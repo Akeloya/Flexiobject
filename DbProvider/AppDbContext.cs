@@ -18,11 +18,50 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+using EntityFrameworkCore.Jet;
+
+using FileContextCore;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace DbProvider
 {
     public class AppDbContext : DbContext
     {
+        private readonly AppDbSettings _settings;
+        public AppDbContext(AppDbSettings settings) : base()
+        {
+            _settings = settings;
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            switch(_settings.DbType)
+            {
+                case DbTypes.MsSqlServer:
+                    optionsBuilder.UseSqlServer($"ServerName={_settings.ServerName};Data");
+                    break;
+                case DbTypes.PostgreSql:
+                    optionsBuilder.UseNpgsql($"");
+                    break;
+#if Windows
+                case DbTypes.MsJet:
+                    optionsBuilder.UseJet($"");
+                    break;
+#endif
+                case DbTypes.MySql:
+                    optionsBuilder.UseMySql($"");
+                    break;
+                case DbTypes.Oracle:
+                    break;
+                case DbTypes.Files:
+                    optionsBuilder.UseFileContextDatabase(_settings.DatabaseName, _settings.ServerName, _settings.UserPassword);
+                    break;
+                default:
+                    optionsBuilder.UseInMemoryDatabase("AppDbTest");
+                    break;
+            }
+        }        
     }
+
+
 }
