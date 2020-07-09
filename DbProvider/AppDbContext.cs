@@ -18,11 +18,14 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+using DbProvider.Entities;
+
 using EntityFrameworkCore.Jet;
 
 using FileContextCore;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.CompilerServices;
 
 namespace DbProvider
 {
@@ -35,7 +38,7 @@ namespace DbProvider
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            switch(_settings.DbType)
+            switch (_settings.DbType)
             {
                 case DbTypes.MsSqlServer:
                     optionsBuilder.UseSqlServer($"ServerName={_settings.ServerName};Data");
@@ -47,7 +50,7 @@ namespace DbProvider
                 case DbTypes.MsJet:
                     optionsBuilder.UseJet($"");
                     break;
-#endif
+#endif                
                 case DbTypes.MySql:
                     optionsBuilder.UseMySql($"");
                     break;
@@ -60,7 +63,15 @@ namespace DbProvider
                     optionsBuilder.UseInMemoryDatabase("AppDbTest");
                     break;
             }
-        }        
+        }
+        public DbSet<AppFolder> AppFolders { get; set; }
+        public DbSet<AppFolderFields> AppFolderFields { get; set; }
+        public DbSet<ObjectType> ObjectTypes { get; set; }
+        public DbSet<ObjectFolder> ObjectFolder { get; set; }
+        public DbSet<ObjectHistory> ObjectHistoryP { get; set; }
+        public DbSet<AppFieldDefinition> AppFieldDefinitions { get; set; }
+        public DbSet<WfState> WfStates { get; set; }
+        public DbSet<WfStateTransition> WfStateTransitions { get; set; }
     }
 
 

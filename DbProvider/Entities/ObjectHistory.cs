@@ -18,33 +18,28 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-namespace DbProvider
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace DbProvider.Entities
 {
-    public class AppDbSettings
+    [Table("ObjectsHistory")]
+    public class ObjectHistory
     {
-        public DbTypes DbType { get; }
-        public string ServerName { get; }
-        public string DatabaseName { get; }
-        public string UserName { get; }
-        public string UserPassword { get; }
-
-        public AppDbSettings(DbTypes type, string serverName, string dbName, string userName, string password)
-        {
-            DbType = type;
-            ServerName = serverName;
-            DatabaseName = dbName;
-            UserName = userName;
-            UserPassword = password;
-        }
-    }
-
-    public enum DbTypes
-    {
-        MsSqlServer,
-        MySql,
-        PostgreSql,
-        MsJet,
-        Files,
-        Oracle
+        [Key]
+        public int Id { get; private set; }
+        [Column("Object_id")]        
+        public long ObjectId { get; private set; }
+        public DateTime ChangeDate { get; private set; }
+        public int ModifiedBy { get; private set; }
+        public short Attribute { get; private set; }
+        public int UserField { get; private set; }
+        [Column("nvarchar(265)")]
+        public string OldValue { get; private set; }
+        [Column("nvarchar(265)")]
+        public string NewValue { get; private set; }
+        public int State { get; private set; }
+        public short Formant { get; private set; }
     }
 }

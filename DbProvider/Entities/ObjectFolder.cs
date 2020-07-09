@@ -18,33 +18,26 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-namespace DbProvider
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace DbProvider.Entities
 {
-    public class AppDbSettings
+    [Table("ObjectFolder")]
+    public class ObjectFolder
     {
-        public DbTypes DbType { get; }
-        public string ServerName { get; }
-        public string DatabaseName { get; }
-        public string UserName { get; }
-        public string UserPassword { get; }
-
-        public AppDbSettings(DbTypes type, string serverName, string dbName, string userName, string password)
-        {
-            DbType = type;
-            ServerName = serverName;
-            DatabaseName = dbName;
-            UserName = userName;
-            UserPassword = password;
-        }
-    }
-
-    public enum DbTypes
-    {
-        MsSqlServer,
-        MySql,
-        PostgreSql,
-        MsJet,
-        Files,
-        Oracle
+        public int Id { get; private set; }
+        [Required]
+        public string Alias { get; set; }
+        [Required]
+        public string Name { get; set; }
+        [Required]
+        public int ParentId { get; set; }
+        [MaxLength(150)]
+        public string NamingScheme { get; set; }
+        public bool InheritNs { get; set; }
+        public int PictureOpen { get; set; }
+        public int PictureClose { get; set; }
+        public int WfHistoryField { get; set; }
     }
 }

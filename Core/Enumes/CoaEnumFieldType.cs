@@ -1,5 +1,5 @@
 ﻿/*
- *  "Custom object application database provider"
+ *  "Custom object application core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
  *  Copyright (C) 2020 by Maxim V. Yugov.
  *
@@ -18,33 +18,23 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-namespace DbProvider
+namespace Core.Enumes
 {
-    public class AppDbSettings
+    public enum CoaEnumFieldType : byte
     {
-        public DbTypes DbType { get; }
-        public string ServerName { get; }
-        public string DatabaseName { get; }
-        public string UserName { get; }
-        public string UserPassword { get; }
-
-        public AppDbSettings(DbTypes type, string serverName, string dbName, string userName, string password)
-        {
-            DbType = type;
-            ServerName = serverName;
-            DatabaseName = dbName;
-            UserName = userName;
-            UserPassword = password;
-        }
-    }
-
-    public enum DbTypes
-    {
-        MsSqlServer,
-        MySql,
-        PostgreSql,
-        MsJet,
-        Files,
-        Oracle
+        Int,
+        ShortInt,
+        Bigint,
+        Decimal,
+        Boolean,
+        String,
+        Text,
+        Date,
+        Currency,
+        Identifier,
+        DropDownList,
+        Object,
+        ObjectList,
+        Workflow
     }
 }
