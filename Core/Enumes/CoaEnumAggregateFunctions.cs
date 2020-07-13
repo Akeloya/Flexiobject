@@ -18,23 +18,36 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-namespace CoaApp.Core.Enumes
+namespace CoaApp.CoreEnumes
 {
-    public enum CoaEnumFieldType : byte
+    /// <summary>
+    /// Aggregation functions types
+    /// </summary>
+    public enum CoaEnumAggregateFunctions
     {
-        Int,
-        ShortInt,
-        Bigint,
-        Decimal,
-        Boolean,
-        String,
-        Text,
-        Date,
-        Currency,
-        TextIdentifier,
-        DropDownList,
-        Object,
-        ObjectList,
-        Workflow
+        /// <summary>
+        /// No function
+        /// </summary>
+        None,
+        /// <summary>
+        /// Summ function
+        /// </summary>
+        Summ,
+        /// <summary>
+        /// Count function
+        /// </summary>
+        Count,
+        /// <summary>
+        /// Average function
+        /// </summary>
+        Avg,
+        /// <summary>
+        /// Min function
+        /// </summary>
+        Min,
+        /// <summary>
+        /// Max function
+        /// </summary>
+        Max
     }
 }

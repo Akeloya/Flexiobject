@@ -18,23 +18,23 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-namespace CoaApp.Core.Enumes
+using System.ComponentModel;
+
+namespace CoaApp.CoreEnumes
 {
-    public enum CoaEnumFieldType : byte
+    /// <summary>
+    /// Коллекция предустановленных папок приложения
+    /// Коллекция используется для связывания пользовательских папок и папок приложения
+    /// </summary>
+    public enum CoaEnumApplicationFolders : byte
     {
-        Int,
-        ShortInt,
-        Bigint,
-        Decimal,
-        Boolean,
-        String,
-        Text,
-        Date,
-        Currency,
-        TextIdentifier,
-        DropDownList,
-        Object,
-        ObjectList,
-        Workflow
+        /// <summary>
+        /// Application user folder 
+        /// </summary>        
+        UserAccounts = 1,
+        /// <summary>
+        /// Application user groups
+        /// </summary>        
+        UserGroups = 2
     }
 }

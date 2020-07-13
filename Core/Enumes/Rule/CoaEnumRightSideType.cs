@@ -18,23 +18,27 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-namespace CoaApp.Core.Enumes
+using System;
+
+namespace CoaApp.Core.Enumes.Rule
 {
-    public enum CoaEnumFieldType : byte
+    /// <summary>
+    /// Right side operand type
+    /// </summary>
+    [Serializable]
+    public enum CoaEnumRightSideType
     {
-        Int,
-        ShortInt,
-        Bigint,
-        Decimal,
-        Boolean,
-        String,
-        Text,
-        Date,
-        Currency,
-        TextIdentifier,
-        DropDownList,
-        Object,
-        ObjectList,
-        Workflow
+        /// <summary>
+        /// Right side is constant
+        /// </summary>
+        Constant,
+        /// <summary>
+        /// Value for right side will asked from user
+        /// </summary>
+        AskUser,
+        /// <summary>
+        /// DateFime offset
+        /// </summary>
+        DateTimeOffset
     }
 }

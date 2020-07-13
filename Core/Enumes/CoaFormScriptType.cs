@@ -18,23 +18,21 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 namespace CoaApp.Core.Enumes
 {
-    public enum CoaEnumFieldType : byte
+    /// <summary>
+    /// Script types for object edit form
+    /// </summary>    
+    public enum CoaFormScriptType
     {
-        Int,
-        ShortInt,
-        Bigint,
-        Decimal,
-        Boolean,
-        String,
-        Text,
-        Date,
-        Currency,
-        TextIdentifier,
-        DropDownList,
-        Object,
-        ObjectList,
-        Workflow
+        /// <summary>
+        /// Open form script
+        /// </summary>
+        OnOpen = 1,
+        /// <summary>
+        /// Close form script
+        /// </summary>
+        OnClose
     }
 }

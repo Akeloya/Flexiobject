@@ -18,23 +18,37 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 namespace CoaApp.Core.Enumes
 {
-    public enum CoaEnumFieldType : byte
+    /// <summary>
+    /// Тип отображаемой колонки
+    /// </summary>
+    public enum CoaEnumColumnType
     {
-        Int,
-        ShortInt,
-        Bigint,
-        Decimal,
-        Boolean,
-        String,
-        Text,
-        Date,
-        Currency,
-        TextIdentifier,
-        DropDownList,
-        Object,
-        ObjectList,
-        Workflow
+        /// <summary>
+        /// Symbol column
+        /// </summary>
+        Symbol,
+        /// <summary>
+        /// Attachments column
+        /// </summary>
+        Attachments,
+        /// <summary>
+        /// Folder column displaying the folder name of the object
+        /// </summary>
+        Folder,
+        /// <summary>
+        /// Field column displaying the value of a field of the object
+        /// </summary>
+        Field,
+        /// <summary>
+        /// Name column displaying the object name of the object
+        /// </summary>
+        Name,
+        /// <summary>
+        /// Folder Path column displaying the complete path to the folder of the object
+        /// </summary>
+        FolderPath,
     }
 }

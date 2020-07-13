@@ -20,21 +20,13 @@
  */
 namespace CoaApp.Core.Enumes
 {
-    public enum CoaEnumFieldType : byte
+    /// <summary>
+    /// Form types of application
+    /// </summary>
+    public enum CoaEnumFormTypes
     {
-        Int,
-        ShortInt,
-        Bigint,
-        Decimal,
-        Boolean,
-        String,
-        Text,
-        Date,
-        Currency,
-        TextIdentifier,
-        DropDownList,
-        Object,
-        ObjectList,
-        Workflow
+        Global,
+        Folder,
+        Search
     }
 }

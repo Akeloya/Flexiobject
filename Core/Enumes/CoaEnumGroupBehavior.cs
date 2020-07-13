@@ -20,21 +20,13 @@
  */
 namespace CoaApp.Core.Enumes
 {
-    public enum CoaEnumFieldType : byte
+    /// <summary>
+    /// Email message send parameters
+    /// </summary>
+    public enum CoaEnumGroupBehavior
     {
-        Int,
-        ShortInt,
-        Bigint,
-        Decimal,
-        Boolean,
-        String,
-        Text,
-        Date,
-        Currency,
-        TextIdentifier,
-        DropDownList,
-        Object,
-        ObjectList,
-        Workflow
+        NoSend = 0,
+        SendToGroupEmail,
+        SendToUsersEmail
     }
 }

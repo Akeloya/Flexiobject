@@ -18,23 +18,35 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 namespace CoaApp.Core.Enumes
 {
-    public enum CoaEnumFieldType : byte
+    /// <summary>
+    /// Application folder properties
+    /// </summary>
+    public enum CoaEnumApplicationFoldersProperties : int
     {
-        Int,
-        ShortInt,
-        Bigint,
-        Decimal,
-        Boolean,
-        String,
-        Text,
-        Date,
-        Currency,
-        TextIdentifier,
-        DropDownList,
-        Object,
-        ObjectList,
-        Workflow
+        #region User Accounts
+        UserLoginName = 1,
+        UserDisplayName = 2,
+        UserSuperuser = 3,
+        UserPassword = 4,
+        UserEmailAddress = 5,
+        UserLocked = 6,
+        UserActive = 7,
+        UserAuthentication = 8,
+        UserWindowsDomainName = 9,
+        UserCalendar = 10,
+        UserDescription = 11,
+        UserLastLogin = 12,
+        #endregion
+
+        #region User Groups
+        GroupName = 31,
+        GroupEmailBehavior = 32,
+        GroupEmailAddress = 33,
+        GroupContainedUsers = 34,
+        GroupContainedGroups = 35
+        #endregion
     }
 }

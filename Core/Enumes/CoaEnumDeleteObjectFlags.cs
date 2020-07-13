@@ -18,23 +18,27 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-namespace CoaApp.Core.Enumes
+using System;
+
+namespace CoaApp.CoreEnumes
 {
-    public enum CoaEnumFieldType : byte
+    /// <summary>
+    /// Deletion parameter flags
+    /// </summary>
+    [Flags]
+    public enum CoaEnumDeletionObjectFlags
     {
-        Int,
-        ShortInt,
-        Bigint,
-        Decimal,
-        Boolean,
-        String,
-        Text,
-        Date,
-        Currency,
-        TextIdentifier,
-        DropDownList,
-        Object,
-        ObjectList,
-        Workflow
+        /// <summary>
+        /// Do not check permission for object deletion action
+        /// </summary>
+        WithoutPermissionCheck,
+        /// <summary>
+        /// Do not run actions
+        /// </summary>
+        WithoutActions,
+        /// <summary>
+        /// Clear deletion - no any 
+        /// </summary>
+        ClearDeletion
     }
 }

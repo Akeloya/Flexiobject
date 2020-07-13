@@ -18,23 +18,18 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-namespace CoaApp.Core.Enumes
+namespace CoaApp.CoreEnumes
 {
-    public enum CoaEnumFieldType : byte
+    /// <summary>
+    /// Формат записи истории
+    /// </summary>
+    public enum CoaEnumHistoryFormats
     {
-        Int,
-        ShortInt,
-        Bigint,
-        Decimal,
-        Boolean,
         String,
-        Text,
-        Date,
-        Currency,
-        TextIdentifier,
-        DropDownList,
         Object,
-        ObjectList,
-        Workflow
+        ReferencedObject,
+        ReferencedObjectList,
+        DropDownValue,
+        WfStatus
     }
 }
