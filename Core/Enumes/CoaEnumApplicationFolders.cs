@@ -20,7 +20,7 @@
  */
 using System.ComponentModel;
 
-namespace CoaApp.CoreEnumes
+namespace CoaApp.Core.Enumes
 {
     /// <summary>
     /// Коллекция предустановленных папок приложения

@@ -18,27 +18,16 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System;
-
 namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Deletion parameter flags
+    /// Privilege levelse collection
     /// </summary>
-    [Flags]
-    public enum CoaEnumDeletionObjectFlags
+    public enum CoaEnumPrivilegeLevel : byte
     {
-        /// <summary>
-        /// Do not check permission for object deletion action
-        /// </summary>
-        WithoutPermissionCheck,
-        /// <summary>
-        /// Do not run actions
-        /// </summary>
-        WithoutActions,
-        /// <summary>
-        /// Clear deletion - no any 
-        /// </summary>
-        ClearDeletion
+        NoPrivilege,
+        ReadOnly,
+        ReadWrite,
+        Administration
     }
 }

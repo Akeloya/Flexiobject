@@ -20,7 +20,7 @@
  */
 using System;
 
-namespace CoaApp.CoreEnumes
+namespace CoaApp.Core.Enumes
 {
     /// <summary>
     /// Свойства пользовательского поля

@@ -18,7 +18,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-namespace CoaApp.CoreEnumes
+namespace CoaApp.Core.Enumes
 {
     /// <summary>
     /// Rule type property of field

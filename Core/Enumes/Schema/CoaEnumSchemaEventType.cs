@@ -18,27 +18,35 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System;
-
 namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Deletion parameter flags
+    /// Event type colection modification of folder object
     /// </summary>
-    [Flags]
-    public enum CoaEnumDeletionObjectFlags
+    public enum CoaEnumSchemaEventType : int
     {
+        Folder = 1,
+        Script,
+        Autocalculation,
+        FieldDefinitions,
+        Permission,
+        ActionList,
+        Form,
+        FormCondition,
+        AppFolderMappings,
+        DropDownValue,
+        State,
+        StateTransition,
+        Picture,
+        AppUser,
+        AppGroup,
+        DefaultValue,
+        EnabledRule,
+        RequiredRule,
+        RestrictionRule,
         /// <summary>
-        /// Do not check permission for object deletion action
+        /// Server version change
         /// </summary>
-        WithoutPermissionCheck,
-        /// <summary>
-        /// Do not run actions
-        /// </summary>
-        WithoutActions,
-        /// <summary>
-        /// Clear deletion - no any 
-        /// </summary>
-        ClearDeletion
+        ServerVersion = 2147483647
     }
 }

@@ -18,27 +18,21 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System;
-
 namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Deletion parameter flags
+    /// Authentication types
     /// </summary>
-    [Flags]
-    public enum CoaEnumDeletionObjectFlags
+    public enum CoaEnumUserAuthTypes
     {
+        NoAuth,
         /// <summary>
-        /// Do not check permission for object deletion action
+        /// User login and password stores in database
         /// </summary>
-        WithoutPermissionCheck,
+        Internal,
         /// <summary>
-        /// Do not run actions
+        /// Windows login and domain get in user logged in environment and transfer to server for check
         /// </summary>
-        WithoutActions,
-        /// <summary>
-        /// Clear deletion - no any 
-        /// </summary>
-        ClearDeletion
+        Windows        
     }
 }
