@@ -18,17 +18,20 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+
+using CoaApp.Core.Enumes;
 
 namespace DbProvider.Entities
 {
-    [Table("AppTableDefinition")]
-    public class AppTableDefinition
+    public partial class Script
     {
-        public int Id { get; private set; }
-        [MaxLength(150)]
-        public string TableName { get; private set; }
-        public bool Deleted { get; set; }
+        public int Id { get; set; }
+        public CoaScriptType Type { get; set; }
+        public string Name { get; set; }
+        public string ScriptCode { get; set; }
+        public int? Ref { get; set; }
+        public byte? NumParams { get; set; }
+        public bool DetermFldsValid { get; set; }
+        public virtual ObjectFolder Folder { get; set; }
     }
 }

@@ -22,12 +22,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DbProvider.Entities
 {
-    [Table("Pictures")]
-    public class Picture
+    [Table("DefaultValues")]
+    public partial class DefaultValue
     {
-        public int Id { get;  set; }
-        public string Name { get; set; }
-        public byte[] Data { get; set; }
-        public bool IsIcon { get; set; }
+        public int Id { get; set; }
+        public byte Type { get; set; }
+        public long? ValBigint { get; set; }
+        public string ValStr { get; set; }
+        public virtual FieldDefinition UserField { get; set; }
+        public virtual ObjectFolder Folder { get; set; }
     }
 }

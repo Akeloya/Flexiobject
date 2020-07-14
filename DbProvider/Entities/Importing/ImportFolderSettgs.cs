@@ -18,16 +18,26 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DbProvider.Entities
+
+using DbProvider.Entities;
+
+namespace DbProvider
 {
-    [Table("Pictures")]
-    public class Picture
+    public partial class ImportFolderSettgs
     {
-        public int Id { get;  set; }
-        public string Name { get; set; }
-        public byte[] Data { get; set; }
-        public bool IsIcon { get; set; }
+        public int Id { get; set; }
+        public int Parent { get; set; }
+        public short ImportType { get; set; }
+        public bool UseCreationRule { get; set; }
+        public bool CacheAllObjects { get; set; }
+        public bool IncludeSubfolders { get; set; }
+        public int? PerformanceFlags { get; set; }
+        public int BulkSize { get; set; }
+        public bool IgnoreBasefilter { get; set; }
+        public bool CompatibilityFlag { get; set; }
+        public bool IdFieldsNull { get; set; }
+        public virtual ImportSettings Setting { get; set; }
+        public virtual FieldDefinition Field { get; set; }
     }
 }

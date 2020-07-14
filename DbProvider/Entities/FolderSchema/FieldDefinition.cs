@@ -18,42 +18,41 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using Core.Enumes;
-
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+
+using CoaApp.Core.Enumes;
 
 namespace DbProvider.Entities
 {
-    [Table("FolderFieldDefinition")]
-    public class FolderFieldDefinition
+    [Table("FieldDefinitions")]
+    public partial class FieldDefinition
     {
-        [Key]
-        public int Id { get; private set; }
-        public int ObjectType { get; private set; }
-        [Column(TypeName = "nvarchar(80)")]
-        [Required]
+        public FieldDefinition()
+        {
+            ListProperties = new HashSet<ListProperty>();
+            Status = new HashSet<WfState>();
+            StateTransitions = new HashSet<WfStateTransition>();
+        }
+        public int Id { get; set; }
         public string Name { get; set; }
-        [Column(TypeName = "nvarchar(80)")]
-        [Required]
         public string Alias { get; set; }
-        [Column(TypeName = "byte")]
-        [Required]
-        public CoaEnumFieldType FieldType { get; private set; }
-        public bool LogChanges { get; set; }
-        public int ObjectTypeReference { get; set; }
-        public short DataProperties { get; set; }
-        public bool SyncronizedField { get; set; }
-        public bool IsQuicksearch { get; set; }
-        public short MinSize { get; set; }
-        public short MaxSize { get; set; }
+        public CoaFieldTypes Type { get; set; }
+        public bool WriteHistory { get; set; }
+        public ObjectFolder FolderReference { get; set; }
+        public int DataProperty { get; set; }
+        public int QuicksearchField { get; set; }
+        public int MinSize { get; set; }
+        public int MaxSize { get; set; }
         public bool IndexDb { get; set; }
-        public bool HasRestriction { get; set; }
-        public bool HasRestrictionScript { get; set; }
+        public bool Restriction { get; set; }
+        public bool RestrictionScript { get; set; }
         public int RestrictionScriptId { get; set; }
-        [MaxLength(256)]
         public string RestrictionErrMsg { get; set; }
-        [MaxLength(100)]
-	    public string MatchExpression { get; set; }
+        public string RestrictionMutch { get; set; }
+        public virtual ObjectFolder Folder { get; set; }
+        public virtual ICollection<ListProperty> ListProperties { get; set; }
+        public virtual ICollection<WfState> Status { get; set; }
+        public virtual ICollection<WfStateTransition> StateTransitions { get; set; }
     }
 }

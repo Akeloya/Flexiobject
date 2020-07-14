@@ -18,28 +18,16 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System;
-using System.ComponentModel.DataAnnotations;
+
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DbProvider.Entities
 {
-    [Table("ObjectsHistory")]
-    public class ObjectHistory
+    [Table("ConditionSteps")]
+    public partial class ConditionStps
     {
-        [Key]
-        public int Id { get; private set; }
-        [Column("Object_id")]        
-        public long ObjectId { get; private set; }
-        public DateTime ChangeDate { get; private set; }
-        public int ModifiedBy { get; private set; }
-        public short Attribute { get; private set; }
-        public int UserField { get; private set; }
-        [Column("nvarchar(265)")]
-        public string OldValue { get; private set; }
-        [Column("nvarchar(265)")]
-        public string NewValue { get; private set; }
-        public int State { get; private set; }
-        public short Formant { get; private set; }
+        public int Id { get; set; }
+        public Condition Condition { get; set; }
+        public FieldDefinition UserField { get; set; }
     }
 }

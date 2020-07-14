@@ -22,12 +22,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DbProvider.Entities
 {
-    [Table("Pictures")]
-    public class Picture
+    [Table("SchemeFieldsDef")]
+    public class SchemaFieldDefinition
     {
-        public int Id { get;  set; }
-        public string Name { get; set; }
-        public byte[] Data { get; set; }
-        public bool IsIcon { get; set; }
+        public int Id { get; set; }
+        public short FieldPosition { get; set; }
+        public int FieldSize { get; set; }
+        public string FieldName { get; set; }
+        public short DataType { get; set; }
+        public bool HasIndex { get; set; }
+        public virtual SchemeTableDefinition SchemeDef { get; set; }
     }
 }

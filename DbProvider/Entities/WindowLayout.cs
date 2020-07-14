@@ -18,20 +18,18 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DbProvider.Entities
 {
-    [Table("AppFieldDef")]
-    public class AppFieldDefinition
+    public partial class WindowLayout
     {
-        public int Id { get; private set; }
-        public int AppTableId { get; private set; }
-        public short FieldPosition { get; private set; }
-        [MaxLength(30)]
-        public string FieldName { get; private set; }
-        public short DataType { get; private set; }
-        public bool HasIndex { get; set; }        
+        public int Id { get; set; }
+        public virtual AppUser User { get; set; }
+        public int? Width { get; set; }
+        public int? Height { get; set; }
+        public int? Left { get; set; }
+        public int? Top { get; set; }
+        public bool? Maximized { get; set; }
+        public byte[] PanesStream { get; set; }
     }
 }

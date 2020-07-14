@@ -18,16 +18,26 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System.ComponentModel.DataAnnotations.Schema;
+using System;
 
 namespace DbProvider.Entities
 {
-    [Table("Pictures")]
-    public class Picture
+    public partial class SchemaHistory
     {
-        public int Id { get;  set; }
-        public string Name { get; set; }
-        public byte[] Data { get; set; }
-        public bool IsIcon { get; set; }
+        public int Id { get; set; }
+        public int Type { get; set; }
+        public int Reference { get; set; }
+        public DateTime EventDate { get; set; }
+        public int UserId { get; set; }
+        public int FolderId { get; set; }
+        public string FolderName { get; set; }
+        public string OldName { get; set; }
+        public string NewName { get; set; }
+        public byte Action { get; set; }
+        public int DeletedReference { get; set; }
+        public int DeletedArea { get; set; }
+        public string Version { get; set; }
+        public string IpAddress { get; set; }
+        public string Username { get; set; }
     }
 }

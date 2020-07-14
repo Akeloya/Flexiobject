@@ -19,15 +19,23 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using System.ComponentModel.DataAnnotations.Schema;
+using CoaApp.Core.Enumes;
 
 namespace DbProvider.Entities
 {
-    [Table("Pictures")]
-    public class Picture
+    [Table("Conditions")]
+    public partial class Condition
     {
-        public int Id { get;  set; }
-        public string Name { get; set; }
-        public byte[] Data { get; set; }
-        public bool IsIcon { get; set; }
+        public int Id { get; set; }
+        public int Rule { get; set; }
+        public CoaRuleCombinationTerms Operator { get; set; }
+        public Condition Parent { get; set; }
+        public byte Property { get; set; }
+        public int KeyProperty { get; set; }
+        public CoaRuleComparisonsTypes Comparison { get; set; }
+        public string ParamName { get; set; }
+        public bool? MatchAll { get; set; }
+        public byte? PropertyFlag { get; set; }
+        public short? ParamPos { get; set; }
     }
 }

@@ -20,14 +20,19 @@
  */
 using System.ComponentModel.DataAnnotations.Schema;
 
+using CoaApp.Core.Enumes;
+
 namespace DbProvider.Entities
 {
-    [Table("Pictures")]
-    public class Picture
+    [Table("Actions")]
+    public partial class Action
     {
-        public int Id { get;  set; }
-        public string Name { get; set; }
-        public byte[] Data { get; set; }
-        public bool IsIcon { get; set; }
+        public int Id { get; set; }
+        public CoaActionListType ActionType { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Expression { get; set; }
+        public string Script { get; set; }
+        public virtual ObjectFolder Folder { get; set; }
     }
 }

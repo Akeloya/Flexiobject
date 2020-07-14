@@ -18,21 +18,13 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using Microsoft.VisualBasic.CompilerServices;
-
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DbProvider.Entities
 {
-    [Table("WfStateTransitions")]
-    public class WfStateTransition
+    public partial class SummaryResultFields
     {
-        [Key]
-        public int Id { get; private set; }
-        public int FieldId { get; private set; }
-        public WfState OldState { get; set; }
-        public WfState NewState { get; set; }
-        public ObjectType ObjectType { get; set; }
+        public int Id { get; set; }
+        public virtual FieldDefinition FieldDef { get; set; }
+        public virtual SummaryDefinition SummaryDef { get; set; }
     }
 }

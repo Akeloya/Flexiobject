@@ -18,20 +18,18 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System.ComponentModel.DataAnnotations;
+using CoaApp.Core.Enumes;
+
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DbProvider.Entities
 {
     [Table("AppFolderFields")]
-    public class AppFolderFields
+    public class AppFolderField
     {
-        [Key]
-        public int Id { get; private set; }
-        public int AppFolder { get; set; }
-        [Column("AppField_Id")]
-        public int AffFieldId { get; set; }
-        [Column("FolderField_Id")]
-        public int FolderFieldId { get; set; }
+        public int Id { get; set; }
+        public virtual AppFolder AppFolder { get; set; }
+        public CoaApplicationFoldersProperties AppField { get; set; }
+        public virtual FieldDefinition FolderField { get; set; }
     }
 }

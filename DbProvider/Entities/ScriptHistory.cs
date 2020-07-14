@@ -18,16 +18,21 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System.ComponentModel.DataAnnotations.Schema;
+using System;
 
 namespace DbProvider.Entities
 {
-    [Table("Pictures")]
-    public class Picture
+    public partial class ScriptHistory
     {
-        public int Id { get;  set; }
-        public string Name { get; set; }
-        public byte[] Data { get; set; }
-        public bool IsIcon { get; set; }
+        public int Id { get; set; }
+        public virtual Script SourceScript { get; set; }
+        public string Script { get; set; }
+        public int CreatedBy { get; set; }
+        public int ModifiedBy { get; set; }
+        public int? PublishedBy { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime Modified { get; set; }
+        public DateTime? Published { get; set; }
+        public bool IsPublished { get; set; }
     }
 }

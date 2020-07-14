@@ -22,12 +22,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DbProvider.Entities
 {
-    [Table("Pictures")]
-    public class Picture
+    [Table("WfStateTransitions")]
+    public class WfStateTransition
     {
-        public int Id { get;  set; }
-        public string Name { get; set; }
-        public byte[] Data { get; set; }
-        public bool IsIcon { get; set; }
+        public int Id { get; set; }
+        public int Old { get; set; }
+        public int New { get; set; }
+        public virtual ObjectFolder Folder { get; set; }
+        public virtual FieldDefinition Field { get; set; }
     }
 }

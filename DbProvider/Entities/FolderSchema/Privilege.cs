@@ -18,16 +18,16 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DbProvider.Entities
+using DbProvider.Entities;
+
+namespace DbProvider
 {
-    [Table("Pictures")]
-    public class Picture
+    public partial class Privilege
     {
-        public int Id { get;  set; }
-        public string Name { get; set; }
-        public byte[] Data { get; set; }
-        public bool IsIcon { get; set; }
+        public int Id { get; set; }
+        public byte Level { get; set; }
+        public virtual AppUser AppUser { get; set; }
+        public virtual ObjectFolder Folder { get; set; }
     }
 }

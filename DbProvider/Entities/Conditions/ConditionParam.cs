@@ -18,16 +18,22 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DbProvider.Entities
 {
-    [Table("Pictures")]
-    public class Picture
+    [Table("ConditionParams")]
+    public partial class ConditionParam
     {
-        public int Id { get;  set; }
-        public string Name { get; set; }
-        public byte[] Data { get; set; }
-        public bool IsIcon { get; set; }
+        public int Id { get; set; }
+        public ObjectDef Object { get; set; }
+        public Condition Condition { get; set; }
+        public byte Value { get; set; }
+        public long LongValue { get; set; }
+        public string StrValue { get; set; }
+        public double DoubleValue { get; set; }
+        public int LongValueHigh { get; set; }
+        public byte ObjectType { get; set; }
     }
 }

@@ -18,16 +18,17 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DbProvider.Entities
+
+namespace DbProvider
 {
-    [Table("Pictures")]
-    public class Picture
+    public partial class ImportColMapping
     {
-        public int Id { get;  set; }
-        public string Name { get; set; }
-        public byte[] Data { get; set; }
-        public bool IsIcon { get; set; }
+        public int Id { get; set; }
+        public int SettingsId { get; set; }
+        public string Source { get; set; }
+        public int Dest { get; set; }
+        public byte Flags { get; set; }
+        public byte AttachmentOption { get; set; }
     }
 }

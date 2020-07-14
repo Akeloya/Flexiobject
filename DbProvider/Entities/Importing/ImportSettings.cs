@@ -18,16 +18,26 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DbProvider.Entities
+
+namespace DbProvider
 {
-    [Table("Pictures")]
-    public class Picture
+    public partial class ImportSettings
     {
-        public int Id { get;  set; }
+        public int Id { get; set; }
+        public int Key { get; set; }
         public string Name { get; set; }
-        public byte[] Data { get; set; }
-        public bool IsIcon { get; set; }
+        public string DatabaseName { get; set; }
+        public string SqlStatement { get; set; }
+        public int User { get; set; }
+        public short DataSourceType { get; set; }
+        public bool LogErrors { get; set; }
+        public string LogfilePrefix { get; set; }
+        public string Logpath { get; set; }
+        public bool UseSql { get; set; }
+        public short Flags { get; set; }
+        public bool ReflistFull { get; set; }
+        public bool RemoveRefs { get; set; }
+        public string IdColumns { get; set; }
     }
 }

@@ -18,22 +18,18 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DbProvider.Entities
 {
-    [Table("WfStates")]
-    public class WfState
+    [Table("WfStatus")]
+    public partial class WfState
     {
-        [Key]
-        public int Id { get; private set; }
-        [MaxLength(150)]
-        public string Name { get; set; }
-        [MaxLength(150)]
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public bool Initial { get; set; }
         public string Alias { get; set; }
-        public int FieldId { get; private set; }
-        public bool IsInitial { get; set; }
-        public int ObjectType { get; private set; }
+        public virtual ObjectFolder folder { get; set; }
+        public virtual FieldDefinition Field { get; set; }
     }
 }

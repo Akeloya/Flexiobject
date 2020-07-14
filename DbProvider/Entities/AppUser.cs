@@ -18,16 +18,30 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
+
+using CoaApp.Core.Enumes;
 
 namespace DbProvider.Entities
 {
-    [Table("Pictures")]
-    public class Picture
+    [Table("AppUsers")]
+    public partial class AppUser
     {
-        public int Id { get;  set; }
-        public string Name { get; set; }
-        public byte[] Data { get; set; }
-        public bool IsIcon { get; set; }
+        public int Id { get; set; }
+        public string LoginName { get; set; }
+        public string DisplayName { get; set; }
+        public string Department { get; set; }
+        public string Phone { get; set; }
+        public bool IsAdministrator { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
+        public bool IsGroup { get; set; }
+        public byte GroupMail { get; set; }
+        public bool IsActive { get; set; }
+        public CoaUserAuthTypes LoginMode { get; set; }
+        public string DomainName { get; set; }
+        public virtual ObjectDef ObjectId { get; set; }
+        public DateTime? Modified { get; set; }
     }
 }

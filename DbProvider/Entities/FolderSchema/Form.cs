@@ -18,26 +18,13 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace DbProvider.Entities
 {
-    [Table("ObjectFolder")]
-    public class ObjectFolder
+    public partial class Form
     {
-        public int Id { get; private set; }
-        [Required]
-        public string Alias { get; set; }
-        [Required]
+        public int Id { get; set; }
         public string Name { get; set; }
-        [Required]
-        public int ParentId { get; set; }
-        [MaxLength(150)]
-        public string NamingScheme { get; set; }
-        public bool InheritNs { get; set; }
-        public int PictureOpen { get; set; }
-        public int PictureClose { get; set; }
-        public int WfHistoryField { get; set; }
+        public byte Type { get; set; }
+        public virtual ObjectFolder Folder { get; set; }
     }
 }

@@ -18,7 +18,8 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System.ComponentModel.DataAnnotations;
+using CoaApp.Core.Enumes;
+
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DbProvider.Entities
@@ -26,11 +27,8 @@ namespace DbProvider.Entities
     [Table("AppFolders")]
     public class AppFolder
     {
-        [Key]
-        public int Id { get; private set; }
-        [Column("AppFolder_Id")]
-        public short AppFolderId { get; set; }
-        [Column("Folder_Id")]
-        public int FolderId { get; set; }
+        public int Id { get; set; }
+        public CoaApplicationFolderTypes AppFolderId { get; set; }
+        public virtual ObjectFolder Folder { get; set; }
     }
 }

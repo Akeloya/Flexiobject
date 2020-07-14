@@ -24,11 +24,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DbProvider.Entities
 {
     [Table("ObjectDef")]
-    public class Object
+    public class ObjectDef
     {
-        public int Id { get; private set; }
-        public int ObjType { get; private set; }
-        public int DeletedByUser { get; set; }
-        public DateTime Created { get; private set; }
+        public int Id { get; set; }
+        public DateTime Created { get; set; }
+        public virtual ObjectFolder Folder { get; set; }
+        public virtual AppUser UserDeletedBy { get; set; }
+
     }
 }
