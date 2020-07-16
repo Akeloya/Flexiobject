@@ -18,15 +18,19 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Rule type collection for folder fields
+    /// Data import parameters
     /// </summary>
-    public enum CoaEnumRuleTypes
+    public enum CoaImportSettingsTypes
     {
-        Restriction = 1,
-        FieldRequiered = 2,
-        FieldEnabled = 3
+        Add,
+        AddModify,
+        AddModifyDelete,
+        AddNew,
+        Modify,
+        UpdateReferences
     }
 }

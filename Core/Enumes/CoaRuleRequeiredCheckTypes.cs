@@ -18,15 +18,15 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Rule type property of field
+    /// Field rule check types
     /// </summary>
-    public enum CoaEnumFieldRuleTypes
+    public enum CoaRuleRequeiredCheckTypes
     {
-        RequiredRule,
-        EnabledRule,
-        RestrictionRule
+        ThisFieldChanged,
+        AnyFieldChanged
     }
 }

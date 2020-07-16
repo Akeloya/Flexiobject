@@ -24,7 +24,7 @@ namespace CoaApp.Core.Enumes
     /// <summary>
     /// Application folder properties
     /// </summary>
-    public enum CoaEnumApplicationFoldersProperties : int
+    public enum CoaApplicationFoldersProperties : int
     {
         #region User Accounts
         UserLoginName = 1,

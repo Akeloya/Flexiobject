@@ -18,27 +18,21 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System;
-
-namespace CoaApp.Core.Enumes.Rule
+namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Right side operand type
+    /// Autocalculation types
     /// </summary>
-    [Serializable]
-    public enum CoaEnumRightSideType
+    public enum CoaSummaryTypes
     {
+        Count = 1,
+        Sum,
+        Avg,
+        Min,
+        Max,
         /// <summary>
-        /// Right side is constant
+        /// Calc by script
         /// </summary>
-        Constant,
-        /// <summary>
-        /// Value for right side will asked from user
-        /// </summary>
-        AskUser,
-        /// <summary>
-        /// DateFime offset
-        /// </summary>
-        DateTimeOffset
+        Script
     }
 }

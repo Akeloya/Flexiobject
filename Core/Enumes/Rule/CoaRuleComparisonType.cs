@@ -18,16 +18,13 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System;
 
 namespace CoaApp.Core.Enumes
 {
     /// <summary>
     /// Оператор сравнения левой и правой части булевого сравнения
-    /// </summary>
-    [Flags]
-    [Serializable]
-    public enum CoaFieldComparisonOperatorType
+    /// </summary>        
+    public enum CoaRuleComparisonsTypes
     {
         /// <summary>
         /// Value is object, user, group, etc.

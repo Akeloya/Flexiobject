@@ -18,15 +18,37 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Email message send parameters
+    /// Тип отображаемой колонки
     /// </summary>
-    public enum CoaEnumGroupBehavior
+    public enum CoaViewColumnTypes
     {
-        NoSend = 0,
-        SendToGroupEmail,
-        SendToUsersEmail
+        /// <summary>
+        /// Symbol column
+        /// </summary>
+        Symbol,
+        /// <summary>
+        /// Attachments column
+        /// </summary>
+        Attachments,
+        /// <summary>
+        /// Folder column displaying the folder name of the object
+        /// </summary>
+        Folder,
+        /// <summary>
+        /// Field column displaying the value of a field of the object
+        /// </summary>
+        Field,
+        /// <summary>
+        /// Name column displaying the object name of the object
+        /// </summary>
+        Name,
+        /// <summary>
+        /// Folder Path column displaying the complete path to the folder of the object
+        /// </summary>
+        FolderPath,
     }
 }

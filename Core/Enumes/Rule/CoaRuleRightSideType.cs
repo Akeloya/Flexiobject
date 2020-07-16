@@ -20,37 +20,25 @@
  */
 using System;
 
-namespace CoaApp.Core.Enumes
+namespace CoaApp.Core.Enumes.Rule
 {
     /// <summary>
-    /// Свойства пользовательского поля
+    /// Right side operand type
     /// </summary>
-    [Flags]
-    public enum CoaEnumFieldProperty
+    [Serializable]
+    public enum CoaRuleRightSideType
     {
         /// <summary>
-        /// Нет значения по умолчанию
+        /// Right side is constant
         /// </summary>
-        NoDefaultValue = 0,
+        Constant,
         /// <summary>
-        /// Только дата
+        /// Value for right side will asked from user
         /// </summary>
-        DateOnly = 1,
+        AskUser,
         /// <summary>
-        /// Значение по-умолчанию - текущая дата
+        /// DateFime offset
         /// </summary>
-        UseCurrentDateTime = 2,
-        /// <summary>
-        /// Значение по-умолчанию - дата создания объекта
-        /// </summary>
-        UseObjectCreationDateTime = 4,
-        /// <summary>
-        /// Используется значение по-умолчанию
-        /// </summary>
-        UseDefaultValue = 8,
-        /// <summary>
-        /// Дата не зависит от временной зоны
-        /// </summary>
-        TimezoneIndependent = 16
+        DateTimeOffset
     }
 }

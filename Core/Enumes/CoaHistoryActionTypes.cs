@@ -23,7 +23,7 @@ namespace CoaApp.Core.Enumes
     /// <summary>
     /// Коллекция типов записей истории изменения объектов
     /// </summary>
-    public enum CoaEnumHistoryAction
+    public enum CoaHistoryActionTypes
     {
         /// <summary>
         /// Объект создан

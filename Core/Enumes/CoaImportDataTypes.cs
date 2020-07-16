@@ -22,11 +22,12 @@
 namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Field rule check types
+    /// Import data type
     /// </summary>
-    public enum CoaEnumRuleRequeiredCheck
+    public enum CoaImportDataTypes
     {
-        ThisFieldChanged,
-        AnyFieldChanged
+        Sql,
+        Csv,
+        Xml
     }
 }

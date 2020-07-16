@@ -21,33 +21,33 @@
 namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Object modification actions
+    /// Aggregation functions types
     /// </summary>
-    public enum CoaEnumActionsType
+    public enum CoaAggregateFunctionTypes
     {
         /// <summary>
-        /// Actions will execute befor object will be created in database
+        /// No function
         /// </summary>
-        BeforeCreation,
+        None,
         /// <summary>
-        /// Actions execute after object created in database
+        /// Summ function
         /// </summary>
-        AfterCreation,
+        Summ,
         /// <summary>
-        /// Actions will execute before object will be modified
+        /// Count function
         /// </summary>
-        BeforeModification,
+        Count,
         /// <summary>
-        /// Actions will execute after object will be modified
+        /// Average function
         /// </summary>
-        AfterModification,
+        Avg,
         /// <summary>
-        /// Actions will execute before object wiil get state deleted
+        /// Min function
         /// </summary>
-        BeforeDeletion,
+        Min,
         /// <summary>
-        /// Actions will execute after object will get state deleted
+        /// Max function
         /// </summary>
-        AfterDeletion
+        Max
     }
 }

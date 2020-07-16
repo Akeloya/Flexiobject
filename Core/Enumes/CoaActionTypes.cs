@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
+ *  An application that implements the ability to customize object templates and actions on them.
+ *  Copyright (C) 2019 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -18,47 +18,32 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System;
-
 namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Execution flags
+    /// Коллекция типов действий модификаций объектов
     /// </summary>
-    [Flags]
-    public enum CoaEnumExecutionFlags : byte
+    public enum CoaActionTypes
     {
         /// <summary>
-        /// Do not check permissions
+        /// Modifieng object data
         /// </summary>
-        DoNotCheckPermissions = 1,
+        ModifyObject,
         /// <summary>
-        /// Do not check privileges
+        /// Email message
         /// </summary>
-        DoNotCheckPrivileges,
+        Email,
         /// <summary>
-        /// Do not validate imput data
+        /// Executing command
         /// </summary>
-        DoNotValidateInput,
+        Command,
         /// <summary>
-        /// Do not checks identity fields
+        /// C# extension action
         /// </summary>
-        DoNotCheckForIdentityFields,
+        CScode,
         /// <summary>
-        /// Do not execute any actions
+        /// Уведомление
         /// </summary>
-        DoNotExecuteActions,
-        /// <summary>
-        /// Do not recalculate escalation datetimes
-        /// </summary>
-        DoNotRecalculateEscalationTimes,
-        /// <summary>
-        /// Do not create history entries
-        /// </summary>
-        DoNotCreateHistoryEntries,
-        /// <summary>
-        /// Do not update any autocalculation on folder for object
-        /// </summary>
-        DoNotUpdateAutocalculations
+        Notification,
     }
 }

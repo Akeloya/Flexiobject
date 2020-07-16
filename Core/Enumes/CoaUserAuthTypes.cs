@@ -21,33 +21,18 @@
 namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Aggregation functions types
+    /// Authentication types
     /// </summary>
-    public enum CoaEnumAggregateFunctions
+    public enum CoaUserAuthTypes
     {
+        NoAuth,
         /// <summary>
-        /// No function
+        /// User login and password stores in database
         /// </summary>
-        None,
+        Internal,
         /// <summary>
-        /// Summ function
+        /// Windows login and domain get in user logged in environment and transfer to server for check
         /// </summary>
-        Summ,
-        /// <summary>
-        /// Count function
-        /// </summary>
-        Count,
-        /// <summary>
-        /// Average function
-        /// </summary>
-        Avg,
-        /// <summary>
-        /// Min function
-        /// </summary>
-        Min,
-        /// <summary>
-        /// Max function
-        /// </summary>
-        Max
+        Windows        
     }
 }

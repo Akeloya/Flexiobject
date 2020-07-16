@@ -18,19 +18,23 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 namespace CoaApp.Core.Enumes
 {
-    /// <summary>
-    /// Data import parameters
-    /// </summary>
-    public enum CoaEnumImportSettingsType
+    public enum CoaFieldTypes : byte
     {
-        Add,
-        AddModify,
-        AddModifyDelete,
-        AddNew,
-        Modify,
-        UpdateReferences
+        Int,
+        ShortInt,
+        Bigint,
+        Decimal,
+        Boolean,
+        String,
+        Text,
+        Date,
+        Currency,
+        TextIdentifier,
+        DropDownList,
+        Object,
+        ObjectList,
+        Workflow
     }
 }

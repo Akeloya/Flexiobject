@@ -18,23 +18,39 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System.ComponentModel;
+using System;
 
 namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Коллекция предустановленных папок приложения
-    /// Коллекция используется для связывания пользовательских папок и папок приложения
+    /// Свойства пользовательского поля
     /// </summary>
-    public enum CoaEnumApplicationFolders : byte
+    [Flags]
+    public enum CoaFieldProperties
     {
         /// <summary>
-        /// Application user folder 
-        /// </summary>        
-        UserAccounts = 1,
+        /// Нет значения по умолчанию
+        /// </summary>
+        NoDefaultValue = 0,
         /// <summary>
-        /// Application user groups
-        /// </summary>        
-        UserGroups = 2
+        /// Только дата
+        /// </summary>
+        DateOnly = 1,
+        /// <summary>
+        /// Значение по-умолчанию - текущая дата
+        /// </summary>
+        UseCurrentDateTime = 2,
+        /// <summary>
+        /// Значение по-умолчанию - дата создания объекта
+        /// </summary>
+        UseObjectCreationDateTime = 4,
+        /// <summary>
+        /// Используется значение по-умолчанию
+        /// </summary>
+        UseDefaultValue = 8,
+        /// <summary>
+        /// Дата не зависит от временной зоны
+        /// </summary>
+        TimezoneIndependent = 16
     }
 }

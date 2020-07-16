@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
- *  An application that implements the ability to customize object templates and actions on them.
- *  Copyright (C) 2019 by Maxim V. Yugov.
+ *  Application for creating and using freely customizable configuration of data, forms, actions and other things
+ *  Copyright (C) 2020 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -21,29 +21,33 @@
 namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Коллекция типов действий модификаций объектов
+    /// Object modification actions
     /// </summary>
-    public enum CoaEnumActionTypes
+    public enum CoaActionListType
     {
         /// <summary>
-        /// Modifieng object data
+        /// Actions will execute befor object will be created in database
         /// </summary>
-        ModifyObject,
+        BeforeCreation,
         /// <summary>
-        /// Email message
+        /// Actions execute after object created in database
         /// </summary>
-        Email,
+        AfterCreation,
         /// <summary>
-        /// Executing command
+        /// Actions will execute before object will be modified
         /// </summary>
-        Command,
+        BeforeModification,
         /// <summary>
-        /// C# extension action
+        /// Actions will execute after object will be modified
         /// </summary>
-        CScode,
+        AfterModification,
         /// <summary>
-        /// Уведомление
+        /// Actions will execute before object wiil get state deleted
         /// </summary>
-        Notification,
+        BeforeDeletion,
+        /// <summary>
+        /// Actions will execute after object will get state deleted
+        /// </summary>
+        AfterDeletion
     }
 }

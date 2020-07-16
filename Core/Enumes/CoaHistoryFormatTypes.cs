@@ -21,14 +21,15 @@
 namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Action collection of schema modification
+    /// History format value types
     /// </summary>
-    public enum CoaEnumSchemaActionType
+    public enum CoaHistoryFormatTypes
     {
-        Create = 1,
-        Delete,
-        Update,
-        Rename,
-        RenameAlias
+        String,
+        Object,
+        ReferencedObject,
+        ReferencedObjectList,
+        DropDownValue,
+        WfStatus
     }
 }

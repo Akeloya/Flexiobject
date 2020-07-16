@@ -18,21 +18,23 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+using System.ComponentModel;
+
 namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Autocalculation types
+    /// Коллекция предустановленных папок приложения
+    /// Коллекция используется для связывания пользовательских папок и папок приложения
     /// </summary>
-    public enum CoaEnumSummaryTypes
+    public enum CoaApplicationFolderTypes : byte
     {
-        Count = 1,
-        Sum,
-        Avg,
-        Min,
-        Max,
         /// <summary>
-        /// Calc by script
-        /// </summary>
-        Script
+        /// Application user folder 
+        /// </summary>        
+        UserAccounts = 1,
+        /// <summary>
+        /// Application user groups
+        /// </summary>        
+        UserGroups = 2
     }
 }

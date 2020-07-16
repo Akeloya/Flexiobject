@@ -18,23 +18,28 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+using System;
+
 namespace CoaApp.Core.Enumes
 {
-    public enum CoaEnumFieldType : byte
+    /// <summary>
+    /// Boolean combination rule operators
+    /// </summary>
+    [Flags]
+    [Serializable]
+    public enum CoaRuleCombinationTerms
     {
-        Int,
-        ShortInt,
-        Bigint,
-        Decimal,
-        Boolean,
-        String,
-        Text,
-        Date,
-        Currency,
-        TextIdentifier,
-        DropDownList,
-        Object,
-        ObjectList,
-        Workflow
+        /// <summary>
+        /// Calculate boolean expression operator
+        /// </summary>        
+        Term = 1,
+        /// <summary>
+        /// Logical operator "And"
+        /// </summary>        
+        And = 2,
+        /// <summary>
+        /// Logical operator "Or"
+        /// </summary>        
+        Or = 3
     }
 }

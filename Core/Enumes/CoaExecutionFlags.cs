@@ -18,21 +18,47 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+using System;
+
 namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Authentication types
+    /// Execution flags
     /// </summary>
-    public enum CoaEnumUserAuthTypes
+    [Flags]
+    public enum CoaExecutionFlags : byte
     {
-        NoAuth,
         /// <summary>
-        /// User login and password stores in database
+        /// Do not check permissions
         /// </summary>
-        Internal,
+        DoNotCheckPermissions = 1,
         /// <summary>
-        /// Windows login and domain get in user logged in environment and transfer to server for check
+        /// Do not check privileges
         /// </summary>
-        Windows        
+        DoNotCheckPrivileges,
+        /// <summary>
+        /// Do not validate imput data
+        /// </summary>
+        DoNotValidateInput,
+        /// <summary>
+        /// Do not checks identity fields
+        /// </summary>
+        DoNotCheckForIdentityFields,
+        /// <summary>
+        /// Do not execute any actions
+        /// </summary>
+        DoNotExecuteActions,
+        /// <summary>
+        /// Do not recalculate escalation datetimes
+        /// </summary>
+        DoNotRecalculateEscalationTimes,
+        /// <summary>
+        /// Do not create history entries
+        /// </summary>
+        DoNotCreateHistoryEntries,
+        /// <summary>
+        /// Do not update any autocalculation on folder for object
+        /// </summary>
+        DoNotUpdateAutocalculations
     }
 }

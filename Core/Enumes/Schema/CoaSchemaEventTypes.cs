@@ -21,12 +21,32 @@
 namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Form types of application
+    /// Event type colection modification of folder object
     /// </summary>
-    public enum CoaEnumFormTypes
+    public enum CoaSchemaEventTypes : int
     {
-        Global,
-        Folder,
-        Search
+        Folder = 1,
+        Script,
+        Autocalculation,
+        FieldDefinitions,
+        Permission,
+        ActionList,
+        Form,
+        FormCondition,
+        AppFolderMappings,
+        DropDownValue,
+        State,
+        StateTransition,
+        Picture,
+        AppUser,
+        AppGroup,
+        DefaultValue,
+        EnabledRule,
+        RequiredRule,
+        RestrictionRule,
+        /// <summary>
+        /// Server version change
+        /// </summary>
+        ServerVersion = 2147483647
     }
 }

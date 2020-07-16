@@ -21,15 +21,12 @@
 namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// History format value types
+    /// Email message send parameters
     /// </summary>
-    public enum CoaEnumHistoryFormats
+    public enum CoaGroupBehaviorTypes
     {
-        String,
-        Object,
-        ReferencedObject,
-        ReferencedObjectList,
-        DropDownValue,
-        WfStatus
+        NoSend = 0,
+        SendToGroupEmail,
+        SendToUsersEmail
     }
 }

@@ -39,7 +39,7 @@ namespace DbProvider.Entities
         public string Alias { get; set; }
         public CoaFieldTypes Type { get; set; }
         public bool WriteHistory { get; set; }
-        public ObjectFolder FolderReference { get; set; }
+        public virtual ObjectFolder FolderReference { get; set; }
         public int DataProperty { get; set; }
         public int QuicksearchField { get; set; }
         public int MinSize { get; set; }
@@ -50,6 +50,7 @@ namespace DbProvider.Entities
         public int RestrictionScriptId { get; set; }
         public string RestrictionErrMsg { get; set; }
         public string RestrictionMutch { get; set; }
+        public bool IsSyncronized { get; set; }
         public virtual ObjectFolder Folder { get; set; }
         public virtual ICollection<ListProperty> ListProperties { get; set; }
         public virtual ICollection<WfState> Status { get; set; }

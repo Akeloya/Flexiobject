@@ -21,15 +21,12 @@
 namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Script types
+    /// Rule type collection for folder fields
     /// </summary>
-    public enum CoaEnumScriptType
+    public enum CoaRuleTypes
     {
-        Include,
-        Normal,
-        DataFilter,
-        Autocalculation,
-        ScheduledTask,
-        Form
+        Restriction = 1,
+        FieldRequiered = 2,
+        FieldEnabled = 3
     }
 }
