@@ -20,13 +20,13 @@
  */
 using System;
 
-namespace CoaApp.Core.Enumes.Rule
+namespace CoaApp.Core.Enumes
 {
     /// <summary>
     /// Right side operand type
     /// </summary>
     [Serializable]
-    public enum CoaRuleRightSideType
+    public enum CoaRuleRightSideTypes
     {
         /// <summary>
         /// Right side is constant

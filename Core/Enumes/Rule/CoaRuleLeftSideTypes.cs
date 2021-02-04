@@ -26,7 +26,7 @@ namespace CoaApp.Core.Enumes
     /// Left side operand type
     /// </summary>
     [Serializable]
-    public enum CoaRuleLeftSideType
+    public enum CoaRuleLeftSideTypes
     {
         /// <summary>
         /// Left side is field path
