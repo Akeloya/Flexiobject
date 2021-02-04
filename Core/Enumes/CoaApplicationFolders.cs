@@ -18,27 +18,21 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System;
 
 namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Deletion parameter flags
+    /// Internal application object type collection
     /// </summary>
-    [Flags]
-    public enum CoaDeletionObjectFlags
+    public enum CoaApplicationFolders
     {
         /// <summary>
-        /// Do not check permission for object deletion action
+        /// User accounts
         /// </summary>
-        WithoutPermissionCheck,
+        UserAccounts = 1,
         /// <summary>
-        /// Do not run actions
+        /// User groups
         /// </summary>
-        WithoutActions,
-        /// <summary>
-        /// Clear deletion - no any 
-        /// </summary>
-        ClearDeletion
+        UserGroups = 2
     }
 }
