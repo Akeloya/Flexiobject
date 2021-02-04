@@ -20,9 +20,22 @@
  */
 namespace CoaApp.Core.Interfaces
 {
-    public interface IBase
+    /// <summary>
+    /// Связь полей
+    /// </summary>
+    public interface IFieldMapping : IBase
     {
-        IApplication Application { get; }
-        dynamic Parent { get; }
+        /// <summary>
+        /// Источник
+        /// </summary>
+        string Source { get; } 
+        /// <summary>
+        /// Пользовательское поле
+        /// </summary>
+        IUserFieldDefinition Field { get; set; }
+        /// <summary>
+        /// Добавление к существующему контенту
+        /// </summary>
+        bool AppendExistingContent { get; set; }
     }
 }

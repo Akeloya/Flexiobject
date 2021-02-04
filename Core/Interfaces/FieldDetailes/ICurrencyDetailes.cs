@@ -20,9 +20,18 @@
  */
 namespace CoaApp.Core.Interfaces
 {
-    public interface IBase
+    /// <summary>
+    /// Детали поля типа "валюта"
+    /// </summary>
+    public interface ICurrencyDetailes : IBase
     {
-        IApplication Application { get; }
-        dynamic Parent { get; }
+        /// <summary>
+        /// Флаг отображения валютного знака
+        /// </summary>
+        bool SuppressCurrencySymbol { get; set; }
+        /// <summary>
+        /// Флаг разделения разрядов числа
+        /// </summary>
+        bool SuppressThousandsSeparator { get; set; }
     }
 }

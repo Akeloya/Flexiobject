@@ -18,11 +18,35 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+using CoaApp.Core.Enumes;
+
 namespace CoaApp.Core.Interfaces
 {
-    public interface IBase
+    /// <summary>
+    /// Действие выполняющееся автоматически при создании, изменении или удалении объекта
+    /// </summary>
+    public interface IAction : IBase
     {
-        IApplication Application { get; }
-        dynamic Parent { get; }
+        /// <summary>
+        /// Ид действия
+        /// </summary>
+        int Id { get;}
+        /// <summary>
+        /// Тип действия
+        /// </summary>
+        CoaActionTypes Type { get; set; } 
+        /// <summary>
+        /// Название
+        /// </summary>
+        string Name { get; set; }
+        /// <summary>
+        /// Описание
+        /// </summary>
+        string Desctiption { get; set; }
+        /// <summary>
+        /// Сохранение изменений в БД
+        /// </summary>
+        /// <returns></returns>
+        void Save();
     }
 }

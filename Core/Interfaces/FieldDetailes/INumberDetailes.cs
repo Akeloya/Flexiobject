@@ -20,9 +20,14 @@
  */
 namespace CoaApp.Core.Interfaces
 {
-    public interface IBase
+    /// <summary>
+    /// Детали числа
+    /// </summary>
+    public interface INumberDetailes : IBase
     {
-        IApplication Application { get; }
-        dynamic Parent { get; }
+        /// <summary>
+        /// Разделение разрядов
+        /// </summary>
+         bool SuppressThousandsSeparator { get; set; }
     }
 }

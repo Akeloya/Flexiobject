@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
+ *  An application that implements the ability to customize object templates and actions on them.
+ *  Copyright (C) 2019 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -20,9 +20,20 @@
  */
 namespace CoaApp.Core.Interfaces
 {
-    public interface IBase
+   /// <summary>
+   /// Активная сессия
+   /// </summary>
+    public interface IActiveSessions : IBase
     {
-        IApplication Application { get; }
-        dynamic Parent { get; }
+        /// <summary>
+        /// Доступ к сессии по индексу в списке
+        /// </summary>
+        /// <param name="idx"></param>
+        /// <returns></returns>
+        IActiveSession this[int idx] { get; }
+        /// <summary>
+        /// Количество активных сессий пользователей
+        /// </summary>
+        int Count { get; }
     }
 }

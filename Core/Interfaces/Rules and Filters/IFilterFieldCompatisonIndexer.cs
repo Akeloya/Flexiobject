@@ -18,11 +18,20 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+using CoaApp.Core.Enumes;
+
 namespace CoaApp.Core.Interfaces
 {
-    public interface IBase
+    /// <summary>
+    /// Интерфейс установки сравнения для поля в правиле
+    /// </summary>
+    public interface IFilterFieldCompatisonIndexer
     {
-        IApplication Application { get; }
-        dynamic Parent { get; }
+        /// <summary>
+        /// Установка и получение значения оператора сравнения для узла правила
+        /// </summary>
+        /// <param name="name">Алиас поля для которого устанавливается значение</param>
+        /// <returns>NULL или тип оператора сравнения</returns>
+        CoaRuleComparisonsTypes? this[string name] { get; set; }
     }
 }

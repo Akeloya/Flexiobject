@@ -18,11 +18,24 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+using CoaApp.Core.Interfaces;
+
 namespace CoaApp.Core.Interfaces
 {
-    public interface IBase
+    /// <summary>
+    /// Коллекция визуальных представлений
+    /// </summary>
+    public interface IViews : IBase
     {
-        IApplication Application { get; }
-        dynamic Parent { get; }
+        /// <summary>
+        /// Получение представления по индексу
+        /// </summary>
+        /// <param name="idx">0..Count-1</param>
+        /// <returns>IView объект</returns>
+        IView this[int idx] { get; }
+        /// <summary>
+        /// Количество элементов в коллекции
+        /// </summary>
+        int Count { get; }
     }
 }

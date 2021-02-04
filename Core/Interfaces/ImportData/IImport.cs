@@ -20,9 +20,22 @@
  */
 namespace CoaApp.Core.Interfaces
 {
-    public interface IBase
+    /// <summary>
+    /// Импорт данных
+    /// </summary>
+    public interface IImport : IBase
     {
-        IApplication Application { get; }
-        dynamic Parent { get; }
+        /// <summary>
+        /// Запуск импорта данных
+        /// </summary>
+        void Run(object settings);
+        /// <summary>
+        /// Путь к файлу, содержащему лог импорта
+        /// </summary>
+        string LogFile { get; }
+        /// <summary>
+        /// Источник данных
+        /// </summary>
+        string DataSource { get; set; }
     }
 }

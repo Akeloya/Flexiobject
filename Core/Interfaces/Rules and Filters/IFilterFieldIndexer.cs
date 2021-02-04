@@ -20,9 +20,16 @@
  */
 namespace CoaApp.Core.Interfaces
 {
-    public interface IBase
+    /// <summary>
+    /// Иинтерфейс доступа к индексу правила
+    /// </summary>
+    public interface IFilterFieldIndexer
     {
-        IApplication Application { get; }
-        dynamic Parent { get; }
+        /// <summary>
+        /// Доступ к значению правила по имени
+        /// </summary>
+        /// <param name="name">Имя поля</param>
+        /// <returns>Поле</returns>
+        object this[string name] { get; set; }
     }
 }

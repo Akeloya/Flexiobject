@@ -18,23 +18,38 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+using System;
+
 namespace CoaApp.Core.Interfaces
 {
-    public interface IApplication
+    /// <summary>
+    /// Активная (текущая) сессия пользователя
+    /// </summary>
+    public interface IActiveSession : IBase
     {
         /// <summary>
-        /// Write string message to write in server log
+        /// Тип клиента
         /// </summary>
-        /// <param name="msg">Message text</param>
-        void WriteLogMessage(string msg);
+        string ClientType { get; }
         /// <summary>
-        /// Open new session to server
+        /// Хост пользователя
         /// </summary>
-        /// <param name="hostName">Server host name</param>
-        /// <param name="port">Server port</param>
-        /// <param name="userName">Application user name</param>
-        /// <param name="password">Application user password</param>
-        /// <returns>Session object</returns>
-        ISession OpenSession(string hostName, int port, string userName, string password);
+        string HostName { get; }
+        /// <summary>
+        /// Время логина
+        /// </summary>
+        DateTime LoginTime { get; }
+        /// <summary>
+        /// Время простоя (отсутствия трафика между клиентом и сервером)
+        /// </summary>
+        DateTime IdleTime { get; }
+        /// <summary>
+        /// Логин пользователя
+        /// </summary>
+        string UserName { get; }
+        /// <summary>
+        /// Закрыть сессию
+        /// </summary>
+        void Close();
     }
 }

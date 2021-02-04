@@ -18,11 +18,25 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+using System.Collections.Generic;
+
 namespace CoaApp.Core.Interfaces
 {
-    public interface IBase
+    /// <summary>
+    /// История изменений объекта
+    /// </summary>
+    public interface IHistory : IBase
     {
-        IApplication Application { get; }
-        dynamic Parent { get; }
+        /// <summary>
+        /// Количество изменений
+        /// </summary>
+        int Count { get; }
+        /// <summary>
+        /// Доступ к элементу коллекции по индексу
+        /// </summary>
+        /// <param name="idx">0...Count-1 значение индекса</param>
+        /// <returns></returns>
+        IHistoryItem this[int idx] { get; }
+        //List<IHistoryItem> Items { get; }
     }
 }

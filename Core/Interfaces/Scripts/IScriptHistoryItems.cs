@@ -20,9 +20,20 @@
  */
 namespace CoaApp.Core.Interfaces
 {
-    public interface IBase
+    /// <summary>
+    /// Данные истории изменения скриптов
+    /// </summary>
+    public interface IScriptHistoryItems : IBase
     {
-        IApplication Application { get; }
-        dynamic Parent { get; }
+        /// <summary>
+        /// Доступ к коллекции по индексу
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        IScriptHistoryItem this[int index] { get; }        
+        /// <summary>
+        /// Количество записей
+        /// </summary>
+        int Count { get; }
     }
 }

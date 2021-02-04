@@ -20,9 +20,11 @@
  */
 namespace CoaApp.Core.Interfaces
 {
-    public interface IBase
+    /// <summary>
+    /// Интерфейс реализации именованных правил
+    /// </summary>
+    public interface INamedFilterDefinitions : IBase
     {
-        IApplication Application { get; }
-        dynamic Parent { get; }
+         
     }
 }

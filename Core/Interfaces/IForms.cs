@@ -18,11 +18,34 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 namespace CoaApp.Core.Interfaces
 {
-    public interface IBase
+    /// <summary>
+    /// Form collection
+    /// </summary>
+    public interface IForms : IBase
     {
-        IApplication Application { get; }
-        dynamic Parent { get; }
+        /// <summary>
+        /// Add new form
+        /// </summary>
+        /// <returns>New IForm object </returns>
+        IForm Add();
+        /// <summary>
+        /// Form count in collection
+        /// </summary>
+        int Count { get; }
+        /// <summary>
+        /// Index access form collection
+        /// </summary>
+        /// <param name="idx">Index 0...Count-1</param>
+        /// <returns></returns>
+        IForm this[int idx] { get; }
+        /// <summary>
+        /// Access to object in collection by name
+        /// </summary>
+        /// <param name="name">Form name</param>
+        /// <returns></returns>
+        IForm this[string name] { get; }
     }
 }

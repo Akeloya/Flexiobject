@@ -20,21 +20,38 @@
  */
 namespace CoaApp.Core.Interfaces
 {
-    public interface IApplication
+    /// <summary>
+    /// Значение выпадающего списка
+    /// </summary>
+    public interface IDropDownValue : IBase
     {
         /// <summary>
-        /// Write string message to write in server log
+        /// Алиас выпадающего значения
         /// </summary>
-        /// <param name="msg">Message text</param>
-        void WriteLogMessage(string msg);
+        string Alias { get; set; } 
         /// <summary>
-        /// Open new session to server
+        /// Описание выпадающего значение
         /// </summary>
-        /// <param name="hostName">Server host name</param>
-        /// <param name="port">Server port</param>
-        /// <param name="userName">Application user name</param>
-        /// <param name="password">Application user password</param>
-        /// <returns>Session object</returns>
-        ISession OpenSession(string hostName, int port, string userName, string password);
+        string Description { get; set; }
+        /// <summary>
+        /// Название выпадающего значения
+        /// </summary>
+        string Name { get; set; }
+        /// <summary>
+        /// Уровень, определяющий порядок в коллекции
+        /// </summary>
+        int Level { get; }
+        /// <summary>
+        /// Предшественник
+        /// </summary>
+        IDropDownValue Predecessor { get; }
+        /// <summary>
+        /// Преемник
+        /// </summary>
+        IDropDownValue Successor { get; }
+        /// <summary>
+        /// Уникальный идентификатор
+        /// </summary>
+        int UniqueId { get; }
     }
 }

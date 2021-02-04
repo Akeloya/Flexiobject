@@ -18,11 +18,22 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+using System;
+
 namespace CoaApp.Core.Interfaces
 {
-    public interface IBase
+    /// <summary>
+    /// Интерфейс поиска записей в истории изменени объектов
+    /// </summary>
+    public interface IHistorySearch : IBase
     {
-        IApplication Application { get; }
-        dynamic Parent { get; }
+        /// <summary>
+        /// Начальная дата фильтрации
+        /// </summary>
+        DateTime EndDate { get; set; }
+        /// <summary>
+        /// Конечная дата фильтрации
+        /// </summary>
+        DateTime StartDate { get; set; }
     }
 }

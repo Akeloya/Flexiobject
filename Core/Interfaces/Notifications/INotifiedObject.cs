@@ -18,11 +18,25 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+using CoaApp.Core.Interfaces;
+
 namespace CoaApp.Core.Interfaces
 {
-    public interface IBase
+    /// <summary>
+    /// 
+    /// </summary>
+    public interface INotifiedObject : IBase
     {
-        IApplication Application { get; }
-        dynamic Parent { get; }
+        /// <summary>
+        /// Уведомить получателя о событии
+        /// </summary>
+        /// <param name="message">Сообщение</param>
+        /// <param name="linkedObject">Связанный объект</param>
+        void Notify(string message, object linkedObject);
+        /// <summary>
+        /// Коллекция уведомлений пользователя
+        /// </summary>
+        /// <returns><seealso cref="INotifiedMessages"/> объект коллекции</returns>
+        INotifiedMessages Messages { get; }
     }
 }

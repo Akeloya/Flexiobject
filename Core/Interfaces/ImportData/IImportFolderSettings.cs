@@ -18,23 +18,35 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+using System.Collections.Generic;
+using CoaApp.Core.Enumes;
+
 namespace CoaApp.Core.Interfaces
 {
-    public interface IApplication
+    /// <summary>
+    /// Определение настроек папки в которую импортируют данные
+    /// </summary>
+    public interface IImportFolderSettings : IBase
     {
         /// <summary>
-        /// Write string message to write in server log
+        /// Тип импорта (добавление, добавление и изменение,...)
         /// </summary>
-        /// <param name="msg">Message text</param>
-        void WriteLogMessage(string msg);
+        CoaImportSettingsTypes Type { get; set; }
         /// <summary>
-        /// Open new session to server
+        /// Необходимо ли создавать записи в истории
         /// </summary>
-        /// <param name="hostName">Server host name</param>
-        /// <param name="port">Server port</param>
-        /// <param name="userName">Application user name</param>
-        /// <param name="password">Application user password</param>
-        /// <returns>Session object</returns>
-        ISession OpenSession(string hostName, int port, string userName, string password);
+        bool CreateHistoryEntries { get; set; }
+        /// <summary>
+        /// Обновление автокалькуляции
+        /// </summary>
+        bool UpdateAutoCalculations { get; set; }
+        /// <summary>
+        /// Выполнение действий при работе с объектом
+        /// </summary>
+        bool ExecuteActions { get; set; }
+        /// <summary>
+        /// Проверка входных данных
+        /// </summary>
+        bool ValidateInput { get; set; }
     }
 }

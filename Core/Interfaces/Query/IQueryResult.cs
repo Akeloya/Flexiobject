@@ -20,21 +20,31 @@
  */
 namespace CoaApp.Core.Interfaces
 {
-    public interface IApplication
+    /// <summary>
+    /// Результат запроса к данным
+    /// </summary>
+    public interface IQueryResult : IBase
     {
         /// <summary>
-        /// Write string message to write in server log
+        /// Количество колонок в результатах запроса
         /// </summary>
-        /// <param name="msg">Message text</param>
-        void WriteLogMessage(string msg);
+        int ColumnCount { get; }
         /// <summary>
-        /// Open new session to server
+        /// Колонка в результатах запроса
         /// </summary>
-        /// <param name="hostName">Server host name</param>
-        /// <param name="port">Server port</param>
-        /// <param name="userName">Application user name</param>
-        /// <param name="password">Application user password</param>
-        /// <returns>Session object</returns>
-        ISession OpenSession(string hostName, int port, string userName, string password);
+        /// <param name="index">индекс колонки</param>
+        /// <returns>Имя колонки</returns>
+        IQueryResultColumn this[int index] { get; }
+        /// <summary>
+        /// Количество строк в результатах запроса
+        /// </summary>
+        int Rows { get; }
+        /// <summary>
+        /// Значение
+        /// </summary>
+        /// <param name="row">индекс строки</param>
+        /// <param name="col">индекс колонки</param>
+        /// <returns></returns>
+        object this[int row, int col] { get; }
     }
 }

@@ -20,9 +20,19 @@
  */
 namespace CoaApp.Core.Interfaces
 {
-    public interface IBase
+    /// <summary>
+    /// Рабочий процесс
+    /// </summary>
+    public interface IWorkflowDetails : IBase
     {
-        IApplication Application { get; }
-        dynamic Parent { get; }
+        /// <summary>
+        /// Состояния рабочего процесса
+        /// </summary>
+        IStateDefinitions States { get; }
+        /// <summary>
+        /// Допустимые переводы рабочего процесса
+        /// </summary>
+        IStateTransitions Transitions { get; }
+
     }
 }
