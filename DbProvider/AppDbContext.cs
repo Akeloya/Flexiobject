@@ -18,6 +18,8 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+using CoaApp.Core.Enumes;
+
 using DbProvider.Entities;
 
 using EntityFrameworkCore.Jet;
@@ -25,6 +27,10 @@ using EntityFrameworkCore.Jet;
 using FileContextCore;
 
 using Microsoft.EntityFrameworkCore;
+
+using System;
+
+using Action = DbProvider.Entities.Action;
 
 namespace DbProvider
 {
@@ -127,7 +133,7 @@ namespace DbProvider
 
                 entity.Property(e => e.Title)
                     .IsRequired()
-                    .HasColumnName("TItle")
+                    .HasColumnName("Title")
                     .HasMaxLength(200);
             });
 
@@ -270,6 +276,8 @@ namespace DbProvider
                 entity.Property(e => e.RestrictionScriptId).HasColumnName("restrictionScriptId");
 
                 entity.Property(e => e.IsSyncronized).HasColumnName("syncronized");
+
+                entity.Property(e => e.Type).HasConversion(c => (byte)c, c => (CoaFieldTypes)c);
 
                 entity.HasOne(d => d.Folder)
                     .WithMany(p => p.FieldDefinitions)

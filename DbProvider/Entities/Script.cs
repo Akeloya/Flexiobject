@@ -26,7 +26,7 @@ namespace DbProvider.Entities
     public partial class Script
     {
         public int Id { get; set; }
-        public CoaScriptType Type { get; set; }
+        public CoaScriptTypes Type { get; set; }
         public string Name { get; set; }
         public string ScriptCode { get; set; }
         public int? Ref { get; set; }
