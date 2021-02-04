@@ -1,5 +1,8 @@
 # Custom object application (Приложение настраиваемых объектов)
 
+![Build](https://github.com/Akeloya/CustomObjectApplication/workflows/.NET%20Core/badge.svg)
+![CodeQL](https://github.com/Akeloya/CustomObjectApplication/workflows/CodeQL/badge.svg)
+
 Application for creating and using freely customizable configuration of data, forms, actions and other things
 
 ## Languages
