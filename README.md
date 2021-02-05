@@ -1,13 +1,14 @@
 # Custom object application (Приложение настраиваемых объектов)
 
-![Build](https://github.com/Akeloya/CustomObjectApplication/workflows/.NET%20Core/badge.svg)
-![CodeQL](https://github.com/Akeloya/CustomObjectApplication/workflows/CodeQL/badge.svg)
-
+[![License: GPL v3](https://img.shields.io/github/license/Akeloya/CustomObjectApplication.svg)](http://www.gnu.org/licenses/gpl-3.0)
+[![Build](https://github.com/Akeloya/CustomObjectApplication/workflows/.NET%20Core/badge.svg)](https://github.com/Akeloya/CustomObjectApplication/actions?query=workflow%3A%22.NET+Core%22)
+[![CodeQL](https://github.com/Akeloya/CustomObjectApplication/workflows/CodeQL/badge.svg)](https://github.com/Akeloya/CustomObjectApplication/actions?query=workflow%3ACodeQL)
+[![BCH compliance](https://bettercodehub.com/edge/badge/Akeloya/CustomObjectApplication?branch=master)](https://bettercodehub.com/)
 Application for creating and using freely customizable configuration of data, forms, actions and other things
 
 ## Languages
 
-- English
+- [English](#English)
 - [Russian](#Russian)
 
 ## English
