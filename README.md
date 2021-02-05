@@ -4,6 +4,7 @@
 [![Build](https://github.com/Akeloya/CustomObjectApplication/workflows/.NET%20Core/badge.svg)](https://github.com/Akeloya/CustomObjectApplication/actions?query=workflow%3A%22.NET+Core%22)
 [![CodeQL](https://github.com/Akeloya/CustomObjectApplication/workflows/CodeQL/badge.svg)](https://github.com/Akeloya/CustomObjectApplication/actions?query=workflow%3ACodeQL)
 [![BCH compliance](https://bettercodehub.com/edge/badge/Akeloya/CustomObjectApplication?branch=master)](https://bettercodehub.com/)
+
 Application for creating and using freely customizable configuration of data, forms, actions and other things
 
 ## Languages
@@ -33,6 +34,24 @@ To describe the subject area, the user is offered a basic set of objects:
 
 The current stage of the project is porting from the .Net Framework to .Net Core to be able to build an application for Linux.
 
+### Object structure
+
+```bash
+Application
+|--Session
+   |--Folder
+      |--Objects
+      |--Forms
+      |--Actions
+      |--Fields
+      |--Scrips
+      |--Sub folders
+```
+
+### How can you help the project
+
+Everyone can help the project, especially for Linux development.
+
 ## Russian
 
 ### Цель
@@ -54,3 +73,7 @@ The current stage of the project is porting from the .Net Framework to .Net Core
 - Виды отображения объектов в папке (на текущий момент только таблица)
 
 Текущая стадия проекта - портирование с .Net Framework в .Net Core для возможности построения приложения под Linux.
+
+### Чем можно помочь проекту
+
+Проекту можно помочь всем, особенно по разработке под Linux.
