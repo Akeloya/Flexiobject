@@ -13,9 +13,15 @@ Application for creating and using freely customizable configuration of data, fo
 
 ## English
 
+### Purpose
+
 This project is an application of custom objects that allows the user to describe objects in the domain using fields in the window interface, add various actions on objects, create forms for editing objects without deep knowledge of programming.
 
-The application has a client-server architecture with its own programming interface. The client can be any application that implements the processing of the project program interface (console application, service, window client).
+### Description
+
+- The application has a client-server architecture with its own software interface. The client can be any application that implements the processing of the project program interface (console application, service, window client).
+- To work, you will need to install the application server, configure the connection to the DBMS, install and run the client.
+- An application has its own data schema in the form of a set of tables that store settings and a description of the application object schema that describe the domain model of a user application for a certain domain.
 
 To describe the subject area, the user is offered a basic set of objects:
 
@@ -29,9 +35,15 @@ The current stage of the project is porting from the .Net Framework to .Net Core
 
 ## Russian
 
+### Цель
+
 Данный проект это приложение настраеваемых объектов, позволяющее пользователю в оконном интерфейсе описать объекты предметной области с помощью полей, добавить различные действия над объектами, создать формы редактирования объектов без глубоких знаний в программировании.
 
-Приложение имеет клиент-серверную архитектуру с собственным программным интерфейсом. Клиентом может являться любое приложение, реализующее обработку программного интерфейса проекта (консольное приложение, служба, оконный клиент).
+### Описание
+
+- Приложение имеет клиент-серверную архитектуру с собственным программным интерфейсом. Клиентом может являться любое приложение, реализующее обработку программного интерфейса проекта (консольное приложение, служба, оконный клиент).
+- Для работы потребуется установка сервера приложений, настройки подключения к СУБД, установки и запуска клиента.
+- У приложения имеется собственная схема данных в виде набора таблиц, в которых хранятся настройки и описание схемы объектов приложения, описывающих предметную модель пользовательского приложения для какой-то предметной области.
 
 Для описания предметной области пользователю предлагается основной набор объектов:
 
