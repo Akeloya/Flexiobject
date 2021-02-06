@@ -39,6 +39,8 @@ namespace CoaApp.Core.Enumes
         UserCalendar = 10,
         UserDescription = 11,
         UserLastLogin = 12,
+        UserPhone = 13,
+        UserDepartment = 14,        
         #endregion
 
         #region User Groups
