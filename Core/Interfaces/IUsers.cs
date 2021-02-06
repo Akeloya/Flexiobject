@@ -25,44 +25,13 @@ namespace CoaApp.Core.Interfaces
     /// <summary>
     /// Коллекция пользователей приложения
     /// </summary>
-    public interface IUsers : IBase
+    public interface IUsers : IBaseCollection<IUser>
     {
         /// <summary>
         /// Получить существующего пользователя по логину
         /// </summary>
         /// <param name="login">Логин пользователя</param>
         /// <returns>Объект IUser</returns>
-        IUser GetUserByLoginName(string login);
-        /// <summary>
-        /// Доступ к коллекции по индексу
-        /// </summary>
-        /// <param name="index">0..Count-1 номер индекса</param>
-        /// <returns></returns>
-        IUser this[int index] { get; }
-        /// <summary>
-        /// Доступ к коллекции по индексу
-        /// </summary>
-        /// <param name="name">Имя объекта, если имеется</param>
-        /// <returns></returns>
-        IUser this[string name] { get; }
-        /// <summary>
-        /// Добавить 
-        /// </summary>
-        /// <returns>объект коллекции</returns>
-        IUser Add();
-        /// <summary>
-        /// Удалить объект коллекции
-        /// </summary>
-        /// <param name="obj">объект, удаляемый из коллекции</param>
-        void Remove(IUser obj);
-        /// <summary>
-        /// Удалить объект коллекции
-        /// </summary>
-        /// <param name="index">номер индекса, удаляемый из коллекции</param>
-        void Remove(int index);
-        /// <summary>
-        /// Количество 
-        /// </summary>
-        int Count { get; }
+        IUser GetUserByLoginName(string login);        
     }
 }
