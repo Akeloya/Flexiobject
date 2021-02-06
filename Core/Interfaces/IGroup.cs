@@ -58,7 +58,7 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// Связанный IRequest объект группы доступа
         /// </summary>
-        IRequest Object { get; }
+        ICustomObject Object { get; }
         /// <summary>
         /// Члены группы
         /// </summary>

@@ -25,7 +25,7 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// Список всех папок
         /// </summary>
-        IRequestFolders RequestFolders { get; }
+        ICustomFolders RequestFolders { get; }
 
         /// <summary>
         /// Сессии пользователей
@@ -62,14 +62,14 @@ namespace CoaApp.Core.Interfaces
         /// Удаленные объекты, находящиеся в корзине
         /// </summary>
         /// <returns>IRequests коллекция удаленных объектов, находящихся в корзине</returns>
-        IRequests GetDeletedRequests();
+        ICustomObjects GetDeletedRequests();
 
         /// <summary>
         /// Получить объект по идентификатору
         /// </summary>
         /// <param name="id">Уникальный идентификатор объекта</param>
         /// <returns>null/IRequest</returns>
-        IRequest GetRequestByUniqueId(long id);
+        ICustomObject GetRequestByUniqueId(long id);
         /// <summary>
         /// Запланированные задачи на сервере
         /// </summary>
@@ -79,14 +79,14 @@ namespace CoaApp.Core.Interfaces
         /// </summary>
         /// <param name="path">Папка[\подпапка 1]</param>
         /// <returns></returns>
-        IRequestFolder GetRequestFolderByPath(string path);
+        ICustomFolder GetRequestFolderByPath(string path);
 
         /// <summary>
         /// Получить папку по ее идентификатору
         /// </summary>
         /// <param name="id">Ид папки</param>
         /// <returns>null/IRequestFolder</returns>
-        IRequestFolder GetRequestFolderByUniqueId(int id);
+        ICustomFolder GetRequestFolderByUniqueId(int id);
 
         /// <summary>
         /// Логирование сообщения
@@ -130,7 +130,7 @@ namespace CoaApp.Core.Interfaces
         /// <param name="reciever">Получатель, объект IUser или IRequest, связанный с пользователями приложения</param>
         /// <param name="message">Сообщение</param>
         /// <param name="linkedRequest">Ссылка на объект при необходимости</param>
-        void NotifyUser(object reciever, string message, IRequest linkedRequest);
+        void NotifyUser(object reciever, string message, ICustomObject linkedRequest);
         /// <summary>
         /// Получить определение пользовательского поля по идентификатору
         /// </summary>

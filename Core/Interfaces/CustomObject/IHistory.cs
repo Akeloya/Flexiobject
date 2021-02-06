@@ -18,7 +18,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System.Collections.Generic;
 
 namespace CoaApp.Core.Interfaces
 {
@@ -36,7 +35,7 @@ namespace CoaApp.Core.Interfaces
         /// </summary>
         /// <param name="idx">0...Count-1 значение индекса</param>
         /// <returns></returns>
-        IHistoryItem this[int idx] { get; }
+        IHistoryRecord this[int idx] { get; }
         //List<IHistoryItem> Items { get; }
     }
 }

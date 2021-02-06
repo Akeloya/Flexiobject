@@ -73,7 +73,7 @@ namespace CoaApp.Core.Interfaces
         /// </summary>
         /// <param name="request">Объект для которого вычисляется правило</param>
         /// <returns>Результат вычисления</returns>
-        bool Calculate(IRequest request);
+        bool Calculate(ICustomObject request);
         /// <summary>
         /// Коллекция полей, задействованных в текущем правиле
         /// </summary>

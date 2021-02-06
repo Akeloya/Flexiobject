@@ -46,7 +46,7 @@ namespace CoaApp.Core.Interfaces
         /// </summary>
         /// <param name="folder">Папка для которой добавляется настройка импорта данных</param>
         /// <returns></returns>
-        IImportDefinition Add(IRequestFolder folder);
+        IImportDefinition Add(ICustomFolder folder);
         /// <summary>
         /// Удаление настройки импорта данных
         /// </summary>

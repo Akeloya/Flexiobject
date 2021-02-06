@@ -51,6 +51,6 @@ namespace CoaApp.Core.Interfaces
         /// <param name="oldRequest">Копия объекта до изменения</param>
         /// <param name="newRequest">Копия объекта после изменения</param>
         /// <returns></returns>
-        bool CheckRule(IRequest oldRequest, IRequest newRequest);
+        bool CheckRule(ICustomObject oldRequest, ICustomObject newRequest);
     }
 }

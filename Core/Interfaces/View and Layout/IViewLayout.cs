@@ -30,7 +30,7 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// Папка визуального отображения данных
         /// </summary>
-        IRequestFolder Folder { get; }
+        ICustomFolder Folder { get; }
         /// <summary>
         /// Название вида
         /// </summary>

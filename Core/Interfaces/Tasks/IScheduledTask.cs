@@ -51,7 +51,7 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// Папка выполнения
         /// </summary>
-        IRequestFolder ExecutionFolder { get; set; }
+        ICustomFolder ExecutionFolder { get; set; }
         /// <summary>
         /// Детали задания (В зависимости от типа)
         /// </summary>

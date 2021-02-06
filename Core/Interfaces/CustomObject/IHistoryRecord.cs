@@ -26,7 +26,7 @@ namespace CoaApp.Core.Interfaces
     /// <summary>
     /// Запись в истории объекта
     /// </summary>
-    public interface IHistoryItem : IBase
+    public interface IHistoryRecord : IBase
     {
         /// <summary>
         /// Действие

@@ -61,14 +61,14 @@ namespace CoaApp.Core.Interfaces
         /// <param name="oldReq">Копия объекта до изменения</param>
         /// <param name="newReq">Копия объекта после изменения</param>
         /// <returns>истина/ложь</returns>
-        bool IsRequired(IRequest oldReq, IRequest newReq);
+        bool IsRequired(ICustomObject oldReq, ICustomObject newReq);
         /// <summary>
         /// Доступно ли поле для использования
         /// </summary>
         /// <param name="oldReq"></param>
         /// <param name="newReq"></param>
         /// <returns></returns>
-        bool IsEnabled(IRequest oldReq, IRequest newReq);
+        bool IsEnabled(ICustomObject oldReq, ICustomObject newReq);
         /// <summary>
         /// Возможна ли смена типа поля
         /// </summary>

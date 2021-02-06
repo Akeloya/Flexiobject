@@ -35,7 +35,7 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// Папка по умолчанию. Используется вместе с <see cref="HasDefaultRequestFolder"/> и указывает папку, по умолчанию при открытии приложения для пользователя
         /// </summary>
-        IRequestFolder DefaultRequestFolder { get; set; }
+        ICustomFolder DefaultRequestFolder { get; set; }
         /// <summary>
         /// Подразделение пользователя
         /// </summary>
@@ -84,7 +84,7 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// IRequest связанный объект текущего объекта IUser
         /// </summary>
-        IRequest Object { get; }
+        ICustomObject Object { get; }
         /// <summary>
         /// Аккаунт эл. почты для исходящих сообщений
         /// </summary>

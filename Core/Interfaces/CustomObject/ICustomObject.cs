@@ -25,7 +25,7 @@ namespace CoaApp.Core.Interfaces
     /// <summary>
     /// Обсновной объект приложения
     /// </summary>
-    public interface IRequest : IBase
+    public interface ICustomObject : IBase
     {
         /// <summary>
         /// Уникальный идентификатор объекта
@@ -58,7 +58,7 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// Родительская папка объекта
         /// </summary>
-        IRequestFolder RequestFolder { get; }
+        ICustomFolder RequestFolder { get; }
         /// <summary>
         /// Получение состояние модификации объекта
         /// </summary>

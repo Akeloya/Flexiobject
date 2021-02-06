@@ -23,18 +23,13 @@ namespace CoaApp.Core.Interfaces
     /// <summary>
     /// Коллекция объектов
     /// </summary>
-    public interface IRequests : IBase
+    public interface ICustomObjects : IBaseCollection<ICustomObject>
     {
-        /// <summary>
-        /// Добавить новый объект
-        /// </summary>
-        /// <returns></returns>
-        IRequest Add();
         /// <summary>
         /// Добавить существующий объект в коллекцию
         /// </summary>
         /// <param name="request">Добавляемый объект</param>
-        void AddExisting(IRequest request);
+        void AddExisting(ICustomObject request);
         /// <summary>
         /// Добавить существующийо бъект по идентификатору
         /// </summary>
@@ -62,16 +57,5 @@ namespace CoaApp.Core.Interfaces
         /// <param name="id">Ид удаляемого объекта</param>
         /// <returns></returns>
         void Delete(long id);
-        /// <summary>
-        /// Количество объектов в коллекции
-        /// </summary>
-        /// <returns></returns>
-        int Count();
-        /// <summary>
-        /// Доступ к коллекции объектов по индексу
-        /// </summary>
-        /// <param name="idx">int индекс</param>
-        /// <returns></returns>
-        IRequest this[int idx] { get; set; }
     }
 }

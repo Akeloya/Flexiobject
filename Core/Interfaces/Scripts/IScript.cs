@@ -84,7 +84,7 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// Папка скрипта
         /// </summary>
-        IRequestFolder Folder { get; }
+        ICustomFolder Folder { get; }
         /// <summary>
         /// История изменения скрипта
         /// </summary>

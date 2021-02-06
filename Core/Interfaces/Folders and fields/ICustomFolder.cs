@@ -26,7 +26,7 @@ namespace CoaApp.Core.Interfaces
     /// <summary>
     /// User object folder
     /// </summary>
-    public interface IRequestFolder : IBase
+    public interface ICustomFolder : IBase
     {
         /// <summary>
         /// Unique folder identifier
@@ -47,7 +47,7 @@ namespace CoaApp.Core.Interfaces
         bool InheritNamingScheme { get; set; }
         /// <summary>
         /// Object naming scheme
-        /// <seealso cref="IRequest.Name"/>
+        /// <seealso cref="ICustomObject.Name"/>
         /// </summary>
         string NamingScheme { get; set; }
         /// <summary>
@@ -62,7 +62,7 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// Parent folder link
         /// </summary>
-        IRequestFolder ParentFolder { get; }
+        ICustomFolder ParentFolder { get; }
         /// <summary>
         /// Действия после создания объекта
         /// </summary>
@@ -102,7 +102,7 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// Folder objects collection
         /// </summary>
-        IRequests Requests { get; }
+        ICustomObjects Requests { get; }
         /// <summary>
         /// Folder scrip collection
         /// </summary>
@@ -119,7 +119,7 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// Дочерние папки
         /// </summary>
-        IRequestFolders SubFolders { get; }
+        ICustomFolders SubFolders { get; }
         /// <summary>
         /// Автоматические вычисления над данными объектов в папке
         /// </summary>
@@ -132,7 +132,7 @@ namespace CoaApp.Core.Interfaces
         /// Изменение положения папки в дереве папок
         /// </summary>
         /// <param name="folder">Новая родительская папка</param>
-        void Move(IRequestFolder folder);
+        void Move(ICustomFolder folder);
         /// <summary>
         /// Создание пустого отображения списка
         /// </summary>
@@ -148,7 +148,7 @@ namespace CoaApp.Core.Interfaces
         /// </summary>
         /// <param name="filter">Фильтр для папки</param>
         /// <returns></returns>
-        IRequests Search(IFilter filter);
+        ICustomObjects Search(IFilter filter);
         /// <summary>
         /// Установка отображения списка текущим
         /// </summary>

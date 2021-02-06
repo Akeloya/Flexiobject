@@ -34,7 +34,7 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// Связанный объект
         /// </summary>
-        IRequest LinkedRequest {get;}
+        ICustomObject LinkedRequest {get;}
         /// <summary>
         /// Дата-время события
         /// </summary>

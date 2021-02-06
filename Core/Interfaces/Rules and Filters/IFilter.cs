@@ -42,7 +42,7 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// Папка в которой выполняется фильтрация
         /// </summary>
-        IRequestFolder Folder { get; }
+        ICustomFolder Folder { get; }
         /// <summary>
         /// Комбинирование фильтров данных
         /// </summary>

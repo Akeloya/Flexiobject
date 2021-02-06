@@ -48,7 +48,7 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// Создать сообщение
         /// </summary>
-        INotifiedMessage Create(IUser sender, string message, IRequest linkedObject);
+        INotifiedMessage Create(IUser sender, string message, ICustomObject linkedObject);
         /// <summary>
         /// Получить новые или непрочитаныне сообщения
         /// </summary>

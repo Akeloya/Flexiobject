@@ -38,7 +38,7 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// Папка по умолчанию, необходима при работе с дочерними объектами
         /// </summary>
-        IRequestFolder DefaultFolder { get; set; }
+        ICustomFolder DefaultFolder { get; set; }
         /// <summary>
         /// Скрипт папки по умолчанию
         /// </summary>
@@ -70,7 +70,7 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// Папка, связанная с полем
         /// </summary>
-        IRequestFolder ReferencedFolder { get; set; }
+        ICustomFolder ReferencedFolder { get; set; }
         /// <summary>
         /// Флак идентифицирующий использование фильтра ограничения
         /// </summary>
@@ -111,7 +111,7 @@ namespace CoaApp.Core.Interfaces
         /// Получить папку по-умолчанию
         /// </summary>
         /// <returns></returns>
-        IRequestFolder GetDefaultFolder();
+        ICustomFolder GetDefaultFolder();
         /// <summary>
         /// Получить фильтр ограничения на связанные объекты
         /// </summary>

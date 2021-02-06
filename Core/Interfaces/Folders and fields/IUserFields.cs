@@ -22,7 +22,7 @@ namespace CoaApp.Core.Interfaces
 {
     /// <summary>
     /// Коллекция полей объекта IRequest
-    /// <seealso cref="IRequest"/>
+    /// <seealso cref="ICustomObject"/>
     /// </summary>
     public interface IUserFields : IBase
     {

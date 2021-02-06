@@ -55,7 +55,7 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// Папка принадлежности формы, пусто - если форма глобальная
         /// </summary>        
-        IRequestFolder Folder { get; }
+        ICustomFolder Folder { get; }
         /// <summary>
         /// Скрипт, вызываемый при открытии формы
         /// </summary>

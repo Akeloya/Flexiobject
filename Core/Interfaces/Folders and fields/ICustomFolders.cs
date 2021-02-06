@@ -23,7 +23,7 @@ namespace CoaApp.Core.Interfaces
     /// <summary>
     /// Коллекция папкок
     /// </summary>
-    public interface IRequestFolders : IBaseCollection<IRequestFolder>
+    public interface ICustomFolders : IBaseCollection<ICustomFolder>
     {
         /// <summary>
         /// Добавить новую папку
@@ -32,7 +32,7 @@ namespace CoaApp.Core.Interfaces
         /// <param name="alias">Алиас папки</param>
         /// <param name="parentFolder">Родительская папка</param>
         /// <returns></returns>
-        IRequestFolder Add(string name, string alias, IRequestFolder parentFolder);
+        ICustomFolder Add(string name, string alias, ICustomFolder parentFolder);
         /// <summary>
         /// Удаление папки
         /// </summary>
@@ -44,7 +44,7 @@ namespace CoaApp.Core.Interfaces
         /// </summary>
         /// <param name="folder">Папка для удаления</param>
         /// <param name="force">Игнорирование наличия в папке объектов</param>
-        void Remove(IRequestFolder folder, bool force = false);
+        void Remove(ICustomFolder folder, bool force = false);
         /// <summary>
         /// Доступ к элементу коллекции по идентификатору
         /// </summary>
