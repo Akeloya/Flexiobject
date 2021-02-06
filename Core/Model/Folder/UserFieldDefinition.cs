@@ -33,12 +33,12 @@ namespace CoaApp.Core.Model.Folder
         public bool IndexFieldDb { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public bool IndexField { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public bool IsEnabled(IRequest oldReq, IRequest newReq)
+        public bool IsEnabled(ICustomObject oldReq, ICustomObject newReq)
         {
             throw new NotImplementedException();
         }
 
-        public bool IsRequired(IRequest oldReq, IRequest newReq)
+        public bool IsRequired(ICustomObject oldReq, ICustomObject newReq)
         {
             throw new NotImplementedException();
         }

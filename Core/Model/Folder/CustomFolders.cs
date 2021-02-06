@@ -5,25 +5,25 @@ using System.Text;
 
 namespace CoaApp.Core.Model.Folder
 {
-    public abstract class RequestFolders<T>: AppBase<T>, IRequestFolders
+    public abstract class CustomFolders<T>: AppBase<T>, ICustomFolders
     {
-        protected RequestFolders(Application app, T parent) : base(app, parent)
+        protected CustomFolders(Application app, T parent) : base(app, parent)
         {
 
         }
 
-        public IRequestFolder this[int index] => throw new NotImplementedException();
+        public ICustomFolder this[int index] => throw new NotImplementedException();
 
-        public IRequestFolder this[string name] => throw new NotImplementedException();
+        public ICustomFolder this[string name] => throw new NotImplementedException();
 
         public int Count => throw new NotImplementedException();
 
-        public IRequestFolder Add(string name, string alias, IRequestFolder parentFolder)
+        public ICustomFolder Add(string name, string alias, ICustomFolder parentFolder)
         {
             throw new NotImplementedException();
         }
 
-        public IRequestFolder Add()
+        public ICustomFolder Add()
         {
             throw new NotImplementedException();
         }
@@ -33,12 +33,12 @@ namespace CoaApp.Core.Model.Folder
             throw new NotImplementedException();
         }
 
-        public void Remove(IRequestFolder folder, bool force = false)
+        public void Remove(ICustomFolder folder, bool force = false)
         {
             throw new NotImplementedException();
         }
 
-        public void Remove(IRequestFolder obj)
+        public void Remove(ICustomFolder obj)
         {
             throw new NotImplementedException();
         }

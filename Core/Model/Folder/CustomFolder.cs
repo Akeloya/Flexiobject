@@ -6,9 +6,9 @@ using System.Text;
 
 namespace CoaApp.Core.Model.Folder
 {
-    public abstract class RequestFolder<T>: AppBase<T>, IRequestFolder
+    public abstract class CustomFolder<T>: AppBase<T>, ICustomFolder
     {
-        protected RequestFolder(Application app, T parent) : base(app, parent)
+        protected CustomFolder(Application app, T parent) : base(app, parent)
         {
 
         }
@@ -27,7 +27,7 @@ namespace CoaApp.Core.Model.Folder
 
         public IForms Forms => throw new NotImplementedException();
 
-        public IRequestFolder ParentFolder => throw new NotImplementedException();
+        public ICustomFolder ParentFolder => throw new NotImplementedException();
 
         public IActions AfterCreateActions => throw new NotImplementedException();
 
@@ -46,13 +46,13 @@ namespace CoaApp.Core.Model.Folder
         public IPicture PictureOpen { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public IPicture PictureClose { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public IRequests Requests => throw new NotImplementedException();
+        public ICustomObjects Requests => throw new NotImplementedException();
 
         public IScripts Scripts => throw new NotImplementedException();
 
         public IUserFieldDefinitions UserFieldDefinitions => throw new NotImplementedException();
 
-        public IRequestFolders SubFolders => throw new NotImplementedException();
+        public ICustomFolders SubFolders => throw new NotImplementedException();
 
         public IAutocalculations Autocalculations => throw new NotImplementedException();
 
@@ -117,7 +117,7 @@ namespace CoaApp.Core.Model.Folder
             throw new NotImplementedException();
         }
 
-        public void Move(IRequestFolder folder)
+        public void Move(ICustomFolder folder)
         {
             throw new NotImplementedException();
         }
@@ -127,7 +127,7 @@ namespace CoaApp.Core.Model.Folder
             throw new NotImplementedException();
         }
 
-        public IRequests Search(IFilter filter)
+        public ICustomObjects Search(IFilter filter)
         {
             throw new NotImplementedException();
         }
