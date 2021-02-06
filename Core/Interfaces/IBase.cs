@@ -23,6 +23,5 @@ namespace CoaApp.Core.Interfaces
     public interface IBase
     {
         IApplication Application { get; }
-        dynamic Parent { get; }
     }
 }

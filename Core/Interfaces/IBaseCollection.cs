@@ -25,7 +25,7 @@ namespace CoaApp.Core.Interfaces
     /// <summary>
     /// Коллекция форм и правил их отображения
     /// </summary>
-    public interface IBaseCollection<T> : IBase
+    public interface IBaseCollection<T>
     {
         /// <summary>
         /// Доступ к коллекции по индексу
