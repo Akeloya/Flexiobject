@@ -29,7 +29,7 @@ namespace CoaApp.Core.Model
         {
 
         }
-        public IRequestFolders RequestFolders => throw new NotImplementedException();
+        public ICustomFolders RequestFolders => throw new NotImplementedException();
 
         public IActiveSessions ActiveSessions => throw new NotImplementedException();
 
@@ -50,7 +50,7 @@ namespace CoaApp.Core.Model
             throw new NotImplementedException();
         }
 
-        public IRequests GetDeletedRequests()
+        public ICustomObjects GetDeletedRequests()
         {
             throw new NotImplementedException();
         }
@@ -60,17 +60,17 @@ namespace CoaApp.Core.Model
             throw new NotImplementedException();
         }
 
-        public IRequest GetRequestByUniqueId(long id)
+        public ICustomObject GetRequestByUniqueId(long id)
         {
             throw new NotImplementedException();
         }
 
-        public IRequestFolder GetRequestFolderByPath(string path)
+        public ICustomFolder GetRequestFolderByPath(string path)
         {
             throw new NotImplementedException();
         }
 
-        public IRequestFolder GetRequestFolderByUniqueId(int id)
+        public ICustomFolder GetRequestFolderByUniqueId(int id)
         {
             throw new NotImplementedException();
         }
@@ -115,7 +115,7 @@ namespace CoaApp.Core.Model
             throw new NotImplementedException();
         }
 
-        public void NotifyUser(object reciever, string message, IRequest linkedRequest)
+        public void NotifyUser(object reciever, string message, ICustomObject linkedRequest)
         {
             throw new NotImplementedException();
         }

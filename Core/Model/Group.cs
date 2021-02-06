@@ -42,7 +42,7 @@ namespace CoaApp.Core.Model
 
         public IGroups GroupsRecursive => throw new NotImplementedException();
 
-        public IRequest Object => throw new NotImplementedException();
+        public ICustomObject Object => throw new NotImplementedException();
 
         public IUsers Users => throw new NotImplementedException();
 

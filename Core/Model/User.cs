@@ -33,7 +33,7 @@ namespace CoaApp.Core.Model
 
         }
         public bool Active { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IRequestFolder DefaultRequestFolder { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ICustomFolder DefaultRequestFolder { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string Department { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string DisplayName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string DomainName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
@@ -48,7 +48,7 @@ namespace CoaApp.Core.Model
 
         public string Name => throw new NotImplementedException();
 
-        public IRequest Object => throw new NotImplementedException();
+        public ICustomObject Object => throw new NotImplementedException();
 
         public string OutgoingEmailAccount { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string Password { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
