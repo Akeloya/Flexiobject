@@ -23,7 +23,7 @@ namespace CoaApp.Core.Interfaces
     /// <summary>
     /// Коллекция папкок
     /// </summary>
-    public interface IRequestFolders : IBase
+    public interface IRequestFolders : IBaseCollection<IRequestFolder>
     {
         /// <summary>
         /// Добавить новую папку
@@ -50,16 +50,5 @@ namespace CoaApp.Core.Interfaces
         /// </summary>
         /// <param name="id">Идентификатор папки</param>
         /// <returns>IRequestFolder/null</returns>
-        IRequestFolder this[int id] { get; }
-        /// <summary>
-        /// Доступ к элементу коллекции по алиасу
-        /// </summary>
-        /// <param name="alias">Алиас папки</param>
-        /// <returns>IRequestFolder/null</returns>
-        IRequestFolder this[string alias] { get; }
-        /// <summary>
-        /// Количество папкок
-        /// </summary>
-        int Count { get; }
     }
 }
