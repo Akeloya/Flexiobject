@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CoaApp.Core.Model.Folder
+namespace CoaApp.Core.Folder
 {
     public abstract class CustomFolders<T>: AppBase<T>, ICustomFolders
     {

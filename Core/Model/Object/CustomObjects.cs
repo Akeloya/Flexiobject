@@ -21,7 +21,7 @@
 
 using CoaApp.Core.Interfaces;
 
-namespace CoaApp.Core.Model
+namespace CoaApp.Core
 {
     public abstract class CustomObjects<T> : AppBase<T>, ICustomObjects
     {

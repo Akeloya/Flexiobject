@@ -23,7 +23,7 @@ using CoaApp.Core.Enumes;
 using CoaApp.Core.Interfaces;
 using System;
 
-namespace CoaApp.Core.Model.Object
+namespace CoaApp.Core.Object
 {
     public class HistoryRecord<T> : AppBase<T>, IHistoryRecord
     {

@@ -24,7 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CoaApp.Core.Model
+namespace CoaApp.Core
 {
     public abstract class User<T> : AppBase<T>, IUser
     {

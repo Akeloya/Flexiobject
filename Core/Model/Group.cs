@@ -22,7 +22,7 @@ using CoaApp.Core.Enumes;
 using CoaApp.Core.Interfaces;
 using System;
 
-namespace CoaApp.Core.Model
+namespace CoaApp.Core
 {
     public abstract class Group<T> : AppBase<T>, IGroup
     {

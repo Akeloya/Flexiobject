@@ -22,7 +22,7 @@
 using CoaApp.Core.Enumes;
 using CoaApp.Core.Interfaces;
 
-namespace CoaApp.Core.Model.Object
+namespace CoaApp.Core
 {
     public class CustomObject<T> : AppBase<T>, ICustomObject
     {

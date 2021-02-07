@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CoaApp.Core.Model.Folder
+namespace CoaApp.Core.Folder
 {
     public abstract class UserFieldDefinitions<T>: AppBase<T>, IUserFieldDefinitions
     {

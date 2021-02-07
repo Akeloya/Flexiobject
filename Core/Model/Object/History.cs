@@ -24,7 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CoaApp.Core.Model.Object
+namespace CoaApp.Core
 {
     public abstract class History<T> : AppBase<T>, IHistory
     {

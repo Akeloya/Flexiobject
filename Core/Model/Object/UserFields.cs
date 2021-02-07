@@ -21,7 +21,7 @@
 using CoaApp.Core.Interfaces;
 using System;
 
-namespace CoaApp.Core.Model
+namespace CoaApp.Core
 {
     public abstract class UserFields<T> : AppBase<T>, IUserFields
     {

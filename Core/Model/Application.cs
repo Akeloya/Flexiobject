@@ -24,7 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CoaApp.Core.Model
+namespace CoaApp.Core
 {
     /// <summary>
     /// Application instance
