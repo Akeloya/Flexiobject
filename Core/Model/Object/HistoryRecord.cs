@@ -32,22 +32,80 @@ namespace CoaApp.Core.Model.Object
 
         }
 
-        public CoaHistoryActionTypes Action => throw new NotImplementedException();
+        protected HistoryRecord(Application app, 
+                                T parent,
+                                int fieldId,
+                                CoaHistoryActionTypes action,
+                                DateTime date,
+                                string desc,
+                                string oldVal,
+                                string newVal,
+                                int userId,
+                                IState state) : base(app, parent)
+        {
+            _fieldId = fieldId;
+            _date = date;
+            _action = action;
+            _description = desc;
+            _oldValue = oldVal;
+            _newValue = newVal;
+            _state = state;
+            _userId = userId;
+        }
 
-        public DateTime Date => throw new NotImplementedException();
+        private IUserFieldDefinition _field;
+        private IUser _user;
+        private IState _state;
+        private int _userId;
+        private int _fieldId;
+        private CoaHistoryActionTypes _action;
+        private DateTime _date;
+        private string _description;
+        private string _oldValue;
+        private string _newValue;
 
-        public string Description => throw new NotImplementedException();
+        public CoaHistoryActionTypes Action => _action;
 
-        public string NewValue => throw new NotImplementedException();
+        public DateTime Date => _date;
 
-        public string OldValue => throw new NotImplementedException();
+        public string Description => _description;
 
-        public IState State => throw new NotImplementedException();
+        public string NewValue => _newValue;
 
-        public IUser User => throw new NotImplementedException();
+        public string OldValue => _oldValue;
 
-        public IUserFieldDefinition UserField => throw new NotImplementedException();
+        public IState State => _state;
+
+        public IUser User
+        {
+            get
+            {
+                if (_user == null)
+                    _user = OnGetUser(_userId);
+                return _user;
+            }
+        }
+
+        public IUserFieldDefinition UserField
+        {
+            get
+            {
+                if (_field == null)
+                    _field = OnGetField(_fieldId);
+                return _field;
+            }
+        }
 
         public string UserName => throw new NotImplementedException();
+
+        protected virtual IUserFieldDefinition OnGetField(int fieldId)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual IUser OnGetUser(int userId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

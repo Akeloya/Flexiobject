@@ -20,17 +20,56 @@
  */
 
 using CoaApp.Core.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CoaApp.Core.Model.Object
 {
     public abstract class History<T> : AppBase<T>, IHistory
     {
-        protected History(Application app, T parent) : base(app, parent)
+        /// <summary>
+        /// History constructor for existing object
+        /// </summary>
+        /// <param name="app">Link to application</param>
+        /// <param name="parent">Link to object-creator</param>
+        /// <param name="custObjUniqueId">Existing object uniqueId</param>
+        protected History(Application app, T parent, long custObjUniqueId) : base(app, parent)
         {
+            _custObjUniqueId = custObjUniqueId;
+        }        
 
+        private long _custObjUniqueId;
+
+        private List<IHistoryRecord> _records;
+        public IHistoryRecord this[int idx]
+        {
+            get
+            {
+                return GetHistory()[idx];
+            }
         }
-        public IHistoryRecord this[int idx] => throw new System.NotImplementedException();
 
-        public int Count => throw new System.NotImplementedException();
+        public int Count => GetHistory().Count();
+        /// <summary>
+        /// Get History records realization
+        /// </summary>
+        /// <param name="custObjId">Custom object UniqueId</param>
+        /// <returns>History records</returns>
+        protected virtual IEnumerable<IHistoryRecord> OnGetHistory(long custObjId)
+        {
+            return new List<IHistoryRecord>();
+        }
+
+        private List<IHistoryRecord> GetHistory()
+        {
+            if(_records == null)
+            {
+                _records = new List<IHistoryRecord>();
+                if (_custObjUniqueId != 0)
+                    _records.AddRange(OnGetHistory(_custObjUniqueId));
+            }
+            return _records;
+        }
     }
 }
