@@ -19,7 +19,6 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using CoaApp.Core.Interfaces;
-using System;
 
 namespace CoaApp.Core
 {
@@ -30,10 +29,36 @@ namespace CoaApp.Core
 
         }
 
-        public IUserField this[int idx] => throw new NotImplementedException();
+        public IUserField this[int idx] => OnGetFieldByIndex(idx);
 
-        public IUserField this[string alias] => throw new NotImplementedException();
+        public IUserField this[string alias] => OnGetFieldByAlias(alias);
 
-        public int Count => throw new NotImplementedException();
+        public int Count => OnGetCount();
+        /// <summary>
+        /// Get User fields count
+        /// </summary>
+        /// <returns></returns>
+        protected virtual int OnGetCount()
+        {
+            return 0;
+        }
+        /// <summary>
+        /// Get User field by index
+        /// </summary>
+        /// <param name="idx"></param>
+        /// <returns></returns>
+        protected virtual IUserField OnGetFieldByIndex(int idx)
+        {
+            return null;
+        }
+        /// <summary>
+        /// Get User field by alias
+        /// </summary>
+        /// <param name="alias"></param>
+        /// <returns></returns>
+        protected virtual IUserField OnGetFieldByAlias(string alias)
+        {
+            return null;
+        }
     }
 }
