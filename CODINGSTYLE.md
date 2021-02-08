@@ -1,4 +1,28 @@
-# Common features
+# Naming rules
+
+Use PascalCase
+
+```csharp
+TheMethod
+```
+Or  camelCase
+
+```csharp
+theMember
+```
+in all naming.
+
+Naming rules:
+
+- Use only PascalCase or camelCase;
+- Naming consts, readonly fields, classes, methods, properties, namespaces, structures, enumes, etc., use PascalCase;
+- Naming variables, private fields, parameters in methods, constructors, etc use camelCase;
+- Use prefix '_ ' with camelCase for private fields;
+- No type-prefix for any variables;
+- Don't use any word 'enum' or 'flags' for enums;
+- Intefrace must be like 'INameIntefrace';
+- Don't use names for classes, which match classes from .Net Framework;
+- Any Exception must ends with 'Exception' word.
 
 ## Use Flags and directives
 
@@ -13,29 +37,31 @@ You can use the #warning and #error directives,
 
 Also you can mark it with "//TODO:" or "//FIXME:" comments that show up in the task pane in IDE or for fast search.
 
-# Classes
+# Formating
+
+## File formating
+
+- First license text or file description
+- All 'using'
+- Current namespace with code of class, enum, interface, etc.
+- Don't leave code commented out. The code should be in Git in previous commits. Leave comments.
 
 ## Declaration order
 
-- Static:
-  - Static constructor (if needed)
-  - Private
-  - Public
-  - Protected
-- All constructors and descructors
-  - public first  
-- Non Static:
-  - private fields
-  - public properties
-  - public methods
-  - protected methods
-  - private methods
+- Consts and fields
+- Propertis from private to public
+- Constructors
+- All methods from public to private in the end
 
-# Formating
+## Methods
+- The maximum number of parameters is 7, preferably 5, if more - a structure or class is created
+- out-parameters declare in the end
+- use minimum required type
+- Try to write the method in height of the screen, large methods should be divided into smaller ones
 
 ## Indent
 
-Use spaces (not tabulation) for writing code. Every indent (tab space) should contain 4 spaces.
+Use spaces (never tabulation) for writing code. Every indent (tab space) should contain 4 spaces.
 
 ## Blank lines
 
@@ -47,7 +73,7 @@ One blank line should always be used between:
 
 ## Line length
 
-Maximum line length 150 characters.
+Maximum line length 120 characters.
 Preferred line length is 80-100 characters, taking into consideration the recommendations below:
 
 - Break after a comma.
