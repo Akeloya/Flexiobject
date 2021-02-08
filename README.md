@@ -1,11 +1,28 @@
-# Custom object application (Приложение настраиваемых объектов)
-
-[![License: GPL v3](https://img.shields.io/github/license/Akeloya/CustomObjectApplication.svg)](http://www.gnu.org/licenses/gpl-3.0)
-[![Build](https://github.com/Akeloya/CustomObjectApplication/workflows/.NET%20Core/badge.svg)](https://github.com/Akeloya/CustomObjectApplication/actions?query=workflow%3A%22.NET+Core%22)
-[![CodeQL](https://github.com/Akeloya/CustomObjectApplication/workflows/CodeQL/badge.svg)](https://github.com/Akeloya/CustomObjectApplication/actions?query=workflow%3ACodeQL)
-[![BCH compliance](https://bettercodehub.com/edge/badge/Akeloya/CustomObjectApplication?branch=master)](https://bettercodehub.com/)
+# Custom object application [![License: GPL v3](https://img.shields.io/github/license/Akeloya/CustomObjectApplication.svg)](http://www.gnu.org/licenses/gpl-3.0) [![Build](https://github.com/Akeloya/CustomObjectApplication/workflows/.NET%20Core/badge.svg)](https://github.com/Akeloya/CustomObjectApplication/actions?query=workflow%3A%22.NET+Core%22) [![CodeQL](https://github.com/Akeloya/CustomObjectApplication/workflows/CodeQL/badge.svg)](https://github.com/Akeloya/CustomObjectApplication/actions?query=workflow%3ACodeQL) [![BCH compliance](https://bettercodehub.com/edge/badge/Akeloya/CustomObjectApplication?branch=master)](https://bettercodehub.com/)
 
 Application for creating and using freely customizable configuration of data, forms, actions and other things
+
+## Solution description
+
+| Language | Platform      | Win GUI  | Linux GUI     |
+|:--------:|:-------------:|:--------:|:-------------:|
+|   c#     | .Net Core 3.1 | WPF app  | Not specified |
+
+## Development
+
+- Make sure you have Visual Studio 2019 Community (or higher)
+- Fork this repo
+- Clone to computer
+- Open solution, run build
+- Read [Coding style](https://github.com/Akeloya/CustomObjectApplication/blob/master/CODINGSTYLE.md)
+
+Solution contains several projects:
+
+- Core - this core library with definition of app API
+- DbProvider - EF core database schema description and methods work with it
+- AppServer - Application server for this app, all app logic implements here
+- API - client side api
+- WpfClient - GUI application using client API
 
 ## Languages
 
