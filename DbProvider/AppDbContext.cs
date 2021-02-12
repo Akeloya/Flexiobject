@@ -29,7 +29,7 @@ using FileContextCore;
 using Microsoft.EntityFrameworkCore;
 
 using System;
-
+using System.Data.Common;
 using Action = DbProvider.Entities.Action;
 
 namespace DbProvider
@@ -37,12 +37,23 @@ namespace DbProvider
     public partial class AppDbContext : DbContext
     {
         private readonly AppDbSettings _settings;
+        private DbConnection _connection;
         public AppDbContext(AppDbSettings settings) : base()
         {
             _settings = settings;
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
+        public AppDbContext(DbConnection connection): base()
         {
+            _connection = connection;
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {            
+            if(_connection != null)
+            {
+                InitiateDbConnection(optionsBuilder);
+                return;
+            }
             switch (_settings.DbType)
             {
                 case DbTypes.MsSqlServer:
@@ -56,9 +67,6 @@ namespace DbProvider
                     optionsBuilder.UseJet($"");
                     break;
 #endif                
-                case DbTypes.MySql:
-                    optionsBuilder.UseMySql($"");
-                    break;
                 case DbTypes.Oracle:
                     break;
                 case DbTypes.Files:
@@ -785,6 +793,33 @@ namespace DbProvider
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        private void InitiateDbConnection(DbContextOptionsBuilder optionsBuilder)
+        {
+            switch (_settings.DbType)
+            {
+                case DbTypes.MsSqlServer:
+                    optionsBuilder.UseSqlServer(_connection);
+                    break;
+                case DbTypes.PostgreSql:
+                    optionsBuilder.UseNpgsql(_connection);
+                    break;
+#if Windows
+                case DbTypes.MsJet:
+                    optionsBuilder.UseJet(_connection);
+                    break;
+#endif                
+                case DbTypes.Oracle:
+                    
+                    break;
+                case DbTypes.Files:
+                    optionsBuilder.UseFileContextDatabase(_settings.DatabaseName, _settings.ServerName, _settings.UserPassword);
+                    break;
+                default:
+                    optionsBuilder.UseInMemoryDatabase("AppDbTest");
+                    break;
+            }            
+        }
 
     }
 

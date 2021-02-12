@@ -20,7 +20,7 @@
  */
 namespace DbProvider
 {
-    public class AppDbSettings
+    public struct AppDbSettings
     {
         public DbTypes DbType { get; }
         public string ServerName { get; }
