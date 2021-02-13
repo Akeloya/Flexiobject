@@ -1,4 +1,4 @@
-﻿using CoaApp.Core.Model;
+﻿using CoaApp.Core;
 using System;
 
 namespace API

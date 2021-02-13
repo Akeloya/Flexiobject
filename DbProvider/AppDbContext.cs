@@ -844,6 +844,4 @@ namespace DbProvider
         }
 
     }
-
-
 }
