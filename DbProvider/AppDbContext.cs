@@ -139,122 +139,24 @@ namespace DbProvider
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             ModifyActionInitiate(modelBuilder);
-
-            modelBuilder.Entity<AppFolderField>(entity =>
-            {
-                entity.Property(e => e.AppField).HasColumnName("AppField_id");
-
-                entity.Property(e => e.FolderFieldId).HasColumnName("FolderField_Id");
-            });
-
-            modelBuilder.Entity<AppFolder>(entity =>
-            {
-                entity.Property(e => e.AppFolderId).HasColumnName("AppFolder_Id");
-
-                entity.Property(e => e.FolderId).HasColumnName("Folder_Id");
-            });
+            AppFolderFieldInitiate(modelBuilder);
+            AppFolderInitiate(modelBuilder);
             AppUserInitiate(modelBuilder);
-
-            modelBuilder.Entity<AppUsersUserGroups>(entity =>
-            {
-                entity.ToTable("AppUsers_UserGroups");
-
-                entity.Property(e => e.UserGroupId).HasColumnName("User_Group");
-
-                entity.Property(e => e.UserId).HasColumnName("User_Id");
-            });
-
-            modelBuilder.Entity<Condition>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.ParamName)
-                    .HasMaxLength(40)
-                    .IsFixedLength();
-            });
-
-            modelBuilder.Entity<ConditionParam>(entity =>
-            {
-                entity.Property(e => e.StrValue)
-                    .HasMaxLength(120)
-                    .IsFixedLength();
-            });
-
-            modelBuilder.Entity<ConditionValueFields>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
+            AppUsersUserGroupsInitiate(modelBuilder);
+            ConditionInitiate(modelBuilder);
+            ConditionParamInitiate(modelBuilder);
+            ConditionValueFieldsInitiate(modelBuilder);
             DefaultValueInitiate(modelBuilder);
             DeletionLogInitiate(modelBuilder);
             FieldDefinitionInitiate(modelBuilder);
-
-            modelBuilder.Entity<Form>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(255);
-            });
-
-            modelBuilder.Entity<FormCondition>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(130)
-                    .IsFixedLength();
-            });
-
+            FormInitiate(modelBuilder);
+            FormConditionInitiate(modelBuilder);
             FormPropertyInitiate(modelBuilder);
-
-            modelBuilder.Entity<History>(entity =>
-            {
-                entity.HasIndex(e => e.ObjectId);
-
-                entity.HasIndex(e => new { e.ObjectId, e.UserField, e.State });
-
-                entity.Property(e => e.ChangeDate).HasColumnType("smalldatetime");
-
-                entity.Property(e => e.NewValue).HasMaxLength(256);
-
-                entity.Property(e => e.OldValue).HasMaxLength(256);
-            });
-
-            modelBuilder.Entity<ImportCmSteps>(entity =>
-            {
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.ColMappingId).HasColumnName("col_mapping_id");
-
-                entity.Property(e => e.FieldId).HasColumnName("userfield");
-            });
+            HistoryInitiate(modelBuilder);
+            ImportCmStepsInitiate(modelBuilder);
             ImportColMappingInitiate(modelBuilder);
-
-            modelBuilder.Entity<ImportFldDestFld>(entity =>
-            {
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.DestFolderId).HasColumnName("dest_folder");
-
-                entity.Property(e => e.FldSettingsId).HasColumnName("fld_settings_id");
-            });
-
-            modelBuilder.Entity<ImportFldIdFields>(entity =>
-            {
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.FldSettingsId).HasColumnName("fld_settings_id");
-
-                entity.Property(e => e.FieldId).HasColumnName("ufd");
-            });
+            ImportFldDestFldInitiate(modelBuilder);
+            ImportFldIdFieldsInitiate(modelBuilder);
             ImportFolderSettgsInitiate(modelBuilder);
             ImportSettingsInitiate(modelBuilder);
             ListPropertyInitiate(modelBuilder);
@@ -262,46 +164,79 @@ namespace DbProvider
             ObjectDefInitiate(modelBuilder);
             ObjectFolderInitiate(modelBuilder);
             PictureInitiate(modelBuilder);
-
-            modelBuilder.Entity<Privilege>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
+            PrivilegeInitiate(modelBuilder);
             SchemaFieldDefinitionInitiate(modelBuilder);
-
-            modelBuilder.Entity<SchemeTableDefinition>(entity =>
-            {
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.Deleted).HasColumnName("deleted");
-
-                entity.Property(e => e.TableName)
-                    .IsRequired()
-                    .HasColumnName("tableName")
-                    .HasMaxLength(50);
-            });
+            SchemeTableDefinitionInitiate(modelBuilder);
             SchemaHistoryInitiate(modelBuilder);
+            ScriptHistoryInitiate(modelBuilder);
+            ScriptInitiate(modelBuilder);
+            WfStateInitiate(modelBuilder);
+            WfStateTransitionInitiate(modelBuilder);
+            SummaryAddFieldsInitiate(modelBuilder);
+            SummaryAddFieldsStpsInitiate(modelBuilder);
+            SummaryDefinitionInitiate(modelBuilder);
+            SummaryFieldStepsInitiate(modelBuilder);
+            SummaryResultFieldsInitiate(modelBuilder);
+            SynchRefFieldsInitiate(modelBuilder);
+            ViewLayoutTmpInitiate(modelBuilder);
+            WindowLayoutInitiate(modelBuilder);
 
-            modelBuilder.Entity<ScriptHistory>(entity =>
+            OnModelCreatingPartial(modelBuilder);
+        }
+
+        private static void SummaryFieldStepsInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<SummaryFieldSteps>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.Created).HasColumnType("smalldatetime");
-
-                entity.Property(e => e.Modified).HasColumnType("smalldatetime");
-
-                entity.Property(e => e.Published).HasColumnType("smalldatetime");
+                entity.HasOne(d => d.SummaryDef)
+                    .WithMany(p => p.SummaryFieldSteps)
+                    .HasForeignKey(d => d.SummaryDefId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_SummaryFieldSteps_ToSummaryDefinition");
             });
+        }
 
-            modelBuilder.Entity<Script>(entity =>
+        private static void SummaryDefinitionInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<SummaryDefinition>(entity =>
             {
-                entity.Property(e => e.Name).HasMaxLength(254);
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(80);
 
-                entity.Property(e => e.NumParams).HasColumnName("Num_params");
+                entity.HasOne(d => d.Folder)
+                    .WithMany(p => p.SummaryDefinition)
+                    .HasForeignKey(d => d.FolderId)
+                    .HasConstraintName("FK_SummaryDefinition_ToObjectFolders");
             });
+        }
 
+        private static void SummaryAddFieldsStpsInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<SummaryAddFieldsStps>(entity =>
+            {
+                entity.HasOne(d => d.AddField)
+                    .WithMany(p => p.SummaryAddFieldsStps)
+                    .HasForeignKey(d => d.AddFieldId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_SummaryAddFieldsStps_SummaryAddFields");
+            });
+        }
+
+        private static void SummaryAddFieldsInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<SummaryAddFields>(entity =>
+            {
+                entity.HasOne(d => d.SummaryDef)
+                    .WithMany(p => p.SummaryAddFields)
+                    .HasForeignKey(d => d.SummaryDefId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_SummaryAddFields_ToSummaryDefinition");
+            });
+        }
+
+        private static void WfStateInitiate(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<WfState>(entity =>
             {
                 entity.Property(e => e.Alias)
@@ -318,52 +253,200 @@ namespace DbProvider
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Status_ToFieldDefinition");
             });
-            WfStateTransitionInitiate(modelBuilder);
+        }
 
-            modelBuilder.Entity<SummaryAddFields>(entity =>
+        private static void ScriptInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Script>(entity =>
             {
-                entity.HasOne(d => d.SummaryDef)
-                    .WithMany(p => p.SummaryAddFields)
-                    .HasForeignKey(d => d.SummaryDefId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_SummaryAddFields_ToSummaryDefinition");
+                entity.Property(e => e.Name).HasMaxLength(254);
+
+                entity.Property(e => e.NumParams).HasColumnName("Num_params");
             });
+        }
 
-            modelBuilder.Entity<SummaryAddFieldsStps>(entity =>
+        private static void ScriptHistoryInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ScriptHistory>(entity =>
             {
-                entity.HasOne(d => d.AddField)
-                    .WithMany(p => p.SummaryAddFieldsStps)
-                    .HasForeignKey(d => d.AddFieldId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_SummaryAddFieldsStps_SummaryAddFields");
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Created).HasColumnType("smalldatetime");
+
+                entity.Property(e => e.Modified).HasColumnType("smalldatetime");
+
+                entity.Property(e => e.Published).HasColumnType("smalldatetime");
             });
+        }
 
-            modelBuilder.Entity<SummaryDefinition>(entity =>
+        private static void SchemeTableDefinitionInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<SchemeTableDefinition>(entity =>
             {
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Deleted).HasColumnName("deleted");
+
+                entity.Property(e => e.TableName)
+                    .IsRequired()
+                    .HasColumnName("tableName")
+                    .HasMaxLength(50);
+            });
+        }
+
+        private static void PrivilegeInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Privilege>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+            });
+        }
+
+        private static void ImportFldIdFieldsInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ImportFldIdFields>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.FldSettingsId).HasColumnName("fld_settings_id");
+
+                entity.Property(e => e.FieldId).HasColumnName("ufd");
+            });
+        }
+
+        private static void ImportFldDestFldInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ImportFldDestFld>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.DestFolderId).HasColumnName("dest_folder");
+
+                entity.Property(e => e.FldSettingsId).HasColumnName("fld_settings_id");
+            });
+        }
+
+        private static void ImportCmStepsInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ImportCmSteps>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.ColMappingId).HasColumnName("col_mapping_id");
+
+                entity.Property(e => e.FieldId).HasColumnName("userfield");
+            });
+        }
+
+        private static void HistoryInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<History>(entity =>
+            {
+                entity.HasIndex(e => e.ObjectId);
+
+                entity.HasIndex(e => new { e.ObjectId, e.UserField, e.State });
+
+                entity.Property(e => e.ChangeDate).HasColumnType("smalldatetime");
+
+                entity.Property(e => e.NewValue).HasMaxLength(256);
+
+                entity.Property(e => e.OldValue).HasMaxLength(256);
+            });
+        }
+
+        private static void FormConditionInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<FormCondition>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(80);
-
-                entity.HasOne(d => d.Folder)
-                    .WithMany(p => p.SummaryDefinition)
-                    .HasForeignKey(d => d.FolderId)
-                    .HasConstraintName("FK_SummaryDefinition_ToObjectFolders");
+                    .HasMaxLength(130)
+                    .IsFixedLength();
             });
+        }
 
-            modelBuilder.Entity<SummaryFieldSteps>(entity =>
+        private static void FormInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Form>(entity =>
             {
-                entity.HasOne(d => d.SummaryDef)
-                    .WithMany(p => p.SummaryFieldSteps)
-                    .HasForeignKey(d => d.SummaryDefId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_SummaryFieldSteps_ToSummaryDefinition");
-            });
-            SummaryResultFieldsInitiate(modelBuilder);
-            SynchRefFieldsInitiate(modelBuilder);
-            ViewLayoutTmpInitiate(modelBuilder);
-            WindowLayoutInitiate(modelBuilder);
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
-            OnModelCreatingPartial(modelBuilder);
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(255);
+            });
+        }
+
+        private static void ConditionValueFieldsInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ConditionValueFields>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+            });
+        }
+
+        private static void ConditionParamInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ConditionParam>(entity =>
+            {
+                entity.Property(e => e.StrValue)
+                    .HasMaxLength(120)
+                    .IsFixedLength();
+            });
+        }
+
+        private static void ConditionInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Condition>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.ParamName)
+                    .HasMaxLength(40)
+                    .IsFixedLength();
+            });
+        }
+
+        private static void AppFolderFieldInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AppFolderField>(entity =>
+            {
+                entity.Property(e => e.AppField).HasColumnName("AppField_id");
+
+                entity.Property(e => e.FolderFieldId).HasColumnName("FolderField_Id");
+            });
+        }
+
+        private static void AppFolderInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AppFolder>(entity =>
+            {
+                entity.Property(e => e.AppFolderId).HasColumnName("AppFolder_Id");
+
+                entity.Property(e => e.FolderId).HasColumnName("Folder_Id");
+            });
+        }
+
+        private static void AppUsersUserGroupsInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AppUsersUserGroups>(entity =>
+            {
+                entity.ToTable("AppUsers_UserGroups");
+
+                entity.Property(e => e.UserGroupId).HasColumnName("User_Group");
+
+                entity.Property(e => e.UserId).HasColumnName("User_Id");
+            });
         }
 
         private static void WfStateTransitionInitiate(ModelBuilder modelBuilder)
@@ -580,47 +663,25 @@ namespace DbProvider
             modelBuilder.Entity<ImportSettings>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
-
                 entity.Property(e => e.DataSourceType).HasColumnName("data_source_type");
-
-                entity.Property(e => e.DatabaseName)
-                    .IsRequired()
-                    .HasColumnName("database_name");
-
+                entity.Property(e => e.DatabaseName).IsRequired().HasColumnName("database_name");
                 entity.Property(e => e.Flags).HasColumnName("flags");
-
                 entity.Property(e => e.IdColumns).HasColumnName("id_columns");
-
                 entity.Property(e => e.Key).HasColumnName("key");
-
                 entity.Property(e => e.LogErrors).HasColumnName("log_errors");
+                entity.Property(e => e.LogfilePrefix).HasColumnName("logfile_prefix")
+                    .HasMaxLength(80).IsFixedLength();
 
-                entity.Property(e => e.LogfilePrefix)
-                    .HasColumnName("logfile_prefix")
-                    .HasMaxLength(80)
-                    .IsFixedLength();
+                entity.Property(e => e.Logpath).HasColumnName("logpath")
+                    .HasMaxLength(250).IsFixedLength();
 
-                entity.Property(e => e.Logpath)
-                    .HasColumnName("logpath")
-                    .HasMaxLength(250)
-                    .IsFixedLength();
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasColumnName("name")
-                    .HasMaxLength(80)
-                    .IsFixedLength();
+                entity.Property(e => e.Name).IsRequired().HasColumnName("name")
+                    .HasMaxLength(80).IsFixedLength();
 
                 entity.Property(e => e.ReflistFull).HasColumnName("reflist_full");
-
                 entity.Property(e => e.RemoveRefs).HasColumnName("remove_refs");
-
-                entity.Property(e => e.SqlStatement)
-                    .IsRequired()
-                    .HasColumnName("sql_statement");
-
+                entity.Property(e => e.SqlStatement).IsRequired().HasColumnName("sql_statement");
                 entity.Property(e => e.UseSql).HasColumnName("use_sql");
-
                 entity.Property(e => e.User).HasColumnName("user_");
             });
         }
