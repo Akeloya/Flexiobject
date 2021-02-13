@@ -28,6 +28,8 @@ namespace DbProvider.Entities
         public int Id { get; set; }
         public int Old { get; set; }
         public int New { get; set; }
+        public int FolderId { get; set; }
+        public int FieldId { get; set; }
         public virtual ObjectFolder Folder { get; set; }
         public virtual FieldDefinition Field { get; set; }
     }

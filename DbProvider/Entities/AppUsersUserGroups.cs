@@ -27,7 +27,9 @@ namespace DbProvider.Entities
     public partial class AppUsersUserGroups
     {
         public int Id { get; set; }
-        public virtual AppUser UserId { get; set; }
+        public int UserId { get; set; }
+        public int UserGroupId { get; set; }
+        public virtual AppUser User { get; set; }
         public virtual AppUser UserGroup { get; set; }
     }
 }

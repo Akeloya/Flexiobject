@@ -39,6 +39,7 @@ namespace DbProvider.Entities
         public int? ModifObjFlags { get; set; }
         public bool? RecalcAfterRemove { get; set; }
         public bool? StoreZero { get; set; }
+        public int FolderId { get; set; }
         public virtual ObjectFolder Folder { get; set; }
         public virtual ICollection<SummaryAddFields> SummaryAddFields { get; set; }
         public virtual ICollection<SummaryFieldSteps> SummaryFieldSteps { get; set; }

@@ -28,8 +28,9 @@ namespace DbProvider.Entities
     {
         public int Id { get; set; }
         public DateTime Created { get; set; }
+        public int FolderId { get; set; }
+        public int UserDeletedById { get; set; }
         public virtual ObjectFolder Folder { get; set; }
-        public virtual AppUser UserDeletedBy { get; set; }
 
     }
 }

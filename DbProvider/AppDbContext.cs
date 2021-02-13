@@ -24,13 +24,12 @@ using DbProvider.Entities;
 
 using EntityFrameworkCore.Jet;
 
-using FileContextCore;
-
+using Microsoft.Data.SqlClient;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
 using System;
 using System.Data.Common;
-using Action = DbProvider.Entities.Action;
 
 namespace DbProvider
 {
@@ -57,7 +56,18 @@ namespace DbProvider
             switch (_settings.DbType)
             {
                 case DbTypes.MsSqlServer:
-                    optionsBuilder.UseSqlServer($"ServerName={_settings.ServerName};Data");
+                    {
+                        var connectionStr = $"Data Source={_settings.ServerName};Initial catalog={_settings.DatabaseName};";
+                        if(string.IsNullOrEmpty(_settings.UserName) && string.IsNullOrEmpty(_settings.UserPassword))
+                        {
+                            connectionStr += "Integrated Security=TRUE;";
+                        }
+                        else
+                        {
+                            connectionStr += $"User ID={_settings.UserName};Password={_settings.UserPassword}";
+                        }
+                        optionsBuilder.UseSqlServer(connectionStr);
+                    }
                     break;
                 case DbTypes.PostgreSql:
                     optionsBuilder.UseNpgsql($"");
@@ -69,15 +79,24 @@ namespace DbProvider
 #endif                
                 case DbTypes.Oracle:
                     break;
-                case DbTypes.Files:
-                    optionsBuilder.UseFileContextDatabase(_settings.DatabaseName, _settings.ServerName, _settings.UserPassword);
+                case DbTypes.SqlLight:
+                    {
+                        var builder = new SqliteConnectionStringBuilder
+                        {
+                            Mode = SqliteOpenMode.ReadWriteCreate,
+                            Password = _settings.UserPassword,
+                            DataSource = _settings.ServerName,
+                        };
+                        optionsBuilder.UseSqlite(builder.ToString());
+                    }
                     break;
                 default:
-                    optionsBuilder.UseInMemoryDatabase("AppDbTest");
+                    optionsBuilder.UseSqlite("Filename=:memory:");
+                    //optionsBuilder.UseInMemoryDatabase("AppDbTest");
                     break;
             }
         }
-        public virtual DbSet<Action> Actions { get; set; }
+        public virtual DbSet<ModifyAction> Actions { get; set; }
         public virtual DbSet<AppFolderField> AppFolderFields { get; set; }
         public virtual DbSet<AppFolder> AppFolders { get; set; }
         public virtual DbSet<AppUser> AppUsers { get; set; }
@@ -126,10 +145,9 @@ namespace DbProvider
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Action>(entity =>
+            modelBuilder.Entity<ModifyAction>(entity =>
             {
-                entity.HasIndex(e => new { e.ActionType, e.Folder })
-                    .HasName("IDX_Actions_ActionType_Folder");
+                entity.HasIndex(e => new { e.ActionType, e.FolderId });
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
@@ -149,14 +167,14 @@ namespace DbProvider
             {
                 entity.Property(e => e.AppField).HasColumnName("AppField_id");
 
-                entity.Property(e => e.FolderField).HasColumnName("FolderField_Id");
+                entity.Property(e => e.FolderFieldId).HasColumnName("FolderField_Id");
             });
 
             modelBuilder.Entity<AppFolder>(entity =>
             {
                 entity.Property(e => e.AppFolderId).HasColumnName("AppFolder_Id");
 
-                entity.Property(e => e.Folder).HasColumnName("Folder_Id");
+                entity.Property(e => e.FolderId).HasColumnName("Folder_Id");
             });
 
             modelBuilder.Entity<AppUser>(entity =>
@@ -181,14 +199,15 @@ namespace DbProvider
                     .HasMaxLength(254)
                     .IsFixedLength();
 
-                entity.Property(e => e.Phone).HasMaxLength(254);
+                entity.Property(e => e.Phone).HasMaxLength(254);                
+
             });
 
             modelBuilder.Entity<AppUsersUserGroups>(entity =>
             {
                 entity.ToTable("AppUsers_UserGroups");
 
-                entity.Property(e => e.UserGroup).HasColumnName("User_Group");
+                entity.Property(e => e.UserGroupId).HasColumnName("User_Group");
 
                 entity.Property(e => e.UserId).HasColumnName("User_Id");
             });
@@ -218,11 +237,11 @@ namespace DbProvider
             {
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Folder).HasColumnName("folder");
+                entity.Property(e => e.FolderId).HasColumnName("folder");
 
                 entity.Property(e => e.Type).HasColumnName("type");
 
-                entity.Property(e => e.UserField).HasColumnName("userfield");
+                entity.Property(e => e.UserFieldId).HasColumnName("userfield");
 
                 entity.Property(e => e.ValBigint).HasColumnName("val_bigint");
 
@@ -289,9 +308,9 @@ namespace DbProvider
 
                 entity.HasOne(d => d.Folder)
                     .WithMany(p => p.FieldDefinitions)
-                    .HasForeignKey(d => d.Folder)
+                    .HasForeignKey(d => d.FolderId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_FieldDefinition_ToObjectTypes");
+                    .HasConstraintName("FK_FieldDefinition_ToObjectFolders");
             });
 
             modelBuilder.Entity<Form>(entity =>
@@ -324,10 +343,9 @@ namespace DbProvider
 
             modelBuilder.Entity<History>(entity =>
             {
-                entity.HasIndex(e => e.Object);
+                entity.HasIndex(e => e.ObjectId);
 
-                entity.HasIndex(e => new { e.Object, e.UserField, e.State })
-                    .HasName("IX_History_ObjectId_UserField");
+                entity.HasIndex(e => new { e.ObjectId, e.UserField, e.State });
 
                 entity.Property(e => e.ChangeDate).HasColumnType("smalldatetime");
 
@@ -342,9 +360,9 @@ namespace DbProvider
                     .HasColumnName("id")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.ColMapping).HasColumnName("col_mapping_id");
+                entity.Property(e => e.ColMappingId).HasColumnName("col_mapping_id");
 
-                entity.Property(e => e.Field).HasColumnName("userfield");
+                entity.Property(e => e.FieldId).HasColumnName("userfield");
             });
 
             modelBuilder.Entity<ImportColMapping>(entity =>
@@ -372,7 +390,7 @@ namespace DbProvider
                     .HasColumnName("id")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.DestFolder).HasColumnName("dest_folder");
+                entity.Property(e => e.DestFolderId).HasColumnName("dest_folder");
 
                 entity.Property(e => e.FldSettingsId).HasColumnName("fld_settings_id");
             });
@@ -385,7 +403,7 @@ namespace DbProvider
 
                 entity.Property(e => e.FldSettingsId).HasColumnName("fld_settings_id");
 
-                entity.Property(e => e.Field).HasColumnName("ufd");
+                entity.Property(e => e.FieldId).HasColumnName("ufd");
             });
 
             modelBuilder.Entity<ImportFolderSettgs>(entity =>
@@ -398,7 +416,7 @@ namespace DbProvider
 
                 entity.Property(e => e.CompatibilityFlag).HasColumnName("compatibility_flag");
 
-                entity.Property(e => e.Field).HasColumnName("field");
+                entity.Property(e => e.FieldId).HasColumnName("field");
 
                 entity.Property(e => e.IdFieldsNull).HasColumnName("id_fields_null");
 
@@ -412,7 +430,7 @@ namespace DbProvider
 
                 entity.Property(e => e.PerformanceFlags).HasColumnName("performance_flags");
 
-                entity.Property(e => e.Setting).HasColumnName("setting_id");
+                entity.Property(e => e.SettingId).HasColumnName("setting_id");
 
                 entity.Property(e => e.UseCreationRule).HasColumnName("use_creation_rule");
             });
@@ -466,8 +484,7 @@ namespace DbProvider
 
             modelBuilder.Entity<ListProperty>(entity =>
             {
-                entity.HasIndex(e => new { e.Folder, e.Field })
-                    .HasName("IX_ListProperties_ObjectType_FieldName");
+                entity.HasIndex(e => new { e.FolderId, e.FieldId });
 
                 entity.Property(e => e.Code)
                     .IsRequired()
@@ -481,22 +498,22 @@ namespace DbProvider
 
                 entity.HasOne(d => d.Field)
                     .WithMany(p => p.ListProperties)
-                    .HasForeignKey(d => d.Field)
+                    .HasForeignKey(d => d.FieldId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_ListProperties_ToFieldDefinition");
 
                 entity.HasOne(d => d.Folder)
                     .WithMany(p => p.ListProperties)
-                    .HasForeignKey(d => d.Folder)
+                    .HasForeignKey(d => d.FolderId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_ListProperties_ToObjectTypes");
+                    .HasConstraintName("FK_ListProperties_ToObjectFolders");
             });
 
             modelBuilder.Entity<Numbering>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Folder).HasColumnName("folder");
+                entity.Property(e => e.FolderId).HasColumnName("folder");
 
                 entity.Property(e => e.FieldWidth).HasColumnName("field_width");
 
@@ -518,7 +535,7 @@ namespace DbProvider
                     .HasColumnName("suffix")
                     .HasMaxLength(20);
 
-                entity.Property(e => e.Field).HasColumnName("userField");
+                entity.Property(e => e.FieldId).HasColumnName("userField");
             });
 
             modelBuilder.Entity<ObjectDef>(entity =>
@@ -527,20 +544,19 @@ namespace DbProvider
                     .HasColumnName("id")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.Folder).HasColumnName("folder");
+                entity.Property(e => e.FolderId).HasColumnName("folder");
 
                 entity.Property(e => e.Created)
                     .HasColumnName("created")
                     .HasColumnType("smalldatetime");
 
-                entity.Property(e => e.UserDeletedBy).HasColumnName("deleted_by_user");
+                entity.Property(e => e.UserDeletedById).HasColumnName("deleted_by_user");
 
             });
 
             modelBuilder.Entity<ObjectFolder>(entity =>
             {
-                entity.HasIndex(e => e.Alias)
-                    .HasName("IX_ObjectTypes_Code");
+                entity.HasIndex(e => e.Alias);
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
@@ -558,13 +574,14 @@ namespace DbProvider
                     .HasColumnName("name_scheme")
                     .HasMaxLength(100);
 
-                entity.Property(e => e.Parent).HasColumnName("parent");
+                entity.Property(e => e.ParentId).HasColumnName("parent");
 
-                entity.Property(e => e.PictureClose).HasColumnName("picture_close");
+                entity.Property(e => e.OpenPictureId).HasColumnName("picture_close");
 
-                entity.Property(e => e.PictureOpen).HasColumnName("picture_open");
+                entity.Property(e => e.ClosePictureId).HasColumnName("picture_open");
 
-                entity.Property(e => e.WfHistoryField).HasColumnName("wfHistory_fld");
+                entity.Property(e => e.WfHistoryFieldId).HasColumnName("wfHistory_fld");
+
             });
 
             modelBuilder.Entity<Picture>(entity =>
@@ -607,7 +624,7 @@ namespace DbProvider
 
                 entity.Property(e => e.HasIndex).HasColumnName("has_index");
 
-                entity.Property(e => e.SchemeDef).HasColumnName("tab_id");
+                entity.Property(e => e.SchemaDefId).HasColumnName("tab_id");
             });
 
             modelBuilder.Entity<SchemeTableDefinition>(entity =>
@@ -690,7 +707,7 @@ namespace DbProvider
 
                 entity.HasOne(d => d.Field)
                     .WithMany(p => p.Status)
-                    .HasForeignKey(d => d.Field)
+                    .HasForeignKey(d => d.FieldId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Status_ToFieldDefinition");
             });
@@ -699,16 +716,21 @@ namespace DbProvider
             {
                 entity.HasOne(d => d.Field)
                     .WithMany(p => p.StateTransitions)
-                    .HasForeignKey(d => d.Field)
+                    .HasForeignKey(d => d.FieldId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_StatusChange_ToStatus");
+                    .HasConstraintName("FK_StateTransitions_ToStatus");
+                entity.HasOne(d => d.Folder)
+                    .WithMany(p => p.WfStateTransitions)
+                    .HasForeignKey(d => d.FolderId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_StateTransitions_ObjectFolder");
             });
 
             modelBuilder.Entity<SummaryAddFields>(entity =>
             {
                 entity.HasOne(d => d.SummaryDef)
                     .WithMany(p => p.SummaryAddFields)
-                    .HasForeignKey(d => d.SummaryDef)
+                    .HasForeignKey(d => d.SummaryDefId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_SummaryAddFields_ToSummaryDefinition");
             });
@@ -717,7 +739,7 @@ namespace DbProvider
             {
                 entity.HasOne(d => d.AddField)
                     .WithMany(p => p.SummaryAddFieldsStps)
-                    .HasForeignKey(d => d.AddField)
+                    .HasForeignKey(d => d.AddFieldId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_SummaryAddFieldsStps_SummaryAddFields");
             });
@@ -730,15 +752,15 @@ namespace DbProvider
 
                 entity.HasOne(d => d.Folder)
                     .WithMany(p => p.SummaryDefinition)
-                    .HasForeignKey(d => d.Folder)
-                    .HasConstraintName("FK_SummaryDefinition_ToObjectTypes");
+                    .HasForeignKey(d => d.FolderId)
+                    .HasConstraintName("FK_SummaryDefinition_ToObjectFolders");
             });
 
             modelBuilder.Entity<SummaryFieldSteps>(entity =>
             {
                 entity.HasOne(d => d.SummaryDef)
                     .WithMany(p => p.SummaryFieldSteps)
-                    .HasForeignKey(d => d.SummaryDef)
+                    .HasForeignKey(d => d.SummaryDefId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_SummaryFieldSteps_ToSummaryDefinition");
             });
@@ -747,7 +769,7 @@ namespace DbProvider
             {
                 entity.HasOne(d => d.SummaryDef)
                     .WithMany(p => p.SummaryResultFields)
-                    .HasForeignKey(d => d.SummaryDef)
+                    .HasForeignKey(d => d.SummaryDefId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_SummaryResultFields_ToSummaryDefinition");
             });
@@ -756,9 +778,9 @@ namespace DbProvider
             {
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Field).HasColumnName("field");
+                entity.Property(e => e.FieldId).HasColumnName("field");
 
-                entity.Property(e => e.PartnerField).HasColumnName("partner_field");
+                entity.Property(e => e.PartnerFieldId).HasColumnName("partner_field");
 
                 entity.Property(e => e.SynchOption).HasColumnName("synch_option");
             });
@@ -767,7 +789,7 @@ namespace DbProvider
             {
                 entity.Property(e => e.Layout).IsRequired();
 
-                entity.Property(e => e.User).HasColumnName("User_");
+                entity.Property(e => e.UserId).HasColumnName("User_id");
             });
 
             modelBuilder.Entity<WindowLayout>(entity =>
@@ -784,7 +806,7 @@ namespace DbProvider
 
                 entity.Property(e => e.Top).HasColumnName("top");
 
-                entity.Property(e => e.User).HasColumnName("user_");
+                entity.Property(e => e.UserId).HasColumnName("user_");
 
                 entity.Property(e => e.Width).HasColumnName("width");
             });
@@ -798,6 +820,9 @@ namespace DbProvider
         {
             switch (_settings.DbType)
             {
+                case DbTypes.SqlLight:
+                    optionsBuilder.UseSqlite(_connection);
+                    break;
                 case DbTypes.MsSqlServer:
                     optionsBuilder.UseSqlServer(_connection);
                     break;
@@ -811,9 +836,6 @@ namespace DbProvider
 #endif                
                 case DbTypes.Oracle:
                     
-                    break;
-                case DbTypes.Files:
-                    optionsBuilder.UseFileContextDatabase(_settings.DatabaseName, _settings.ServerName, _settings.UserPassword);
                     break;
                 default:
                     optionsBuilder.UseInMemoryDatabase("AppDbTest");

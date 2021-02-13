@@ -24,8 +24,8 @@ using CoaApp.Core.Enumes;
 
 namespace DbProvider.Entities
 {
-    [Table("Actions")]
-    public partial class Action
+    [Table("ModifyActions")]
+    public partial class ModifyAction
     {
         public int Id { get; set; }
         public CoaActionListType ActionType { get; set; }
@@ -33,6 +33,7 @@ namespace DbProvider.Entities
         public string Description { get; set; }
         public string Expression { get; set; }
         public string Script { get; set; }
+        public int FolderId { get; set; }
         public virtual ObjectFolder Folder { get; set; }
     }
 }

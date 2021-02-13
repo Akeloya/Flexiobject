@@ -37,6 +37,8 @@ namespace DbProvider
         public bool IgnoreBasefilter { get; set; }
         public bool CompatibilityFlag { get; set; }
         public bool IdFieldsNull { get; set; }
+        public int FieldId { get; set; }
+        public int SettingId { get; set; }
         public virtual ImportSettings Setting { get; set; }
         public virtual FieldDefinition Field { get; set; }
     }

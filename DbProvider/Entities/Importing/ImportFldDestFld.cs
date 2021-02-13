@@ -27,6 +27,7 @@ namespace DbProvider
     {
         public int Id { get; set; }
         public int FldSettingsId { get; set; }
+        public int DestFolderId { get; set; }
         public virtual ObjectFolder DestFolder { get; set; }
     }
 }

@@ -29,7 +29,9 @@ namespace DbProvider.Entities
         public string Title { get; set; }
         public bool Initial { get; set; }
         public string Alias { get; set; }
-        public virtual ObjectFolder folder { get; set; }
+        public int FolderId { get; set; }
+        public int FieldId { get; set; }
+        public virtual ObjectFolder Folder { get; set; }
         public virtual FieldDefinition Field { get; set; }
     }
 }

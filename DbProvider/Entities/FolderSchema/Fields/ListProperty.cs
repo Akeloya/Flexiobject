@@ -30,7 +30,9 @@ namespace DbProvider.Entities
         public string Code { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public int? Position { get; set; }
+        public int Position { get; set; }
+        public int FolderId { get; set; }
+        public int FieldId { get; set; }
         public virtual ObjectFolder Folder { get; set; }
         public virtual FieldDefinition Field { get; set; }
     }

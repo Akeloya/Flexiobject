@@ -28,6 +28,7 @@ namespace DbProvider
     {
         public int Id { get; set; }
         public int FldSettingsId { get; set; }
+        public int FieldId { get; set; }
         public virtual FieldDefinition Field { get; set; }
     }
 }

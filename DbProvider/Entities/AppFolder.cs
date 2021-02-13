@@ -28,6 +28,7 @@ namespace DbProvider.Entities
     public class AppFolder
     {
         public int Id { get; set; }
+        public int FolderId { get; set; }
         public CoaApplicationFolderTypes AppFolderId { get; set; }
         public virtual ObjectFolder Folder { get; set; }
     }

@@ -31,6 +31,7 @@ namespace DbProvider.Entities
         public string FieldName { get; set; }
         public short DataType { get; set; }
         public bool HasIndex { get; set; }
+        public int SchemaDefId { get; set; }
         public virtual SchemeTableDefinition SchemeDef { get; set; }
     }
 }

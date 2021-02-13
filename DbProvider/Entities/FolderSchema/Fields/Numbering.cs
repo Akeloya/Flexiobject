@@ -29,6 +29,8 @@ namespace DbProvider.Entities
         public int? FieldWidth { get; set; }
         public string MinimumValue { get; set; }
         public bool ShareNumbers { get; set; }
+        public int FolderId { get; set; }
+        public int FieldId { get; set; }
         public virtual ObjectFolder Folder { get; set; }
         public virtual FieldDefinition Field { get; set; }
     }

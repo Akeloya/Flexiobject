@@ -40,11 +40,13 @@ namespace DbProvider
 
     public enum DbTypes
     {
+        Files,
+        Memory,
+        MsJet,
         MsSqlServer,
         MySql,
+        Oracle,
         PostgreSql,
-        MsJet,
-        Files,
-        Oracle
+        SqlLight
     }
 }

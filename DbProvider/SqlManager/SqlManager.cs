@@ -6,7 +6,7 @@ using System.Data.Common;
 using System.Linq;
 using System.Text;
 
-namespace DbProvider.SqlManager
+namespace DbProvider
 {
     public class SqlManager
     {

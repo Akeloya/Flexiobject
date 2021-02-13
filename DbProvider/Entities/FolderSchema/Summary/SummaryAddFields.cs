@@ -30,6 +30,8 @@ namespace DbProvider.Entities
         }
 
         public int Id { get; set; }
+        public int SummaryDefId { get; set; }
+        public int FieldId { get; set; }
         public virtual SummaryDefinition SummaryDef { get; set; }
         public virtual FieldDefinition Field { get; set; }
         public virtual ICollection<SummaryAddFieldsStps> SummaryAddFieldsStps { get; set; }

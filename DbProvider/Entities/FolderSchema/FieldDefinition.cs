@@ -51,6 +51,7 @@ namespace DbProvider.Entities
         public string RestrictionErrMsg { get; set; }
         public string RestrictionMutch { get; set; }
         public bool IsSyncronized { get; set; }
+        public int FolderId { get; set; }
         public virtual ObjectFolder Folder { get; set; }
         public virtual ICollection<ListProperty> ListProperties { get; set; }
         public virtual ICollection<WfState> Status { get; set; }

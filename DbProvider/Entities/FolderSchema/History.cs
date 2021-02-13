@@ -34,6 +34,8 @@ namespace DbProvider.Entities
         public string NewValue { get; set; }
         public int State { get; set; }
         public byte Format { get; set; }
+        public long ObjectId { get; set; }
+        public int ModifiedById { get; set; }
         public virtual ObjectDef Object { get; set; }
         public virtual AppUser ModifiedBy { get; set; }
     }
