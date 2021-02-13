@@ -46,56 +46,7 @@ namespace DbProvider
         {
             _connection = connection;
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {            
-            if(_connection != null)
-            {
-                InitiateDbConnection(optionsBuilder);
-                return;
-            }
-            switch (_settings.DbType)
-            {
-                case DbTypes.MsSqlServer:
-                    {
-                        var connectionStr = $"Data Source={_settings.ServerName};Initial catalog={_settings.DatabaseName};";
-                        if(string.IsNullOrEmpty(_settings.UserName) && string.IsNullOrEmpty(_settings.UserPassword))
-                        {
-                            connectionStr += "Integrated Security=TRUE;";
-                        }
-                        else
-                        {
-                            connectionStr += $"User ID={_settings.UserName};Password={_settings.UserPassword}";
-                        }
-                        optionsBuilder.UseSqlServer(connectionStr);
-                    }
-                    break;
-                case DbTypes.PostgreSql:
-                    optionsBuilder.UseNpgsql($"");
-                    break;
-#if Windows
-                case DbTypes.MsJet:
-                    optionsBuilder.UseJet($"");
-                    break;
-#endif                
-                case DbTypes.Oracle:
-                    break;
-                case DbTypes.SqlLight:
-                    {
-                        var builder = new SqliteConnectionStringBuilder
-                        {
-                            Mode = SqliteOpenMode.ReadWriteCreate,
-                            Password = _settings.UserPassword,
-                            DataSource = _settings.ServerName,
-                        };
-                        optionsBuilder.UseSqlite(builder.ToString());
-                    }
-                    break;
-                default:
-                    optionsBuilder.UseSqlite("Filename=:memory:");
-                    //optionsBuilder.UseInMemoryDatabase("AppDbTest");
-                    break;
-            }
-        }
+        
         public virtual DbSet<ModifyAction> Actions { get; set; }
         public virtual DbSet<AppFolderField> AppFolderFields { get; set; }
         public virtual DbSet<AppFolder> AppFolders { get; set; }
@@ -142,26 +93,52 @@ namespace DbProvider
         public virtual DbSet<UserFieldProp> UserFieldProp { get; set; }
         public virtual DbSet<ViewLayoutTmp> ViewLayoutTmp { get; set; }
         public virtual DbSet<WindowLayout> WindowLayout { get; set; }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (_connection != null)
+            {
+                InitiateDbConnection(optionsBuilder);
+                return;
+            }
+            switch (_settings.DbType)
+            {
+                case DbTypes.MsSqlServer:
+                    MsSqlInitiate(optionsBuilder);
+                    break;
+                case DbTypes.PostgreSql:
+                    optionsBuilder.UseNpgsql($"");
+                    break;
+#if Windows
+                case DbTypes.MsJet:
+                    optionsBuilder.UseJet($"");
+                    break;
+#endif                
+                case DbTypes.Oracle:
+                    break;
+                case DbTypes.SqlLight:
+                        SqlLigntBuidlString(optionsBuilder);
+                    break;
+                default:
+                    optionsBuilder.UseSqlite("Filename=:memory:");
+                    //optionsBuilder.UseInMemoryDatabase("AppDbTest");
+                    break;
+            }
+        }
+
+        private void SqlLigntBuidlString(DbContextOptionsBuilder optionsBuilder)
+        {
+            var builder = new SqliteConnectionStringBuilder
+            {
+                Mode = SqliteOpenMode.ReadWriteCreate,
+                Password = _settings.UserPassword,
+                DataSource = _settings.ServerName,
+            };
+            optionsBuilder.UseSqlite(builder.ToString());
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ModifyAction>(entity =>
-            {
-                entity.HasIndex(e => new { e.ActionType, e.FolderId });
-
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.Description).HasMaxLength(500);
-
-                entity.Property(e => e.Expression).IsRequired();
-
-                entity.Property(e => e.Script).IsRequired();
-
-                entity.Property(e => e.Title)
-                    .IsRequired()
-                    .HasColumnName("Title")
-                    .HasMaxLength(200);
-            });
+            ModifyActionInitiate(modelBuilder);
 
             modelBuilder.Entity<AppFolderField>(entity =>
             {
@@ -176,32 +153,7 @@ namespace DbProvider
 
                 entity.Property(e => e.FolderId).HasColumnName("Folder_Id");
             });
-
-            modelBuilder.Entity<AppUser>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.Department).HasMaxLength(254);
-
-                entity.Property(e => e.DisplayName)
-                    .IsRequired()
-                    .HasMaxLength(254);
-
-                entity.Property(e => e.DomainName).HasMaxLength(254);
-
-                entity.Property(e => e.Email).HasMaxLength(254);
-
-                entity.Property(e => e.LoginName).HasMaxLength(254);
-
-                entity.Property(e => e.ObjectId).HasColumnName("Object_Id");
-
-                entity.Property(e => e.Password)
-                    .HasMaxLength(254)
-                    .IsFixedLength();
-
-                entity.Property(e => e.Phone).HasMaxLength(254);                
-
-            });
+            AppUserInitiate(modelBuilder);
 
             modelBuilder.Entity<AppUsersUserGroups>(entity =>
             {
@@ -232,22 +184,229 @@ namespace DbProvider
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
             });
+            DefaultValueInitiate(modelBuilder);
+            DeletionLogInitiate(modelBuilder);
+            FieldDefinitionInitiate(modelBuilder);
 
-            modelBuilder.Entity<DefaultValue>(entity =>
+            modelBuilder.Entity<Form>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(255);
+            });
+
+            modelBuilder.Entity<FormCondition>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(130)
+                    .IsFixedLength();
+            });
+
+            FormPropertyInitiate(modelBuilder);
+
+            modelBuilder.Entity<History>(entity =>
+            {
+                entity.HasIndex(e => e.ObjectId);
+
+                entity.HasIndex(e => new { e.ObjectId, e.UserField, e.State });
+
+                entity.Property(e => e.ChangeDate).HasColumnType("smalldatetime");
+
+                entity.Property(e => e.NewValue).HasMaxLength(256);
+
+                entity.Property(e => e.OldValue).HasMaxLength(256);
+            });
+
+            modelBuilder.Entity<ImportCmSteps>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.ColMappingId).HasColumnName("col_mapping_id");
+
+                entity.Property(e => e.FieldId).HasColumnName("userfield");
+            });
+            ImportColMappingInitiate(modelBuilder);
+
+            modelBuilder.Entity<ImportFldDestFld>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.DestFolderId).HasColumnName("dest_folder");
+
+                entity.Property(e => e.FldSettingsId).HasColumnName("fld_settings_id");
+            });
+
+            modelBuilder.Entity<ImportFldIdFields>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.FldSettingsId).HasColumnName("fld_settings_id");
+
+                entity.Property(e => e.FieldId).HasColumnName("ufd");
+            });
+            ImportFolderSettgsInitiate(modelBuilder);
+            ImportSettingsInitiate(modelBuilder);
+            ListPropertyInitiate(modelBuilder);
+            NumberingInitiate(modelBuilder);
+            ObjectDefInitiate(modelBuilder);
+            ObjectFolderInitiate(modelBuilder);
+            PictureInitiate(modelBuilder);
+
+            modelBuilder.Entity<Privilege>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+            });
+            SchemaFieldDefinitionInitiate(modelBuilder);
+
+            modelBuilder.Entity<SchemeTableDefinition>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Deleted).HasColumnName("deleted");
+
+                entity.Property(e => e.TableName)
+                    .IsRequired()
+                    .HasColumnName("tableName")
+                    .HasMaxLength(50);
+            });
+            SchemaHistoryInitiate(modelBuilder);
+
+            modelBuilder.Entity<ScriptHistory>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Created).HasColumnType("smalldatetime");
+
+                entity.Property(e => e.Modified).HasColumnType("smalldatetime");
+
+                entity.Property(e => e.Published).HasColumnType("smalldatetime");
+            });
+
+            modelBuilder.Entity<Script>(entity =>
+            {
+                entity.Property(e => e.Name).HasMaxLength(254);
+
+                entity.Property(e => e.NumParams).HasColumnName("Num_params");
+            });
+
+            modelBuilder.Entity<WfState>(entity =>
+            {
+                entity.Property(e => e.Alias)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.Field)
+                    .WithMany(p => p.Status)
+                    .HasForeignKey(d => d.FieldId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_Status_ToFieldDefinition");
+            });
+            WfStateTransitionInitiate(modelBuilder);
+
+            modelBuilder.Entity<SummaryAddFields>(entity =>
+            {
+                entity.HasOne(d => d.SummaryDef)
+                    .WithMany(p => p.SummaryAddFields)
+                    .HasForeignKey(d => d.SummaryDefId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_SummaryAddFields_ToSummaryDefinition");
+            });
+
+            modelBuilder.Entity<SummaryAddFieldsStps>(entity =>
+            {
+                entity.HasOne(d => d.AddField)
+                    .WithMany(p => p.SummaryAddFieldsStps)
+                    .HasForeignKey(d => d.AddFieldId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_SummaryAddFieldsStps_SummaryAddFields");
+            });
+
+            modelBuilder.Entity<SummaryDefinition>(entity =>
+            {
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(80);
+
+                entity.HasOne(d => d.Folder)
+                    .WithMany(p => p.SummaryDefinition)
+                    .HasForeignKey(d => d.FolderId)
+                    .HasConstraintName("FK_SummaryDefinition_ToObjectFolders");
+            });
+
+            modelBuilder.Entity<SummaryFieldSteps>(entity =>
+            {
+                entity.HasOne(d => d.SummaryDef)
+                    .WithMany(p => p.SummaryFieldSteps)
+                    .HasForeignKey(d => d.SummaryDefId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_SummaryFieldSteps_ToSummaryDefinition");
+            });
+            SummaryResultFieldsInitiate(modelBuilder);
+            SynchRefFieldsInitiate(modelBuilder);
+            ViewLayoutTmpInitiate(modelBuilder);
+            WindowLayoutInitiate(modelBuilder);
+
+            OnModelCreatingPartial(modelBuilder);
+        }
+
+        private static void WfStateTransitionInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<WfStateTransition>(entity =>
+            {
+                entity.HasOne(d => d.Field)
+                    .WithMany(p => p.StateTransitions)
+                    .HasForeignKey(d => d.FieldId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_StateTransitions_ToStatus");
+                entity.HasOne(d => d.Folder)
+                    .WithMany(p => p.WfStateTransitions)
+                    .HasForeignKey(d => d.FolderId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_StateTransitions_ObjectFolder");
+            });
+        }
+
+        private static void ImportColMappingInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ImportColMapping>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.FolderId).HasColumnName("folder");
+                entity.Property(e => e.AttachmentOption).HasColumnName("attachment_option");
 
-                entity.Property(e => e.Type).HasColumnName("type");
+                entity.Property(e => e.Dest).HasColumnName("dest");
 
-                entity.Property(e => e.UserFieldId).HasColumnName("userfield");
+                entity.Property(e => e.Flags).HasColumnName("flags");
 
-                entity.Property(e => e.ValBigint).HasColumnName("val_bigint");
+                entity.Property(e => e.SettingsId).HasColumnName("settings_id");
 
-                entity.Property(e => e.ValStr).HasColumnName("val_str");
+                entity.Property(e => e.Source)
+                    .IsRequired()
+                    .HasColumnName("source")
+                    .HasMaxLength(80)
+                    .IsFixedLength();
             });
+        }
 
+        private static void DeletionLogInitiate(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<DeletionLog>(entity =>
             {
                 entity.HasIndex(e => e.DeletedTime);
@@ -266,8 +425,78 @@ namespace DbProvider
                     .IsRequired()
                     .HasMaxLength(255);
             });
+        }
 
-            
+        private static void DefaultValueInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<DefaultValue>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.FolderId).HasColumnName("folder");
+
+                entity.Property(e => e.Type).HasColumnName("type");
+
+                entity.Property(e => e.UserFieldId).HasColumnName("userfield");
+
+                entity.Property(e => e.ValBigint).HasColumnName("val_bigint");
+
+                entity.Property(e => e.ValStr).HasColumnName("val_str");
+            });
+        }
+
+        private static void AppUserInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AppUser>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Department).HasMaxLength(254);
+
+                entity.Property(e => e.DisplayName)
+                    .IsRequired()
+                    .HasMaxLength(254);
+
+                entity.Property(e => e.DomainName).HasMaxLength(254);
+
+                entity.Property(e => e.Email).HasMaxLength(254);
+
+                entity.Property(e => e.LoginName).HasMaxLength(254);
+
+                entity.Property(e => e.ObjectId).HasColumnName("Object_Id");
+
+                entity.Property(e => e.Password)
+                    .HasMaxLength(254)
+                    .IsFixedLength();
+
+                entity.Property(e => e.Phone).HasMaxLength(254);
+
+            });
+        }
+
+        private static void ModifyActionInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ModifyAction>(entity =>
+            {
+                entity.HasIndex(e => new { e.ActionType, e.FolderId });
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Description).HasMaxLength(500);
+
+                entity.Property(e => e.Expression).IsRequired();
+
+                entity.Property(e => e.Script).IsRequired();
+
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasColumnName("Title")
+                    .HasMaxLength(200);
+            });
+        }
+
+        private static void FieldDefinitionInitiate(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<FieldDefinition>(entity =>
             {
                 entity.Property(e => e.Alias)
@@ -312,100 +541,10 @@ namespace DbProvider
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_FieldDefinition_ToObjectFolders");
             });
+        }
 
-            modelBuilder.Entity<Form>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(255);
-            });
-
-            modelBuilder.Entity<FormCondition>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(130)
-                    .IsFixedLength();
-            });
-
-            modelBuilder.Entity<FormProperty>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(60);
-            });
-
-            modelBuilder.Entity<History>(entity =>
-            {
-                entity.HasIndex(e => e.ObjectId);
-
-                entity.HasIndex(e => new { e.ObjectId, e.UserField, e.State });
-
-                entity.Property(e => e.ChangeDate).HasColumnType("smalldatetime");
-
-                entity.Property(e => e.NewValue).HasMaxLength(256);
-
-                entity.Property(e => e.OldValue).HasMaxLength(256);
-            });
-
-            modelBuilder.Entity<ImportCmSteps>(entity =>
-            {
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.ColMappingId).HasColumnName("col_mapping_id");
-
-                entity.Property(e => e.FieldId).HasColumnName("userfield");
-            });
-
-            modelBuilder.Entity<ImportColMapping>(entity =>
-            {
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.AttachmentOption).HasColumnName("attachment_option");
-
-                entity.Property(e => e.Dest).HasColumnName("dest");
-
-                entity.Property(e => e.Flags).HasColumnName("flags");
-
-                entity.Property(e => e.SettingsId).HasColumnName("settings_id");
-
-                entity.Property(e => e.Source)
-                    .IsRequired()
-                    .HasColumnName("source")
-                    .HasMaxLength(80)
-                    .IsFixedLength();
-            });
-
-            modelBuilder.Entity<ImportFldDestFld>(entity =>
-            {
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.DestFolderId).HasColumnName("dest_folder");
-
-                entity.Property(e => e.FldSettingsId).HasColumnName("fld_settings_id");
-            });
-
-            modelBuilder.Entity<ImportFldIdFields>(entity =>
-            {
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.FldSettingsId).HasColumnName("fld_settings_id");
-
-                entity.Property(e => e.FieldId).HasColumnName("ufd");
-            });
-
+        private static void ImportFolderSettgsInitiate(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<ImportFolderSettgs>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
@@ -434,7 +573,10 @@ namespace DbProvider
 
                 entity.Property(e => e.UseCreationRule).HasColumnName("use_creation_rule");
             });
+        }
 
+        private static void ImportSettingsInitiate(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<ImportSettings>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
@@ -481,7 +623,10 @@ namespace DbProvider
 
                 entity.Property(e => e.User).HasColumnName("user_");
             });
+        }
 
+        private static void ListPropertyInitiate(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<ListProperty>(entity =>
             {
                 entity.HasIndex(e => new { e.FolderId, e.FieldId });
@@ -508,7 +653,10 @@ namespace DbProvider
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_ListProperties_ToObjectFolders");
             });
+        }
 
+        private static void NumberingInitiate(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<Numbering>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
@@ -537,7 +685,10 @@ namespace DbProvider
 
                 entity.Property(e => e.FieldId).HasColumnName("userField");
             });
+        }
 
+        private static void ObjectDefInitiate(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<ObjectDef>(entity =>
             {
                 entity.Property(e => e.Id)
@@ -553,7 +704,29 @@ namespace DbProvider
                 entity.Property(e => e.UserDeletedById).HasColumnName("deleted_by_user");
 
             });
+        }
 
+        private static void PictureInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Picture>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Data).HasColumnName("data");
+
+                entity.Property(e => e.IsIcon).HasColumnName("is_icon");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasColumnName("name")
+                    .HasMaxLength(40);
+            });
+        }
+
+        private static void ObjectFolderInitiate(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<ObjectFolder>(entity =>
             {
                 entity.HasIndex(e => e.Alias);
@@ -583,28 +756,10 @@ namespace DbProvider
                 entity.Property(e => e.WfHistoryFieldId).HasColumnName("wfHistory_fld");
 
             });
+        }
 
-            modelBuilder.Entity<Picture>(entity =>
-            {
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.Data).HasColumnName("data");
-
-                entity.Property(e => e.IsIcon).HasColumnName("is_icon");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasColumnName("name")
-                    .HasMaxLength(40);
-            });
-
-            modelBuilder.Entity<Privilege>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
-
+        private static void SchemaFieldDefinitionInitiate(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<SchemaFieldDefinition>(entity =>
             {
                 entity.Property(e => e.Id)
@@ -626,21 +781,10 @@ namespace DbProvider
 
                 entity.Property(e => e.SchemaDefId).HasColumnName("tab_id");
             });
+        }
 
-            modelBuilder.Entity<SchemeTableDefinition>(entity =>
-            {
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.Deleted).HasColumnName("deleted");
-
-                entity.Property(e => e.TableName)
-                    .IsRequired()
-                    .HasColumnName("tableName")
-                    .HasMaxLength(50);
-            });
-
+        private static void SchemaHistoryInitiate(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<SchemaHistory>(entity =>
             {
                 entity.Property(e => e.DeletedArea).HasColumnName("Deleted_Area");
@@ -676,95 +820,10 @@ namespace DbProvider
                     .HasMaxLength(50)
                     .IsFixedLength();
             });
+        }
 
-            modelBuilder.Entity<ScriptHistory>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.Created).HasColumnType("smalldatetime");
-
-                entity.Property(e => e.Modified).HasColumnType("smalldatetime");
-
-                entity.Property(e => e.Published).HasColumnType("smalldatetime");
-            });
-
-            modelBuilder.Entity<Script>(entity =>
-            {
-                entity.Property(e => e.Name).HasMaxLength(254);
-
-                entity.Property(e => e.NumParams).HasColumnName("Num_params");
-            });
-
-            modelBuilder.Entity<WfState>(entity =>
-            {
-                entity.Property(e => e.Alias)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Title)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.HasOne(d => d.Field)
-                    .WithMany(p => p.Status)
-                    .HasForeignKey(d => d.FieldId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_Status_ToFieldDefinition");
-            });
-
-            modelBuilder.Entity<WfStateTransition>(entity =>
-            {
-                entity.HasOne(d => d.Field)
-                    .WithMany(p => p.StateTransitions)
-                    .HasForeignKey(d => d.FieldId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_StateTransitions_ToStatus");
-                entity.HasOne(d => d.Folder)
-                    .WithMany(p => p.WfStateTransitions)
-                    .HasForeignKey(d => d.FolderId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_StateTransitions_ObjectFolder");
-            });
-
-            modelBuilder.Entity<SummaryAddFields>(entity =>
-            {
-                entity.HasOne(d => d.SummaryDef)
-                    .WithMany(p => p.SummaryAddFields)
-                    .HasForeignKey(d => d.SummaryDefId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_SummaryAddFields_ToSummaryDefinition");
-            });
-
-            modelBuilder.Entity<SummaryAddFieldsStps>(entity =>
-            {
-                entity.HasOne(d => d.AddField)
-                    .WithMany(p => p.SummaryAddFieldsStps)
-                    .HasForeignKey(d => d.AddFieldId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_SummaryAddFieldsStps_SummaryAddFields");
-            });
-
-            modelBuilder.Entity<SummaryDefinition>(entity =>
-            {
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(80);
-
-                entity.HasOne(d => d.Folder)
-                    .WithMany(p => p.SummaryDefinition)
-                    .HasForeignKey(d => d.FolderId)
-                    .HasConstraintName("FK_SummaryDefinition_ToObjectFolders");
-            });
-
-            modelBuilder.Entity<SummaryFieldSteps>(entity =>
-            {
-                entity.HasOne(d => d.SummaryDef)
-                    .WithMany(p => p.SummaryFieldSteps)
-                    .HasForeignKey(d => d.SummaryDefId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_SummaryFieldSteps_ToSummaryDefinition");
-            });
-
+        private static void SummaryResultFieldsInitiate(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<SummaryResultFields>(entity =>
             {
                 entity.HasOne(d => d.SummaryDef)
@@ -773,7 +832,10 @@ namespace DbProvider
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_SummaryResultFields_ToSummaryDefinition");
             });
+        }
 
+        private static void SynchRefFieldsInitiate(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<SynchRefFields>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
@@ -784,14 +846,20 @@ namespace DbProvider
 
                 entity.Property(e => e.SynchOption).HasColumnName("synch_option");
             });
+        }
 
+        private static void ViewLayoutTmpInitiate(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<ViewLayoutTmp>(entity =>
             {
                 entity.Property(e => e.Layout).IsRequired();
 
                 entity.Property(e => e.UserId).HasColumnName("User_id");
             });
+        }
 
+        private static void WindowLayoutInitiate(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<WindowLayout>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
@@ -810,12 +878,21 @@ namespace DbProvider
 
                 entity.Property(e => e.Width).HasColumnName("width");
             });
-
-            OnModelCreatingPartial(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 
+        private void FormPropertyInitiate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<FormProperty>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(60);
+            });
+        }
         private void InitiateDbConnection(DbContextOptionsBuilder optionsBuilder)
         {
             switch (_settings.DbType)
@@ -843,5 +920,18 @@ namespace DbProvider
             }            
         }
 
+        private void MsSqlInitiate(DbContextOptionsBuilder optionsBuilder)
+        {
+            var connectionStr = $"Data Source={_settings.ServerName};Initial catalog={_settings.DatabaseName};";
+            if (string.IsNullOrEmpty(_settings.UserName) && string.IsNullOrEmpty(_settings.UserPassword))
+            {
+                connectionStr += "Integrated Security=TRUE;";
+            }
+            else
+            {
+                connectionStr += $"User ID={_settings.UserName};Password={_settings.UserPassword}";
+            }
+            optionsBuilder.UseSqlServer(connectionStr);
+        }
     }
 }
