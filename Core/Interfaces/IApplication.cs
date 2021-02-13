@@ -18,9 +18,9 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-namespace Core.Interfaces
+namespace CoaApp.Core.Interfaces
 {
-    interface IApplication
+    public interface IApplication
     {
         /// <summary>
         /// Write string message to write in server log
