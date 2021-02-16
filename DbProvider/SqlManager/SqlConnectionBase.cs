@@ -50,7 +50,7 @@ namespace DbProvider
         }
         public void RollbackTransaction()
         {
-            throw new NotImplementedException();
+            OnRollbackTransaction.Invoke(this, new SqlManagerGetTransactionEventArgs(Owner));
         }
         protected virtual void Dispose(bool disposing)
         {
