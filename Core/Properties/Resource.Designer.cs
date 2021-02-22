@@ -61,6 +61,15 @@ namespace CoaApp.Core.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Access deny.
+        /// </summary>
+        internal static string AuthentificationException {
+            get {
+                return ResourceManager.GetString("AuthentificationException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на There are problems with serialization/deserialization message.
         /// </summary>
         internal static string SerializationMessageException {

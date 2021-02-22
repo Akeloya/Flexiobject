@@ -18,18 +18,18 @@
 *  You should have received a copy of the GNU General Public License
 *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 using CoaApp.Core.Properties;
 using System;
 
 namespace CoaApp.Core.Errors
 {
     [Serializable]
-    public class SerializationMessageException : AppException
+    public class AuthenticationException : AppException
     {
-
-        public SerializationMessageException(Exception ex) : base(Resource.SerializationMessageException, ex)
+        public AuthenticationException(): base(Resource.AuthentificationException)
         {
-            
+
         }
     }
 }
