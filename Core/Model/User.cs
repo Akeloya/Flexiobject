@@ -26,9 +26,9 @@ using System.Text;
 
 namespace CoaApp.Core
 {
-    public abstract class User<T> : AppBase<T>, IUser
+    public abstract class User : AppBase, IUser
     {
-        protected User(Application app, T parent) : base(app, parent)
+        protected User(Application app, object parent) : base(app, parent)
         {
 
         }

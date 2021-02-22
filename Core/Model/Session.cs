@@ -23,7 +23,7 @@ using System;
 
 namespace CoaApp.Core
 {
-    public abstract class Session : AppBase<Application>, ISession
+    public abstract class Session : AppBase, ISession
     {
         protected Session(Application app): base(app, app)
         {

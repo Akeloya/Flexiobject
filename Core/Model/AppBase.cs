@@ -23,9 +23,9 @@ using System;
 
 namespace CoaApp.Core
 {
-    public abstract class AppBase<T> : MarshalByRefObject, IBase
+    public abstract class AppBase : MarshalByRefObject, IBase
     {
-        public AppBase(Application app, T parent)
+        public AppBase(Application app, object parent)
         {
             Application = app;
             Parent = parent;
@@ -41,7 +41,7 @@ namespace CoaApp.Core
         }
         public Application Application { get; }
 
-        public T Parent { get; }
+        public object Parent { get; }
 
         IApplication IBase.Application => Application;
     }

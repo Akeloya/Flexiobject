@@ -22,18 +22,17 @@ using CoaApp.Core.Interfaces;
 
 namespace CoaApp.Core
 {
-    public abstract class UserFields<T> : AppBase<T>, IUserFields
+    public abstract class UserFields : AppBase, IUserFields
     {
-        protected UserFields(Application app, T parent) : base(app, parent)
-        {
-
-        }
-
         public IUserField this[int idx] => OnGetFieldByIndex(idx);
 
         public IUserField this[string alias] => OnGetFieldByAlias(alias);
 
         public int Count => OnGetCount();
+        protected UserFields(Application app, object parent) : base(app, parent)
+        {
+
+        }
         /// <summary>
         /// Get User fields count
         /// </summary>

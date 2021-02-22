@@ -6,9 +6,9 @@ using System.Text;
 
 namespace CoaApp.Core.Folder
 {
-    public abstract class CustomFolder<T>: AppBase<T>, ICustomFolder
+    public abstract class CustomFolder: AppBase, ICustomFolder
     {
-        protected CustomFolder(Application app, T parent) : base(app, parent)
+        protected CustomFolder(Application app, object parent) : base(app, parent)
         {
 
         }

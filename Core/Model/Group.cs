@@ -24,9 +24,9 @@ using System;
 
 namespace CoaApp.Core
 {
-    public abstract class Group<T> : AppBase<T>, IGroup
+    public abstract class Group : AppBase, IGroup
     {
-        protected Group(Application app, T parent) : base(app, parent)
+        protected Group(Application app, object parent) : base(app, parent)
         {
 
         }

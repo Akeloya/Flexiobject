@@ -25,56 +25,24 @@ using System;
 
 namespace CoaApp.Core.Object
 {
-    public class HistoryRecord<T> : AppBase<T>, IHistoryRecord
+    public class HistoryRecord : AppBase, IHistoryRecord
     {
-        protected HistoryRecord(Application app, T parent) : base(app, parent)
-        {
-
-        }
-
-        protected HistoryRecord(Application app, 
-                                T parent,
-                                int fieldId,
-                                CoaHistoryActionTypes action,
-                                DateTime date,
-                                string desc,
-                                string oldVal,
-                                string newVal,
-                                int userId,
-                                IState state) : base(app, parent)
-        {
-            _fieldId = fieldId;
-            _date = date;
-            _action = action;
-            _description = desc;
-            _oldValue = oldVal;
-            _newValue = newVal;
-            _state = state;
-            _userId = userId;
-        }
-
         private IUserFieldDefinition _field;
         private IUser _user;
-        private IState _state;
         private int _userId;
         private int _fieldId;
-        private CoaHistoryActionTypes _action;
-        private DateTime _date;
-        private string _description;
-        private string _oldValue;
-        private string _newValue;
 
-        public CoaHistoryActionTypes Action => _action;
+        public CoaHistoryActionTypes Action { get; }
 
-        public DateTime Date => _date;
+        public DateTime Date { get; }
 
-        public string Description => _description;
+        public string Description { get; }
 
-        public string NewValue => _newValue;
+        public string NewValue { get; }
 
-        public string OldValue => _oldValue;
+        public string OldValue { get; }
 
-        public IState State => _state;
+        public IState State { get; }
 
         public IUser User
         {
@@ -96,8 +64,32 @@ namespace CoaApp.Core.Object
             }
         }
 
-        public string UserName => throw new NotImplementedException();
+        public string UserName => User?.Name;
+        protected HistoryRecord(Application app, History parent) : base(app, parent)
+        {
 
+        }
+
+        protected HistoryRecord(Application app, 
+                                object parent,
+                                int fieldId,
+                                CoaHistoryActionTypes action,
+                                DateTime date,
+                                string desc,
+                                string oldVal,
+                                string newVal,
+                                int userId,
+                                IState state) : base(app, parent)
+        {
+            _fieldId = fieldId;
+            Date = date;
+            Action = action;
+            Description = desc;
+            OldValue = oldVal;
+            NewValue = newVal;
+            State = state;
+            _userId = userId;
+        }
         protected virtual IUserFieldDefinition OnGetField(int fieldId)
         {
             throw new NotImplementedException();

@@ -24,9 +24,9 @@ using System.ComponentModel;
 
 namespace CoaApp.Core.Object
 {
-    public abstract class UserField<T> : AppBase<T>, IUserField
+    public abstract class UserField : AppBase, IUserField
     {
-        protected UserField(Application app, T parent) : base (app, parent)
+        protected UserField(Application app, object parent) : base (app, parent)
         {
 
         }
