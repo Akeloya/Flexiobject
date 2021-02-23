@@ -61,6 +61,69 @@ namespace AppServer.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Configuration not properly initiated.
+        /// </summary>
+        internal static string CmdStrConfigNotInitialized {
+            get {
+                return ResourceManager.GetString("CmdStrConfigNotInitialized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Connection user name: {0}.
+        /// </summary>
+        internal static string CmdStrDbLogin {
+            get {
+                return ResourceManager.GetString("CmdStrDbLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Database name: {0}.
+        /// </summary>
+        internal static string CmdStrDbName {
+            get {
+                return ResourceManager.GetString("CmdStrDbName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Connection user password: {0}.
+        /// </summary>
+        internal static string CmdStrDbPassword {
+            get {
+                return ResourceManager.GetString("CmdStrDbPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Connection security: {0}.
+        /// </summary>
+        internal static string CmdStrDbSecurity {
+            get {
+                return ResourceManager.GetString("CmdStrDbSecurity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Database type: {0}.
+        /// </summary>
+        internal static string CmdStrDbType {
+            get {
+                return ResourceManager.GetString("CmdStrDbType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Server name: {0}.
+        /// </summary>
+        internal static string CmdStrServerName {
+            get {
+                return ResourceManager.GetString("CmdStrServerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на {0} [{1}] {2}
         ///This program comes with ABSOLUTELY NO WARRANTY; for details type &apos;-show w&apos;.
         ///This is free software, and you are welcome to redistribute it under certain conditions; type &apos;-show c&apos; for details..
@@ -68,6 +131,15 @@ namespace AppServer.Properties {
         internal static string ConsoleStartInfo {
             get {
                 return ResourceManager.GetString("ConsoleStartInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Client request worker.
+        /// </summary>
+        internal static string ThreadClientWorker {
+            get {
+                return ResourceManager.GetString("ThreadClientWorker", resourceCulture);
             }
         }
     }

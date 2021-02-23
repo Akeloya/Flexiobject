@@ -117,8 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CmdStrConfigNotInitialized" xml:space="preserve">
+    <value>Configuration not properly initiated</value>
+  </data>
+  <data name="CmdStrDbLogin" xml:space="preserve">
+    <value>Connection user name: {0}</value>
+  </data>
+  <data name="CmdStrDbName" xml:space="preserve">
+    <value>Database name: {0}</value>
+  </data>
+  <data name="CmdStrDbPassword" xml:space="preserve">
+    <value>Connection user password: {0}</value>
+  </data>
+  <data name="CmdStrDbSecurity" xml:space="preserve">
+    <value>Connection security: {0}</value>
+  </data>
+  <data name="CmdStrDbType" xml:space="preserve">
+    <value>Database type: {0}</value>
+  </data>
+  <data name="CmdStrServerName" xml:space="preserve">
+    <value>Server name: {0}</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ConsoleStartInfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ConsoleStartInfo.en.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
+  </data>
+  <data name="ThreadClientWorker" xml:space="preserve">
+    <value>Client request worker</value>
   </data>
 </root>
