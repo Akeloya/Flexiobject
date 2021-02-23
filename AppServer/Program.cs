@@ -19,6 +19,9 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using AppServer.Services.CommandInterface;
+using CliFx;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -34,7 +37,7 @@ namespace AppServer
 
 #if Linux || OSX
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)            
+            Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddHostedService<Worker>();
@@ -45,9 +48,29 @@ namespace AppServer
             Host.CreateDefaultBuilder(args)
                 .ConfigureLogging(loggerFactory => loggerFactory.AddEventLog())
                 .UseWindowsService()
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {                                        
+                    if(args != null)
+                    {
+                        config.AddCommandLine(args);
+                    }
+                })
                 .ConfigureServices(services =>
                 {
                     services.AddHostedService<Worker>();
+                    services.AddTransient<DatabaseInfo>();
+                    services.AddTransient<DatabaseCheck>();
+                    services.AddTransient<DatabaseClear>();
+                    services.AddTransient<DatabaseInit>();
+                    services.AddTransient<DatabaseSetConfig>();
+                    
+                    var serviceProvider = services.BuildServiceProvider();
+
+                    new CliApplicationBuilder()
+                        .AddCommandsFromThisAssembly()
+                        .UseTypeActivator(serviceProvider.GetService)
+                        .Build()
+                        .RunAsync();
                 });
 #endif
     }

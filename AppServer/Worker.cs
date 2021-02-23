@@ -21,7 +21,8 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-
+using AppServer.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -30,19 +31,23 @@ namespace AppServer
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
-
-        public Worker(ILogger<Worker> logger)
+        private readonly IConfiguration _config;
+        private readonly AppConfig _appConfig;
+        public Worker(ILogger<Worker> logger, IConfiguration config)
         {
             _logger = logger;
+            _config = config;
+            _appConfig = new AppConfig();
+            _config.GetSection(AppConfig.ConfigName).Bind(_appConfig);
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            while (!stoppingToken.IsCancellationRequested)
+            /*while (!stoppingToken.IsCancellationRequested)
             {
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
                 await Task.Delay(1000, stoppingToken);
-            }
+            }*/
         }
     }
 }

@@ -18,19 +18,18 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+using CoaApp.Core.Folder;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-using DbProvider;
-
-namespace AppServer.Services
+namespace AppServer.Model.Folder
 {
-    public class DatabaseConfig : IAppDbSettings
+    public class CoaCustomFolder: CustomFolder
     {
-        public const string ConfigName = "Database";
-        public string Security { get; set; }
-        public DbTypes Type { get; set; }
-        public string Server { get; set; }
-        public string DbName { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }        
+        internal CoaCustomFolder(CoaApplication app, CoaSession parent): base(app, parent)
+        {
+
+        }
     }
 }
