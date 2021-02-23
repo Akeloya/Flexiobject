@@ -20,21 +20,30 @@
  */
 namespace DbProvider
 {
-    public struct AppDbSettings
+    public interface IAppDbSettings
     {
-        public DbTypes DbType { get; }
-        public string ServerName { get; }
-        public string DatabaseName { get; }
-        public string UserName { get; }
-        public string UserPassword { get; }
+        public DbTypes Type { get; set; }
+        public string Server { get; set; }
+        public string DbName { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+    }
+
+    public class AppDbSettings : IAppDbSettings
+    {
+        public DbTypes Type { get; set; }
+        public string Server { get; set; }
+        public string DbName { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
 
         public AppDbSettings(DbTypes type, string serverName, string dbName, string userName, string password)
         {
-            DbType = type;
-            ServerName = serverName;
-            DatabaseName = dbName;
+            Type = type;
+            Server = serverName;
+            DbName = dbName;
             UserName = userName;
-            UserPassword = password;
+            Password = password;
         }
     }
 

@@ -14,10 +14,10 @@ namespace DbProvider
         [ThreadStatic] private static Dictionary<Guid, ISqlConnectionItem> _sqlConnectionItems = new Dictionary<Guid, ISqlConnectionItem>();
         [ThreadStatic] private static Guid _owner;
         [ThreadStatic] private static DbTransaction _transaction;
-        private static AppDbSettings _settings;
+        private static IAppDbSettings _settings;
         private static object _syncConnections = new object();
 
-        public static void RegisterManager(AppDbSettings settings)
+        public static void RegisterManager(IAppDbSettings settings)
         {
             _settings = settings;
         }

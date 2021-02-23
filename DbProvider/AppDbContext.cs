@@ -35,9 +35,9 @@ namespace DbProvider
 {
     public partial class AppDbContext : DbContext
     {
-        private readonly AppDbSettings _settings;
+        private readonly IAppDbSettings _settings;
         private DbConnection _connection;
-        public AppDbContext(AppDbSettings settings) : base()
+        public AppDbContext(IAppDbSettings settings) : base()
         {
             _settings = settings;
         }
@@ -100,7 +100,7 @@ namespace DbProvider
                 InitiateDbConnection(optionsBuilder);
                 return;
             }
-            switch (_settings.DbType)
+            switch (_settings.Type)
             {
                 case DbTypes.MsSqlServer:
                     MsSqlInitiate(optionsBuilder);
@@ -130,8 +130,8 @@ namespace DbProvider
             var builder = new SqliteConnectionStringBuilder
             {
                 Mode = SqliteOpenMode.ReadWriteCreate,
-                Password = _settings.UserPassword,
-                DataSource = _settings.ServerName,
+                Password = _settings.Password,
+                DataSource = _settings.Server,
             };
             optionsBuilder.UseSqlite(builder.ToString());
         }
@@ -956,7 +956,7 @@ namespace DbProvider
         }
         private void InitiateDbConnection(DbContextOptionsBuilder optionsBuilder)
         {
-            switch (_settings.DbType)
+            switch (_settings.Type)
             {
                 case DbTypes.SqlLight:
                     optionsBuilder.UseSqlite(_connection);
@@ -983,14 +983,14 @@ namespace DbProvider
 
         private void MsSqlInitiate(DbContextOptionsBuilder optionsBuilder)
         {
-            var connectionStr = $"Data Source={_settings.ServerName};Initial catalog={_settings.DatabaseName};";
-            if (string.IsNullOrEmpty(_settings.UserName) && string.IsNullOrEmpty(_settings.UserPassword))
+            var connectionStr = $"Data Source={_settings.Server};Initial catalog={_settings.DbName};";
+            if (string.IsNullOrEmpty(_settings.UserName) && string.IsNullOrEmpty(_settings.Password))
             {
                 connectionStr += "Integrated Security=TRUE;";
             }
             else
             {
-                connectionStr += $"User ID={_settings.UserName};Password={_settings.UserPassword}";
+                connectionStr += $"User ID={_settings.UserName};Password={_settings.Password}";
             }
             optionsBuilder.UseSqlServer(connectionStr);
         }
