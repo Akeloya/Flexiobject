@@ -142,6 +142,15 @@
   <data name="ConsoleStartInfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ConsoleStartInfo.en.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
+  <data name="ServerStrDbConnection" xml:space="preserve">
+    <value>Connection to database. Server: {0}, Database name: {1}, User name: {2}</value>
+  </data>
+  <data name="ServerStrInitializing" xml:space="preserve">
+    <value>Server initializing...</value>
+  </data>
+  <data name="ServerStrStarting" xml:space="preserve">
+    <value>Starting server...</value>
+  </data>
   <data name="ThreadClientWorker" xml:space="preserve">
     <value>Client request worker</value>
   </data>

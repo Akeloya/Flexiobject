@@ -142,6 +142,15 @@
   <data name="ConsoleStartInfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ConsoleStartInfo.ru.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="ServerStrDbConnection" xml:space="preserve">
+    <value>Соединение с БД. Сервер: {0}, база данных: {1}, пользователь: {2}</value>
+  </data>
+  <data name="ServerStrInitializing" xml:space="preserve">
+    <value>Инициализируем сервер...</value>
+  </data>
+  <data name="ServerStrStarting" xml:space="preserve">
+    <value>Запускаем сервер...</value>
+  </data>
   <data name="ThreadClientWorker" xml:space="preserve">
     <value>Обработчик запросов клиента</value>
   </data>

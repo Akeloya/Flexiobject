@@ -135,6 +135,33 @@ namespace AppServer.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Connection to database. Server: {0}, Database name: {1}, User name: {2}.
+        /// </summary>
+        internal static string ServerStrDbConnection {
+            get {
+                return ResourceManager.GetString("ServerStrDbConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Server initializing....
+        /// </summary>
+        internal static string ServerStrInitializing {
+            get {
+                return ResourceManager.GetString("ServerStrInitializing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Starting server....
+        /// </summary>
+        internal static string ServerStrStarting {
+            get {
+                return ResourceManager.GetString("ServerStrStarting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Client request worker.
         /// </summary>
         internal static string ThreadClientWorker {
