@@ -1,8 +1,28 @@
-﻿using CliFx;
+﻿/*
+ *  "Custom object application core"
+ *  Application for creating and using freely customizable configuration of data, forms, actions and other things
+ *  Copyright (C) 2020 by Maxim V. Yugov.
+ *
+ *  This file is part of "Custom object application".
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+using AppServer.Model;
+using CliFx;
 using CliFx.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace AppServer.Services.CommandInterface
@@ -10,9 +30,16 @@ namespace AppServer.Services.CommandInterface
     [Command("srv run", Description = "Starts server")]
     public class ServerRun : ICommand
     {
+        CoaApplication _app;
+        public ServerRun(IConfiguration config, ILogger logger)
+        {
+            _app = new CoaApplication(config, logger);
+        }
         public ValueTask ExecuteAsync(IConsole console)
         {
-            throw new NotImplementedException();
+            _app.Initiate();
+            _app.Start();
+            return default;
         }
     }
 }

@@ -21,6 +21,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using AppServer.Model;
 using AppServer.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -33,12 +34,15 @@ namespace AppServer
         private readonly ILogger<Worker> _logger;
         private readonly IConfiguration _config;
         private readonly AppConfig _appConfig;
+
+        private CoaApplication _app;
         public Worker(ILogger<Worker> logger, IConfiguration config)
         {
             _logger = logger;
             _config = config;
             _appConfig = new AppConfig();
             _config.GetSection(AppConfig.ConfigName).Bind(_appConfig);
+            _app = new CoaApplication(config, logger);
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)

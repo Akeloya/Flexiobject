@@ -19,8 +19,11 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using AppServer.Model;
+using AppServer.Services;
 using AppServer.Services.CommandInterface;
 using CliFx;
+using CoaApp.Core.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -57,14 +60,20 @@ namespace AppServer
                 })
                 .ConfigureServices(services =>
                 {
-                    services.AddHostedService<Worker>();
+                    var serviceProvider = services.BuildServiceProvider();
+                    var logger = serviceProvider.GetService<ILogger<AppLogger>>();
+                    services.AddSingleton(typeof(ILogger), logger);
+
+                    //services.AddHostedService<Worker>();
                     services.AddTransient<DatabaseInfo>();
                     services.AddTransient<DatabaseCheck>();
                     services.AddTransient<DatabaseClear>();
                     services.AddTransient<DatabaseInit>();
                     services.AddTransient<DatabaseSetConfig>();
+                    services.AddTransient<LoggingCommands>();
+                    services.AddTransient<ServerRun>();
                     
-                    var serviceProvider = services.BuildServiceProvider();
+                    serviceProvider = services.BuildServiceProvider();
 
                     new CliApplicationBuilder()
                         .AddCommandsFromThisAssembly()
