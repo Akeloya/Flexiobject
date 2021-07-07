@@ -177,6 +177,9 @@
   <data name="SchemaHistoryArgumentExceptionWithArgName" xml:space="preserve">
     <value>During scheme history writing was null argument wigh name '{0}'</value>
   </data>
+  <data name="SchemeNotFoundException" xml:space="preserve">
+    <value>Scheme not found in database</value>
+  </data>
   <data name="SerializationMessageException" xml:space="preserve">
     <value>The group cannot be updated because the linked object does not support updates</value>
   </data>

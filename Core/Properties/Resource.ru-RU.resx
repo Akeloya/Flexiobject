@@ -177,6 +177,9 @@
   <data name="SchemaHistoryArgumentExceptionWithArgName" xml:space="preserve">
     <value>При записи переименования объекта в историю схемы был указано не допустимое значение аргумента {0}</value>
   </data>
+  <data name="SchemeNotFoundException" xml:space="preserve">
+    <value>Схема не была найдена в базе данных</value>
+  </data>
   <data name="SerializationMessageException" xml:space="preserve">
     <value>Имеются проблемы десериализации данных</value>
   </data>

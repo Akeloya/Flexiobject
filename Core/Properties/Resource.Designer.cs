@@ -241,6 +241,15 @@ namespace CoaApp.Core.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Scheme not found in database.
+        /// </summary>
+        internal static string SchemeNotFoundException {
+            get {
+                return ResourceManager.GetString("SchemeNotFoundException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на The group cannot be updated because the linked object does not support updates.
         /// </summary>
         internal static string SerializationMessageException {
