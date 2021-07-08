@@ -198,6 +198,9 @@
   <data name="ServerNotFoundExceptionNoInfo" xml:space="preserve">
     <value>Server not found</value>
   </data>
+  <data name="UserSyncRequestException" xml:space="preserve">
+    <value>There are no object for syncronization with User</value>
+  </data>
   <data name="WorkflowNullValueException" xml:space="preserve">
     <value>Unable to set null as workflow field value</value>
   </data>

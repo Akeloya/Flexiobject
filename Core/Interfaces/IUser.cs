@@ -67,14 +67,6 @@ namespace CoaApp.Core.Interfaces
         /// </summary>
         bool HasDefaultCustomFolder { get; set; }
         /// <summary>
-        /// User last name
-        /// </summary>
-        string LastName { get; set; }
-        /// <summary>
-        /// Link to LDAP profile
-        /// </summary>
-        string LdapProfile { get; set; }
-        /// <summary>
         /// User Login name
         /// </summary>
         string LoginName { get; set; }
@@ -85,7 +77,7 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// ICustomObject linked with this user object
         /// </summary>
-        ICustomObject Object { get; }
+        ICustomObject Object { get; set; }
         /// <summary>
         /// Account for outgoing e-mail
         /// </summary>
@@ -94,10 +86,6 @@ namespace CoaApp.Core.Interfaces
         /// User password
         /// </summary>
         string Password { get; set; }
-        /// <summary>
-        /// User phone
-        /// </summary>
-        string Phone { get; set; }
         /// <summary>
         /// Super user privilegies flag
         /// </summary>

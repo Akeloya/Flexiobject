@@ -192,6 +192,9 @@
   <data name="SerializationMessageException" xml:space="preserve">
     <value>Имеются проблемы десериализации данных</value>
   </data>
+  <data name="UserSyncRequestException" xml:space="preserve">
+    <value>Невозможно установить объект для папки, не синхронизированной с пользователями приложения</value>
+  </data>
   <data name="WorkflowNullValueException" xml:space="preserve">
     <value>Невозможно установить null в качестве значения поля рабочего процесса</value>
   </data>

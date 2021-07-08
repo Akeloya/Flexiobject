@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
- *  An application that implements the ability to customize object templates and actions on them.
- *  Copyright (C) 2019 by Maxim V. Yugov.
+ *  Application for creating and using freely customizable configuration of data, forms, actions and other things
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -18,70 +18,125 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 using CoaApp.Core.Enumes;
+using CoaApp.Core.Exceptions;
 using CoaApp.Core.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CoaApp.Core
 {
-    public abstract class User<T> : AppBase<T>, IUser
+    public abstract class CoaUser : AppBase, IUser
     {
-        protected User(Application app, T parent) : base(app, parent)
+        private int _uniqueId;
+        private CoaUserAuthenticationTypes _authType;
+        private long _custObjId;
+        private ICustomObject _custObject;
+        protected CoaUser(IApplication app, object parent, long custObjId = 0) : base(app, parent)
         {
-
+            _custObjId = custObjId;
         }
-        public bool Active { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public ICustomFolder DefaultRequestFolder { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Department { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string DisplayName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string DomainName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string EmailAddress { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public IGroups Groups => throw new NotImplementedException();
-        public IGroups GroupsRecursive => throw new NotImplementedException();
-        public bool HasDefaultRequestFolder { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string LastName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string LdapProfile { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string LoginName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public string Name => throw new NotImplementedException();
-
-        public ICustomObject Object => throw new NotImplementedException();
-
-        public string OutgoingEmailAccount { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Password { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Phone { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool SuperUser { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public int UniqueId => throw new NotImplementedException();
-
-        public CoaUserAuthenticationTypes AuthenticationType { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public void AddToGroup(IGroup group)
+        public static bool operator ==(CoaUser left, IUser right)
         {
-            throw new NotImplementedException();
+            return (left?.Equals(right) ?? (right?.Equals(left) ?? true));
         }
-
-        public void Delete()
+        public static bool operator !=(CoaUser left, IUser right)
         {
-            throw new NotImplementedException();
+            return !(left?.Equals(right) ?? (right?.Equals(left) ?? true));
         }
-
-        public bool IsInGroup(string groupName)
+        [AppFolderProperty(CoaApplicationFoldersProperties.UserActive, true)]
+        public bool Active { get; set; }
+        public ICustomFolder DefaultCustomFolder { get; set; }
+        [AppFolderProperty(CoaApplicationFoldersProperties.UserDepartment, false)]
+        public string Department { get; set; }
+        [AppFolderProperty(CoaApplicationFoldersProperties.UserDisplayName, true)]
+        public string DisplayName { get; set; }
+        [AppFolderProperty(CoaApplicationFoldersProperties.UserWindowsDomainName, true)]
+        public string DomainName { get; set; }
+        [AppFolderProperty(CoaApplicationFoldersProperties.UserEmailAddress, false)]
+        public string EmailAddress { get; set; }        
+        public bool HasDefaultCustomFolder { get; set; }
+        [AppFolderProperty(CoaApplicationFoldersProperties.UserLoginName, false)]
+        public string LoginName { get; set; }
+        public string Name => DisplayName;
+        public ICustomObject Object
         {
-            throw new NotImplementedException();
+            get
+            {
+                if (_custObjId > 0 && _custObject == null)
+                    _custObject = OnGetObject();
+                return _custObject;
+            }
+            set
+            {
+                if (value == null && Object != null)
+                    throw new NotImplementedException();
+                if(value != null)
+                {
+                    if (!value.CustomObjFolder[CoaApplicationFolders.UserAccounts])
+                        throw new UserSyncRequestException();
+                }
+                _custObject = value;
+            }
         }
-
-        public bool IsInGroupRecursive(string groupName)
+        public string OutgoingEmailAccount { get; set; }
+        [AppFolderProperty(CoaApplicationFoldersProperties.UserPassword, false)]
+        public string Password { get; set; }
+        [AppFolderProperty(CoaApplicationFoldersProperties.UserSuperuser, false)]
+        public bool SuperUser { get; set; }
+        public int UniqueId => _uniqueId;
+        [AppFolderProperty(CoaApplicationFoldersProperties.UserAuthentication, false)]
+        public CoaUserAuthenticationTypes AuthenticationType { get { return _authType; } set { _authType = value; } }
+        public bool Equals(IUser other)
         {
-            throw new NotImplementedException();
+            if (other == null)
+                return false;
+            return UniqueId == other.UniqueId;
         }
-
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as IUser);
+        }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
         public void Save()
         {
-            throw new NotImplementedException();
+            switch (_authType)
+            {
+                case CoaUserAuthenticationTypes.Internal:
+                    if (string.IsNullOrEmpty(Password))
+                        throw new CoaUserPasswordRequiredException();
+                    if (string.IsNullOrEmpty(LoginName))
+                        throw new CoaUserLoginRequiredException();
+                    break;
+                case CoaUserAuthenticationTypes.Windows:
+                    if (string.IsNullOrEmpty(LoginName))
+                        throw new CoaUserLoginRequiredException();
+                    break;
+                case CoaUserAuthenticationTypes.NoAuth:
+                    Password = null;
+                    break;
+            }
+
+            _uniqueId = OnSave();
         }
+        public abstract IGroups Groups { get; }
+        public abstract IGroups GroupsRecursive { get; }
+        public abstract void AddToGroup(IGroup group);
+        public abstract void Delete();
+        public abstract bool IsInGroup(string groupName);
+        public abstract bool IsInGroupRecursive(string groupName);
+        /// <summary>
+        /// Save object implementation
+        /// </summary>
+        /// <returns></returns>
+        protected abstract int OnSave();
+        /// <summary>
+        /// Getting linked custom object
+        /// </summary>
+        /// <returns></returns>
+        protected abstract ICustomObject OnGetObject();
     }
 }

@@ -304,6 +304,15 @@ namespace CoaApp.Core.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на There are no object for syncronization with User.
+        /// </summary>
+        internal static string UserSyncRequestException {
+            get {
+                return ResourceManager.GetString("UserSyncRequestException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Unable to set null as workflow field value.
         /// </summary>
         internal static string WorkflowNullValueException {
