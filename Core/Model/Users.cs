@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
  *  An application that implements the ability to customize object templates and actions on them.
- *  Copyright (C) 2019 by Maxim V. Yugov.
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -23,36 +23,23 @@ using System;
 
 namespace CoaApp.Core
 {
-    public abstract class Users<T> : AppBase<T>, IUsers
+    public abstract class Users : AppBase, IUsers
     {
-        protected Users(Application app, T parent) : base(app, parent)
+        protected Users(IApplication app, object parent) : base(app, parent)
         {
 
         }
-        public IUser this[int index] => throw new NotImplementedException();
+        public abstract IUser this[int index] { get; }
 
-        public IUser this[string name] => throw new NotImplementedException();
+        public abstract IUser this[string name] { get; }
 
         public int Count => throw new NotImplementedException();
 
-        public IUser Add()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract IUser Add();
+        public abstract IUser GetUserByLoginName(string login);
 
-        public IUser GetUserByLoginName(string login)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void Remove(IUser obj);        
 
-        public void Remove(IUser obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(int index)
-        {
-            throw new NotImplementedException();
-        }
-    }
+        public abstract void Remove(int index);
+     }
 }
