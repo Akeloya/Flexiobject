@@ -70,6 +70,15 @@ namespace CoaApp.Core.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на (All groups).
+        /// </summary>
+        internal static string BaseGroupDisplayName {
+            get {
+                return ResourceManager.GetString("BaseGroupDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на [All users and groups].
         /// </summary>
         internal static string CoaGroup_AllUserName {
@@ -84,6 +93,15 @@ namespace CoaApp.Core.Properties {
         internal static string CoaGroupCollectionReadonlyException {
             get {
                 return ResourceManager.GetString("CoaGroupCollectionReadonlyException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Modification of  application access group was not permitted.
+        /// </summary>
+        internal static string CoaGroupModificationException {
+            get {
+                return ResourceManager.GetString("CoaGroupModificationException", resourceCulture);
             }
         }
         
@@ -174,6 +192,15 @@ namespace CoaApp.Core.Properties {
         internal static string GroupFolderSyncException {
             get {
                 return ResourceManager.GetString("GroupFolderSyncException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Group id={0}.
+        /// </summary>
+        internal static string GroupName {
+            get {
+                return ResourceManager.GetString("GroupName", resourceCulture);
             }
         }
         

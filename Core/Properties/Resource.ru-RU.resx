@@ -120,8 +120,14 @@
   <data name="AuthenticationException" xml:space="preserve">
     <value>Во время аутентификации возникли проблемы</value>
   </data>
+  <data name="BaseGroupDisplayName" xml:space="preserve">
+    <value>(Все группы)</value>
+  </data>
   <data name="CoaGroupCollectionReadonlyException" xml:space="preserve">
     <value>Коллекция групп только для чтения</value>
+  </data>
+  <data name="CoaGroupModificationException" xml:space="preserve">
+    <value>Изменение группы доступа приложения не разрешено</value>
   </data>
   <data name="CoaGroup_AllUserName" xml:space="preserve">
     <value>[Все пользователи и группы]</value>
@@ -155,6 +161,9 @@
   </data>
   <data name="GroupFolderSyncException" xml:space="preserve">
     <value>Невозможно установить объект для папки, не синхронизированной с группами приложения</value>
+  </data>
+  <data name="GroupName" xml:space="preserve">
+    <value>Группа ид={0}</value>
   </data>
   <data name="GroupSyncRequestException" xml:space="preserve">
     <value>Невозможно обновить группу, так как связанный объект не поддерживает обновления</value>

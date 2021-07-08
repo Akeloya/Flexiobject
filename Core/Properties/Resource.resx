@@ -120,8 +120,14 @@
   <data name="AuthenticationException" xml:space="preserve">
     <value>There were problems during authentication</value>
   </data>
+  <data name="BaseGroupDisplayName" xml:space="preserve">
+    <value>(All groups)</value>
+  </data>
   <data name="CoaGroupCollectionReadonlyException" xml:space="preserve">
     <value>Group collection is read only</value>
+  </data>
+  <data name="CoaGroupModificationException" xml:space="preserve">
+    <value>Modification of  application access group was not permitted</value>
   </data>
   <data name="CoaGroup_AllUserName" xml:space="preserve">
     <value>[All users and groups]</value>
@@ -155,6 +161,9 @@
   </data>
   <data name="GroupFolderSyncException" xml:space="preserve">
     <value>Unable to set object for folder not synchronized with application groups</value>
+  </data>
+  <data name="GroupName" xml:space="preserve">
+    <value>Group id={0}</value>
   </data>
   <data name="GroupSyncRequestException" xml:space="preserve">
     <value>There are no object for syncronization with Group</value>
