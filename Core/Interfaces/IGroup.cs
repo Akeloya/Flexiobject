@@ -19,13 +19,14 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using CoaApp.Core.Enumes;
+using System;
 
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
     /// Группа доступа
     /// </summary>
-    public interface IGroup : IBase
+    public interface IGroup : IBase, IEquatable<IGroup>
     {
         /// <summary>
         /// Идентификатор группы доступа
@@ -58,7 +59,7 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// Связанный IRequest объект группы доступа
         /// </summary>
-        ICustomObject Object { get; }
+        ICustomObject Object { get; set; }
         /// <summary>
         /// Члены группы
         /// </summary>

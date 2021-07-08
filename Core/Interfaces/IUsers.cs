@@ -18,20 +18,19 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using CoaApp.Core.Interfaces;
 
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Коллекция пользователей приложения
+    /// Application user collection
     /// </summary>
     public interface IUsers : IBaseCollection<IUser>
     {
         /// <summary>
-        /// Получить существующего пользователя по логину
+        /// Get user by login name
         /// </summary>
-        /// <param name="login">Логин пользователя</param>
-        /// <returns>Объект IUser</returns>
+        /// <param name="login">User login name</param>
+        /// <returns>Object IUser</returns>
         IUser GetUserByLoginName(string login);        
     }
 }

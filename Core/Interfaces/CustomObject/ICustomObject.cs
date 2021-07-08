@@ -58,7 +58,7 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// Родительская папка объекта
         /// </summary>
-        ICustomFolder RequestFolder { get; }
+        ICustomFolder CustomObjFolder { get; }
         /// <summary>
         /// Получение состояние модификации объекта
         /// </summary>
