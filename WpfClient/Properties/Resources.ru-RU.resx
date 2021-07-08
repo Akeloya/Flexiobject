@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppTitle" xml:space="preserve">
+    <value>Приложение настраеваемых объектов</value>
+  </data>
+  <data name="License_AvalonEdit" xml:space="preserve">
+    <value>Avalon Edit</value>
+  </data>
+  <data name="License_CustomObjectApplication" xml:space="preserve">
+    <value>Приложение настраеваемых объектов</value>
+  </data>
+  <data name="License_ExtendedWpfToolkit" xml:space="preserve">
+    <value>Extended.Wpf.Toolkit</value>
+  </data>
+  <data name="License_LinqToExcel" xml:space="preserve">
+    <value>LinqToExcel</value>
+  </data>
+  <data name="License_WpfExtendedControls" xml:space="preserve">
+    <value>Wpf extended controls</value>
+  </data>
+  <data name="MenuItemEdit" xml:space="preserve">
+    <value>Редактирование</value>
+  </data>
+  <data name="MenuItemEditAdd" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="MenuItemEditAddFolder" xml:space="preserve">
+    <value>Добавить папку</value>
+  </data>
+  <data name="MenuItemEditAddFolderFolder" xml:space="preserve">
+    <value>Подпапку</value>
+  </data>
+  <data name="MenuItemEditAddFolderFolderSameLevel" xml:space="preserve">
+    <value>Этого же уровня</value>
+  </data>
+  <data name="MenuItemEditEdit" xml:space="preserve">
+    <value>Редактировать</value>
+  </data>
+  <data name="MenuItemEditEditFolder" xml:space="preserve">
+    <value>Редактировать папку</value>
+  </data>
+  <data name="MenuItemEditRefresh" xml:space="preserve">
+    <value>Обновить</value>
+  </data>
+  <data name="MenuItemEditRemove" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="MenuItemEditRemoveFolder" xml:space="preserve">
+    <value>Удалить папку</value>
+  </data>
+  <data name="MenuItemFile" xml:space="preserve">
+    <value>Файл</value>
+  </data>
+  <data name="MenuItemFileAdmin" xml:space="preserve">
+    <value>Администрирование</value>
+  </data>
+  <data name="MenuItemFileAdminActiveSessions" xml:space="preserve">
+    <value>Активные сессии</value>
+  </data>
+  <data name="MenuItemFileAdminBlockedObjects" xml:space="preserve">
+    <value>Заблокированные объекты</value>
+  </data>
+  <data name="MenuItemFileAdminClientParameters" xml:space="preserve">
+    <value>Параметры клиента</value>
+  </data>
+  <data name="MenuItemFileAdminColorSchema" xml:space="preserve">
+    <value>Цветовая схемы</value>
+  </data>
+  <data name="MenuItemFileAdminDeleteAllObjects" xml:space="preserve">
+    <value>Удалить все объекты</value>
+  </data>
+  <data name="MenuItemFileAdminDeletionLog" xml:space="preserve">
+    <value>Лог удалённых объектов</value>
+  </data>
+  <data name="MenuItemFileAdminGlobalForms" xml:space="preserve">
+    <value>Глобальные формы</value>
+  </data>
+  <data name="MenuItemFileAdminImageCollection" xml:space="preserve">
+    <value>Коллекция картинок</value>
+  </data>
+  <data name="MenuItemFileAdminScheduledTasks" xml:space="preserve">
+    <value>Запланированные задачи</value>
+  </data>
+  <data name="MenuItemFileAdminSchemaHistory" xml:space="preserve">
+    <value>История изменения схемы</value>
+  </data>
+  <data name="MenuItemFileAdminSystemParameters" xml:space="preserve">
+    <value>Системные параметры</value>
+  </data>
+  <data name="MenuItemFileExit" xml:space="preserve">
+    <value>Выйти</value>
+  </data>
+  <data name="MenuItemFileExitAndEnter" xml:space="preserve">
+    <value>Выйти и войти</value>
+  </data>
+  <data name="MenuItemFileNotifyUser" xml:space="preserve">
+    <value>Отправить уведомление пользователю</value>
+  </data>
+  <data name="MenuItemFilePrint" xml:space="preserve">
+    <value>Печать</value>
+  </data>
+  <data name="MenuItemFileRecentObjects" xml:space="preserve">
+    <value>Последние объекты</value>
+  </data>
+  <data name="MenuItemFileSciptsGlobal" xml:space="preserve">
+    <value>Глобальные скрипты</value>
+  </data>
+  <data name="MenuItemFileScripts" xml:space="preserve">
+    <value>Скрипты</value>
+  </data>
+  <data name="MenuItemFileScriptsSearch" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
+  <data name="MenuItemFileScriptsState" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="MenuItemHelp" xml:space="preserve">
+    <value>Справка</value>
+  </data>
+  <data name="MenuItemHelpAbout" xml:space="preserve">
+    <value>О программе</value>
+  </data>
+  <data name="MenuItemHelpHelp" xml:space="preserve">
+    <value>Справка</value>
+  </data>
+  <data name="MenuItemInstruments" xml:space="preserve">
+    <value>Инструменты</value>
+  </data>
+  <data name="MenuItemInstrumentsOpenObjectById" xml:space="preserve">
+    <value>Открыть объект по ИД</value>
+  </data>
+  <data name="MenuItemInstrumentsOpenScenarioEditor" xml:space="preserve">
+    <value>Открыть редактор сценариев</value>
+  </data>
+  <data name="MenuItemInstrumentsSettings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="MenuItemSettings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="MenuItemSettingsApp" xml:space="preserve">
+    <value>Настройки приложения</value>
+  </data>
+  <data name="MenuItemSettingsOpenSetupFolder" xml:space="preserve">
+    <value>Папка установки</value>
+  </data>
+  <data name="MenuItemView" xml:space="preserve">
+    <value>Вид</value>
+  </data>
+  <data name="MenuItemViewInstrumentPanels" xml:space="preserve">
+    <value>Панели инструментов</value>
+  </data>
+  <data name="MenuItemViewNotifies" xml:space="preserve">
+    <value>Уведомления</value>
+  </data>
+  <data name="MenuItemViewTreeFolder" xml:space="preserve">
+    <value>Дерево папок</value>
+  </data>
+  <data name="MenuItemViewWorkWithFolder" xml:space="preserve">
+    <value>Работа с папкой</value>
+  </data>
+  <data name="MenuItemViewWorkWithObject" xml:space="preserve">
+    <value>Работа с объектом</value>
+  </data>
+</root>
