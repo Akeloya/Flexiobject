@@ -25,29 +25,14 @@ namespace CoaApp.Core.Interfaces
     /// <summary>
     /// Коллекция определений пользовательскиъ полей
     /// </summary>
-    public interface IUserFieldDefinitions : IBase
+    public interface IUserFieldDefinitions : IBaseCollection<IUserFieldDefinition>
     {
-        /// <summary>
-        /// Доступ к определению опльзовательских полей по индексу
-        /// </summary>
-        /// <param name="idx">Индекс 0..Count-1 коллекции определения пользовательских полей</param>
-        /// <returns>IUserFieldDefinition объект</returns>
-        IUserFieldDefinition this[int idx] { get; }
-        /// <summary>
-        /// Количество определений пользовательских полей в коллекции
-        /// </summary>
-        int Count { get; }
         /// <summary>
         /// Добавление нового определения пользовательского поля
         /// </summary>
         /// <param name="type">Тип пользовательского поля</param>
         /// <returns>IUserFieldDefinition объект нового определения</returns>
         IUserFieldDefinition Add(CoaFieldTypes type);
-        /// <summary>
-        /// Удалить определение пользовательского поля по индексу или алиасу
-        /// </summary>
-        /// <param name="variant">Индекс или алиас пользовательского поля</param>
-        void Delete(object variant);
         /// <summary>
         /// Добавить пользовательское поле в коллекции
         /// </summary>
@@ -66,11 +51,5 @@ namespace CoaApp.Core.Interfaces
         /// Если объект не является контейнером, то невозможно использовать методы AddExisting, RemoveExisting
         /// </summary>
         bool IsContainer { get; }
-        /// <summary>
-        /// Доступ к коллекции определений полей по алиасу
-        /// </summary>
-        /// <param name="alias">Алиас определения пользовательского поля</param>
-        /// <returns>IUserFieldDefinition определение пользовательского поля</returns>
-        IUserFieldDefinition this[string alias] { get; }
     }
 }
