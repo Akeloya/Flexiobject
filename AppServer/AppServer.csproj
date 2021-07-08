@@ -17,7 +17,7 @@
     <DefineConstants>Linux</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>dotnet-AppServer-C6B0002B-4543-427B-AACA-2C63B226D4A3</UserSecretsId>
   </PropertyGroup>
 
