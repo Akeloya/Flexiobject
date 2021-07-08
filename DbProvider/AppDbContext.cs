@@ -22,8 +22,6 @@ using CoaApp.Core.Enumes;
 
 using DbProvider.Entities;
 
-using EntityFrameworkCore.Jet;
-
 using Microsoft.Data.SqlClient;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
@@ -107,12 +105,7 @@ namespace DbProvider
                     break;
                 case DbTypes.PostgreSql:
                     optionsBuilder.UseNpgsql($"");
-                    break;
-#if Windows
-                case DbTypes.MsJet:
-                    optionsBuilder.UseJet($"");
-                    break;
-#endif                
+                    break;        
                 case DbTypes.Oracle:
                     break;
                 case DbTypes.SqlLight:
@@ -966,12 +959,7 @@ namespace DbProvider
                     break;
                 case DbTypes.PostgreSql:
                     optionsBuilder.UseNpgsql(_connection);
-                    break;
-#if Windows
-                case DbTypes.MsJet:
-                    optionsBuilder.UseJet(_connection);
-                    break;
-#endif                
+                    break;              
                 case DbTypes.Oracle:
                     
                     break;
