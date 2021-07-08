@@ -19,14 +19,14 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using CoaApp.Core.Enumes;
-using System.Collections.Generic;
+using System;
 
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
     /// User object folder
     /// </summary>
-    public interface ICustomFolder : IBase
+    public interface ICustomFolder : IBase, IEquatable<ICustomFolder>
     {
         /// <summary>
         /// Unique folder identifier
