@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -21,36 +21,10 @@
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Коллекция групп безопасности
+    /// Application group collection
     /// </summary>
-    public interface IGroups : IBase
-    {
-        /// <summary>
-        /// Добавление новой группы
-        /// </summary>
-        /// <returns>IGroup объект, добавленный в коллекцию</returns>
-        IGroup Add();
-        /// <summary>
-        /// Количество объектов в коллекции
-        /// </summary>
-        int Count { get; }
-        /// <summary>
-        /// Доступ к коллекции по индексу
-        /// </summary>
-        /// <param name="idx">Индекс 0...Count-1</param>
-        /// <returns></returns>
-        IGroup this[int idx] { get; }
-        /// <summary>
-        /// Доступ к коллекции по имени группы
-        /// </summary>
-        /// <param name="name">Имя группы</param>
-        /// <returns></returns>
-        IGroup this[string name] { get; }
-        /// <summary>
-        /// Получение элемента коллекции по
-        /// </summary>
-        /// <param name="group"></param>
-        /// <returns></returns>
-        IGroup this[IGroup group] { get; }
+    public interface IGroups : IBaseCollection<IGroup>
+    {        
+
     }
 }

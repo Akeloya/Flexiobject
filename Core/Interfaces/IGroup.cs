@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -24,92 +24,92 @@ using System;
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Группа доступа
+    /// Application access group
     /// </summary>
     public interface IGroup : IBase, IEquatable<IGroup>
     {
         /// <summary>
-        /// Идентификатор группы доступа
+        /// Group identifier
         /// </summary>
         int UniqueId { get; }
         /// <summary>
-        /// Название группы
+        /// Group name
         /// </summary>
         string Name { get; }
         /// <summary>
-        /// Отображаемое имя группы
+        /// Group displan name
         /// </summary>
         string DisplayName { get; set; }
         /// <summary>
-        /// Почтовый адрес группы
+        /// Group email address
         /// </summary>
         string EmailAddress { get; set; }
         /// <summary>
-        /// Настройки отправки почтовых уведомлений на группу и пользователей
+        /// Email settings behavior
         /// </summary>
         CoaGroupBehaviorTypes EmailBehavior { get; set; }
         /// <summary>
-        /// Дочерние группы
+        /// Nested groups
         /// </summary>
         IGroups Groups { get; }
         /// <summary>
-        /// Получение списка дочерних групп рекурсивно в глубину
+        /// Nested groups recursive
         /// </summary>
         IGroups GroupsRecursive { get; }
         /// <summary>
-        /// Связанный IRequest объект группы доступа
+        /// Linked ICustomObject to this groups
         /// </summary>
         ICustomObject Object { get; set; }
         /// <summary>
-        /// Члены группы
+        /// Nested users
         /// </summary>
         IUsers Users { get; }
         /// <summary>
-        /// Список членов группы рекурсивно в глубину
+        /// Nested users recursive
         /// </summary>
-        IUsers UsersRecurcive { get; }
+        IUsers UsersRecursive { get; }
         /// <summary>
-        /// Добавить дочернюю группу
+        /// Add nested group
         /// </summary>
-        /// <param name="group">IGroup добавляемая группа</param>
+        /// <param name="group">IGroup not saved object</param>
         void AddGroup(IGroup group);
         /// <summary>
-        /// Добавление нового члена группы
+        /// Add user to group
         /// </summary>
-        /// <param name="user">IUser член группы</param>
+        /// <param name="user">IUser object</param>
         void AddUser(IUser user);
         /// <summary>
-        /// Проверка нахождения группы в дочерних группах
+        /// Check group in nested groups
         /// </summary>
-        /// <param name="groupName">Название проверяемой группы</param>
+        /// <param name="groupName">Name checking group</param>
         /// <returns></returns>
         bool IsInGroup(string groupName);
         /// <summary>
-        /// Проверка нахождения группы в дочерних группах рекурсивно в глубину
+        /// Check group in nested group recursive
         /// </summary>
-        /// <param name="groupName">Название проверяемой группы</param>
+        /// <param name="groupName">Checking group name</param>
         /// <returns></returns>
         bool IsInGroupRecursive(string groupName);
         /// <summary>
-        /// Удаление группы из списка дочерних групп
+        /// Remove group from nested
         /// </summary>
-        /// <param name="group">Удаляемая группа</param>
+        /// <param name="group">IGroup object</param>
         void RemoveGroup(IGroup group);
         /// <summary>
-        /// Удаление пользователя из списка членов группы
+        /// Remove user from nested
         /// </summary>
-        /// <param name="user">IUser удаляемый пользователь</param>
+        /// <param name="user">IUser object</param>
         void RemoveUser(IUser user);
         /// <summary>
-        /// Удалить объект
+        /// Remove this group
         /// </summary>
         void Delete();
         /// <summary>
-        /// Сохранить изменения в объекте
+        /// Save changes
         /// </summary>
         void Save();
         /// <summary>
-        /// Отправить e-mail сообщение на указанный адрес
+        /// Send e-mail to group e-mail or nested users
         /// <seealso cref="EmailAddress"/> 
         /// </summary>
         void SendEmail();
