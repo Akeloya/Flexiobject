@@ -23,31 +23,17 @@ using System;
 
 namespace CoaApp.Core.Exceptions
 {
-    /// <summary>
-    /// Exception throwns when user folder and app folder has breked link or link is missing
-    /// </summary>
     [Serializable]
-    public class GroupFolderSyncException : CoaApplicationException
+    public class CoaGroupModificationException : CoaApplicationException
     {
-        /// <summary>
-        /// Constructor for overriding message
-        /// </summary>
-        /// <param name="message"></param>
-        public GroupFolderSyncException(string message) : base(message, AppExceptionStatus.Work)
+        public CoaGroupModificationException(): base(Resource.CoaGroupModificationException, AppExceptionStatus.Work)
         {
+
         }
-        /// <summary>
-        /// Constructor for define standard exception with inner exception
-        /// </summary>
-        /// <param name="innerException">Additional exception</param>
-        public GroupFolderSyncException(Exception innerException) : base(Resource.GroupSyncRequestException, innerException, AppExceptionStatus.Work)
+
+        public CoaGroupModificationException(Exception innerException) : base(Resource.CoaGroupModificationException, innerException, AppExceptionStatus.Work)
         {
-        }
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        public GroupFolderSyncException() : base(Resource.GroupFolderSyncException, AppExceptionStatus.Work)
-        {
+
         }
     }
 }
