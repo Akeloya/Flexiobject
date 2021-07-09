@@ -24,19 +24,19 @@ using CoaApp.Core.Interfaces;
 
 namespace CoaApp.Core
 {
-    public abstract class CustomObject : AppBase, ICustomObject
+    public abstract class CoaCustomObject : AppBase, ICustomObject
     {
         private long _uniqueId;
         private CoaEnumSaveFlags _flags;
-        protected CustomObject(IApplication app, object parent, long uniqueId = 0) : base(app, parent)
+        protected CoaCustomObject(IApplication app, object parent, long uniqueId = 0) : base(app, parent)
         {
             _uniqueId = uniqueId;
         }
-        public static bool operator ==(CustomObject left, ICustomObject right)
+        public static bool operator ==(CoaCustomObject left, ICustomObject right)
         {
             return (left?.Equals(right) ?? (right?.Equals(left) ?? true));
         }
-        public static bool operator !=(CustomObject left, ICustomObject right)
+        public static bool operator !=(CoaCustomObject left, ICustomObject right)
         {
             return !(left?.Equals(right) ?? (right?.Equals(left) ?? true));
         }
