@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -23,131 +23,125 @@ namespace CoaApp.Core.Interfaces
     public interface ISession : IBase
     {
         /// <summary>
-        /// Список всех папок
+        /// All folders
         /// </summary>
         ICustomFolders RequestFolders { get; }
-
         /// <summary>
-        /// Сессии пользователей
+        /// Application users active sessions
         /// </summary>
         IActiveSessions ActiveSessions { get; }
-
         /// <summary>
-        /// Текущий пользователь
+        /// Current user
         /// </summary>
         string Username { get; }
-
         /// <summary>
-        /// Коллекция картинок, доступных на сервере
+        /// Picture collection in server
         /// </summary>
         IPictures Pictures { get; }
         /// <summary>
-        /// Активный пользователь
+        /// Active user
         /// </summary>
         IUser ActiveUser { get; }
         /// <summary>
-        /// Группы приложения, включая группу
+        /// Application groups
         /// </summary>
         IGroups Groups { get; }
         /// <summary>
-        /// Пользователи приложения. По умолчанию возвращаются активные пользователи. Если сессия открыта от суперпользователя, то будут возвращены все пользователи, включая неактивных.
+        /// Application users. By default will be returned only active users.
+        /// If current user has 'superuser' flag, will be returned all users include inactive.
         /// </summary>
         IUsers Users { get; }
         /// <summary>
-        /// завершить текущую сессию и закрыть подключение к серверу
+        /// Close this session
         /// </summary>
         void Logoff();
-
         /// <summary>
-        /// Удаленные объекты, находящиеся в корзине
+        /// Object moved to trash bin
         /// </summary>
-        /// <returns>IRequests коллекция удаленных объектов, находящихся в корзине</returns>
+        /// <returns>ICustomObjects collection with only objects in trash bin</returns>
         ICustomObjects GetDeletedRequests();
-
         /// <summary>
-        /// Получить объект по идентификатору
+        /// Get user object by uniqueId
         /// </summary>
-        /// <param name="id">Уникальный идентификатор объекта</param>
-        /// <returns>null/IRequest</returns>
+        /// <param name="id">Object unique identifier</param>
+        /// <returns>null/ICustomObject</returns>
         ICustomObject GetRequestByUniqueId(long id);
         /// <summary>
-        /// Запланированные задачи на сервере
+        /// Scheduled tasks on server
         /// </summary>
         IScheduledTasks ScheduledTasks { get; }
         /// <summary>
-        /// Получить папку по ее пути
+        /// Get folder by path
         /// </summary>
-        /// <param name="path">Папка[\подпапка 1]</param>
+        /// <param name="path">Folder[\Nested folder[\...]</param>
         /// <returns></returns>
         ICustomFolder GetRequestFolderByPath(string path);
-
         /// <summary>
-        /// Получить папку по ее идентификатору
+        /// Get folder by id
         /// </summary>
-        /// <param name="id">Ид папки</param>
-        /// <returns>null/IRequestFolder</returns>
+        /// <param name="id">Folder Id</param>
+        /// <returns>null/ICustomFolder</returns>
         ICustomFolder GetRequestFolderByUniqueId(int id);
-
         /// <summary>
-        /// Логирование сообщения
+        /// Log message to application log
         /// </summary>
-        /// <param name="msg">Сообщение для логирвоания</param>
+        /// <param name="msg">Message to log</param>
         void LogMessage(string msg);
         /// <summary>
-        /// Получение системного параметра
+        /// Get system parameter
         /// </summary>
-        /// <param name="table">Таблица параметров</param>
-        /// <param name="name">Имя параметра</param>
-        /// <returns>Строка-значение параметра</returns>
-        string GetSystemParameter(string table, string name);
+        /// <param name="table">Registry key</param>
+        /// <param name="name">Parameter name</param>
+        /// <returns>String value of parameter</returns>
+        string GetSystemParameter(string registry, string name);
         /// <summary>
-        /// Получить пользователя по идентификатору
+        /// Get application user by id
         /// </summary>
-        /// <param name="id">Ид пользователя</param>
+        /// <param name="id">User id</param>
         /// <returns>null/IUser</returns>
         IUser GetUserByUniqueId(int id);
         /// <summary>
-        /// Получить группу
+        /// Get group by id
         /// </summary>
-        /// <param name="id">ИД группы</param>
-        /// <returns>Группа пользователей. <see cref="IGroup"/></returns>
+        /// <param name="id">Group id</param>
+        /// <returns>Application group. <see cref="IGroup"/></returns>
         IGroup GetGroupByUniqueId(int id);
         /// <summary>
-        /// Получить серверный скрипт по имени
+        /// Get server scenario (script) by name
         /// </summary>
-        /// <param name="name">Имя скрипта</param>
+        /// <param name="name">Script name</param>
         /// <returns>IScript/null</returns>
         IScript GetServerScript(string name);
         /// <summary>
-        /// Получить состояние по ИД
+        /// Get workflow state by id
         /// </summary>
-        /// <param name="id">Идентификатор состояния</param>
-        /// <returns></returns>
+        /// <param name="id">State id</param>
+        /// <returns>IState/null</returns>
         IState GetStateByUniqueId(int id);
         /// <summary>
-        /// Уведомление пользователя
+        /// Notify user
         /// </summary>
-        /// <param name="reciever">Получатель, объект IUser или IRequest, связанный с пользователями приложения</param>
-        /// <param name="message">Сообщение</param>
-        /// <param name="linkedRequest">Ссылка на объект при необходимости</param>
+        /// <param name="reciever">Reciever: object IUser or ICustomObject (linked with IUser)</param>
+        /// <param name="message">Message</param>
+        /// <param name="linkedRequest">Link to ICustomObject if nessesary</param>
         void NotifyUser(object reciever, string message, ICustomObject linkedRequest);
         /// <summary>
-        /// Получить определение пользовательского поля по идентификатору
+        /// Get user field definition by id
         /// </summary>
-        /// <param name="id">Ид поля</param>
+        /// <param name="id">User field identifier</param>
         /// <returns>IUserFieldDefinition/null</returns>
         IUserFieldDefinition GetUserFieldDefinitionByUniqueId(int id);
         /// <summary>
-        /// Пользовательский запрос к данным
+        /// User requerst to stored data
         /// </summary>
-        /// <param name="sqlCommand">Строка</param>
-        /// <param name="parameters">Параметры запроса</param>
+        /// <param name="sqlCommand">Sql string</param>
+        /// <param name="parameters">Request parameters</param>
         /// <returns></returns>
         IQueryResult ExecuteSqlRequest(string sqlCommand, params object[] parameters);
         /// <summary>
-        /// Получение визуального представления по ИД
+        /// Get folder view by id
         /// </summary>
-        /// <param name="id">Ид искомого представления</param>
+        /// <param name="id">View id</param>
         /// <returns></returns>
         IView GetViewByUniqueId(int id);
     }
