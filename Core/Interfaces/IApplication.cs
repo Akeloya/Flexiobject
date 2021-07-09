@@ -22,6 +22,7 @@ namespace CoaApp.Core.Interfaces
 {
     public interface IApplication
     {
+        ISession ActiveSession { get; }
         /// <summary>
         /// Write string message to write in server log
         /// </summary>

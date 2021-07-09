@@ -38,6 +38,10 @@ namespace CoaApp.Core.Interfaces
         /// </summary>
         string Name { get; }
         /// <summary>
+        /// Object created date-time
+        /// </summary>
+        DateTime Created { get; }
+        /// <summary>
         /// Object fields defined in folder
         /// </summary>
         IUserFields UserFields { get; }

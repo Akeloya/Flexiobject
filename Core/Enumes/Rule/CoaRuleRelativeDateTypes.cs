@@ -18,27 +18,49 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System;
 
 namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Right side operand type
+    /// Collection relative date time types for filters
     /// </summary>
-    [Serializable]
-    public enum CoaRuleRightSideTypes
+    public enum CoaRuleRelativeDateTypes
     {
         /// <summary>
-        /// Right side is constant
+        /// compare with the current time
         /// </summary>
-        Constant,
+        CurrentTime = 1,
         /// <summary>
-        /// Value for right side will asked from user
+        /// compare with the start of the current day
         /// </summary>
-        AskUser,
+        StartCurrentDay = 2,
         /// <summary>
-        /// Relative offset
+        /// compare with the start of the current week
         /// </summary>
-        RelativeDateTime
+        StartCurrentWeek = 3,
+        /// <summary>
+        /// compare with the start of the current month
+        /// </summary>
+        StartCurrentMonth = 4,
+        /// <summary>
+        /// compare with the start of the current year
+        /// </summary>
+        StartCurrentYear = 5,
+        /// <summary>
+        /// compare with the start of the previous month
+        /// </summary>
+        StartPreviousMonth = 6,
+        /// <summary>
+        /// compare with the start of the previous year
+        /// </summary>
+        StartPreviousYear = 7,
+        /// <summary>
+        /// compare with the start of the next month
+        /// </summary>
+        StartNextMonth = 8,
+        /// <summary>
+        /// compare with the start of the next year
+        /// </summary>
+        StartNextYear = 9
     }
 }

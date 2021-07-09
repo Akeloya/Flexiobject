@@ -23,7 +23,7 @@ namespace CoaApp.Core.Interfaces
     /// <summary>
     /// Base typed object collection
     /// </summary>
-    public interface IBaseCollection<T>
+    public interface IBaseCollection<T>: IBase
     {
         /// <summary>
         /// Acces object in collection by index

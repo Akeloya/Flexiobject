@@ -27,6 +27,7 @@ namespace CoaApp.Core.Enumes
         ShortInt,
         Bigint,
         Decimal,
+        AutoNumber,
         Boolean,
         String,
         Text,

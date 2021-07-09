@@ -21,6 +21,7 @@
 
 using CoaApp.Core.Enumes;
 using CoaApp.Core.Interfaces;
+using System;
 
 namespace CoaApp.Core
 {
@@ -46,7 +47,10 @@ namespace CoaApp.Core
         public IHistory History => GetHistory(_uniqueId);
         public abstract ICustomFolder CustomObjFolder { get; }
         public abstract bool IsModified { get; }
-        protected CoaEnumSaveFlags SavingFlags => _flags;
+        protected internal CoaEnumSaveFlags SavingFlags => _flags;
+
+        public abstract DateTime Created { get; }
+
         public void Save(CoaEnumSaveFlags flags = CoaEnumSaveFlags.NoFlags)
         {
             _flags = flags;
@@ -55,7 +59,7 @@ namespace CoaApp.Core
         }
         public bool Equals(ICustomObject other)
         {
-            throw new System.NotImplementedException();
+            return UniqueId == other.UniqueId;
         }
         public override bool Equals(object obj)
         {
