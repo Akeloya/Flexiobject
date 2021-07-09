@@ -120,7 +120,7 @@ namespace CoaApp.Core
         }
         [AppFolderProperty(CoaApplicationFoldersProperties.GroupContainedUsers, true)]
         public abstract IUsers Users { get; }
-        public abstract IUsers UsersRecurcive { get; }
+        public abstract IUsers UsersRecursive { get; }
         public void Save()
         {
             if (_isBaseGroup)
