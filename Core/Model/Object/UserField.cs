@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -24,9 +24,9 @@ using System.ComponentModel;
 
 namespace CoaApp.Core.Object
 {
-    public abstract class UserField<T> : AppBase<T>, IUserField
+    public abstract class UserField : AppBase, IUserField
     {
-        protected UserField(Application app, T parent) : base (app, parent)
+        protected UserField(IApplication app, object parent) : base (app, parent)
         {
 
         }
