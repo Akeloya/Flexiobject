@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -25,15 +25,25 @@ using System;
 
 namespace CoaApp.Core.Object
 {
-    public class HistoryRecord<T> : AppBase<T>, IHistoryRecord
+    public abstract class HistoryRecord : AppBase, IHistoryRecord
     {
-        protected HistoryRecord(Application app, T parent) : base(app, parent)
+        private IUserFieldDefinition _field;
+        private IUser _user;
+        private readonly IState _state;
+        private readonly int _userId;
+        private readonly int _fieldId;
+        private readonly CoaHistoryActionTypes _action;
+        private readonly DateTime _date;
+        private readonly string _description;
+        private readonly string _oldValue;
+        private readonly string _newValue;
+        protected HistoryRecord(IApplication app, object parent) : base(app, parent)
         {
 
         }
 
-        protected HistoryRecord(Application app, 
-                                T parent,
+        protected HistoryRecord(IApplication app, 
+                                object parent,
                                 int fieldId,
                                 CoaHistoryActionTypes action,
                                 DateTime date,
@@ -52,30 +62,12 @@ namespace CoaApp.Core.Object
             _state = state;
             _userId = userId;
         }
-
-        private IUserFieldDefinition _field;
-        private IUser _user;
-        private IState _state;
-        private int _userId;
-        private int _fieldId;
-        private CoaHistoryActionTypes _action;
-        private DateTime _date;
-        private string _description;
-        private string _oldValue;
-        private string _newValue;
-
         public CoaHistoryActionTypes Action => _action;
-
         public DateTime Date => _date;
-
         public string Description => _description;
-
         public string NewValue => _newValue;
-
         public string OldValue => _oldValue;
-
         public IState State => _state;
-
         public IUser User
         {
             get
@@ -85,7 +77,6 @@ namespace CoaApp.Core.Object
                 return _user;
             }
         }
-
         public IUserFieldDefinition UserField
         {
             get
@@ -98,14 +89,7 @@ namespace CoaApp.Core.Object
 
         public string UserName => throw new NotImplementedException();
 
-        protected virtual IUserFieldDefinition OnGetField(int fieldId)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected virtual IUser OnGetUser(int userId)
-        {
-            throw new NotImplementedException();
-        }
+        protected abstract IUserFieldDefinition OnGetField(int fieldId);
+        protected abstract IUser OnGetUser(int userId);
     }
 }

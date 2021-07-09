@@ -24,44 +24,44 @@ using CoaApp.Core.Enumes;
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Запись в истории объекта
+    /// ICustomObject history record
     /// </summary>
     public interface IHistoryRecord : IBase
     {
         /// <summary>
-        /// Действие
+        /// Object modification action
         /// </summary>
         CoaHistoryActionTypes Action { get; }
         /// <summary>
-        /// Дата-время изменения
+        /// Date-time of modification
         /// </summary>
         DateTime Date { get; }
         /// <summary>
-        /// текстовое описание события
+        /// Description text
         /// </summary>
         string Description { get; }
         /// <summary>
-        /// Новое значение
+        /// New value of data
         /// </summary>
         string NewValue { get; }
         /// <summary>
-        /// Старое значение
+        /// Old value of data
         /// </summary>
         string OldValue { get; }
         /// <summary>
-        /// Информация о состоянии объекта в момент изменения
+        /// Workflow state of object if exist field and selected on ICustomFolder
         /// </summary>
         IState State { get; }
         /// <summary>
-        /// Пользователь, вызвавший изменения
+        /// User modificated object
         /// </summary>
         IUser User { get;}
         /// <summary>
-        /// Поле, которое было изменено.
+        /// Field which was modificated
         /// </summary>
         IUserFieldDefinition UserField { get; }
         /// <summary>
-        /// Имя пользователя IUser.Object.Name
+        /// User name who modificated object
         /// </summary>
         string UserName { get; }
     }

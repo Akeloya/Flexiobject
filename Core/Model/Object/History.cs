@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -20,56 +20,49 @@
  */
 
 using CoaApp.Core.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace CoaApp.Core
 {
-    public abstract class History<T> : AppBase<T>, IHistory
+    public abstract class History: AppBase, IHistory
     {
+        private readonly long _custObjUniqueId;
+        private IEnumerable<IHistoryRecord> _records;
         /// <summary>
         /// History constructor for existing object
         /// </summary>
         /// <param name="app">Link to application</param>
         /// <param name="parent">Link to object-creator</param>
         /// <param name="custObjUniqueId">Existing object uniqueId</param>
-        protected History(Application app, T parent, long custObjUniqueId) : base(app, parent)
+        protected History(IApplication app, object parent, long custObjUniqueId) : base(app, parent)
         {
             _custObjUniqueId = custObjUniqueId;
         }        
 
-        private long _custObjUniqueId;
-
-        private List<IHistoryRecord> _records;
         public IHistoryRecord this[int idx]
         {
             get
             {
-                return GetHistory()[idx];
+                return GetHistory().ElementAt(idx);
             }
         }
 
         public int Count => GetHistory().Count();
+        private IEnumerable<IHistoryRecord> GetHistory()
+        {
+            if (_records == null)
+            {                
+                if (_custObjUniqueId != 0)
+                    _records = OnGetHistory(_custObjUniqueId);
+            }
+            return _records;
+        }
         /// <summary>
         /// Get History records realization
         /// </summary>
         /// <param name="custObjId">Custom object UniqueId</param>
         /// <returns>History records</returns>
-        protected virtual IEnumerable<IHistoryRecord> OnGetHistory(long custObjId)
-        {
-            return new List<IHistoryRecord>();
-        }
-
-        private List<IHistoryRecord> GetHistory()
-        {
-            if(_records == null)
-            {
-                _records = new List<IHistoryRecord>();
-                if (_custObjUniqueId != 0)
-                    _records.AddRange(OnGetHistory(_custObjUniqueId));
-            }
-            return _records;
-        }
+        protected abstract IEnumerable<IHistoryRecord> OnGetHistory(long custObjId);
     }
 }

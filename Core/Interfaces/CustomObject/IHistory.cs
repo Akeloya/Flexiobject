@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -22,20 +22,19 @@
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// История изменений объекта
+    /// History modification of object
     /// </summary>
     public interface IHistory : IBase
     {
         /// <summary>
-        /// Количество изменений
+        /// History record count
         /// </summary>
         int Count { get; }
         /// <summary>
-        /// Доступ к элементу коллекции по индексу
+        /// Access to history record by index
         /// </summary>
-        /// <param name="idx">0...Count-1 значение индекса</param>
+        /// <param name="idx">0...Count-1 value of index</param>
         /// <returns></returns>
-        IHistoryRecord this[int idx] { get; }
-        //List<IHistoryItem> Items { get; }
+        IHistoryRecord this[int idx] { get; }        
     }
 }
