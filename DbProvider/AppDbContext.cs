@@ -959,7 +959,7 @@ namespace DbProvider
                     break;
                 case DbTypes.PostgreSql:
                     optionsBuilder.UseNpgsql(_connection);
-                    break;              
+                    break;     
                 case DbTypes.Oracle:
                     
                     break;
