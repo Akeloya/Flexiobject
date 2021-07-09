@@ -20,7 +20,6 @@
  */
 using CoaApp.Core.Properties;
 using System;
-;
 
 namespace CoaApp.Core.Exceptions
 {

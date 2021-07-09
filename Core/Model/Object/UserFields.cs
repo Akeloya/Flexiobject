@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -22,9 +22,9 @@ using CoaApp.Core.Interfaces;
 
 namespace CoaApp.Core
 {
-    public abstract class UserFields<T> : AppBase<T>, IUserFields
+    public abstract class UserFields : AppBase, IUserFields
     {
-        protected UserFields(Application app, T parent) : base(app, parent)
+        protected UserFields(IApplication app, object parent) : base(app, parent)
         {
 
         }
