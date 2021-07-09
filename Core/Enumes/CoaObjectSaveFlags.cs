@@ -19,50 +19,50 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using CoaApp.Core.Enumes;
 using System;
 
-namespace CoaApp.Core.Interfaces
+namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Base user object in application
+    /// ICustomObject save flags
     /// </summary>
-    public interface ICustomObject : IBase, IEquatable<ICustomObject>
+    [Flags]
+    public enum CoaEnumSaveFlags
     {
+        NoFlags = 0,
         /// <summary>
-        /// Unique identifier of object
+        /// Don't check permissions
         /// </summary>
-        long UniqueId { get; }
+        DoNotCheckPermission = 1,
         /// <summary>
-        /// Object name from folder naming schema
+        /// Don't check data:
+        /// - Regular expressions
+        /// - Restriction filters
+        /// - Non defined or incorrect workflow state
+        /// - Correct placement of related objects
+        /// - Autonumeration corrected
+        /// - Empty required fields
         /// </summary>
-        string Name { get; }
+        DoNotValidateInput = 2,
         /// <summary>
-        /// Object fields defined in folder
+        /// Don't execute actions on folder
         /// </summary>
-        IUserFields UserFields { get; }
+        DoNotExecuteActions = 4,
         /// <summary>
-        /// Object history changes
+        /// Don't write any history changes
         /// </summary>
-        IHistory History { get; }
+        DoNotUpdateHistory = 8,
         /// <summary>
-        /// Save object
+        /// Don't recalculate autocalculations
         /// </summary>
-        void Save(CoaEnumSaveFlags flags);
+        DoNotRecalcAutocalculations = 16,
         /// <summary>
-        /// Removing object
+        /// Don't check permissions
         /// </summary>
-        /// <param name="skipTrashbin">Skip trash bin. By default object removed in trash bin, and after it's cleared - from database</param>
-        /// <param name="ignoreReferences">Ignore references to another objects</param>
-        /// <param name="flags">Deletion parameters</param>
-        void Delete(bool skipTrashbin = false, bool ignoreReferences = false, CoaDeletionObjectFlags? flags = null);
+        DoNotCheckPrivileges = 32,
         /// <summary>
-        /// Parent folder, which object belongs to
+        /// Don't check last changed fields
         /// </summary>
-        ICustomFolder CustomObjFolder { get; }
-        /// <summary>
-        /// Get modified object state
-        /// </summary>
-        bool IsModified { get; }
+        DoNotChangeLastChangeFields = 64
     }
 }
