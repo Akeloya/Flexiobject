@@ -475,6 +475,15 @@ namespace CoaApp.Core.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на &lt;Always&gt;.
+        /// </summary>
+        internal static string CoaRuleStringAlways {
+            get {
+                return ResourceManager.GetString("CoaRuleStringAlways", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Application user collection is read only.
         /// </summary>
         internal static string CoaUserCollectionReadonlyException {

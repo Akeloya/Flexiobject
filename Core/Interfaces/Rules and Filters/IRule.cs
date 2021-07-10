@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -24,58 +24,58 @@ using System.Collections.Generic;
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Интерфейс правила фильтрования объектов
+    /// Object filtering rule interface
     /// </summary>
     public interface IRule : IBase
     {
         /// <summary>
-        /// Комбинирование правил
+        /// КComparisons types
         /// </summary>
         CoaRuleComparisonsTypes? CombinationOperator { get; set; }
         /// <summary>
-        /// Xml представление правила
+        /// xml view of rule
         /// </summary>
         string Data { get; set; }
         /// <summary>
-        /// Ссылка на дочерние правила
+        /// Nested rules
         /// </summary>
-        List<IRule> ChiledRules { get; }
+        IList<IRule> ChiledRules { get; }
         /// <summary>
-        /// Логическая комбинация для текущего правила или атомарное сравнение значений
+        /// Boolean combination for current rule or atomic comparison of values
         /// </summary>
         CoaRuleCombinationTerms Combination { get; set; }
         /// <summary>
-        /// Тип правого операнда
+        /// Type of right side value
         /// </summary>
         CoaRuleRightSideTypes RightSideType { get; set; }
         /// <summary>
-        /// Тип левого операнда
+        /// Type of left side value
         /// </summary>
         CoaRuleLeftSideTypes LeftSideType { get; set; }
         /// <summary>
-        /// Путь к полю
+        /// Field path
         /// </summary>
         string LeftSideFieldPath { get; set; }
         /// <summary>
-        /// Правый операнд
+        /// Right operand
         /// </summary>
         object RightSideValue { get; set; }
         /// <summary>
-        /// Левый операнд
+        /// Left operand
         /// </summary>
         object LeftSideValue { get; set; }
         /// <summary>
-        /// Очистка правила
+        /// Clear rule and nested rules
         /// </summary>
         void Clear();
         /// <summary>
-        /// Вычисление правила
+        /// Calculating rule
         /// </summary>
-        /// <param name="request">Объект для которого вычисляется правило</param>
-        /// <returns>Результат вычисления</returns>
+        /// <param name="request">Object calculating rule for</param>
+        /// <returns>Calculating result</returns>
         bool Calculate(ICustomObject request);
         /// <summary>
-        /// Коллекция полей, задействованных в текущем правиле
+        /// Field collection affected in current rule
         /// </summary>
         IUserFieldDefinitions AffectedFields { get; }
     }

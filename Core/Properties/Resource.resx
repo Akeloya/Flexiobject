@@ -255,6 +255,9 @@
   <data name="CoaRuleComparisonsTypesNotEqualTo" xml:space="preserve">
     <value>!=</value>
   </data>
+  <data name="CoaRuleStringAlways" xml:space="preserve">
+    <value>&lt;Always&gt;</value>
+  </data>
   <data name="CoaUserCollectionReadonlyException" xml:space="preserve">
     <value>Application user collection is read only</value>
   </data>

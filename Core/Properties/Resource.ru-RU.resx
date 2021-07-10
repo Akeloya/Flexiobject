@@ -255,6 +255,9 @@
   <data name="CoaRuleComparisonsTypesNotEqualTo" xml:space="preserve">
     <value>!=</value>
   </data>
+  <data name="CoaRuleStringAlways" xml:space="preserve">
+    <value>&lt;Всегда&gt;</value>
+  </data>
   <data name="CoaUserCollectionReadonlyException" xml:space="preserve">
     <value>Коллекция пользователей приложения только для чтения</value>
   </data>
