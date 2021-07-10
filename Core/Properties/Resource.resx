@@ -147,6 +147,114 @@
   <data name="CoaProblemOnFormException" xml:space="preserve">
     <value>There are problem or error on form detected</value>
   </data>
+  <data name="CoaRuleCombinationTermsAnd" xml:space="preserve">
+    <value>AND</value>
+  </data>
+  <data name="CoaRuleCombinationTermsOr" xml:space="preserve">
+    <value>OR</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesBelongsToGroup" xml:space="preserve">
+    <value>belongs to group</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesContains" xml:space="preserve">
+    <value>contains</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesContainsCurrentUser" xml:space="preserve">
+    <value>contains current user</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesContainsUser" xml:space="preserve">
+    <value>contains user</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesDoesNotBelongToGroup" xml:space="preserve">
+    <value>not belongs to group</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesDoesNotContainCurrentUser" xml:space="preserve">
+    <value>not contain current user</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesDoesNotMatch" xml:space="preserve">
+    <value>not match</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesEqualTo" xml:space="preserve">
+    <value>=</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesGreaterThan" xml:space="preserve">
+    <value>&gt;</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesGreaterThanDropDownText" xml:space="preserve">
+    <value>high than</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesGreaterThanOrEqual" xml:space="preserve">
+    <value>&gt;=</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesGreaterThanOrEqualDropDownText" xml:space="preserve">
+    <value>high than from</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIs" xml:space="preserve">
+    <value>is</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsApiInterface" xml:space="preserve">
+    <value>is API interface</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsBackgroundProcess" xml:space="preserve">
+    <value>is background process</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsGroup" xml:space="preserve">
+    <value>is group</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsInitialState" xml:space="preserve">
+    <value>is initial state</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsInternalUser" xml:space="preserve">
+    <value>is internal user</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsNot" xml:space="preserve">
+    <value>is not</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsNotInitialState" xml:space="preserve">
+    <value>is not initial state</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsNotInternalUser" xml:space="preserve">
+    <value>is not internal user</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsNotMemberOf" xml:space="preserve">
+    <value>is not member</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsSuperuser" xml:space="preserve">
+    <value>is superuser</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsUser" xml:space="preserve">
+    <value>is user</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsUserClient" xml:space="preserve">
+    <value>is user client</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsVisibleForCurrentUser" xml:space="preserve">
+    <value>is visible for current user</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesLessThan" xml:space="preserve">
+    <value>&lt;</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesLessThanDropDownText" xml:space="preserve">
+    <value>lower</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesLessThanOrEqual" xml:space="preserve">
+    <value>&lt;=</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesLessThanOrEqualDropDownText" xml:space="preserve">
+    <value>lower from</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesMatches" xml:space="preserve">
+    <value>matches</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesNotContains" xml:space="preserve">
+    <value>not contains</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesNotContainsUser" xml:space="preserve">
+    <value>not contains user</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesNotEqualTo" xml:space="preserve">
+    <value>!=</value>
+  </data>
   <data name="CoaUserCollectionReadonlyException" xml:space="preserve">
     <value>Application user collection is read only</value>
   </data>

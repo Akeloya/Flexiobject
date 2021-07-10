@@ -151,6 +151,330 @@ namespace CoaApp.Core.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на AND.
+        /// </summary>
+        internal static string CoaRuleCombinationTermsAnd {
+            get {
+                return ResourceManager.GetString("CoaRuleCombinationTermsAnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на OR.
+        /// </summary>
+        internal static string CoaRuleCombinationTermsOr {
+            get {
+                return ResourceManager.GetString("CoaRuleCombinationTermsOr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на belongs to group.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesBelongsToGroup {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesBelongsToGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на contains.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesContains {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesContains", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на contains current user.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesContainsCurrentUser {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesContainsCurrentUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на contains user.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesContainsUser {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesContainsUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на not belongs to group.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesDoesNotBelongToGroup {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesDoesNotBelongToGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на not contain current user.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesDoesNotContainCurrentUser {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesDoesNotContainCurrentUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на not match.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesDoesNotMatch {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesDoesNotMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на =.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesEqualTo {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesEqualTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на &gt;.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesGreaterThan {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesGreaterThan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на high than.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesGreaterThanDropDownText {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesGreaterThanDropDownText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на &gt;=.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesGreaterThanOrEqual {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesGreaterThanOrEqual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на high than from.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesGreaterThanOrEqualDropDownText {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesGreaterThanOrEqualDropDownText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на is.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesIs {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesIs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на is API interface.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesIsApiInterface {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesIsApiInterface", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на is background process.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesIsBackgroundProcess {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesIsBackgroundProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на is group.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesIsGroup {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesIsGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на is initial state.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesIsInitialState {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesIsInitialState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на is internal user.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesIsInternalUser {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesIsInternalUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на is not.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesIsNot {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesIsNot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на is not initial state.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesIsNotInitialState {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesIsNotInitialState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на is not internal user.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesIsNotInternalUser {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesIsNotInternalUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на is not member.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesIsNotMemberOf {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesIsNotMemberOf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на is superuser.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesIsSuperuser {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesIsSuperuser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на is user.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesIsUser {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesIsUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на is user client.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesIsUserClient {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesIsUserClient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на is visible for current user.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesIsVisibleForCurrentUser {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesIsVisibleForCurrentUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на &lt;.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesLessThan {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesLessThan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на lower.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesLessThanDropDownText {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesLessThanDropDownText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на &lt;=.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesLessThanOrEqual {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesLessThanOrEqual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на lower from.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesLessThanOrEqualDropDownText {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesLessThanOrEqualDropDownText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на matches.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesMatches {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesMatches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на not contains.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesNotContains {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesNotContains", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на not contains user.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesNotContainsUser {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesNotContainsUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на !=.
+        /// </summary>
+        internal static string CoaRuleComparisonsTypesNotEqualTo {
+            get {
+                return ResourceManager.GetString("CoaRuleComparisonsTypesNotEqualTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Application user collection is read only.
         /// </summary>
         internal static string CoaUserCollectionReadonlyException {

@@ -29,8 +29,8 @@ namespace CoaApp.Core
     [Serializable]
     internal class FilterFieldIndexer : IFilterFieldIndexer
     {
-        private Get _get;
-        private Set _set;
+        private readonly Get _get;
+        private readonly Set _set;
         internal FilterFieldIndexer(Get get, Set set)
         {
             _get = get ?? throw new ArgumentNullException(nameof(get));

@@ -30,8 +30,8 @@ namespace CoaApp.Core
     [Serializable]
     internal class CoaFilterFieldCompatisonIndexer : IFilterFieldCompatisonIndexer
     {
-        private Get _get;
-        private Set _set;
+        private readonly Get _get;
+        private readonly Set _set;
         public CoaFilterFieldCompatisonIndexer(Get get, Set set)
         {
             _get = get ?? throw new ArgumentNullException(nameof(get));

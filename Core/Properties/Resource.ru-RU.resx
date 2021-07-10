@@ -147,6 +147,114 @@
   <data name="CoaProblemOnFormException" xml:space="preserve">
     <value>Обнаружена проблема или ошибка на форме</value>
   </data>
+  <data name="CoaRuleCombinationTermsAnd" xml:space="preserve">
+    <value>И</value>
+  </data>
+  <data name="CoaRuleCombinationTermsOr" xml:space="preserve">
+    <value>ИЛИ</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesBelongsToGroup" xml:space="preserve">
+    <value>принадлежит группе</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesContains" xml:space="preserve">
+    <value>содержит</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesContainsCurrentUser" xml:space="preserve">
+    <value>содержит текущего пользователя</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesContainsUser" xml:space="preserve">
+    <value>содержит пользователя</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesDoesNotBelongToGroup" xml:space="preserve">
+    <value>не принадлежит группе</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesDoesNotContainCurrentUser" xml:space="preserve">
+    <value>не содержит текущего пользователя</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesDoesNotMatch" xml:space="preserve">
+    <value>не совпадает</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesEqualTo" xml:space="preserve">
+    <value>=</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesGreaterThan" xml:space="preserve">
+    <value>&gt;</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesGreaterThanDropDownText" xml:space="preserve">
+    <value>выше чем</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesGreaterThanOrEqual" xml:space="preserve">
+    <value>&gt;=</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesGreaterThanOrEqualDropDownText" xml:space="preserve">
+    <value>выше начиная с</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIs" xml:space="preserve">
+    <value>является</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsApiInterface" xml:space="preserve">
+    <value>является API интерфейсом</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsBackgroundProcess" xml:space="preserve">
+    <value>является фоновым процессом</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsGroup" xml:space="preserve">
+    <value>является группой</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsInitialState" xml:space="preserve">
+    <value>начальное состояние</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsInternalUser" xml:space="preserve">
+    <value>является внутренним пользователем</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsNot" xml:space="preserve">
+    <value>не является</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsNotInitialState" xml:space="preserve">
+    <value>не начальное состояние</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsNotInternalUser" xml:space="preserve">
+    <value>не является внутренним пользователем</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsNotMemberOf" xml:space="preserve">
+    <value>не является членом</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsSuperuser" xml:space="preserve">
+    <value>является суперпользователем</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsUser" xml:space="preserve">
+    <value>является пользователем</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsUserClient" xml:space="preserve">
+    <value>является пользовательским клиентом</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsVisibleForCurrentUser" xml:space="preserve">
+    <value>видим для текущего пользователя</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesLessThan" xml:space="preserve">
+    <value>&lt;</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesLessThanDropDownText" xml:space="preserve">
+    <value>ниже</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesLessThanOrEqual" xml:space="preserve">
+    <value>&lt;=</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesLessThanOrEqualDropDownText" xml:space="preserve">
+    <value>ниже начиная с</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesMatches" xml:space="preserve">
+    <value>совпадает с</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesNotContains" xml:space="preserve">
+    <value>не содержит</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesNotContainsUser" xml:space="preserve">
+    <value>не содержит пользователя</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesNotEqualTo" xml:space="preserve">
+    <value>!=</value>
+  </data>
   <data name="CoaUserCollectionReadonlyException" xml:space="preserve">
     <value>Коллекция пользователей приложения только для чтения</value>
   </data>
