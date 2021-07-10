@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -21,15 +21,15 @@
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Иинтерфейс доступа к индексу правила
+    /// Interface to acces rule indexer
     /// </summary>
     public interface IFilterFieldIndexer
     {
         /// <summary>
-        /// Доступ к значению правила по имени
+        /// Access by field name
         /// </summary>
-        /// <param name="name">Имя поля</param>
-        /// <returns>Поле</returns>
+        /// <param name="name">Field name</param>
+        /// <returns>Field or value for this field</returns>
         object this[string name] { get; set; }
     }
 }
