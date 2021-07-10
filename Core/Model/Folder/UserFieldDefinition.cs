@@ -22,17 +22,85 @@ using CoaApp.Core.Enumes;
 using CoaApp.Core.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics;
+using System.Linq;
 
-namespace CoaApp.Core.Folder
+namespace CoaApp.Core
 {
-    public abstract class UserFieldDefinition : AppBase, IUserFieldDefinition
+    public abstract class CoaUserFieldDefinition : AppBase, IUserFieldDefinition
     {
-        protected UserFieldDefinition(IApplication app, object parent): base(app, parent)
+        protected CoaUserFieldDefinition(IApplication app, object parent): base(app, parent)
         {
 
         }
+        public static IList<IUserFieldDefinition> GetFieldsByPath(ICustomFolder startFolder, string fieldPath)
+        {
+#if DEBUG
+            Debug.WriteLine("Folder = " + startFolder.Alias + " fieldPath = " + fieldPath);
+#endif
+            IUserFieldDefinition field = null;
 
+            var fields = new List<IUserFieldDefinition>();
+
+            var path = fieldPath.Split(new[] { "." }, StringSplitOptions.RemoveEmptyEntries);
+
+            try
+            {
+                fields.Add(startFolder.UserFieldDefinitions[path[0]]);
+                field = fields[0];
+            }
+            catch
+            {
+                return new List<IUserFieldDefinition>();
+            }
+
+            for (var i = 1; i < path.Length; i++)
+            {
+                var p = path[i];
+                try
+                {
+                    var det = field.Details as IRefDetailes;
+                    field = det.ReferencedFolder.UserFieldDefinitions[p];
+                    fields.Add(field);
+                }
+                catch (Exception)
+                {
+                    break;
+                }
+            }
+
+            return fields;
+        }
+        public static IUserFieldDefinition GetFieldByPath(ICustomFolder startFolder, string fieldPath)
+        {
+            return GetFieldsByPath(startFolder, fieldPath).Last();
+        }
+        public static string GetFieldPathByFieldIds(ICustomFolder startFolder, int[] fieldIds)
+        {
+            string result = null;
+            IUserFieldDefinition field;
+            ICustomFolder currFolder = startFolder;
+            var fieldCount = fieldIds.Length;
+            for (var i = 0; i < fieldCount; i++)
+            {
+                var fieldId = fieldIds[i];
+                field = null;
+                for (var j = 0; j < currFolder.UserFieldDefinitions.Count; j++)
+                    if (currFolder.UserFieldDefinitions[j].Id == fieldId)
+                    {
+                        field = currFolder.UserFieldDefinitions[j];
+                        break;
+                    }
+                if (field == null)
+                    return null;
+                if (fieldCount > 1 && i < fieldCount - 1)
+                    currFolder = (field.Details as IRefDetailes).ReferencedFolder;
+                result += field.Alias + ".";
+            }
+            if (result?.Length > 1)
+                result = result[0..^1];//Substring(0, result.Length - 1)
+            return result;
+        }
         public int Id => throw new NotImplementedException();
 
         public string Alias { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
