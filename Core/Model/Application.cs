@@ -38,7 +38,8 @@ namespace CoaApp.Core
         /// <returns></returns>
         public static List<CoaApplicationFolders> GetApplicationFolders()
         {
-            List<CoaApplicationFolders> result = new List<CoaApplicationFolders> {
+            List<CoaApplicationFolders> result = new()
+            {
                 CoaApplicationFolders.UserAccounts,
                 CoaApplicationFolders.UserGroups
             };
@@ -51,7 +52,7 @@ namespace CoaApp.Core
         /// <returns></returns>
         public static Dictionary<CoaApplicationFoldersProperties, bool> GetAllowedFielsByAppFolderType(CoaApplicationFolders type)
         {
-            Dictionary<CoaApplicationFoldersProperties, bool> result = new Dictionary<CoaApplicationFoldersProperties, bool>();
+            Dictionary<CoaApplicationFoldersProperties, bool> result = new();
             switch (type)
             {
                 case CoaApplicationFolders.UserAccounts:
