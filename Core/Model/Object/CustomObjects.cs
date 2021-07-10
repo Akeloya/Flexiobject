@@ -32,10 +32,11 @@ namespace CoaApp.Core
         public abstract ICustomObject this[int index] { get; }
         public abstract ICustomObject this[string name] { get; }
         public abstract int Count { get; }
+        protected internal bool IsModified { get; }
         public abstract ICustomObject Add();
         public abstract void AddExisting(ICustomObject obj);
         public abstract void AddExistingById(long id);
-        public abstract void Delete(long id);
+        public abstract void Delete(long id);        
         public abstract void Remove(ICustomObject obj);
         public abstract void Remove(int index);
         public abstract void RemoveExisting(object variant);
