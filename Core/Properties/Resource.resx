@@ -150,6 +150,30 @@
   <data name="CoaUserCollectionReadonlyException" xml:space="preserve">
     <value>Application user collection is read only</value>
   </data>
+  <data name="CoaUserFieldAnotherFolderException" xml:space="preserve">
+    <value>Cannot set object from another folder as value</value>
+  </data>
+  <data name="CoaUserFieldArgumentObjListTypeException" xml:space="preserve">
+    <value>Invalid data type for field of type ObjectList</value>
+  </data>
+  <data name="CoaUserFieldException" xml:space="preserve">
+    <value>An error occurred while setting or getting value</value>
+  </data>
+  <data name="CoaUserFieldForeignCollectionException" xml:space="preserve">
+    <value>Can't install someone else's collection</value>
+  </data>
+  <data name="CoaUserFieldIncorrectInitializationException" xml:space="preserve">
+    <value>Incorrectly initialized call to [SetObjectListValue]</value>
+  </data>
+  <data name="CoaUserFieldInitializationValueException" xml:space="preserve">
+    <value>It is not possible to set a value other than the initial state until the object is created</value>
+  </data>
+  <data name="CoaUserFieldValidationGreaterThenErrorMessage" xml:space="preserve">
+    <value>The field "{0}" is greater than the allowed length in {1} characters</value>
+  </data>
+  <data name="CoaUserFieldValidationLessThenErrorMessage" xml:space="preserve">
+    <value>The field "{0}" less than minimum length ({1})</value>
+  </data>
   <data name="CoaUserLoginRequiredException" xml:space="preserve">
     <value>For the specified authentication type, you must set a login</value>
   </data>

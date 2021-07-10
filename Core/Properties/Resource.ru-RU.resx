@@ -150,6 +150,30 @@
   <data name="CoaUserCollectionReadonlyException" xml:space="preserve">
     <value>Коллекция пользователей приложения только для чтения</value>
   </data>
+  <data name="CoaUserFieldAnotherFolderException" xml:space="preserve">
+    <value>Невозможно установить объект из другой папки в качестве значения</value>
+  </data>
+  <data name="CoaUserFieldArgumentObjListTypeException" xml:space="preserve">
+    <value>Неверный тип данных для поля типа ObjectList</value>
+  </data>
+  <data name="CoaUserFieldException" xml:space="preserve">
+    <value>Произошла ошибка во время установки или получения значения</value>
+  </data>
+  <data name="CoaUserFieldForeignCollectionException" xml:space="preserve">
+    <value>Невозможно установить чужую коллекцию</value>
+  </data>
+  <data name="CoaUserFieldIncorrectInitializationException" xml:space="preserve">
+    <value>Неправильно инициализирован вызов [SetObjectListValue]</value>
+  </data>
+  <data name="CoaUserFieldInitializationValueException" xml:space="preserve">
+    <value>Невозможно установить значение отличное от начального состояния пока объект не создан</value>
+  </data>
+  <data name="CoaUserFieldValidationGreaterThenErrorMessage" xml:space="preserve">
+    <value>Поле "{0}" больше максимальной длины в {1} символов</value>
+  </data>
+  <data name="CoaUserFieldValidationLessThenErrorMessage" xml:space="preserve">
+    <value>Поле "{0}" меньше минимальной длины ({1})</value>
+  </data>
   <data name="CoaUserLoginRequiredException" xml:space="preserve">
     <value>Для указанного типа аутентификации необходимо установить логин</value>
   </data>

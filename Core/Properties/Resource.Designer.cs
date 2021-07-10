@@ -160,6 +160,78 @@ namespace CoaApp.Core.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Cannot set object from another folder as value.
+        /// </summary>
+        internal static string CoaUserFieldAnotherFolderException {
+            get {
+                return ResourceManager.GetString("CoaUserFieldAnotherFolderException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Invalid data type for field of type ObjectList.
+        /// </summary>
+        internal static string CoaUserFieldArgumentObjListTypeException {
+            get {
+                return ResourceManager.GetString("CoaUserFieldArgumentObjListTypeException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на An error occurred while setting or getting value.
+        /// </summary>
+        internal static string CoaUserFieldException {
+            get {
+                return ResourceManager.GetString("CoaUserFieldException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Can&apos;t install someone else&apos;s collection.
+        /// </summary>
+        internal static string CoaUserFieldForeignCollectionException {
+            get {
+                return ResourceManager.GetString("CoaUserFieldForeignCollectionException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Incorrectly initialized call to [SetObjectListValue].
+        /// </summary>
+        internal static string CoaUserFieldIncorrectInitializationException {
+            get {
+                return ResourceManager.GetString("CoaUserFieldIncorrectInitializationException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на It is not possible to set a value other than the initial state until the object is created.
+        /// </summary>
+        internal static string CoaUserFieldInitializationValueException {
+            get {
+                return ResourceManager.GetString("CoaUserFieldInitializationValueException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на The field &quot;{0}&quot; is greater than the allowed length in {1} characters.
+        /// </summary>
+        internal static string CoaUserFieldValidationGreaterThenErrorMessage {
+            get {
+                return ResourceManager.GetString("CoaUserFieldValidationGreaterThenErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на The field &quot;{0}&quot; less than minimum length ({1}).
+        /// </summary>
+        internal static string CoaUserFieldValidationLessThenErrorMessage {
+            get {
+                return ResourceManager.GetString("CoaUserFieldValidationLessThenErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на For the specified authentication type, you must set a login.
         /// </summary>
         internal static string CoaUserLoginRequiredException {

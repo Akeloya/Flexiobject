@@ -18,34 +18,29 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System.ComponentModel;
+using CoaApp.Core.Properties;
+using System;
 
-namespace CoaApp.Core.Interfaces
+namespace CoaApp.Core.Exceptions.CommonExceptions
 {
     /// <summary>
-    /// Object user field
+    /// Exception rised in user field
     /// </summary>
-    public interface IUserField : IBase, IDataErrorInfo, INotifyPropertyChanged
+    [Serializable]
+    public class CoaUserFieldException: CoaApplicationException
     {
-        /// <summary>
-        /// Field value
-        /// </summary>
-        dynamic TValue { get; set; }
-        /// <summary>
-        /// Field definition
-        /// </summary>
-        IUserFieldDefinition Definition { get; }
-        /// <summary>
-        /// Is value null flag
-        /// </summary>
-        bool IsNull { get; }
-        /// <summary>
-        /// Field avaliability for editing
-        /// </summary>
-        bool IsEnabled { get; }
-        /// <summary>
-        /// Field mandatory for value
-        /// </summary>
-        bool IsRequired { get; }
+        public CoaUserFieldException() : base(Resource.CoaUserFieldException, AppExceptionStatus.Work)
+        {
+        }
+
+        public CoaUserFieldException(string text) : base(text, AppExceptionStatus.Work)
+        {
+
+        }
+
+        public CoaUserFieldException(Exception inner) : base(Resource.CoaUserFieldException,inner, AppExceptionStatus.Work)
+        {
+
+        }
     }
 }
