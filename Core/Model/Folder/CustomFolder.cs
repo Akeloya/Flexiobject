@@ -26,9 +26,15 @@ namespace CoaApp.Core
 {
     public abstract class CustomFolder : AppBase, ICustomFolder
     {
+        private int _uniqueId;
         protected CustomFolder(IApplication app, object parent) : base(app, parent)
         {
 
+        }
+
+        protected CustomFolder(IApplication app, object parent, int uniqueId) : base(app, parent)
+        {
+            _uniqueId = uniqueId;
         }
         public static bool operator ==(CustomFolder left, ICustomFolder right)
         {
@@ -38,25 +44,19 @@ namespace CoaApp.Core
         {
             return !(left?.Equals(right) ?? (right?.Equals(left) ?? true));
         }
-        public bool this[CoaApplicationFolders type] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IUserFieldDefinition this[CoaApplicationFolders folderType, CoaApplicationFoldersProperties propType] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int UniqueId => throw new NotImplementedException();
-        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Alias { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool InheritNamingScheme { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string NamingScheme { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Path => throw new NotImplementedException();
-        public IForms Forms => throw new NotImplementedException();
-        public ICustomFolder ParentFolder => throw new NotImplementedException();
-        public IActions AfterCreateActions => throw new NotImplementedException();
-        public IActions AfterDeleteActions => throw new NotImplementedException();
-        public IActions AfterModificationActions => throw new NotImplementedException();
-        public IActions BeforCreateActions => throw new NotImplementedException();
-        public IActions BeforDeleteActions => throw new NotImplementedException();
-        public IActions BeforModificationActions => throw new NotImplementedException();
-        public IPrivileges Privileges => throw new NotImplementedException();
-        public IPicture PictureOpen { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IPicture PictureClose { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int UniqueId => _uniqueId;
+        public abstract bool this[CoaApplicationFolders type] { get; set; }
+        public abstract IUserFieldDefinition this[CoaApplicationFolders folderType, CoaApplicationFoldersProperties propType] { get; set; }
+        public abstract string Name { get; set; }
+        public abstract string Alias { get; set; }
+        public abstract bool InheritNamingScheme { get; set; }
+        public abstract string NamingScheme { get; set; }
+        public abstract string Path { get; set; }
+        public abstract IForms Forms { get; set; }
+        public abstract ICustomFolder ParentFolder { get; set; }
+        public abstract IPrivileges Privileges { get; set; }
+        public abstract IPicture PictureOpen { get; set; }
+        public abstract IPicture PictureClose { get; set; }
         public abstract ICustomObjects Requests { get; }
         public abstract IScripts Scripts { get; }
         public abstract IUserFieldDefinitions UserFieldDefinitions { get; }
@@ -82,6 +82,10 @@ namespace CoaApp.Core
                 return false;
             return other.UniqueId == UniqueId;     
         }
+        public void Save()
+        {
+            _uniqueId = OnSave();
+        }
         public CoaEnumPrivilegeLevel GetPrivilegeLevel(IUser user)
         {
             if (user == null)
@@ -102,8 +106,7 @@ namespace CoaApp.Core
                     if (result < Privileges[i].PrivilegeLevel)
                         result = Privileges[i].PrivilegeLevel;
                 }
-                var group = Privileges[i].User as IGroup;
-                if (group != null)
+                if (Privileges[i].User is IGroup group)
                 {
                     if (result < Privileges[i].PrivilegeLevel && user.IsInGroup(group.Name))
                         result = Privileges[i].PrivilegeLevel;
@@ -128,6 +131,7 @@ namespace CoaApp.Core
                 }
             return result;
         }
+        public abstract IActions GetActionList(CoaActionListType type);
         public abstract IColumnLayout MakeColumnLayout();
         public abstract IFilter MakeFilter();
         public abstract IImport MakeImport();
@@ -135,7 +139,7 @@ namespace CoaApp.Core
         public abstract IQuery MakeQuery();
         public abstract IView MakeView();
         public abstract void Move(ICustomFolder folder);
-        public abstract void Save();
+        protected abstract int OnSave();
         public abstract ICustomObjects Search(IFilter filter);
         public abstract void SetColumnLayout(IColumnLayout layout);
         public abstract void SetCurrentView(int context, int viewId);

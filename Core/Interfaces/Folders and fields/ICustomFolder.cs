@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -62,33 +62,9 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// Parent folder link
         /// </summary>
-        ICustomFolder ParentFolder { get; }
+        ICustomFolder ParentFolder { get; }                
         /// <summary>
-        /// Действия после создания объекта
-        /// </summary>
-        IActions AfterCreateActions { get; }
-        /// <summary>
-        /// Действия после удаления объекта
-        /// </summary>
-        IActions AfterDeleteActions { get; }
-        /// <summary>
-        /// Действия после изменения объекта
-        /// </summary>
-        IActions AfterModificationActions { get; }
-        /// <summary>
-        /// Действия до создания объекта
-        /// </summary>
-        IActions BeforCreateActions { get; }
-        /// <summary>
-        /// Действия до удаления объекта
-        /// </summary>
-        IActions BeforDeleteActions { get; }
-        /// <summary>
-        /// Действия до изменения объекта
-        /// </summary>
-        IActions BeforModificationActions { get; }
-        /// <summary>
-        /// Привилегии доступа к объектам папки и ее настройкам
+        /// User privilegies for object and folder
         /// </summary>
         IPrivileges Privileges { get; }
         /// <summary>
@@ -108,134 +84,118 @@ namespace CoaApp.Core.Interfaces
         /// </summary>
         IScripts Scripts { get; }
         /// <summary>
-        /// Определение пользовательских полей папки
+        /// Actions modification collection
+        /// </summary>
+        IActions GetActionList(CoaActionListType type);
+        /// <summary>
+        /// User field definition of folder
         /// </summary>
         IUserFieldDefinitions UserFieldDefinitions { get; }
         /// <summary>
-        /// Создание нового фильтра
+        /// New filter for object of this folder
         /// </summary>
-        /// <returns>IFilter объект для фильтрации данных текущей папки</returns>
+        /// <returns>IFilter object to filter ICustomObject of this folder</returns>
         IFilter MakeFilter();
         /// <summary>
-        /// Дочерние папки
+        /// Nested folders
         /// </summary>
         ICustomFolders SubFolders { get; }
         /// <summary>
-        /// Автоматические вычисления над данными объектов в папке
+        /// Automatic calculation definitions for object of this folder
         /// </summary>
         IAutocalculations Autocalculations { get; }
         /// <summary>
-        /// Сохранение изменений в БД
+        /// Save changes to database
         /// </summary>
         void Save();
         /// <summary>
-        /// Изменение положения папки в дереве папок
+        /// Move folder in hierarchy
         /// </summary>
-        /// <param name="folder">Новая родительская папка</param>
+        /// <param name="folder">New parent folder</param>
         void Move(ICustomFolder folder);
         /// <summary>
-        /// Создание пустого отображения списка
+        /// Create empty folder column layout
         /// </summary>
         /// <returns></returns>
         IColumnLayout MakeColumnLayout();
         /// <summary>
-        /// Получение текущего отображения списка
+        /// Get current column layout
         /// </summary>
         /// <returns></returns>
         IColumnLayout GetColumnLayout();
         /// <summary>
-        /// Поиск объектов с фильтром
+        /// Search object with filter
         /// </summary>
-        /// <param name="filter">Фильтр для папки</param>
+        /// <param name="filter">Filter for objects</param>
         /// <returns></returns>
         ICustomObjects Search(IFilter filter);
         /// <summary>
-        /// Установка отображения списка текущим
+        /// Set column layout by current
         /// </summary>
         /// <param name="layout"></param>
-        void SetColumnLayout(IColumnLayout layout);
+        void SetColumnLayout(IColumnLayout layout);        
         /// <summary>
-        /// Устанавливает идентификатор текущего отображения для текущего пользователя и контекст.
+        /// Create new visual view for this folder
         /// </summary>
-        /// <param name="context">Контекст для текущего отображения</param>
-        /// <param name="viewId">Ид отображения, который должен быть текущим</param>
-        void SetCurrentView(int context, int viewId);
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="type">
-        /// 0 = Any type
-        /// 1 = Request List
-        /// 2 = Calendar(Month)
-        /// 3 = Calendar(Week)
-        /// 4 = Calendar(Day)
-        /// 5 = Tree
-        /// </param>
-        /// <returns></returns>
-        IView GetInitialView(int context, int type = 0);
-        /// <summary>
-        /// Создание нового физуального представления для текущей папки
-        /// </summary>
-        /// <returns>IView объект</returns>
+        /// <returns>IView object</returns>
         IView MakeView();
         /// <summary>
-        /// Создание новых настроек импорта данных
+        /// Create new import definition
         /// </summary>
-        /// <returns>Объект настроек</returns>
+        /// <returns>Import settings object</returns>
         IImportDefinition MakeImportDefinition();
         /// <summary>
-        /// Удаление настроек импорта данных
+        /// Delete import settings
         /// </summary>
-        /// <param name="settings">название или объект удаляемой настройки IImportDefinition</param>
+        /// <param name="settings">Deletion object name or IImportDefinition object</param>
         void DeleteImportDefinition(object settings);
         /// <summary>
-        /// Создание импорта данных из настроек
+        /// Create import from settings
         /// </summary>
         /// <returns></returns>
         IImport MakeImport();
         /// <summary>
-        /// Создание нового запроса к данным
+        /// Create new query
         /// <seealso cref="IQuery"/>
         /// </summary>
         /// <returns></returns>
         IQuery MakeQuery();
         
         /// <summary>
-        /// Получить уровень привилегий пользователя для папки
+        /// Get user privilege level for folder
         /// </summary>
-        /// <param name="user">Пользователь, для которого происходит проверка</param>
-        /// <returns>Уровень привелегий, см <see cref="CoaEnumPermissionDefinition"/></returns>
+        /// <param name="user">User for check privilege level</param>
+        /// <returns>Privilege level <see cref="CoaEnumPermissionDefinition"/></returns>
         CoaEnumPrivilegeLevel GetPrivilegeLevel(IUser user);
         /// <summary>
-        /// Получить уровень привилегий группы для папки
+        /// Get group privilege level
         /// </summary>
-        /// <param name="group">Группа, для которого происходит проверка</param>
-        /// <returns>Уровень привелегий, см <see cref="CoaEnumPermissionDefinition"/></returns>
+        /// <param name="group">Group for check privilege level</param>
+        /// <returns>Privilege level <see cref="CoaEnumPermissionDefinition"/></returns>
         CoaEnumPrivilegeLevel GetPrivilegeLevel(IGroup group);
         /// <summary>
-        /// Правило видимости папки
+        /// Folder visibility rule
         /// </summary>
         IRule VisibilityRule { get; set; }
         /// <summary>
-        /// Установка связи с папкой приложения
+        /// Links to application objects
         /// </summary>
-        /// <param name="type">Тип папки</param>
+        /// <param name="type">Application object type</param>
         /// <returns></returns>
         bool this[CoaApplicationFolders type] { get;set; }
         /// <summary>
-        /// Установка связи пользовательского поля и поля приложения
+        /// Link application object field and user field of this folder
         /// </summary>
         /// <param name="folderType"></param>
         /// <param name="propType"></param>
         /// <returns></returns>
         IUserFieldDefinition this[CoaApplicationFolders folderType, CoaApplicationFoldersProperties propType] { get; set; }
         /// <summary>
-        /// Получение истории изменения схемы
+        /// Get history changes of schema
         /// </summary>
         ISchemaHistory SchemaHistory { get; }
         /// <summary>
-        /// Поле рабочего процесса, задействованное в истории
+        /// Get or set workflow user field for history records
         /// </summary>
         IUserFieldDefinition HistoryWorkflowField { get; set; }
     }
