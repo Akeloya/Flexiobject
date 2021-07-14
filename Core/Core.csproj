@@ -6,6 +6,11 @@
     <RootNamespace>CoaApp.Core</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\Core.xml</DocumentationFile>
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Update="Properties\Resource.Designer.cs">
       <DesignTime>True</DesignTime>
