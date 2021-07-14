@@ -24,19 +24,30 @@ using System.Linq;
 
 namespace CoaApp.Core
 {
+    ///<inheritdoc/>
     public abstract class CoaFilter : AppBase, IFilter
     {
         private IRule _rule;
         private readonly ICustomFolder _folder;
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="folder"></param>
         protected CoaFilter(IApplication app, ICustomFolder folder): base(app, folder)
         {
             _folder = folder;
             _rule = GetRuleInstance(app, this, folder);
         }
+        ///<inheritdoc/>
         public IFilterFieldIndexer UserField => new FilterFieldIndexer(UserFieldGet, UserFieldSet);
+        ///<inheritdoc/>
         public IRule Rule { get => _rule; set => _rule = value; }
+        ///<inheritdoc/>
         public IFilterFieldCompatisonIndexer UserFieldComparison => new CoaFilterFieldCompatisonIndexer(UserFieldComparisonGet, UserFieldComparisonSet);
+        ///<inheritdoc/>
         public ICustomFolder Folder => _folder;
+        ///<inheritdoc/>
         public void Combine(IFilter filter, CoaRuleCombinationTerms term)
         {
             if (_rule.Combination == CoaRuleCombinationTerms.Term || _rule.Combination != term)
@@ -128,7 +139,15 @@ namespace CoaApp.Core
             }
             item.RightSideValue = args.Value;
         }
+        ///<inheritdoc/>
         public abstract void Save();
+        /// <summary>
+        /// Get Rule instance method declaration
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="parent"></param>
+        /// <param name="folder"></param>
+        /// <returns></returns>
         protected abstract IRule GetRuleInstance(IApplication app, object parent, ICustomFolder folder);
     }
 }

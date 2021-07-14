@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -18,27 +18,31 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+using CoaApp.Core.Enumes;
+
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Детали поля типа "дата"
+    /// Field definition detales for type 'Date'
+    /// <seealso cref="IUserFieldDefinition"/>
+    /// <seealso cref="CoaFieldTypes"/>
     /// </summary>
     public interface IDateDetailes : IBase
     {
         /// <summary>
-        /// Дата создания в качестве значения по умолчанию
+        /// Default value of field will be object creation date-time
         /// </summary>
         bool CreationDateAsDefault { get; set; }
         /// <summary>
-        /// Текущее время в качестве значения по умолчанию
+        /// Current date-time will be value of field
         /// </summary>
         bool CurrentDateTime { get; set; }
         /// <summary>
-        /// Только дата
+        /// Only date, time part will be 00:00:00
         /// </summary>
         bool DateOnly { get; set; }
         /// <summary>
-        /// Независимо от временной зоны
+        /// Time zone independent
         /// </summary>
         bool TimezoneIndependent { get; set; }
     }

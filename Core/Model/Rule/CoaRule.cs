@@ -29,23 +29,37 @@ using System.Linq;
 
 namespace CoaApp.Core
 {
+    ///<inheritdoc/>
     public abstract class CoaRule : AppBase, IRule
     {
         private readonly IList<IRule> _chiledRules;
         private readonly ICustomFolder _folder;
         private CoaRuleCombinationTerms _combination = CoaRuleCombinationTerms.Term;
         private int[] _leftSideFieldPath;
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="parent"></param>
+        /// <param name="folder"></param>
         protected CoaRule(IApplication app, object parent, ICustomFolder folder) : base(app, parent)
         {
             _chiledRules = new List<IRule>();
             _folder = folder;
         }
+        ///<inheritdoc/>
         public CoaRuleComparisonsTypes? CombinationOperator { get; set; }
+        ///<inheritdoc/>
         public string Data { get; set; }
+        ///<inheritdoc/>
         public IList<IRule> ChiledRules => _chiledRules;
+        ///<inheritdoc/>
         public CoaRuleCombinationTerms Combination { get => _combination; set => _combination = value; }
+        ///<inheritdoc/>
         public CoaRuleRightSideTypes RightSideType { get; set; }
+        ///<inheritdoc/>
         public CoaRuleLeftSideTypes LeftSideType { get; set; }
+        ///<inheritdoc/>
         public string LeftSideFieldPath
         {
             get
@@ -59,13 +73,18 @@ namespace CoaApp.Core
                 InitiateAffectedFields(value);
             }
         }
+        ///<inheritdoc/>
         public object RightSideValue { get; set; }
+        ///<inheritdoc/>
         public object LeftSideValue { get; set; }
+        ///<inheritdoc/>
         public IUserFieldDefinitions AffectedFields { get { return OnGetffectedFields(_leftSideFieldPath); } }
+        ///<inheritdoc/>
         public bool Calculate(ICustomObject custObj)
         {
             return Calculate(this, custObj, custObj, Application, RightSideValue);
         }
+        ///<inheritdoc/>
         public void Clear()
         {
             _chiledRules.Clear();
@@ -73,6 +92,7 @@ namespace CoaApp.Core
             LeftSideValue = null;
             RightSideValue = null;
         }
+        ///<inheritdoc/>
         public override string ToString()
         {
             return BuildStringRule();
@@ -223,7 +243,17 @@ namespace CoaApp.Core
             for (var i = 0; i < fields.Count; i++)
                 _leftSideFieldPath[i] = fields[i].Id;
         }
+        /// <summary>
+        /// Get rule instance method declaration
+        /// </summary>
+        /// <param name="app"></param>
+        /// <returns></returns>
         protected internal abstract IRule GetInstance(IApplication app);
+        /// <summary>
+        /// Get affected field method declaration
+        /// </summary>
+        /// <param name="fieldIds"></param>
+        /// <returns></returns>
         protected abstract IUserFieldDefinitions OnGetffectedFields(int[] fieldIds);
     }
 }

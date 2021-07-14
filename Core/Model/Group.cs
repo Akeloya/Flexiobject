@@ -26,6 +26,7 @@ using System;
 
 namespace CoaApp.Core
 {
+    ///<inheritdoc/>
     public abstract class CoaGroup : AppBase, IGroup
     {
         private bool _isBaseGroup;
@@ -35,11 +36,24 @@ namespace CoaApp.Core
         private CoaGroupBehaviorTypes _emailBehavior;
         private long _objectId;
         private int _uniqueId;
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="parent"></param>
+        /// <param name="isBase">Flag indicate is folder base for other folders</param>
         protected CoaGroup(IApplication app, object parent, bool isBase = false) : base(app, parent)
         {
             _isBaseGroup = isBase;
         }
-
+        /// <summary>
+        /// Constructor for existing groups
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="parent"></param>
+        /// <param name="uniqueId">Group database Id</param>
+        /// <param name="isBase">Base group flag</param>
+        /// <param name="customObjId">Linked user object unique id</param>
         protected CoaGroup(IApplication app, object parent, int uniqueId, bool isBase = false, long customObjId = 0) : base(app, parent)
         {
             _uniqueId = uniqueId;
@@ -54,8 +68,9 @@ namespace CoaApp.Core
         {
             return !(left?.Equals(right) ?? (right?.Equals(left) ?? true));
         }
+        ///<inheritdoc/>
         public int UniqueId => _uniqueId;
-        [AppFolderProperty(CoaApplicationFoldersProperties.GroupName, true)]
+        ///<inheritdoc/>
         public string Name {
             get
             {
@@ -64,18 +79,21 @@ namespace CoaApp.Core
                 return _displayName ?? string.Format(Resource.GroupName, _uniqueId);
             }
         }
-
+        ///<inheritdoc/>        
+        [AppFolderProperty(CoaApplicationFoldersProperties.GroupName, true)]
         public string DisplayName
         {
             get => _displayName;
             set => _displayName = value;
         }
+        ///<inheritdoc/>
         [AppFolderProperty(CoaApplicationFoldersProperties.GroupEmailAddress, false)]
         public string EmailAddress
         {
             get => _emailAddress;
             set => _emailAddress = value;
         }
+        ///<inheritdoc/>
         [AppFolderProperty(CoaApplicationFoldersProperties.GroupEmailBehavior, true)]
         public CoaGroupBehaviorTypes EmailBehavior
         {
@@ -93,10 +111,12 @@ namespace CoaApp.Core
                 }
             }
         }
+        ///<inheritdoc/>
         [AppFolderProperty(CoaApplicationFoldersProperties.GroupContainedGroups, false)]
         public abstract IGroups Groups { get; }
-
+        ///<inheritdoc/>
         public abstract IGroups GroupsRecursive { get; }
+        ///<inheritdoc/>
         public ICustomObject Object
         {
             get
@@ -118,44 +138,73 @@ namespace CoaApp.Core
                 _userObject = value;
             }
         }
+        ///<inheritdoc/>
         [AppFolderProperty(CoaApplicationFoldersProperties.GroupContainedUsers, true)]
         public abstract IUsers Users { get; }
+        ///<inheritdoc/>
         public abstract IUsers UsersRecursive { get; }
+        ///<inheritdoc/>
         public void Save()
         {
             if (_isBaseGroup)
                 throw new CoaGroupModificationException();
             _uniqueId = OnSave();
         }
+        ///<inheritdoc/>
         public override bool Equals(object obj)
         {
             return Equals(obj as IGroup);
         }
+        ///<inheritdoc/>
         public override int GetHashCode()
         {
             return base.GetHashCode();
         }
+        ///<inheritdoc/>
         public bool Equals(IGroup other)
         {
             if (other == null)
                 return false;
             return UniqueId == other.UniqueId;
         }
+        ///<inheritdoc/>
         public void Delete()
         {
             if (_isBaseGroup)
                 throw new CoaGroupModificationException();
             OnDelete();
         }
+        ///<inheritdoc/>
         public abstract void AddGroup(IGroup group);
+        ///<inheritdoc/>
         public abstract void AddUser(IUser user);
+        ///<inheritdoc/>
         public abstract bool IsInGroup(string groupName);
+        ///<inheritdoc/>
         public abstract bool IsInGroupRecursive(string groupName);
+        ///<inheritdoc/>
         public abstract void RemoveGroup(IGroup group);
+        ///<inheritdoc/>
         public abstract void RemoveUser(IUser user);
+        ///<inheritdoc/>
         public abstract void SendEmail();
+        /// <summary>
+        /// Save method declaration
+        /// </summary>
+        /// <returns>Group id stored in database</returns>
         protected abstract int OnSave();
+        /// <summary>
+        /// Get user object method declaration
+        /// </summary>
+        /// <param name="objectId">Object unique Id</param>
+        /// <returns>
+        /// User Object
+        /// <seealso cref="ICustomObject"/>
+        /// </returns>
         protected abstract ICustomObject OnGetObject(long objectId);
+        /// <summary>
+        /// Delete method declaration
+        /// </summary>
         protected abstract void OnDelete();
     }
 }

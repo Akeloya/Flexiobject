@@ -32,6 +32,7 @@ using System.Text.RegularExpressions;
 
 namespace CoaApp.Core.Object
 {
+    ///<inheritdoc/>
     public abstract class UserField : AppBase, IUserField
     {
         private long? _longValue;
@@ -52,14 +53,21 @@ namespace CoaApp.Core.Object
         private bool _initiated;
         private bool _isRequired;
         private bool _isEnabled;
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="parent"></param>
+        /// <param name="definition"></param>
+        /// <param name="custObj"></param>
         protected UserField(IApplication app, object parent, IUserFieldDefinition definition, ICustomObject custObj) : base (app, parent)
         {
             _custObjParent = custObj;
             _definition = definition;
         }
-
+        ///<inheritdoc/>
         public string this[string columnName] => Validate(columnName);
-
+        ///<inheritdoc/>
         public dynamic TValue
         {
             get
@@ -83,11 +91,11 @@ namespace CoaApp.Core.Object
                 OnPropertyChanged();
             }
         }
-
+        ///<inheritdoc/>
         public IUserFieldDefinition Definition => _definition;
-
+        ///<inheritdoc/>
         public bool IsNull => GetValueFromValues() == null;
-
+        ///<inheritdoc/>
         public bool IsEnabled
         {
             get
@@ -106,7 +114,7 @@ namespace CoaApp.Core.Object
             }
             set { _isEnabled = value; OnPropertyChanged(); }
         }
-
+        ///<inheritdoc/>
         public bool IsRequired
         {
             get
@@ -121,20 +129,31 @@ namespace CoaApp.Core.Object
             }
             set { _isRequired = value; OnPropertyChanged(); }
         }
-
+        ///<inheritdoc/>
         public string Error { get; private set; }
-
+        ///<inheritdoc/>
         public event PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// Checking field value event
+        /// </summary>
         public event EventHandler<CheckRuleEvents> CheckField;
+        /// <summary>
+        /// Method to call when property changed
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        /// <summary>
+        /// Get cleared simple typed value
+        /// </summary>
+        /// <returns></returns>
         protected dynamic GetValueFromValues()
         {
             switch (_definition.Type)
             {
-                case CoaFieldTypes.AutoNumber:
+                case CoaFieldTypes.Identifier:
                     if (string.IsNullOrEmpty(_stringValue))
                         _stringValue = OnGetAutoNumberValue(null);
                     return _stringValue;
@@ -148,7 +167,7 @@ namespace CoaApp.Core.Object
                     return _datetimeValue;
                 case CoaFieldTypes.Decimal:
                     return _decimalValue;
-                case CoaFieldTypes.DropDownList:
+                case CoaFieldTypes.OptionList:
                     if (!_initiated)
                     {
                         if (_tValueInitiated is int && Convert.ToInt32(_tValueInitiated) != 0)
@@ -213,7 +232,7 @@ namespace CoaApp.Core.Object
         {
             switch (_definition.Type)
             {
-                case CoaFieldTypes.AutoNumber:
+                case CoaFieldTypes.Identifier:
                     _stringValue = Convert.ToString(value);
                     break;
                 case CoaFieldTypes.Bigint:
@@ -244,7 +263,7 @@ namespace CoaApp.Core.Object
                     else
                         _decimalValue = Convert.ToDecimal(value);
                     break;
-                case CoaFieldTypes.DropDownList:
+                case CoaFieldTypes.OptionList:
                     SetDropDownValue(value);
                     break;
                 case CoaFieldTypes.Int:
@@ -429,7 +448,7 @@ namespace CoaApp.Core.Object
                         _initiated = false;//endless initialization?
                     }
                     break;
-                case CoaFieldTypes.DropDownList:
+                case CoaFieldTypes.OptionList:
                     {
                         if (value == null)
                         {
@@ -470,7 +489,7 @@ namespace CoaApp.Core.Object
                         _initiated = true;
                     }
                     break;
-                case CoaFieldTypes.AutoNumber:
+                case CoaFieldTypes.Identifier:
                     _stringValue = OnGetAutoNumberValue(value);
                     _initiated = true;
                     break;
@@ -487,6 +506,9 @@ namespace CoaApp.Core.Object
         {
             _tValueInitiated = TValue;
         }
+        /// <summary>
+        /// Method to call update object list value
+        /// </summary>
         protected internal void UpdateObjectLists()
         {
             _custObjtListValue = OnGetCustomObjectList(_custObjParent.UniqueId, _definition.Id);

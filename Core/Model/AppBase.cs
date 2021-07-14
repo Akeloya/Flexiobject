@@ -23,8 +23,16 @@ using System;
 
 namespace CoaApp.Core
 {
+    /// <summary>
+    /// Application base class
+    /// </summary>
     public abstract class AppBase : MarshalByRefObject, IBase
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="parent"></param>
         protected AppBase(IApplication app, object parent)
         {
             Application = app;
@@ -40,8 +48,9 @@ namespace CoaApp.Core
             return null;
         }
 #pragma warning restore CS0672
+        ///<inheritdoc/>
         public IApplication Application { get; }
-
+        ///<inheritdoc/>
         public object Parent { get; }
     }
 }

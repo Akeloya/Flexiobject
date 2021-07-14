@@ -36,11 +36,7 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// Default custom folder for user. Uses with <see cref="HasDefaultCustomFolder"/>. This folder will show for user after open UI
         /// </summary>
-        ICustomFolder DefaultCustomFolder { get; set; }
-        /// <summary>
-        /// User department
-        /// </summary>
-        string Department { get; set; }
+        ICustomFolder DefaultCustomFolder { get; set; }        
         /// <summary>
         /// User display name
         /// </summary>

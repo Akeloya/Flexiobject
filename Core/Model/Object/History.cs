@@ -25,6 +25,7 @@ using System.Linq;
 
 namespace CoaApp.Core
 {
+    ///<inheritdoc/>
     public abstract class History: AppBase, IHistory
     {
         private readonly long _custObjUniqueId;
@@ -38,8 +39,8 @@ namespace CoaApp.Core
         protected History(IApplication app, object parent, long custObjUniqueId) : base(app, parent)
         {
             _custObjUniqueId = custObjUniqueId;
-        }        
-
+        }
+        ///<inheritdoc/>
         public IHistoryRecord this[int idx]
         {
             get
@@ -47,7 +48,7 @@ namespace CoaApp.Core
                 return GetHistory().ElementAt(idx);
             }
         }
-
+        ///<inheritdoc/>
         public int Count => GetHistory().Count();
         private IEnumerable<IHistoryRecord> GetHistory()
         {

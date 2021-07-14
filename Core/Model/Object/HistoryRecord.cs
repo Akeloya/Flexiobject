@@ -25,6 +25,7 @@ using System;
 
 namespace CoaApp.Core.Object
 {
+    ///<inheritdoc/>
     public abstract class HistoryRecord : AppBase, IHistoryRecord
     {
         private IUserFieldDefinition _field;
@@ -37,11 +38,19 @@ namespace CoaApp.Core.Object
         private readonly string _description;
         private readonly string _oldValue;
         private readonly string _newValue;
-        protected HistoryRecord(IApplication app, object parent) : base(app, parent)
-        {
-
-        }
-
+        /// <summary>
+        /// Default constructor for history record
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="parent"></param>
+        /// <param name="fieldId"></param>
+        /// <param name="action"></param>
+        /// <param name="date"></param>
+        /// <param name="desc"></param>
+        /// <param name="oldVal"></param>
+        /// <param name="newVal"></param>
+        /// <param name="userId"></param>
+        /// <param name="state"></param>
         protected HistoryRecord(IApplication app, 
                                 object parent,
                                 int fieldId,
@@ -62,12 +71,19 @@ namespace CoaApp.Core.Object
             _state = state;
             _userId = userId;
         }
+        ///<inheritdoc/>
         public CoaHistoryActionTypes Action => _action;
+        ///<inheritdoc/>
         public DateTime Date => _date;
+        ///<inheritdoc/>
         public string Description => _description;
+        ///<inheritdoc/>
         public string NewValue => _newValue;
+        ///<inheritdoc/>
         public string OldValue => _oldValue;
+        ///<inheritdoc/>
         public IState State => _state;
+        ///<inheritdoc/>
         public IUser User
         {
             get
@@ -77,6 +93,7 @@ namespace CoaApp.Core.Object
                 return _user;
             }
         }
+        ///<inheritdoc/>
         public IUserFieldDefinition UserField
         {
             get
@@ -86,10 +103,11 @@ namespace CoaApp.Core.Object
                 return _field;
             }
         }
-
-        public string UserName => throw new NotImplementedException();
-
+        ///<inheritdoc/>
+        public string UserName => User?.Name;
+        ///<inheritdoc/>
         protected abstract IUserFieldDefinition OnGetField(int fieldId);
+        ///<inheritdoc/>
         protected abstract IUser OnGetUser(int userId);
     }
 }

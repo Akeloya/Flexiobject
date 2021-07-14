@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -20,8 +20,14 @@
  */
 namespace CoaApp.Core.Interfaces
 {
+    /// <summary>
+    /// Application interface
+    /// </summary>
     public interface IApplication
     {
+        /// <summary>
+        /// Active session context
+        /// </summary>
         ISession ActiveSession { get; }
         /// <summary>
         /// Write string message to write in server log

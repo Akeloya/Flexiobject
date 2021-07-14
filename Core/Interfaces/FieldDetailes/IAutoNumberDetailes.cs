@@ -21,43 +21,45 @@
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Интерфейс автоинкрементного идентификатора с префиксом и постфиксом
+    /// User identifier number
+    /// <seealso cref="ICustomFolder"/>
+    /// <seealso cref="IUserFieldDefinition"/>
     /// </summary>
     public interface IAutoNumberDetailes : IBase
     {
         /// <summary>
-        /// Длина поля
+        /// Field number width
         /// </summary>
         int FieldWidth { get; set; }
         /// <summary>
-        /// Наследовать настройки (родительской папки)
+        /// Inherit settings from parent folder
         /// </summary>
         bool InheritSettings { get; set; }
         /// <summary>
-        /// Заполнять нолями слева число, добивая до длины
+        /// Fill zeros empty digits
         /// </summary>
-        bool LeadingZeroes { get; set; }
+        bool FillZeroes { get; set; }
         /// <summary>
-        /// Максимальное значение
+        /// Initial number value
         /// </summary>
-        int MinimumValue { get; set; }
+        int InitialValue { get; set; }
         /// <summary>
-        /// Префикс числа
+        /// Identifier preffix
         /// </summary>
         string Prefix { get; set; }
         /// <summary>
-        /// Распространять на дочерние папки
+        /// Subfolders will get value from parent folder and won't generate own values
         /// </summary>
         bool ShareNumbersWithSubfolders { get; set; }
         /// <summary>
-        /// Суффикс авто числа
+        /// Identifier suffix
         /// </summary>
         string Suffix { get; set; }
         /// <summary>
-        /// Преобразование значения авточисла в число
+        /// Converting string identifier value to number
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="value">String identifier value</param>
         /// <returns></returns>
-        long ConvertStringToNumber(string value);
+        long ToNumber(string value);
     }
 }

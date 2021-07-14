@@ -65,9 +65,9 @@ namespace CoaApp.Core.Model.Rule
             //TODO:dig into other branches of switch operator and replace resultRightValue for right side
             switch (leftSide.Definition.Type)
             {
-                case CoaFieldTypes.AutoNumber:
+                case CoaFieldTypes.Identifier:
                     var dt = (IAutoNumberDetailes)leftSide.Definition.Details;
-                    result = CompareLongs(Convert.ToInt64(dt.ConvertStringToNumber(leftSide.TValue.ToString())), Convert.ToInt64(rightSide), operatr);
+                    result = CompareLongs(Convert.ToInt64(dt.ToNumber(leftSide.TValue.ToString())), Convert.ToInt64(rightSide), operatr);
                     break;
                 case CoaFieldTypes.Bigint:
                     result = CompareLongs(Convert.ToInt32(leftSide.TValue), Convert.ToInt32(rightSide), operatr);
@@ -87,7 +87,7 @@ namespace CoaApp.Core.Model.Rule
                 case CoaFieldTypes.Date:
                     result = CompareDates(Convert.ToDateTime(leftSide.TValue), rightSide, operatr, rightSideType);
                     break;
-                case CoaFieldTypes.DropDownList:
+                case CoaFieldTypes.OptionList:
                     {
                         if (leftSide.TValue != null)
                         {

@@ -26,12 +26,19 @@ using System;
 
 namespace CoaApp.Core
 {
+    ///<inheritdoc/>
     public abstract class CoaUser : AppBase, IUser
     {
         private int _uniqueId;
         private CoaUserAuthenticationTypes _authType;
         private long _custObjId;
         private ICustomObject _custObject;
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="parent"></param>
+        /// <param name="custObjId"></param>
         protected CoaUser(IApplication app, object parent, long custObjId = 0) : base(app, parent)
         {
             _custObjId = custObjId;
@@ -44,21 +51,28 @@ namespace CoaApp.Core
         {
             return !(left?.Equals(right) ?? (right?.Equals(left) ?? true));
         }
+        ///<inheritdoc/>
         [AppFolderProperty(CoaApplicationFoldersProperties.UserActive, true)]
         public bool Active { get; set; }
-        public ICustomFolder DefaultCustomFolder { get; set; }
-        [AppFolderProperty(CoaApplicationFoldersProperties.UserDepartment, false)]
-        public string Department { get; set; }
+        ///<inheritdoc/>
+        public ICustomFolder DefaultCustomFolder { get; set; }                
+        ///<inheritdoc/>
         [AppFolderProperty(CoaApplicationFoldersProperties.UserDisplayName, true)]
         public string DisplayName { get; set; }
+        ///<inheritdoc/>
         [AppFolderProperty(CoaApplicationFoldersProperties.UserWindowsDomainName, true)]
         public string DomainName { get; set; }
+        ///<inheritdoc/>
         [AppFolderProperty(CoaApplicationFoldersProperties.UserEmailAddress, false)]
-        public string EmailAddress { get; set; }        
+        public string EmailAddress { get; set; }
+        ///<inheritdoc/>
         public bool HasDefaultCustomFolder { get; set; }
+        ///<inheritdoc/>
         [AppFolderProperty(CoaApplicationFoldersProperties.UserLoginName, false)]
         public string LoginName { get; set; }
+        ///<inheritdoc/>
         public string Name => DisplayName;
+        ///<inheritdoc/>
         public ICustomObject Object
         {
             get
@@ -79,28 +93,37 @@ namespace CoaApp.Core
                 _custObject = value;
             }
         }
+        ///<inheritdoc/>
         public string OutgoingEmailAccount { get; set; }
+        ///<inheritdoc/>
         [AppFolderProperty(CoaApplicationFoldersProperties.UserPassword, false)]
         public string Password { get; set; }
+        ///<inheritdoc/>
         [AppFolderProperty(CoaApplicationFoldersProperties.UserSuperuser, false)]
         public bool SuperUser { get; set; }
+        ///<inheritdoc/>
         public int UniqueId => _uniqueId;
+        ///<inheritdoc/>
         [AppFolderProperty(CoaApplicationFoldersProperties.UserAuthentication, false)]
         public CoaUserAuthenticationTypes AuthenticationType { get { return _authType; } set { _authType = value; } }
+        ///<inheritdoc/>
         public bool Equals(IUser other)
         {
             if (other == null)
                 return false;
             return UniqueId == other.UniqueId;
         }
+        ///<inheritdoc/>
         public override bool Equals(object obj)
         {
             return Equals(obj as IUser);
         }
+        ///<inheritdoc/>
         public override int GetHashCode()
         {
             return base.GetHashCode();
         }
+        ///<inheritdoc/>
         public void Save()
         {
             switch (_authType)
@@ -122,11 +145,17 @@ namespace CoaApp.Core
 
             _uniqueId = OnSave();
         }
+        ///<inheritdoc/>
         public abstract IGroups Groups { get; }
+        ///<inheritdoc/>
         public abstract IGroups GroupsRecursive { get; }
+        ///<inheritdoc/>
         public abstract void AddToGroup(IGroup group);
+        ///<inheritdoc/>
         public abstract void Delete();
+        ///<inheritdoc/>
         public abstract bool IsInGroup(string groupName);
+        ///<inheritdoc/>
         public abstract bool IsInGroupRecursive(string groupName);
         /// <summary>
         /// Save object implementation
