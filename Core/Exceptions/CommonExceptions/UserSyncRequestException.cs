@@ -29,20 +29,15 @@ namespace CoaApp.Core.Exceptions
     [Serializable]
     public class UserSyncRequestException : CoaApplicationException
     {
-        /// <summary>
-        /// Constructor for overriding standard message
-        /// </summary>
-        /// <param name="message">Exception message</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/message/*'/>
         public UserSyncRequestException(string message) : base(message, AppExceptionStatus.Work)
         {
         }
-
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/messageInnerException/*'/>
         public UserSyncRequestException(string message, Exception innerException) : base(message, innerException, AppExceptionStatus.Work)
         {
         }
-        /// <summary>
-        /// Default counstructor
-        /// </summary>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/default/*'/>
         public UserSyncRequestException() : base(Resource.UserSyncRequestException, AppExceptionStatus.Work)
         {
         }

@@ -29,42 +29,21 @@ namespace CoaApp.Core.Exceptions
     [Serializable]
     public class MissingStatusOnServerException : CoaApplicationException
     {
-        /// <summary>
-        /// Constructor for override exception message
-        /// </summary>
-        /// <param name="message">Custom exception message</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/message/*'/>
         public MissingStatusOnServerException(string message) : base(message, AppExceptionStatus.Work)
         {
         }
-        /// <summary>
-        /// Constructor for override exception message with additional exception object
-        /// </summary>
-        /// <param name="message">Custom exception message</param>
-        /// <param name="innerException">Additional exception object</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/messageInnerException/*'/>
         public MissingStatusOnServerException(string message, Exception innerException) : base(message, innerException, AppExceptionStatus.Work)
         {
         }
-
-        /// <summary>
-        /// Default constructor with predefined exception message
-        /// </summary>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/default/*'/>
         public MissingStatusOnServerException() : base(Resource.MissingStatusOnServerException, AppExceptionStatus.Work)
         {
         }
-        /// <summary>
-        /// Standart constructor with predefined exception message with additional exception object
-        /// </summary>
-        /// <param name="innerException">Additional exception object</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/innerException/*'/>
         public MissingStatusOnServerException(Exception innerException) : base(Resource.MissingStatusOnServerException, innerException, AppExceptionStatus.Work)
-        { }
-        /// <summary>
-        /// Default serizlization constructor
-        /// </summary>
-        /// <param name="serializationInfo"></param>
-        /// <param name="streamingContext"></param>
-        protected MissingStatusOnServerException(System.Runtime.Serialization.SerializationInfo serializationInfo, System.Runtime.Serialization.StreamingContext streamingContext)
-        {
-            throw new NotImplementedException();
+        { 
         }
     }
 }

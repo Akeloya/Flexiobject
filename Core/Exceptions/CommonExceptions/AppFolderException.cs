@@ -28,10 +28,11 @@ namespace CoaApp.Core.Exceptions
     [Serializable]
     public class CoaAppFolderException : CoaApplicationException
     {
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/message/*'/>
         public CoaAppFolderException(string message) : base(message, AppExceptionStatus.Terminate)
         {
         }
-
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/messageInnerException/*'/>
         public CoaAppFolderException(string message, Exception innerException) : base(message, innerException, AppExceptionStatus.Terminate)
         {
         }

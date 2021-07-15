@@ -29,23 +29,15 @@ namespace CoaApp.Core.Exceptions
     [Serializable]
     public class GroupFolderSyncException : CoaApplicationException
     {
-        /// <summary>
-        /// Constructor for overriding message
-        /// </summary>
-        /// <param name="message"></param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/message/*'/>
         public GroupFolderSyncException(string message) : base(message, AppExceptionStatus.Work)
         {
         }
-        /// <summary>
-        /// Constructor for define standard exception with inner exception
-        /// </summary>
-        /// <param name="innerException">Additional exception</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/innerException/*'/>
         public GroupFolderSyncException(Exception innerException) : base(Resource.GroupSyncRequestException, innerException, AppExceptionStatus.Work)
         {
         }
-        /// <summary>
-        /// Default constructor
-        /// </summary>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/default/*'/>
         public GroupFolderSyncException() : base(Resource.GroupFolderSyncException, AppExceptionStatus.Work)
         {
         }

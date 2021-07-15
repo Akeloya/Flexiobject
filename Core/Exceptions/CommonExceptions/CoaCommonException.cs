@@ -28,18 +28,11 @@ namespace CoaApp.Core.Exceptions
     [Serializable]
     public class CoaCommonException : CoaApplicationException
     {
-        /// <summary>
-        /// Constructor with exception message
-        /// </summary>
-        /// <param name="message">Exception message</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/message/*'/>
         public CoaCommonException(string message) : base(message, AppExceptionStatus.Terminate)
         {
         }
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="message">Exception message</param>
-        /// <param name="innerException">Additional exception object</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/messageInnerException/*'/>
         public CoaCommonException(string message, Exception innerException) : base(message, innerException, AppExceptionStatus.Terminate)
         {
         }

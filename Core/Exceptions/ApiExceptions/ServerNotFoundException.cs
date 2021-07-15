@@ -23,30 +23,21 @@ using System;
 
 namespace CoaApp.Core.Exceptions.ApiExceptions
 {
-    // <summary>
+    /// <summary>
     /// Exception for client side calling when not found server
     /// </summary>
     [Serializable]
     public class ServerNotFoundException : CoaApplicationException
     {
-        /// <summary>
-        /// Constructor for override exception message
-        /// </summary>
-        /// <param name="message">Custom exception message</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/message/*'/>
         public ServerNotFoundException(string message) : base(message, AppExceptionStatus.Work)
         {
         }
-        /// <summary>
-        /// Constructor for override exception message and add additional object exception
-        /// </summary>
-        /// <param name="message">Custom exception message</param>
-        /// <param name="innerException">Additional exception object</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/messageInnerException/*'/>
         public ServerNotFoundException(string message, Exception innerException) : base(message, innerException, AppExceptionStatus.Work)
         {
         }
-        /// <summary>
-        /// Default empty constructor
-        /// </summary>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/default/*'/>
         public ServerNotFoundException() : base(Resource.ServerNotFoundExceptionNoInfo, AppExceptionStatus.Work)
         {
         }

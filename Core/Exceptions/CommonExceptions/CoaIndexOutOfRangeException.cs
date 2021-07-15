@@ -49,17 +49,12 @@ namespace CoaApp.Core.Exceptions
             AppExceptionStatus.Terminate)
         {
         }
-        /// <summary>
-        /// Constructor with standard exception string and additional exception object
-        /// </summary>
-        /// <param name="innerException">Additional exception object</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/innerException/*'/>
         public CoaIndexOutOfRangeException(Exception innerException) : base(Resource.CoaIndexOutOfRangeException, innerException, AppExceptionStatus.Terminate)
         {
 
         }
-        /// <summary>
-        /// Standard constructor
-        /// </summary>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/default/*'/>
         public CoaIndexOutOfRangeException() : base(Resource.CoaIndexOutOfRangeException, AppExceptionStatus.Terminate)
         {
         }

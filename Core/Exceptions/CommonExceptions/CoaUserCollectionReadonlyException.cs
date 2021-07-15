@@ -29,31 +29,19 @@ namespace CoaApp.Core.Exceptions
     [Serializable]
     public class CoaUserCollectionReadonlyException : CoaApplicationException
     {
-        /// <summary>
-        /// Standard constructor with predefined exception message
-        /// </summary>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/default/*'/>
         public CoaUserCollectionReadonlyException() : base(Resource.CoaUserCollectionReadonlyException, AppExceptionStatus.Work)
         {
         }
-        /// <summary>
-        /// Standard coustructor with predefined exception message and additional exception object
-        /// </summary>
-        /// <param name="innerException">Additional exception object</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/innerException/*'/>
         public CoaUserCollectionReadonlyException(Exception innerException) : base(Resource.CoaUserCollectionReadonlyException, innerException, AppExceptionStatus.Work)
         {
         }
-        /// <summary>
-        /// Constructor for override exception message with additional exception object
-        /// </summary>
-        /// <param name="message">Custom exception message</param>
-        /// <param name="innerException">Additional exception object</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/messageInnerException/*'/>
         public CoaUserCollectionReadonlyException(string message, Exception innerException) : base(message, innerException, AppExceptionStatus.Work)
         {
         }
-        /// <summary>
-        /// Constructor for override exception message
-        /// </summary>
-        /// <param name="message">Custom exception message</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/message/*'/>
         public CoaUserCollectionReadonlyException(string message) : base(message, AppExceptionStatus.Work)
         {
         }

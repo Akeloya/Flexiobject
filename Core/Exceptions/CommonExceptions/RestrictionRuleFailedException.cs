@@ -29,33 +29,21 @@ namespace CoaApp.Core.Exceptions
     [Serializable]
     public class RestrictionRuleFailedException : CoaApplicationException
     {
-        /// <summary>
-        /// Standard constructor
-        /// </summary>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/default/*'/>
         public RestrictionRuleFailedException() : base(Resource.RestrictionRuleFailedException, AppExceptionStatus.Work)
         {
 
         }
-        /// <summary>
-        /// Standard constructor with inner exception link
-        /// </summary>
-        /// <param name="innerException">Inner exception</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/innerException/*'/>
         public RestrictionRuleFailedException(Exception innerException) : base(Resource.RestrictionRuleFailedException, innerException, AppExceptionStatus.Work)
         {
 
         }
-        /// <summary>
-        /// Constructor for override exception message text
-        /// </summary>
-        /// <param name="message">Exception message</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/message/*'/>
         public RestrictionRuleFailedException(string message) : base(message, AppExceptionStatus.Work)
         {
         }
-        /// <summary>
-        /// Constructor for override exception message with inner exception
-        /// </summary>
-        /// <param name="message">Exception message</param>
-        /// <param name="innerException">Inner exception link</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/messageInnerException/*'/>
         public RestrictionRuleFailedException(string message, Exception innerException) : base(message, innerException, AppExceptionStatus.Work)
         {
         }

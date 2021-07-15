@@ -29,41 +29,20 @@ namespace CoaApp.Core.Exceptions
     [Serializable]
     public class WorkflowNullValueException : CoaApplicationException
     {
-        /// <summary>
-        /// Default serialization constructor
-        /// </summary>
-        /// <param name="serializationInfo"></param>
-        /// <param name="streamingContext"></param>
-        protected WorkflowNullValueException(System.Runtime.Serialization.SerializationInfo serializationInfo, System.Runtime.Serialization.StreamingContext streamingContext)
-        {
-            throw new NotImplementedException();
-        }
-        /// <summary>
-        /// Default exception constructor with predefined exception message
-        /// </summary>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/default/*'/>
         public WorkflowNullValueException() : base(Resource.WorkflowNullValueException, AppExceptionStatus.Work)
         {
         }
-        /// <summary>
-        /// Default constructor with predefined exception message and addition exception object
-        /// </summary>
-        /// <param name="innerException">Additional exception object</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/innerException/*'/>
         public WorkflowNullValueException(Exception innerException) : base(Resource.WorkflowNullValueException, innerException, AppExceptionStatus.Work)
         {
 
         }
-        /// <summary>
-        /// Constructor for custom message exception
-        /// </summary>
-        /// <param name="message">Custom message</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/message/*'/>
         public WorkflowNullValueException(string message) : base(message, AppExceptionStatus.Work)
         {
         }
-        /// <summary>
-        /// Constructor for custom message text and additional exception object
-        /// </summary>
-        /// <param name="message">Custom message text</param>
-        /// <param name="innerException">Additional exception object</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/messageInnerException/*'/>
         public WorkflowNullValueException(string message, Exception innerException) : base(message, innerException, AppExceptionStatus.Work)
         {
         }

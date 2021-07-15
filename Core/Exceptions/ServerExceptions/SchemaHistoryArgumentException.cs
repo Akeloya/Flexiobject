@@ -29,17 +29,11 @@ namespace CoaApp.Core.Exceptions
     [Serializable]
     public class SchemaHistoryArgumentException : CoaApplicationException
     {
-        /// <summary>
-        /// overriding base exception message and add inner exception
-        /// </summary>
-        /// <param name="message">New message text</param>
-        /// <param name="innerException">Inner exception</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/messageInnerException/*'/>
         public SchemaHistoryArgumentException(string message, Exception innerException) : base(message, innerException, AppExceptionStatus.Work)
         {
         }
-        /// <summary>
-        /// Default counstructor with predefined exception message
-        /// </summary>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/default/*'/>
         public SchemaHistoryArgumentException() : base(Resource.SchemaHistoryArgumentException, AppExceptionStatus.Work)
         {
         }

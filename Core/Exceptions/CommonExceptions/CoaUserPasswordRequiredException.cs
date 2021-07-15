@@ -29,31 +29,19 @@ namespace CoaApp.Core.Exceptions
     [Serializable]
     public class CoaUserPasswordRequiredException : CoaApplicationException
     {
-        /// <summary>
-        /// Default exception constructor with predefined message
-        /// </summary>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/default/*'/>
         public CoaUserPasswordRequiredException() : base(Resource.CoaUserPasswordRequiredException, AppExceptionStatus.Work)
         {
         }
-        /// <summary>
-        /// Constructor with overriding exception message
-        /// </summary>
-        /// <param name="message">Custom exception message</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/message/*'/>
         public CoaUserPasswordRequiredException(string message) : base(message, AppExceptionStatus.Work)
         {
         }
-        /// <summary>
-        /// Constructor with overriding exception message and inner exception
-        /// </summary>
-        /// <param name="message">Custom exception message</param>
-        /// <param name="innerException">Additional exception</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/messageInnerException/*'/>
         public CoaUserPasswordRequiredException(string message, Exception innerException) : base(message, innerException, AppExceptionStatus.Work)
         {
         }
-        /// <summary>
-        /// Default constructor with additional exception object and predefined exception message
-        /// </summary>
-        /// <param name="innerException"></param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/innerException/*'/>
         public CoaUserPasswordRequiredException(Exception innerException) : base(Resource.CoaUserPasswordRequiredException, innerException, AppExceptionStatus.Work)
         {
 

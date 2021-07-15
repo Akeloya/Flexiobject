@@ -29,24 +29,15 @@ namespace CoaApp.Core.Exceptions
     [Serializable]
     public class CoaProblemOnFormException : CoaApplicationException
     {
-        /// <summary>
-        /// Constructor for custom message exception
-        /// </summary>
-        /// <param name="message">Custom message exception</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/message/*'/>
         public CoaProblemOnFormException(string message) : base(message, AppExceptionStatus.Work)
         {
         }
-        /// <summary>
-        /// Constructor for custom exception message and exception object
-        /// </summary>
-        /// <param name="message">Custom message exception</param>
-        /// <param name="innerException">Additional exception object</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/messageInnerException/*'/>
         public CoaProblemOnFormException(string message, Exception innerException) : base(message, innerException, AppExceptionStatus.Work)
         {
         }
-        /// <summary>
-        /// Default constructor
-        /// </summary>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/default/*'/>
         public CoaProblemOnFormException() : base(Resource.CoaProblemOnFormException, AppExceptionStatus.Work)
         {
         }

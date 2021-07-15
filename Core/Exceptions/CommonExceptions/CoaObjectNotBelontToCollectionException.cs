@@ -29,24 +29,15 @@ namespace CoaApp.Core.Exceptions
     [Serializable]
     public class CoaObjectNotBelontToCollectionException : CoaApplicationException
     {
-        /// <summary>
-        /// Constructor for override exception message
-        /// </summary>
-        /// <param name="message">Exception message</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/message/*'/>
         public CoaObjectNotBelontToCollectionException(string message) : base(message, AppExceptionStatus.Work)
         {
         }
-        /// <summary>
-        /// Constructor for override exception message with additional exception object
-        /// </summary>
-        /// <param name="message">Custom exception message</param>
-        /// <param name="innerException">Additional exception object</param>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/messageInnerException/*'/>
         public CoaObjectNotBelontToCollectionException(string message, Exception innerException) : base(message, innerException, AppExceptionStatus.Work)
         {
         }
-        /// <summary>
-        /// Default exception constructor
-        /// </summary>
+        /// <include file='exceptionDoc.xml' path='docs/members[@name="exception"]/default/*'/>
         public CoaObjectNotBelontToCollectionException() : base(Resource.CoaObjectNotBelontToCollectionException, AppExceptionStatus.Work)
         {
         }
