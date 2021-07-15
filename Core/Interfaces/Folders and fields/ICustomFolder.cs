@@ -165,13 +165,13 @@ namespace CoaApp.Core.Interfaces
         /// Get user privilege level for folder
         /// </summary>
         /// <param name="user">User for check privilege level</param>
-        /// <returns>Privilege level <see cref="CoaEnumPermissionDefinition"/></returns>
+        /// <returns>Privilege level <see cref="CoaEnumPrivilegeLevel"/></returns>
         CoaEnumPrivilegeLevel GetPrivilegeLevel(IUser user);
         /// <summary>
         /// Get group privilege level
         /// </summary>
         /// <param name="group">Group for check privilege level</param>
-        /// <returns>Privilege level <see cref="CoaEnumPermissionDefinition"/></returns>
+        /// <returns>Privilege level <see cref="CoaEnumPrivilegeLevel"/></returns>
         CoaEnumPrivilegeLevel GetPrivilegeLevel(IGroup group);
         /// <summary>
         /// Folder visibility rule

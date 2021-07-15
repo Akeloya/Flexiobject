@@ -62,7 +62,7 @@ namespace CoaApp.Core.Interfaces
         List<string> ScriptDependencyFields { get; set; }
         /// <summary>
         /// Поле типа "ObjectList" с объектами для калькуляции
-        /// <seealso cref="CoaEnumFieldType"/>
+        /// <seealso cref="CoaFieldTypes"/>
         /// <seealso cref="IUserFieldDefinition"/>
         /// <seealso cref="SummarizedFieldPath"/>
         /// </summary>

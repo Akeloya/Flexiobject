@@ -25,6 +25,9 @@ namespace CoaApp.Core.Enumes
     /// </summary>
     public enum CoaUserAuthTypes
     {
+        /// <summary>
+        /// User won't have any access to application
+        /// </summary>
         NoAuth,
         /// <summary>
         /// User login and password stores in database

@@ -24,6 +24,9 @@ using System.Collections.Generic;
 
 namespace CoaApp.Core.Model.Rule
 {
+    /// <summary>
+    /// Rule helpers to get string value of condition elements
+    /// </summary>
     public static class RuleHelpers
     {
         private static readonly Dictionary<CoaRuleComparisonsTypes, string> _comparisonStr = new()
@@ -64,6 +67,11 @@ namespace CoaApp.Core.Model.Rule
             { CoaRuleComparisonsTypes.IsApiInterface, Resource.CoaRuleComparisonsTypesIsApiInterface },
             { CoaRuleComparisonsTypes.NotContainsUser, Resource.CoaRuleComparisonsTypesNotContains }
         };
+        /// <summary>
+        /// Get string value of comparisson
+        /// </summary>
+        /// <param name="type">Comparison</param>
+        /// <returns>Epmty string or string value of comparison</returns>
         public static string ToStringValue(this CoaRuleComparisonsTypes? type)
         {
             if (type == null)
@@ -72,7 +80,11 @@ namespace CoaApp.Core.Model.Rule
                 return string.Empty;
             return result;
         }
-
+        /// <summary>
+        /// Get string value of combinations
+        /// </summary>
+        /// <param name="combination">Combination</param>
+        /// <returns>Empty string or string value of combination</returns>
         public static string ToStringValue(this CoaRuleCombinationTerms combination)
         {
             switch (combination)

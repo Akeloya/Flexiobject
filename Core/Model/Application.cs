@@ -31,6 +31,7 @@ namespace CoaApp.Core
     public abstract class CoaApplication : MarshalByRefObject, IApplication
     {
         [ThreadStatic] private static ISession _activeSession;
+        ///<inheritdoc/>
         public ISession ActiveSession => _activeSession;
         /// <summary>
         /// Internal application folders
@@ -59,8 +60,6 @@ namespace CoaApp.Core
                     result = new Dictionary<CoaApplicationFoldersProperties, bool>{
                         { CoaApplicationFoldersProperties.UserActive, true},
                         { CoaApplicationFoldersProperties.UserAuthentication, true},
-                        { CoaApplicationFoldersProperties.UserCalendar, false},
-                        { CoaApplicationFoldersProperties.UserDepartment, false},
                         { CoaApplicationFoldersProperties.UserDescription, false},
                         { CoaApplicationFoldersProperties.UserDisplayName, true},
                         { CoaApplicationFoldersProperties.UserEmailAddress, false},
@@ -68,7 +67,6 @@ namespace CoaApp.Core
                         { CoaApplicationFoldersProperties.UserLocked, true},
                         { CoaApplicationFoldersProperties.UserLoginName, false},
                         { CoaApplicationFoldersProperties.UserPassword, true},
-                        { CoaApplicationFoldersProperties.UserPhone, false},
                         { CoaApplicationFoldersProperties.UserSuperuser, false},
                         { CoaApplicationFoldersProperties.UserWindowsDomainName, false } };
                     break;
@@ -83,8 +81,7 @@ namespace CoaApp.Core
             }
             return result;
         }
-
-        
+        ///<inheritdoc/>
         public ISession OpenSession(string hostName, int port, string userName = null, string password = null)
         {
             if (string.IsNullOrEmpty(hostName))
@@ -103,10 +100,7 @@ namespace CoaApp.Core
             }
             return _activeSession;
         }
-        /// <summary>
-        /// Loggin message to server log
-        /// </summary>
-        /// <param name="msg">Message string</param>
+        ///<inheritdoc/>
         public void WriteLogMessage(string msg)
         {
             if (string.IsNullOrEmpty(msg))

@@ -30,7 +30,7 @@ namespace CoaApp.Core
     public abstract class CoaUser : AppBase, IUser
     {
         private int _uniqueId;
-        private CoaUserAuthenticationTypes _authType;
+        private CoaUserAuthTypes _authType;
         private long _custObjId;
         private ICustomObject _custObject;
         /// <summary>
@@ -43,6 +43,12 @@ namespace CoaApp.Core
         {
             _custObjId = custObjId;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static bool operator ==(CoaUser left, IUser right)
         {
             return (left?.Equals(right) ?? (right?.Equals(left) ?? true));
@@ -105,7 +111,7 @@ namespace CoaApp.Core
         public int UniqueId => _uniqueId;
         ///<inheritdoc/>
         [AppFolderProperty(CoaApplicationFoldersProperties.UserAuthentication, false)]
-        public CoaUserAuthenticationTypes AuthenticationType { get { return _authType; } set { _authType = value; } }
+        public CoaUserAuthTypes AuthenticationType { get { return _authType; } set { _authType = value; } }
         ///<inheritdoc/>
         public bool Equals(IUser other)
         {
@@ -128,17 +134,17 @@ namespace CoaApp.Core
         {
             switch (_authType)
             {
-                case CoaUserAuthenticationTypes.Internal:
+                case CoaUserAuthTypes.Internal:
                     if (string.IsNullOrEmpty(Password))
                         throw new CoaUserPasswordRequiredException();
                     if (string.IsNullOrEmpty(LoginName))
                         throw new CoaUserLoginRequiredException();
                     break;
-                case CoaUserAuthenticationTypes.Windows:
+                case CoaUserAuthTypes.Windows:
                     if (string.IsNullOrEmpty(LoginName))
                         throw new CoaUserLoginRequiredException();
                     break;
-                case CoaUserAuthenticationTypes.NoAuth:
+                case CoaUserAuthTypes.NoAuth:
                     Password = null;
                     break;
             }

@@ -21,11 +21,22 @@
 
 namespace CoaApp.Core.Enumes
 {
+    /// <summary>
+    /// Task types
+    /// </summary>
     public enum CoaTaskTypes
     {
-        TaskActionList = 0,
-        TaskReport = 1,
-        TaskExport = 2,
-        TaskExportToDatabase = 3
+        /// <summary>
+        /// Action list
+        /// </summary>
+        ActionList = 0,
+        /// <summary>
+        /// Generating report
+        /// </summary>
+        Report = 1,
+        /// <summary>
+        /// Export data
+        /// </summary>
+        Export = 2        
     }
 }

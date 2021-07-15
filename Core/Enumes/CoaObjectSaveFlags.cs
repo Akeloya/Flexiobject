@@ -29,6 +29,9 @@ namespace CoaApp.Core.Enumes
     [Flags]
     public enum CoaEnumSaveFlags
     {
+        /// <summary>
+        /// No saving flags - default value
+        /// </summary>
         NoFlags = 0,
         /// <summary>
         /// Don't check permissions

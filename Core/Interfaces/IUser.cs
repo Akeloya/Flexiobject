@@ -93,7 +93,7 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// User authentication type.
         /// </summary>
-        CoaUserAuthenticationTypes AuthenticationType { get; set; }
+        CoaUserAuthTypes AuthenticationType { get; set; }
         /// <summary>
         /// Add user object to group
         /// </summary>

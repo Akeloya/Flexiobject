@@ -20,6 +20,9 @@
  */
 namespace CoaApp.Core.Interfaces
 {
+    /// <summary>
+    /// User session object interface
+    /// </summary>
     public interface ISession : IBase
     {
         /// <summary>
@@ -90,7 +93,7 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// Get system parameter
         /// </summary>
-        /// <param name="table">Registry key</param>
+        /// <param name="registry">Registry key</param>
         /// <param name="name">Parameter name</param>
         /// <returns>String value of parameter</returns>
         string GetSystemParameter(string registry, string name);
