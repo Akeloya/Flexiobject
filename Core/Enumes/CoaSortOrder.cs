@@ -25,7 +25,13 @@ namespace CoaApp.Core.Enumes
     /// </summary>
     public enum CoaEnumSortDirection
     {
+        /// <summary>
+        /// Ascending sorting
+        /// </summary>
         Ascending = 1,
+        /// <summary>
+        /// Ascending sorting
+        /// </summary>
         Descending
     }
 }

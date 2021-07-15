@@ -40,10 +40,12 @@ namespace CoaApp.Core
         {
             _uniqueId = uniqueId;
         }
+        /// <include file='commonDocs.xml' path='docs/members[@name="comparisons"]/equality/*'/>
         public static bool operator ==(CoaCustomObject left, ICustomObject right)
         {
             return (left?.Equals(right) ?? (right?.Equals(left) ?? true));
         }
+        /// <include file='commonDocs.xml' path='docs/members[@name="comparisons"]/inequality/*'/>
         public static bool operator !=(CoaCustomObject left, ICustomObject right)
         {
             return !(left?.Equals(right) ?? (right?.Equals(left) ?? true));

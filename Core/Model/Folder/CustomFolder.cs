@@ -46,11 +46,13 @@ namespace CoaApp.Core
         protected CustomFolder(IApplication app, object parent, int uniqueId) : base(app, parent)
         {
             _uniqueId = uniqueId;
-        }        
+        }
+        /// <include file='commonDocs.xml' path='docs/members[@name="comparisons"]/equality/*'/>
         public static bool operator ==(CustomFolder left, ICustomFolder right)
         {
             return (left?.Equals(right) ?? (right?.Equals(left) ?? true));
         }
+        /// <include file='commonDocs.xml' path='docs/members[@name="comparisons"]/inequality/*'/>
         public static bool operator !=(CustomFolder left, ICustomFolder right)
         {
             return !(left?.Equals(right) ?? (right?.Equals(left) ?? true));

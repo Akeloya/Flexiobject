@@ -29,12 +29,12 @@ namespace CoaApp.Core
     ///<inheritdoc/>
     public abstract class CoaGroup : AppBase, IGroup
     {
-        private bool _isBaseGroup;
+        private readonly bool _isBaseGroup;
         private ICustomObject _userObject;
         private string _displayName;
         private string _emailAddress;
         private CoaGroupBehaviorTypes _emailBehavior;
-        private long _objectId;
+        private readonly long _objectId;
         private int _uniqueId;
         /// <summary>
         /// Default constructor
@@ -60,10 +60,12 @@ namespace CoaApp.Core
             _objectId = customObjId;
             _isBaseGroup = isBase;
         }
+        /// <include file='commonDocs.xml' path='docs/members[@name="comparisons"]/equality/*'/>
         public static bool operator ==(CoaGroup left, IGroup right)
         {
             return (left?.Equals(right) ?? (right?.Equals(left) ?? true));
         }
+        /// <include file='commonDocs.xml' path='docs/members[@name="comparisons"]/inequality/*'/>
         public static bool operator !=(CoaGroup left, IGroup right)
         {
             return !(left?.Equals(right) ?? (right?.Equals(left) ?? true));

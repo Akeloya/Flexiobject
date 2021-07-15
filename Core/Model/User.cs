@@ -31,7 +31,7 @@ namespace CoaApp.Core
     {
         private int _uniqueId;
         private CoaUserAuthTypes _authType;
-        private long _custObjId;
+        private readonly long _custObjId;
         private ICustomObject _custObject;
         /// <summary>
         /// Default constructor
@@ -43,16 +43,12 @@ namespace CoaApp.Core
         {
             _custObjId = custObjId;
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
+        /// <include file='commonDocs.xml' path='docs/members[@name="comparisons"]/equality/*'/>
         public static bool operator ==(CoaUser left, IUser right)
         {
             return (left?.Equals(right) ?? (right?.Equals(left) ?? true));
         }
+        /// <include file='commonDocs.xml' path='docs/members[@name="comparisons"]/inequality/*'/>
         public static bool operator !=(CoaUser left, IUser right)
         {
             return !(left?.Equals(right) ?? (right?.Equals(left) ?? true));

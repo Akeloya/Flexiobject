@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<docs>
+	<members name="comparisons">
+		<equality>
+			<summary>
+				Comparison of two objects, one left equal right
+			</summary>
+			<param name="left">Left comparison operand</param>
+			<param name="right">Right comparison operand</param>
+			<returns>Comparison value</returns>
+		</equality>
+		<inequality>
+			<summary>
+				Comparison of two objects, one left not equal right
+			</summary>
+			<param name="left">Left comparison operand</param>
+			<param name="right">Right comparison operand</param>
+			<returns>Comparison value</returns>
+		</inequality>
+	</members>
+</docs>
