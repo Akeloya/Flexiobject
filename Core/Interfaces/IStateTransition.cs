@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -18,39 +18,33 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Транзакция перевода из состояния в состояние
+    /// Transition from state to state in workflow
     /// </summary>
     public interface IStateTransition : IBase
     {
         /// <summary>
-        /// Состояние откуда
+        /// Transition from state
         /// </summary>
         IState From { get; set; }
         /// <summary>
-        /// Состояние куда
+        /// Transition to state
         /// </summary>
         IState To { get; set; }
         /// <summary>
-        /// Требуемые поля для заполнения
+        /// Fields, that must be with value to transition success
         /// </summary>
         IUserFieldDefinitions RequiredFields { get; set; }
         /// <summary>
-        /// Действия, выполняемые до перевода
+        /// Actions that will be executed before transition
         /// </summary>
         IActions ActionListBefore { get; }
         /// <summary>
-        /// Действия выполняемые после перевода
+        /// Actions than will be executed after transition
         /// </summary>
-        IActions ActionListAfter { get; }
-        /// <summary>
-        /// Проверка правила  для объекта
-        /// </summary>
-        /// <param name="oldRequest">Копия объекта до изменения</param>
-        /// <param name="newRequest">Копия объекта после изменения</param>
-        /// <returns></returns>
-        bool CheckRule(ICustomObject oldRequest, ICustomObject newRequest);
+        IActions ActionListAfter { get; }        
     }
 }

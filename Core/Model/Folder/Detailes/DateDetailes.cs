@@ -25,11 +25,7 @@ namespace CoaApp.Core
     ///<inheritdoc/>
     public abstract class DateDetailes : AppBase, IDateDetailes
     {
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        /// <param name="app"></param>
-        /// <param name="parent"></param>
+        /// <include file='commonDocs.xml' path='docs/members[@name="constructors"]/defaultProtected/*'/>
         protected DateDetailes(IApplication app, object parent): base(app, parent)
         {
 

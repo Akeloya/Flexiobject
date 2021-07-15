@@ -18,4 +18,13 @@
 			<returns>Comparison value</returns>
 		</inequality>
 	</members>
+	<members name="constructors">
+		<defaultProtected>
+			<summary>
+				Default constructor
+			</summary>
+			<param name="app">Reference to Application</param>
+			<param name="parent">Parent object or object-creator</param>
+		</defaultProtected>
+	</members>
 </docs>
