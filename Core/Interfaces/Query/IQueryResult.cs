@@ -1,49 +1,29 @@
-﻿/*
- *  "Custom object application core"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
- *
- *  This file is part of "Custom object application".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-namespace CoaApp.Core.Interfaces
+﻿namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Результат запроса к данным
+    /// Query results
     /// </summary>
     public interface IQueryResult : IBase
     {
         /// <summary>
-        /// Количество колонок в результатах запроса
+        /// Column count
         /// </summary>
         int ColumnCount { get; }
         /// <summary>
-        /// Колонка в результатах запроса
+        /// Access query column by index
         /// </summary>
-        /// <param name="index">индекс колонки</param>
-        /// <returns>Имя колонки</returns>
+        /// <param name="index">0..ColumnCount-1 index value</param>
+        /// <returns></returns>
         IQueryResultColumn this[int index] { get; }
         /// <summary>
-        /// Количество строк в результатах запроса
+        /// Rows count
         /// </summary>
         int Rows { get; }
         /// <summary>
-        /// Значение
+        /// Data value
         /// </summary>
-        /// <param name="row">индекс строки</param>
-        /// <param name="col">индекс колонки</param>
+        /// <param name="row">0..Rows index value</param>
+        /// <param name="col">0..ColumnCount index value</param>
         /// <returns></returns>
         object this[int row, int col] { get; }
     }

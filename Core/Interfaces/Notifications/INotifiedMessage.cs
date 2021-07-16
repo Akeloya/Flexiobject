@@ -1,62 +1,42 @@
-﻿/*
- *  "Custom object application core"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
- *
- *  This file is part of "Custom object application".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-using System;
+﻿using System;
 
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Сообщение уведомления пользователя
+    /// Notification message to user
     /// </summary>
     public interface INotifiedMessage : IBase
     {
         /// <summary>
-        /// Текст сообщения
+        /// Message text
         /// </summary>
         string Message { get;}
         /// <summary>
-        /// Связанный объект
+        /// Custom object linked to message
         /// </summary>
-        ICustomObject LinkedRequest {get;}
+        ICustomObject LinkedCustomObject {get;}
         /// <summary>
-        /// Дата-время события
+        /// Date time of message
         /// </summary>
         DateTime EventDate { get; }
         /// <summary>
-        /// Отправитель
+        /// User-sender
         /// </summary>
         IUser Sender { get; }
         /// <summary>
-        /// Флаг прочитано ли сообщение
+        /// Is readed flag
         /// </summary>
         bool IsReaded { get; }
         /// <summary>
-        /// Дата прочтения сообщения
+        /// Message readed date
         /// </summary>
         DateTime? ReadedDate { get; }
         /// <summary>
-        /// Прочитать сообщение
+        /// Read message
         /// </summary>
         void Read();
         /// <summary>
-        /// Удалить сообщение
+        /// Remove message
         /// </summary>
         void Delete();
     }
