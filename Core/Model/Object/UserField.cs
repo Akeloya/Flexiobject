@@ -1,25 +1,4 @@
-﻿/*
- *  "Custom object application core"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2018 by Maxim V. Yugov.
- *
- *  This file is part of "Custom object application".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-using CoaApp.Core.Enumes;
+﻿using CoaApp.Core.Enumes;
 using CoaApp.Core.Exceptions;
 using CoaApp.Core.Exceptions.CommonExceptions;
 using CoaApp.Core.Interfaces;
@@ -45,7 +24,7 @@ namespace CoaApp.Core.Object
         private short? _shortValue;
         private bool? _boolValue;
         private IState _stateValue;
-        private IDropDownValue _ddlValue;
+        private IOptionListValue _ddlValue;
         private dynamic _tValueInitiated;
 
         private readonly IUserFieldDefinition _definition;
@@ -173,7 +152,7 @@ namespace CoaApp.Core.Object
                         if (_tValueInitiated is int && Convert.ToInt32(_tValueInitiated) != 0)
                         {
                             var typedValue = Convert.ToInt64(_tValueInitiated);
-                            var detailes = (IDropDownListDetailes)_definition.Details;
+                            var detailes = (IOptionListDetailes)_definition.Details;
                             for (int i = 0; i < detailes.Count; i++)
                                 if (detailes[i].UniqueId == typedValue)
                                 {
@@ -184,7 +163,7 @@ namespace CoaApp.Core.Object
                         }
                         if (_tValueInitiated is string)
                         {
-                            _ddlValue = ((IDropDownListDetailes)_definition.Details)[Convert.ToString(_tValueInitiated)];
+                            _ddlValue = ((IOptionListDetailes)_definition.Details)[Convert.ToString(_tValueInitiated)];
                             _initiated = true;
                         }
                     }
@@ -264,7 +243,7 @@ namespace CoaApp.Core.Object
                         _decimalValue = Convert.ToDecimal(value);
                     break;
                 case CoaFieldTypes.OptionList:
-                    SetDropDownValue(value);
+                    SetOptionListValue(value);
                     break;
                 case CoaFieldTypes.Int:
                     if (value == null)
@@ -458,7 +437,7 @@ namespace CoaApp.Core.Object
                         {
                             if (value is int && Convert.ToInt32(value) != 0)
                             {
-                                var det = (IDropDownListDetailes)_definition.Details;
+                                var det = (IOptionListDetailes)_definition.Details;
                                 for (int i = 0; i < det.Count; i++)
                                     if (det[i].UniqueId == value)
                                     {
@@ -467,7 +446,7 @@ namespace CoaApp.Core.Object
                                     }
                             }
                             else
-                                _ddlValue = ((IDropDownListDetailes)_definition.Details)[value];
+                                _ddlValue = ((IOptionListDetailes)_definition.Details)[value];
                         }
                         _initiated = true;
                         _tValueInitiated = _ddlValue;
@@ -546,9 +525,9 @@ namespace CoaApp.Core.Object
         /// <param name="value">Число переданное с сервера или хранящееся в БД</param>
         /// <returns></returns>
         protected abstract string OnGetAutoNumberValue(dynamic value);
-        private void SetDropDownValue(dynamic value)
+        private void SetOptionListValue(dynamic value)
         {
-            var det = (IDropDownListDetailes)_definition.Details;
+            var det = (IOptionListDetailes)_definition.Details;
             if (value is string)
                 _ddlValue = value != null ? det[value?.ToString()] : _tValueInitiated;
             if (value is int)

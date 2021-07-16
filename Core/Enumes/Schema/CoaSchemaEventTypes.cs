@@ -53,7 +53,7 @@ namespace CoaApp.Core.Enumes
         /// <summary>
         /// Manipulations with option list
         /// <seealso cref="IUserFieldDefinition"/>
-        /// <seealso cref="IDropDownListDetailes"/>
+        /// <seealso cref="IOptionListDetailes"/>
         /// </summary>
         OptionList,
         /// <summary>

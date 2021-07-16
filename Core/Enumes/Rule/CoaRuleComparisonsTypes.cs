@@ -72,19 +72,19 @@
         /// <summary>
         /// Current list value less than setted
         /// </summary>
-        LessThanDropDownText,
+        LessThanOptionListText,
         /// <summary>
         /// Current list value greater than setted
         /// </summary>
-        GreaterThanDropDownText,
+        GreaterThanOptionListText,
         /// <summary>
         /// Current list value less or equeal than setted
         /// </summary>
-        LessThanOrEqualDropDownText,
+        LessThanOrEqualOptionListText,
         /// <summary>
         /// Current list value greater or equal than setted
         /// </summary>
-        GreaterThanOrEqualDropDownText,
+        GreaterThanOrEqualOptionListText,
         /// <summary>
         /// Является суперпользователем
         /// </summary>

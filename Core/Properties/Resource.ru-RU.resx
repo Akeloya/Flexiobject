@@ -180,13 +180,13 @@
   <data name="CoaRuleComparisonsTypesGreaterThan" xml:space="preserve">
     <value>&gt;</value>
   </data>
-  <data name="CoaRuleComparisonsTypesGreaterThanDropDownText" xml:space="preserve">
+  <data name="CoaRuleComparisonsTypesGreaterThanOptionListText" xml:space="preserve">
     <value>выше чем</value>
   </data>
   <data name="CoaRuleComparisonsTypesGreaterThanOrEqual" xml:space="preserve">
     <value>&gt;=</value>
   </data>
-  <data name="CoaRuleComparisonsTypesGreaterThanOrEqualDropDownText" xml:space="preserve">
+  <data name="CoaRuleComparisonsTypesGreaterThanOrEqualOptionListText" xml:space="preserve">
     <value>выше начиная с</value>
   </data>
   <data name="CoaRuleComparisonsTypesIs" xml:space="preserve">
@@ -234,13 +234,13 @@
   <data name="CoaRuleComparisonsTypesLessThan" xml:space="preserve">
     <value>&lt;</value>
   </data>
-  <data name="CoaRuleComparisonsTypesLessThanDropDownText" xml:space="preserve">
+  <data name="CoaRuleComparisonsTypesLessThanOptionListText" xml:space="preserve">
     <value>ниже</value>
   </data>
   <data name="CoaRuleComparisonsTypesLessThanOrEqual" xml:space="preserve">
     <value>&lt;=</value>
   </data>
-  <data name="CoaRuleComparisonsTypesLessThanOrEqualDropDownText" xml:space="preserve">
+  <data name="CoaRuleComparisonsTypesLessThanOrEqualOptionListText" xml:space="preserve">
     <value>ниже начиная с</value>
   </data>
   <data name="CoaRuleComparisonsTypesMatches" xml:space="preserve">

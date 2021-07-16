@@ -252,9 +252,9 @@ namespace CoaApp.Core.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на high than.
         /// </summary>
-        internal static string CoaRuleComparisonsTypesGreaterThanDropDownText {
+        internal static string CoaRuleComparisonsTypesGreaterThanOptionListText {
             get {
-                return ResourceManager.GetString("CoaRuleComparisonsTypesGreaterThanDropDownText", resourceCulture);
+                return ResourceManager.GetString("CoaRuleComparisonsTypesGreaterThanOptionListText", resourceCulture);
             }
         }
         
@@ -270,9 +270,9 @@ namespace CoaApp.Core.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на high than from.
         /// </summary>
-        internal static string CoaRuleComparisonsTypesGreaterThanOrEqualDropDownText {
+        internal static string CoaRuleComparisonsTypesGreaterThanOrEqualOptionListText {
             get {
-                return ResourceManager.GetString("CoaRuleComparisonsTypesGreaterThanOrEqualDropDownText", resourceCulture);
+                return ResourceManager.GetString("CoaRuleComparisonsTypesGreaterThanOrEqualOptionListText", resourceCulture);
             }
         }
         
@@ -414,9 +414,9 @@ namespace CoaApp.Core.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на lower.
         /// </summary>
-        internal static string CoaRuleComparisonsTypesLessThanDropDownText {
+        internal static string CoaRuleComparisonsTypesLessThanOptionListText {
             get {
-                return ResourceManager.GetString("CoaRuleComparisonsTypesLessThanDropDownText", resourceCulture);
+                return ResourceManager.GetString("CoaRuleComparisonsTypesLessThanOptionListText", resourceCulture);
             }
         }
         
@@ -432,9 +432,9 @@ namespace CoaApp.Core.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на lower from.
         /// </summary>
-        internal static string CoaRuleComparisonsTypesLessThanOrEqualDropDownText {
+        internal static string CoaRuleComparisonsTypesLessThanOrEqualOptionListText {
             get {
-                return ResourceManager.GetString("CoaRuleComparisonsTypesLessThanOrEqualDropDownText", resourceCulture);
+                return ResourceManager.GetString("CoaRuleComparisonsTypesLessThanOrEqualOptionListText", resourceCulture);
             }
         }
         

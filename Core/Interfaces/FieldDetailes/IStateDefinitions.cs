@@ -1,70 +1,50 @@
-﻿/*
- *  "Custom object application core"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
- *
- *  This file is part of "Custom object application".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-using System.Collections.Generic;
-
-namespace CoaApp.Core.Interfaces
+﻿namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Определение коллекции состояний рабочего процесса
+    /// State collection definition
+    /// <see cref="IWorkflowDetails"/>
+    /// <seealso cref="IStateTransitions"/>
     /// </summary>
     public interface IStateDefinitions : IBase
     {
         /// <summary>
-        /// Создать состояние
+        /// Create state
         /// </summary>
-        /// <returns>Новое состояние не привязанное к коллекции</returns>
-        IState CreateStateDefinition();
+        /// <returns>New state object not belong to collection</returns>
+        IState Create();
         /// <summary>
-        /// Добавить созданное состояние
+        /// Add early created state
         /// </summary>
-        /// <param name="state">Состояние</param>
+        /// <param name="state">New state</param>
         void Add(IState state);
         /// <summary>
-        /// Начальное состояние
+        /// Get state with initial flag (initial state)
         /// </summary>
         IState InitialState { get; }
         /// <summary>
-        /// Удалить состояние по индексу
+        /// Remove state by index
         /// </summary>
-        /// <param name="idx"></param>
+        /// <param name="idx">0..Count-1 index value</param>
         void Remove(int idx);
         /// <summary>
-        /// Удалить состояние
+        /// Remove state object
         /// </summary>
-        /// <param name="state">Состояние в коллекции, которое требуется удалить</param>
+        /// <param name="state">State that will be removed</param>
         void Remove(IState state);
         /// <summary>
-        /// Доступ к коллекции состояний по индексу
+        /// Get state by index value
         /// </summary>
-        /// <param name="idx">Индекс 0..Count-1 коллекции состояний</param>
-        /// <returns>IState объект коллекции</returns>
+        /// <param name="idx">0..Count-1 index value</param>
+        /// <returns>IState object</returns>
         IState this[int idx] { get; }
         /// <summary>
-        /// Доступ к коллекции состояний по алиасу
+        /// Access state object by it's alias
         /// </summary>
-        /// <param name="alias">Алиас состояния из коллекции</param>
-        /// <returns>IState объект коллекции</returns>
+        /// <param name="alias">State alias</param>
+        /// <returns>IState collection object</returns>
         IState this[string alias] { get; }
         /// <summary>
-        /// Количество состояий в коллекции
+        /// State collection count
         /// </summary>
         int Count { get; }
     }
