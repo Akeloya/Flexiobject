@@ -1,26 +1,26 @@
 ﻿namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Коллекция полей объекта ICustomObject
+    /// User field collection of ICustomObject
     /// <seealso cref="ICustomObject"/>
     /// </summary>
     public interface IUserFields : IBase
     {
         /// <summary>
-        /// Количество объектов в коллекции
+        /// Field count in collection
         /// </summary>
         int Count { get; }
         /// <summary>
-        /// Доступ к полю по индексу в списке
+        /// Access to field by index
         /// </summary>
-        /// <param name="idx">0 - Count-1</param>
-        /// <returns>IUserField объект <seealso cref="IUserField"/></returns>
+        /// <param name="idx">0 - Count-1 index value</param>
+        /// <returns>IUserField object <seealso cref="IUserField"/></returns>
         IUserField this[int idx] { get; }
         /// <summary>
-        /// Доступ к объекту в коллекции по алиасу
+        /// Access to field by it's alias
         /// </summary>
-        /// <param name="alias">Строка - алиас поля</param>
-        /// <returns>IUserField объект <seealso cref="IUserField"/></returns>
+        /// <param name="alias">Field alias</param>
+        /// <returns>IUserField object <seealso cref="IUserField"/></returns>
         IUserField this[string alias] { get; }        
     }
 }
