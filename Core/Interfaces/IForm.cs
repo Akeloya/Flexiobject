@@ -1,75 +1,55 @@
-﻿/*
- *  "Custom object application core"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
- *
- *  This file is part of "Custom object application".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-using CoaApp.Core.Enumes;
+﻿using CoaApp.Core.Enumes;
 using System.Drawing;
 
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Интерфейс формы приложения
+    /// Application form
     /// </summary>
     public interface IForm : IBase
     {
         /// <summary>
-        /// Название формы в БД
+        /// Form name (short name)
         /// </summary>
         string Name { get; set; }
         /// <summary>
-        /// Заголовок формы в ПИ
+        /// Form title, multilangual
         /// </summary>
         string Title { get; }
         /// <summary>
-        /// Ширина окна формы
+        /// Window (form) width
         /// </summary>
         double Width { get; set; }
         /// <summary>
-        /// Высота окна формы
+        /// Window (form) height
         /// </summary>
         double Height { get; set; }
         /// <summary>
-        /// Содержимое формы
+        /// Form content (xaml markup)
         /// </summary>
         string Content { get; set; }
         /// <summary>
-        /// Фон формы
+        /// Form background
         /// </summary>
         Color? Background { get; set; }
         /// <summary>
-        /// Папка принадлежности формы, пусто - если форма глобальная
+        /// Forlder form, if form global - value will be null
         /// </summary>        
         ICustomFolder Folder { get; }
         /// <summary>
-        /// Скрипт, вызываемый при открытии формы
+        /// Script executing on form opening
         /// </summary>
         IScript OnOpenScript { get; set; }
         /// <summary>
-        /// Скрипт вызываемый при закрытии формы
+        /// Script executing on form closing
         /// </summary>
         IScript OnCloseScript { get; set; }
         /// <summary>
-        /// Тип формы
+        /// Form type
         /// </summary>
         CoaFormTypes Type { get; }
         /// <summary>
-        /// Сохранение изменений в форме, при ее изменении
+        /// Save changes to form
         /// </summary>
         void Save();
     }
