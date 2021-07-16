@@ -1,57 +1,35 @@
-﻿/*
- *  "Custom object application core"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
- *
- *  This file is part of "Custom object application".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-using System.Collections.Generic;
-
-namespace CoaApp.Core.Interfaces
+﻿namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Интерфейс коллекции действий модификации объектов
+    /// Action collection
     /// </summary>
     public interface IActions : IBase
     {
         /// <summary>
-        /// Добавить новое действие
+        /// Add new action
         /// </summary>
         /// <returns></returns>
         IAction Add();
         /// <summary>
-        /// Удалить действие
+        /// Remove action from collection
         /// </summary>
-        /// <param name="variant"></param>
+        /// <param name="variant">IAction object or index</param>
         void Remove(object variant);
         /// <summary>
-        /// Количество действий в коллекции
+        /// Action colleciton count
         /// </summary>
         int Count { get; }
         /// <summary>
-        /// Доступ к действию по индексу
+        /// Access to action by index
         /// </summary>
-        /// <param name="idx">0...Count-1 индекс действия</param>
+        /// <param name="idx">0...Count-1 index value</param>
         /// <returns></returns>
         IAction this[int idx] { get; }
         /// <summary>
-        /// Изменение порядка действий при обработке
+        /// Swap to action places
         /// </summary>
-        /// <param name="left">Объект IAction или индекс 0...Count-1 коллекции</param>
-        /// <param name="right">Объект IAction или индекс 0...Count-1 коллекции</param>
+        /// <param name="left">IAction object or 0...Count-1 index value</param>
+        /// <param name="right">IAction object or 0...Count-1 index value</param>
         void Swap(object left, object right);
     }
 }

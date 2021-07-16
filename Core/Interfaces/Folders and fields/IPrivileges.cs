@@ -1,55 +1,35 @@
-﻿/*
- *  "Custom object application core"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
- *
- *  This file is part of "Custom object application".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-namespace CoaApp.Core.Interfaces
+﻿namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Коллекция разрешений для папки
+    /// Custom folder privilegies collection
     /// </summary>
     public interface IPrivileges : IBase
     {
         /// <summary>
-        /// Создать новое разрешение. Изменения применятся после сохранения объекта.
+        /// Add new privilegies. Changes will applied after it will be saved
         /// <see cref="IPrivilege.Save"/>
         /// </summary>
         /// <returns>Объект IPermission</returns>
         IPrivilege Add();
         /// <summary>
-        /// Удаление записи из коллекции по индексу
+        /// Remove privilege from collection by index
         /// </summary>
-        /// <param name="index">0..Count-1 индекс</param>
+        /// <param name="index">0..Count-1 index value</param>
         void Remove(int index);
         /// <summary>
-        /// Удаление записи из коллекции. Запись должна принадлежать коллекции
+        /// Remove privilege from collection
         /// </summary>
-        /// <param name="obj">Удаляемый объект <see cref="IPrivilege"/></param>
+        /// <param name="obj">Object that must be removed <see cref="IPrivilege"/></param>
         void Remove(IPrivilege obj);
         /// <summary>
-        /// Количество привелегий
+        /// Privilege collection count
         /// </summary>
         int Count { get; }
         /// <summary>
-        /// Получение привелегии по индексу
+        /// Access privilege by index
         /// </summary>
-        /// <param name="index">0...Count-1 значение индекса</param>
-        /// <returns>Объект <see cref="IPrivilege"/></returns>
+        /// <param name="index">0...Count-1 index value</param>
+        /// <returns>Privilege object <see cref="IPrivilege"/></returns>
         IPrivilege this[int index] { get; }
     }
 }
