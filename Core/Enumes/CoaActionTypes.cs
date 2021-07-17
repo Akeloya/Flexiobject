@@ -1,7 +1,7 @@
 ﻿namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Коллекция типов действий модификаций объектов
+    /// Action types
     /// </summary>
     public enum CoaActionTypes
     {
@@ -22,7 +22,7 @@
         /// </summary>
         CScode,
         /// <summary>
-        /// Уведомление
+        /// Action notify user
         /// </summary>
         Notification,
     }

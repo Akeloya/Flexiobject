@@ -42,11 +42,11 @@ namespace CoaApp.Core
     internal class CoaFilterFieldArgs
     {
         /// <summary>
-        /// Название поля
+        /// Field name
         /// </summary>
         public string FieldName { get; set; }
         /// <summary>
-        /// Значение
+        /// Data value
         /// </summary>
         public object Value { get; set; }
 

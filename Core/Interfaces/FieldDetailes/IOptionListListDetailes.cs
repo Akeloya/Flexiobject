@@ -37,7 +37,7 @@
         /// Create new option list. For add it to collection use 'InsertAt'
         /// <see cref="InsertAt(IOptionListValue, int)"/>
         /// </summary>
-        /// <returns>IOptionListValue объект</returns>
+        /// <returns>IOptionListValue object</returns>
         IOptionListValue Create();
         /// <summary>
         /// Add early created IOptionListValue object to collection

@@ -326,12 +326,12 @@ namespace CoaApp.Core.Object
             }
         }
         /// <summary>
-        /// Установка значения поля типа ObjectList
+        /// Setting value to field of type ObjectList
         /// </summary>
-        /// <param name="value">Объект ICustomObjects</param>
-        /// <param name="force">Флаг форсирования обновления данных</param>
-        /// <param name="addingcustomObjs">Массив значений UniqueId добавляемых ссылок</param>
-        /// <param name="deletedcustomObjIds">Массив значений UniqueId удаляемых ссылок</param>
+        /// <param name="value">Object of type ICustomObjects</param>
+        /// <param name="force">Force set data</param>
+        /// <param name="addingcustomObjs">Array identifiers UniqueId of adding objects</param>
+        /// <param name="deletedcustomObjIds">Array identifiers UniqueId of removing objects</param>
         protected void SetObjectListValue(dynamic value, bool force = false, long[] addingcustomObjs = null, long[] deletedcustomObjIds = null)
         {
             if (value == null)
@@ -363,7 +363,7 @@ namespace CoaApp.Core.Object
         }
 
         /// <summary>
-        /// Установка значение при инициализации
+        /// Set initial value
         /// </summary>
         /// <param name="value"></param>
         protected void SetValueOnInit(dynamic value)
@@ -515,14 +515,14 @@ namespace CoaApp.Core.Object
         /// <returns></returns>
         protected abstract ICustomObject OnGetCustomObject(long id);
         /// <summary>
-        /// Получение эекземпляра списка объектов значения данного поля
+        /// Implementation getting custom object collection by object Id and field identifier
         /// </summary>
         /// <returns></returns>
         protected abstract CoaCustomObjects OnGetCustomObjectList(long customObjId, int fieldId);
         /// <summary>
-        /// Реализация получения значения для автоинкрементного поля
+        /// Implementation getting value for autonumber field
         /// </summary>
-        /// <param name="value">Число переданное с сервера или хранящееся в БД</param>
+        /// <param name="value">Field value from server (database)</param>
         /// <returns></returns>
         protected abstract string OnGetAutoNumberValue(dynamic value);
         private void SetOptionListValue(dynamic value)

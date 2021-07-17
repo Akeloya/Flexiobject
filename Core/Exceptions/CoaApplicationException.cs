@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace CoaApp.Core.Exceptions
 {
     /// <summary>
-    /// Сериализуемое исключение
+    /// Base application serializable exception
     /// </summary>
     [Serializable]
     public abstract class CoaApplicationException : Exception
@@ -14,11 +14,11 @@ namespace CoaApp.Core.Exceptions
         /// </summary>
         public AppExceptionStatus Status { get; } = AppExceptionStatus.Terminate;
         /// <summary>
-        /// ClientVersion
+        /// Client version
         /// </summary>
         public string ClientVersion { get; } = CoaInvironment.ClientVersion;
         /// <summary>
-        /// Версия сервера
+        /// Server version
         /// </summary>
         public string ServerVersion { get; } = CoaInvironment.ServerVersion;
         /// <summary>
@@ -34,8 +34,8 @@ namespace CoaApp.Core.Exceptions
         /// <summary>
         /// Init new exception with message and status
         /// </summary>
-        /// <param name="message">Сообщение, описывающее исключнеие</param>
-        /// <param name="status">Статус сессии</param>
+        /// <param name="message">Exception message</param>
+        /// <param name="status">Session status</param>
         public CoaApplicationException(string message, AppExceptionStatus status) : base(message)
         {
             Status = status;
@@ -43,9 +43,9 @@ namespace CoaApp.Core.Exceptions
         /// <summary>
         /// Init new exception with message inner exception and app status
         /// </summary>
-        /// <param name="message">Сообщение, описывающее исключение</param>
-        /// <param name="inner">Вложенное исключение</param>
-        /// <param name="status">Статус сессии</param>
+        /// <param name="message">Exception message</param>
+        /// <param name="inner">Inner exception data</param>
+        /// <param name="status">Session status</param>
         public CoaApplicationException(string message, Exception inner, AppExceptionStatus status) : base(message, inner)
         {
             Status = status;

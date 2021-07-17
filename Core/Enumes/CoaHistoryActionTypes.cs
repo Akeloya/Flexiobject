@@ -1,16 +1,16 @@
 ﻿namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Коллекция типов записей истории изменения объектов
+    /// Object modification history action types
     /// </summary>
     public enum CoaHistoryActionTypes
     {
         /// <summary>
-        /// Объект создан
+        /// Object created record type
         /// </summary>
         ObjCreated = 1,
         /// <summary>
-        /// Удаление объекта
+        /// Object deleted record type
         /// </summary>
         ObjDeleted,
         /// <summary>
@@ -22,43 +22,43 @@
         /// </summary>
         ObjCopied,
         /// <summary>
-        /// Изменено пользовательское поле
+        /// Object field was modificated
         /// </summary>
         FieldModified,
         /// <summary>
-        /// Изменен список объектов
+        /// Object list was modified
         /// </summary>
-        ModifyObjectLIst,
+        ModifyObjectList,
         /// <summary>
-        /// Перемещение вложения
+        /// Attachment was moved
         /// </summary>
         AttachmentMoved,
         /// <summary>
-        /// Добавление ссылки
+        /// Reference to another object was added
         /// </summary>
         ReferenceAdded,
         /// <summary>
-        /// Удаление ссылки
+        /// Reference to another object was removed (field value cleared)
         /// </summary>
         ReferenceRemoved,
         /// <summary>
-        /// Добавлено вложение
+        /// Attachment was added
         /// </summary>
         AttachmentAdded,
         /// <summary>
-        /// Вложение удалено
+        /// Attachment was deleted
         /// </summary>
         AttachmentDeleted,
         /// <summary>
-        /// Изменение вложения
+        /// Attachment was modified
         /// </summary>
         AttachmentModified,
         /// <summary>
-        /// Изменение описания вложения
+        /// Attachment description was modified
         /// </summary>
         AttachmentDescriptionModified,
         /// <summary>
-        /// Создание схемы импорта
+        /// Schema import was created
         /// </summary>
         CreatedSchemaImport
     }

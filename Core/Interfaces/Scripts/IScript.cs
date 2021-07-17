@@ -1,24 +1,4 @@
-﻿/*
- *  "Custom object application core"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
- *
- *  This file is part of "Custom object application".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using CoaApp.Core.Enumes;
@@ -26,67 +6,67 @@ using CoaApp.Core.Enumes;
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Код (скрипт) c# для выполнения
+    /// Script (scenario) - executable c# code
     /// </summary>
     public interface IScript : IBase, INotifyPropertyChanged
     {
         /// <summary>
-        /// Ид скрипта
+        /// Script identifier
         /// </summary>
         int Id { get; }
         /// <summary>
-        /// Описание
+        /// Script description
         /// </summary>
         string Description { get; set; }
         /// <summary>
-        /// Название
+        /// Script name
         /// </summary>
         string Name { get; set; }
         /// <summary>
-        /// Скрипт/код
+        /// c# code
         /// </summary>
         string Script { get; set; }
         /// <summary>
-        /// Тип
+        /// Script type
         /// </summary>
         CoaScriptTypes Type { get; set; }
         /// <summary>
-        /// Ссылка на форме
+        /// Reference to app object (form)
         /// </summary>
         int Reference { get; }
         /// <summary>
-        /// Флаг построения скрипта
+        /// Build state flag
         /// </summary>
         bool Builded { get; }
         /// <summary>
-        /// Сохранение изменений с построением
+        /// Save changes
         /// </summary>
-        /// <returns>Список ошибок при построении</returns>
-        List<string> Save();
+        /// <returns>Errors after build on save</returns>
+        IEnumerable<string> Save();
         /// <summary>
-        /// Построение или перестроение скрипта
+        /// Build script
         /// </summary>
-        /// <returns>Ошибки, возникшие во время построения</returns>
-        List<string> Build();
+        /// <returns>Errors after build</returns>
+        IEnumerable<string> Build();
         /// <summary>
-        /// Публикация версии в качестве текущей
+        /// Publish new version into application
         /// </summary>
-        /// <returns>Список ошибок, либо null. Если имеется список ошибок, то публикация провалилась.</returns>
-        List<string> Publish();
-            /// <summary>
-        /// Последнее время построения
+        /// <returns>Errors on publish. If errors not empty - publish failed.</returns>
+        IEnumerable<string> Publish();
+        /// <summary>
+        /// Last build time
         /// </summary>
         DateTime? BuildedTime { get;}     
         /// <summary>
-        /// Ошибки построения скрипта
+        /// Active build errors
         /// </summary>
-        List<string> Errors { get; }
+        IEnumerable<string> Errors { get; }
         /// <summary>
-        /// Папка скрипта
+        /// Script folder
         /// </summary>
         ICustomFolder Folder { get; }
         /// <summary>
-        /// История изменения скрипта
+        /// Script history changes
         /// </summary>
         IScriptHistoryItems HistoryItems { get; }
     }

@@ -1,7 +1,7 @@
 ﻿namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Оператор сравнения левой и правой части булевого сравнения
+    /// Comparison operator types
     /// </summary>        
     public enum CoaRuleComparisonsTypes
     {
@@ -86,7 +86,7 @@
         /// </summary>
         GreaterThanOrEqualOptionListText,
         /// <summary>
-        /// Является суперпользователем
+        /// Is user have administrator privilegies
         /// </summary>
         IsSuperuser,
         /// <summary>

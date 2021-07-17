@@ -1,7 +1,7 @@
 ﻿namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Тип отображаемой колонки
+    /// Types of column view
     /// </summary>
     public enum CoaViewColumnTypes
     {

@@ -9,7 +9,7 @@
         /// Add new privilegies. Changes will applied after it will be saved
         /// <see cref="IPrivilege.Save"/>
         /// </summary>
-        /// <returns>Объект IPermission</returns>
+        /// <returns>IPrivilege object</returns>
         IPrivilege Add();
         /// <summary>
         /// Remove privilege from collection by index

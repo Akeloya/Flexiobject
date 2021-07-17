@@ -1,77 +1,48 @@
-﻿/*
- *  "Custom object application core"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
- *
- *  This file is part of "Custom object application".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-using CoaApp.Core.Enumes;
+﻿using CoaApp.Core.Enumes;
 
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Объект представляет объект IView (вывод может быть в виде списка, календаря, дерева)
+    /// View layout for object in folder (column, tree)
     /// </summary>
     public interface IViewLayout : IBase
     {
         /// <summary>
-        /// Папка визуального отображения данных
+        /// Folder where will be displaing view
         /// </summary>
         ICustomFolder Folder { get; }
         /// <summary>
-        /// Название вида
+        /// View laoyut name
         /// </summary>
         string Name { get; set; }
         /// <summary>
-        /// Тип вида
+        /// View type
         /// </summary>
         CoaViewTypes Type { get; set; }
         /// <summary>
-        /// Добавить колонку к табличному виду
+        /// Add column laout to folder layout
         /// </summary>
-        /// <param name="column">Колонка</param>
+        /// <param name="column">Column laoyut</param>
         void AddColumnLayout(IColumnLayout column);
         /// <summary>
-        /// Добавить колонку к древовидному виду.
+        /// Add to folder view laoyt tree layout
         /// </summary>
-        /// <param name="tree">Колонка</param>
+        /// <param name="tree">Tree layout</param>
         void AddTreeLayout(ITreeLayout tree);
         /// <summary>
-        /// Получить табличное представление по папке и контексту
+        /// Get column layout by folder Id
         /// </summary>
-        /// <param name="folderId"></param>
-        /// <param name="context"></param>
+        /// <param name="folderId">Folder id</param>
         /// <returns></returns>
-        IColumnLayout GetColumnLayout(int folderId, int context);
+        IColumnLayout GetColumnLayout(int folderId);
         /// <summary>
-        /// Получить древовидное представление по папке и контексту
+        /// Get tree layout by folder id
         /// </summary>
-        /// <param name="folderId"></param>
-        /// <param name="context"></param>
+        /// <param name="folderId">Folder id</param>
         /// <returns></returns>
-        ITreeLayout GetTreeLayout(int folderId, int context);
+        ITreeLayout GetTreeLayout(int folderId);        
         /// <summary>
-        /// Заменить пользовательское поле
-        /// </summary>
-        /// <param name="oldVal"></param>
-        /// <param name="newVal"></param>
-        /// <returns></returns>
-        long ReplaceUserfield(object oldVal, object newVal);
-        /// <summary>
-        /// Сохранить представление
+        /// Save changes
         /// </summary>
         void Save();
     }

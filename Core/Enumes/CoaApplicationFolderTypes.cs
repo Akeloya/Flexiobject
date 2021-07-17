@@ -1,8 +1,8 @@
 ﻿namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Коллекция предустановленных папок приложения
-    /// Коллекция используется для связывания пользовательских папок и папок приложения
+    /// Application inner objects
+    /// Types used to link user objects and inner application objects
     /// </summary>
     public enum CoaApplicationFolderTypes : byte
     {

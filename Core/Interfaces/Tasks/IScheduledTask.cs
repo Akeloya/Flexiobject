@@ -1,71 +1,50 @@
-﻿/*
- *  "Custom object application core"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
- *
- *  This file is part of "Custom object application".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-using CoaApp.Core.Enumes;
+﻿using CoaApp.Core.Enumes;
 
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Запланированное серверное задание
+    /// Scheduled task on server
     /// </summary>
     public interface IScheduledTask : IBase
     {
         /// <summary>
-        /// Название
+        /// Task name
         /// </summary>
         string Name { get; set; }
         /// <summary>
-        /// Алиас для доступа из API
+        /// Task alias to access from API
         /// </summary>
         string Alias { get; set; }
         /// <summary>
-        /// Описание
+        /// Task description
         /// </summary>
         string Description { get; set; }
         /// <summary>
-        /// Расписание выполнение запланированной задачи
+        /// Task schedule
         /// </summary>
         ISchedule Schedule { get; set; }
         /// <summary>
-        /// Тип
+        /// Task type
         /// </summary>
         CoaScheduledTaskTypes Type { get; set; }
         /// <summary>
-        /// Папка выполнения
+        /// Task execute on folder
         /// </summary>
         ICustomFolder ExecutionFolder { get; set; }
         /// <summary>
-        /// Детали задания (В зависимости от типа)
+        /// Task detailes
         /// </summary>
         object Detailes { get; set; }
         /// <summary>
-        /// Логирование результатов выполнения задания
+        /// Task execution results file name
         /// </summary>
         string ResultFileName { get; set; }
         /// <summary>
-        /// Тип файла с результатами выполнения
+        /// Execution results file
         /// </summary>
         CoaScheduledTaskResulFormatType ResultFileType { get; set; }
         /// <summary>
-        /// Сохранение изменений
+        /// Save changes
         /// </summary>
         void Save();
     }

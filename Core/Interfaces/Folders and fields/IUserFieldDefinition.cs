@@ -40,9 +40,9 @@ namespace CoaApp.Core.Interfaces
         /// <summary>
         /// Calculating
         /// </summary>
-        /// <param name="oldObj">Копия объекта до изменения</param>
-        /// <param name="newObj">Копия объекта после изменения</param>
-        /// <returns>истина/ложь</returns>
+        /// <param name="oldObj">Old object copy</param>
+        /// <param name="newObj">New object copy</param>
+        /// <returns>Required/Not required</returns>
         bool IsRequired(ICustomObject oldObj, ICustomObject newObj);
         /// <summary>
         /// Flag indicates enabled field for editing
