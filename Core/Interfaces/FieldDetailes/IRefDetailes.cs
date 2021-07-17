@@ -8,7 +8,7 @@ namespace CoaApp.Core.Interfaces
     /// <seealso cref="ICustomObject"/>
     /// <seealso cref="ICustomObjects"/>
     /// </summary>
-    public interface IRefDetailes : IBase, INotifyPropertyChanged
+    public interface IRefDetailes : IBase
     {
         /// <summary>
         /// Cascade copy objects in field references
