@@ -6,6 +6,7 @@ using System;
 namespace CoaApp.Core
 {
     ///<inheritdoc/>
+    [AppFolder(CoaApplicationFolders.UserAccounts)]
     public abstract class CoaUser : AppBase, IUser
     {
         private int _uniqueId;

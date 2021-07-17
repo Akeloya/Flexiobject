@@ -7,10 +7,11 @@ namespace CoaApp.Core
     /// <summary>
     /// Application folder field attribute
     /// </summary>
+    [AttributeUsage(AttributeTargets.Property)]
     public class AppFolderPropertyAttribute : Attribute
     {
-        private CoaApplicationFoldersProperties _type;
-        private bool _required;
+        private readonly CoaApplicationFoldersProperties _type;
+        private readonly bool _required;
         /// <summary>
         /// Constructor
         /// </summary>

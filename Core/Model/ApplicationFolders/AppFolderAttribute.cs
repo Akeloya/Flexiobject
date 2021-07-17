@@ -2,14 +2,15 @@
 using CoaApp.Core.Enumes;
 using System.ComponentModel;
 
-namespace CoaApp.Core.Model.ApplicationFolders
+namespace CoaApp.Core
 {
     /// <summary>
     /// An attribute that specifies for a class its application folder type
     /// </summary>
+    [AttributeUsage(AttributeTargets.Class)]
     public class AppFolderAttribute : Attribute
     {
-        private CoaApplicationFolders _type;
+        private readonly CoaApplicationFolders _type;
         /// <summary>
         /// Constructor
         /// </summary>

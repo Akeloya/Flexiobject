@@ -7,6 +7,7 @@ using System;
 namespace CoaApp.Core
 {
     ///<inheritdoc/>
+    [AppFolder(CoaApplicationFolders.UserGroups)]
     public abstract class CoaGroup : AppBase, IGroup
     {
         private readonly bool _isBaseGroup;
