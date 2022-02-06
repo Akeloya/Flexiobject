@@ -1,54 +1,34 @@
-﻿/*
- *  "Custom object application core"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
- *
- *  This file is part of "Custom object application".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-namespace CoaApp.Core.Interfaces
+﻿namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Коллекция автокалькуляций для папки
+    /// Autocalculation collection for objects in folder
     /// </summary>
     public interface IAutocalculations : IBase
     {
         /// <summary>
-        /// Добавить новую автокалькуляцию
+        /// Add new calculation
         /// </summary>
-        /// <returns>Объект автокалькуляции</returns>
+        /// <returns>Autocalculation object</returns>
         IAutocalculation Add();
         /// <summary>
-        /// Удалить автокалькуляцию
+        /// Remove autocalculation
         /// </summary>
-        /// <param name="variant">Объект IAutocalculation для удаления из текущей коллекции или индекс удаляемой калькуляции из коллекции </param>
+        /// <param name="variant">IAutocalculation object or index</param>
         void Delete(object variant);
         /// <summary>
-        /// Доступ к объекту коллекции по индексу
+        /// Access to autocalculcation by index
         /// </summary>
-        /// <param name="idx">0..Count-1</param>
+        /// <param name="idx">0..Count-1 index value</param>
         /// <returns></returns>
         IAutocalculation this[int idx] { get; }
         /// <summary>
-        /// Доступ к объекту коллекции по названию
+        /// Acces to autocalculation object by name
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
         IAutocalculation this[string name] { get; }
         /// <summary>
-        /// Количество объектов в коллекции
+        /// Autocalculations count
         /// </summary>
         int Count { get; }
     }

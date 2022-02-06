@@ -1,119 +1,102 @@
-﻿/*
- *  "Custom object application core"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
- *
- *  This file is part of "Custom object application".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Дополнительная информация поля типа объект и список объектов
+    /// Settings of field with reference to ICustomObject and ICustomObjects
+    /// <see cref="IUserFieldDefinition"/>
+    /// <seealso cref="ICustomObject"/>
+    /// <seealso cref="ICustomObjects"/>
     /// </summary>
-    public interface IRefDetailes : IBase, INotifyPropertyChanged
+    public interface IRefDetailes : IBase
     {
         /// <summary>
-        /// Флаг операции каскадного копирования
+        /// Cascade copy objects in field references
         /// </summary>
-        bool CascadeCopyOperations { get; set; }
+        bool CascadeCopy { get; set; }
         /// <summary>
-        /// Индикатор операции каскадного удаление объектов
+        /// Cascade delete objects in field references
         /// </summary>
-        bool CascadeDeleteOperations { get; set; }
+        bool CascadeDelete { get; set; }
         /// <summary>
-        /// Папка по умолчанию, необходима при работе с дочерними объектами
+        /// Default folder for selecting object if there are many folders 
         /// </summary>
         ICustomFolder DefaultFolder { get; set; }
         /// <summary>
-        /// Скрипт папки по умолчанию
+        /// Script to implement algorythm selecting default folder
         /// </summary>
         IScript DefaultFolderScript { get; set; }
         /// <summary>
-        /// Флаг использования скрипта для папки по умолчанию
+        /// Flag to use script to select default folder
         /// </summary>
         bool DefaultFolderUseScript { get; set; }
         /// <summary>
-        /// Поле быстрого поиска объекта
+        /// Quick select field for easy selection of a value
         /// </summary>
-        IUserFieldDefinition DefaultQuickSearchField { get; set; }
+        IUserFieldDefinition QuickSearchField { get; set; }
         /// <summary>
-        /// Индикатор удаления ссылок на объект
+        /// Flag to delete referenced objects
         /// </summary>
         bool DeleteRefObjects { get; set; }
         /// <summary>
-        /// Включение подпапок
+        /// Including subfolders during selecting objects
         /// </summary>
         bool IncludeSubfolders { get; set; }
         /// <summary>
-        /// Синхронизировано ли поле
+        /// Syncrfonize field with
         /// </summary>
         bool IsSynchronized { get; set; }
         /// <summary>
-        /// Индикатор мастер-поля синхронизации
+        /// Master field in non symmetric syncronization
         /// </summary>
         bool MasterField { get; set; }
         /// <summary>
-        /// Папка, связанная с полем
+        /// Referenced folder (folder which stored objects)
         /// </summary>
         ICustomFolder ReferencedFolder { get; set; }
         /// <summary>
-        /// Флак идентифицирующий использование фильтра ограничения
+        /// Restriction filter flag
         /// </summary>
         bool Restriction { get; set; }
         /// <summary>
-        /// Флаг идентифицирующий ограничения только для выбранного объекта
+        /// Restriction flag will be work only for selecting objects
         /// </summary>
         bool RestrictionOnlyForSelection { get; set; }
         /// <summary>
-        /// Ошибка, выдаваемая пользователю при нарушении ограничения
+        /// Restriction error message for user
         /// </summary>
         string RestrictionOptionalErrorMessage { get; set; }
         /// <summary>
-        /// Сприкт ограничения
+        /// Restriction script
         /// </summary>
         IScript RestrictionScript { get; set; }
         /// <summary>
-        /// Правило ограничения
+        /// Restriction rule
         /// </summary>
         IRule RestrictionRule { get; set; }
         /// <summary>
-        /// Флаг использования скрипта ограничения
+        /// Flag marks to execute restriction script instead calculating rule
         /// </summary>
         bool RestrictionUseScript { get; set; }
         /// <summary>
-        /// Флаг симметричной синхронизации полей
+        /// Symmetric synchronization flag.
         /// </summary>
         bool SymmetricSynchronization { get; set; }
         /// <summary>
-        /// Поле синхронизации
+        /// User field syncronization for symmetric syncronization
         /// </summary>
         IUserFieldDefinition SynchronizedField { get; set; }
         /// <summary>
-        /// Поля синхонизации
+        /// User fields syncronization for asymmetric syncronization
         /// </summary>
         IUserFieldDefinitions SynchronizedFields { get; set; }
         /// <summary>
-        /// Получить папку по-умолчанию
+        /// Get default folder
         /// </summary>
         /// <returns></returns>
         ICustomFolder GetDefaultFolder();
         /// <summary>
-        /// Получить фильтр ограничения на связанные объекты
+        /// Get restriction filter
         /// </summary>
         /// <returns></returns>
         IFilter GetRestrictionFilter();

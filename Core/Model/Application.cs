@@ -1,43 +1,26 @@
-﻿/*
- *  "Custom object application core"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
- *
- *  This file is part of "Custom object application".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-using CoaApp.Core.Enumes;
+﻿using CoaApp.Core.Enumes;
 using CoaApp.Core.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace CoaApp.Core
 {
     /// <summary>
     /// Application instance
     /// </summary>
-    public abstract class Application : MarshalByRefObject, IApplication
+    public abstract class CoaApplication : MarshalByRefObject, IApplication
     {
+        [ThreadStatic] private static ISession _activeSession;
+        ///<inheritdoc/>
+        public ISession ActiveSession => _activeSession;
         /// <summary>
         /// Internal application folders
         /// </summary>
         /// <returns></returns>
         public static List<CoaApplicationFolders> GetApplicationFolders()
         {
-            List<CoaApplicationFolders> result = new List<CoaApplicationFolders> {
+            List<CoaApplicationFolders> result = new()
+            {
                 CoaApplicationFolders.UserAccounts,
                 CoaApplicationFolders.UserGroups
             };
@@ -50,15 +33,13 @@ namespace CoaApp.Core
         /// <returns></returns>
         public static Dictionary<CoaApplicationFoldersProperties, bool> GetAllowedFielsByAppFolderType(CoaApplicationFolders type)
         {
-            Dictionary<CoaApplicationFoldersProperties, bool> result = new Dictionary<CoaApplicationFoldersProperties, bool>();
+            Dictionary<CoaApplicationFoldersProperties, bool> result = new();
             switch (type)
             {
                 case CoaApplicationFolders.UserAccounts:
                     result = new Dictionary<CoaApplicationFoldersProperties, bool>{
                         { CoaApplicationFoldersProperties.UserActive, true},
                         { CoaApplicationFoldersProperties.UserAuthentication, true},
-                        { CoaApplicationFoldersProperties.UserCalendar, false},
-                        { CoaApplicationFoldersProperties.UserDepartment, false},
                         { CoaApplicationFoldersProperties.UserDescription, false},
                         { CoaApplicationFoldersProperties.UserDisplayName, true},
                         { CoaApplicationFoldersProperties.UserEmailAddress, false},
@@ -66,7 +47,6 @@ namespace CoaApp.Core
                         { CoaApplicationFoldersProperties.UserLocked, true},
                         { CoaApplicationFoldersProperties.UserLoginName, false},
                         { CoaApplicationFoldersProperties.UserPassword, true},
-                        { CoaApplicationFoldersProperties.UserPhone, false},
                         { CoaApplicationFoldersProperties.UserSuperuser, false},
                         { CoaApplicationFoldersProperties.UserWindowsDomainName, false } };
                     break;
@@ -81,9 +61,7 @@ namespace CoaApp.Core
             }
             return result;
         }
-
-        [ThreadStatic]private static Session _activeSession;
-        public Session ActiveSession => _activeSession;
+        ///<inheritdoc/>
         public ISession OpenSession(string hostName, int port, string userName = null, string password = null)
         {
             if (string.IsNullOrEmpty(hostName))
@@ -102,10 +80,7 @@ namespace CoaApp.Core
             }
             return _activeSession;
         }
-        /// <summary>
-        /// Loggin message to server log
-        /// </summary>
-        /// <param name="msg">Message string</param>
+        ///<inheritdoc/>
         public void WriteLogMessage(string msg)
         {
             if (string.IsNullOrEmpty(msg))
@@ -124,10 +99,7 @@ namespace CoaApp.Core
         /// <param name="host">Host name</param>
         /// <param name="port">Port number</param>
         /// <returns></returns>
-        protected virtual Session OnOpenSession(string host, int port)
-        {
-            throw new NotImplementedException();
-        }
+        protected abstract ISession OnOpenSession(string host, int port);
 
         /// <summary>
         /// Realization of opening session method by using internal auth
@@ -137,17 +109,11 @@ namespace CoaApp.Core
         /// <param name="login">User login name</param>
         /// <param name="password">User password string</param>
         /// <returns></returns>
-        protected virtual Session OnOpenSessionWithLoginPassword(string host, int port, string login, string password)
-        {
-            throw new NotImplementedException();
-        }
+        protected abstract ISession OnOpenSessionWithLoginPassword(string host, int port, string login, string password);
         /// <summary>
         /// Realization of logging message
         /// </summary>
         /// <param name="message"></param>
-        protected virtual void OnLogMessage(string message)
-        {
-            throw new NotImplementedException();
-        }
+        protected abstract void OnLogMessage(string message);        
     }
 }

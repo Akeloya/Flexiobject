@@ -1,62 +1,38 @@
-﻿/*
- *  "Custom object application core"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
- *
- *  This file is part of "Custom object application".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CoaApp.Core.Enumes;
 
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Коллекция скриптов (модулей кода)
+    /// Script collection
     /// </summary>
     public interface IScripts : IBase
     {
         /// <summary>
-        /// Добавление нового скрипта
+        /// Add new empty script
         /// </summary>
         /// <returns></returns>
         IScript Add();
         /// <summary>
-        /// Создание нового скрипта с шаблоном текста согласно указанному типу
+        /// Add new script from template
         /// </summary>
-        /// <param name="type"></param>
+        /// <param name="type">Script type. By this value choose template</param>
         /// <returns></returns>
         IScript Add(CoaScriptTypes type);
         /// <summary>
-        /// Удаление скрипта по его ИД
+        /// Remove script by id
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Script identifier</param>
         void Remove(int id);
         /// <summary>
-        /// Количество скриптов в коллекции
+        /// Scripts count
         /// </summary>
         int Count { get; }
         /// <summary>
-        /// Доступ к скрипту по его ИД
+        /// Access script by index
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="idx">0..Count-1 index value</param>
         /// <returns></returns>
-        IScript this [int id] { get; }
-        /// <summary>
-        /// Заглушка
-        /// </summary>
-        List<IScript> List { get; } 
+        IScript this [int idx] { get; }        
     }
 }

@@ -1,96 +1,193 @@
-﻿/*
- *  "Custom object application core"
- *  An application that implements the ability to customize object templates and actions on them.
- *  Copyright (C) 2019 by Maxim V. Yugov.
- *
- *  This file is part of "Custom object application".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-using CoaApp.Core.Enumes;
+﻿using CoaApp.Core.Enumes;
+using CoaApp.Core.Exceptions;
 using CoaApp.Core.Interfaces;
+using CoaApp.Core.Properties;
 using System;
 
 namespace CoaApp.Core
 {
-    public abstract class Group<T> : AppBase<T>, IGroup
+    ///<inheritdoc/>
+    [AppFolder(CoaApplicationFolders.UserGroups)]
+    public abstract class CoaGroup : AppBase, IGroup
     {
-        protected Group(Application app, T parent) : base(app, parent)
+        private readonly bool _isBaseGroup;
+        private ICustomObject _userObject;
+        private string _displayName;
+        private string _emailAddress;
+        private CoaGroupBehaviorTypes _emailBehavior;
+        private readonly long _objectId;
+        private int _uniqueId;
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="parent"></param>
+        /// <param name="isBase">Flag indicate is folder base for other folders</param>
+        protected CoaGroup(IApplication app, object parent, bool isBase = false) : base(app, parent)
         {
-
+            _isBaseGroup = isBase;
         }
-        public int UniqueId => throw new NotImplementedException();
-
-        public string Name => throw new NotImplementedException();
-
-        public string DisplayName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string EmailAddress { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public CoaGroupBehaviorTypes EmailBehavior { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public IGroups Groups => throw new NotImplementedException();
-
-        public IGroups GroupsRecursive => throw new NotImplementedException();
-
-        public ICustomObject Object => throw new NotImplementedException();
-
-        public IUsers Users => throw new NotImplementedException();
-
-        public IUsers UsersRecurcive => throw new NotImplementedException();
-
-        public void AddGroup(IGroup group)
+        /// <summary>
+        /// Constructor for existing groups
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="parent"></param>
+        /// <param name="uniqueId">Group database Id</param>
+        /// <param name="isBase">Base group flag</param>
+        /// <param name="customObjId">Linked user object unique id</param>
+        protected CoaGroup(IApplication app, object parent, int uniqueId, bool isBase = false, long customObjId = 0) : base(app, parent)
         {
-            throw new NotImplementedException();
+            _uniqueId = uniqueId;
+            _objectId = customObjId;
+            _isBaseGroup = isBase;
         }
-
-        public void AddUser(IUser user)
+        /// <include file='commonDocs.xml' path='docs/members[@name="comparisons"]/equality/*'/>
+        public static bool operator ==(CoaGroup left, IGroup right)
         {
-            throw new NotImplementedException();
+            return (left?.Equals(right) ?? (right?.Equals(left) ?? true));
         }
-
-        public void Delete()
+        /// <include file='commonDocs.xml' path='docs/members[@name="comparisons"]/inequality/*'/>
+        public static bool operator !=(CoaGroup left, IGroup right)
         {
-            throw new NotImplementedException();
+            return !(left?.Equals(right) ?? (right?.Equals(left) ?? true));
         }
-
-        public bool IsInGroup(string groupName)
+        ///<inheritdoc/>
+        public int UniqueId => _uniqueId;
+        ///<inheritdoc/>
+        public string Name {
+            get
+            {
+                if (_isBaseGroup)
+                    return Resource.BaseGroupDisplayName;
+                return _displayName ?? string.Format(Resource.GroupName, _uniqueId);
+            }
+        }
+        ///<inheritdoc/>        
+        [AppFolderProperty(CoaApplicationFoldersProperties.GroupName, true)]
+        public string DisplayName
         {
-            throw new NotImplementedException();
+            get => _displayName;
+            set => _displayName = value;
         }
-
-        public bool IsInGroupRecursive(string groupName)
+        ///<inheritdoc/>
+        [AppFolderProperty(CoaApplicationFoldersProperties.GroupEmailAddress, false)]
+        public string EmailAddress
         {
-            throw new NotImplementedException();
+            get => _emailAddress;
+            set => _emailAddress = value;
         }
-
-        public void RemoveGroup(IGroup group)
+        ///<inheritdoc/>
+        [AppFolderProperty(CoaApplicationFoldersProperties.GroupEmailBehavior, true)]
+        public CoaGroupBehaviorTypes EmailBehavior
         {
-            throw new NotImplementedException();
+            get { return _emailBehavior; }
+            set
+            {
+                _emailBehavior = value;
+                if (Object != null)
+                {
+                    if (!_userObject.CustomObjFolder[CoaApplicationFolders.UserGroups])
+                        throw new GroupSyncRequestException();
+                    var field = _userObject.CustomObjFolder[CoaApplicationFolders.UserGroups, CoaApplicationFoldersProperties.GroupEmailAddress];
+                    if (field != null)
+                        _userObject.UserFields[field.Alias].TValue = value.ToString();
+                }
+            }
         }
-
-        public void RemoveUser(IUser user)
+        ///<inheritdoc/>
+        [AppFolderProperty(CoaApplicationFoldersProperties.GroupContainedGroups, false)]
+        public abstract IGroups Groups { get; }
+        ///<inheritdoc/>
+        public abstract IGroups GroupsRecursive { get; }
+        ///<inheritdoc/>
+        public ICustomObject Object
         {
-            throw new NotImplementedException();
-        }
+            get
+            {
+                if (_objectId > 0 && _userObject == null)
+                    _userObject = OnGetObject(_objectId);
+                return _userObject;
+            }
+            set
+            {
+                if(value == null)
+                {
+                    if (Object != null && Object.CustomObjFolder[CoaApplicationFolders.UserGroups])
+                        throw new NotImplementedException();
+                }
 
+                if (!value.CustomObjFolder[CoaApplicationFolders.UserGroups])
+                    throw new GroupFolderSyncException();
+                _userObject = value;
+            }
+        }
+        ///<inheritdoc/>
+        [AppFolderProperty(CoaApplicationFoldersProperties.GroupContainedUsers, true)]
+        public abstract IUsers Users { get; }
+        ///<inheritdoc/>
+        public abstract IUsers UsersRecursive { get; }
+        ///<inheritdoc/>
         public void Save()
         {
-            throw new NotImplementedException();
+            if (_isBaseGroup)
+                throw new CoaGroupModificationException();
+            _uniqueId = OnSave();
         }
-
-        public void SendEmail()
+        ///<inheritdoc/>
+        public override bool Equals(object obj)
         {
-            throw new NotImplementedException();
+            return Equals(obj as IGroup);
         }
+        ///<inheritdoc/>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+        ///<inheritdoc/>
+        public bool Equals(IGroup other)
+        {
+            if (other == null)
+                return false;
+            return UniqueId == other.UniqueId;
+        }
+        ///<inheritdoc/>
+        public void Delete()
+        {
+            if (_isBaseGroup)
+                throw new CoaGroupModificationException();
+            OnDelete();
+        }
+        ///<inheritdoc/>
+        public abstract void AddGroup(IGroup group);
+        ///<inheritdoc/>
+        public abstract void AddUser(IUser user);
+        ///<inheritdoc/>
+        public abstract bool IsInGroup(string groupName);
+        ///<inheritdoc/>
+        public abstract bool IsInGroupRecursive(string groupName);
+        ///<inheritdoc/>
+        public abstract void RemoveGroup(IGroup group);
+        ///<inheritdoc/>
+        public abstract void RemoveUser(IUser user);
+        ///<inheritdoc/>
+        public abstract void SendEmail();
+        /// <summary>
+        /// Save method declaration
+        /// </summary>
+        /// <returns>Group id stored in database</returns>
+        protected abstract int OnSave();
+        /// <summary>
+        /// Get user object method declaration
+        /// </summary>
+        /// <param name="objectId">Object unique Id</param>
+        /// <returns>
+        /// User Object
+        /// <seealso cref="ICustomObject"/>
+        /// </returns>
+        protected abstract ICustomObject OnGetObject(long objectId);
+        /// <summary>
+        /// Delete method declaration
+        /// </summary>
+        protected abstract void OnDelete();
     }
 }

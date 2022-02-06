@@ -1,71 +1,51 @@
-﻿/*
- *  "Custom object application core"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
- *
- *  This file is part of "Custom object application".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-using System;
+﻿using System;
 using CoaApp.Core.Enumes;
 
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Интерфейс записи истории схемы изменения папок и связанных объектов
+    /// Schema history changes item
     /// </summary>
     public interface ISchemaHistoryItem : IBase
     {
         /// <summary>
-        /// Дата события
+        /// Event date
         /// </summary>
         DateTime Date { get; }
         /// <summary>
-        /// Тип события
+        /// Event type
         /// </summary>
         CoaSchemaEventTypes Type { get; }
         /// <summary>
-        /// Ид записи в базе связанного объекта
+        /// Reference identifier for linked object
         /// </summary>
         int Reference { get; }
         /// <summary>
-        /// Пользовательское имя
+        /// User name
         /// </summary>
         string UserName { get; }
         /// <summary>
-        /// Ид связанного удалённого объекта
+        /// Identifier of deleted object
         /// </summary>
         int DeletedRef { get; }
         /// <summary>
-        /// Старое название объекта
+        /// Old string value
         /// </summary>
-        string OldName { get; }
+        string OldStrValue { get; }
         /// <summary>
-        /// Новое название объекта
+        /// New string value
         /// </summary>
-        string NewName { get; }
+        string NewStringVal { get; }
         /// <summary>
-        /// Действие над объектом
+        /// Action change on object
         /// </summary>
         CoaSchemaActionTypes Action { get; }
         /// <summary>
-        /// Версия сервера приложений во время изменения объекта
+        /// Server version
         /// </summary>
         string Version { get; }
         /// <summary>
-        /// Сетевой адрес компьютера с клиентом, с которого производились изменения
+        /// The network address from which the change was made
         /// </summary>
         string IPAddress { get; }
     }

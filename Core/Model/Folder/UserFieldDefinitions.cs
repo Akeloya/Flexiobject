@@ -1,44 +1,40 @@
 ﻿using CoaApp.Core.Enumes;
 using CoaApp.Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CoaApp.Core.Folder
 {
-    public abstract class UserFieldDefinitions<T>: AppBase<T>, IUserFieldDefinitions
+    ///<inheritdoc/>
+    public abstract class UserFieldDefinitions: AppBase, IUserFieldDefinitions
     {
-        protected UserFieldDefinitions(Application app, T parent): base(app, parent)
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="parent"></param>
+        /// <param name="isContainer">Flag only for collection, wich belong to parent folder in app</param>
+        protected UserFieldDefinitions(IApplication app, object parent, bool isContainer = false): base(app, parent)
         {
-
+            IsContainer = isContainer;
         }
-
-        public IUserFieldDefinition this[int index] => throw new NotImplementedException();
-
-        public IUserFieldDefinition this[string name] => throw new NotImplementedException();
-
-        public bool IsContainer => throw new NotImplementedException();
-
-        public int Count => throw new NotImplementedException();
-
-        public IUserFieldDefinition Add(CoaFieldTypes type)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddExisting(IUserFieldDefinition field)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(object variant)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveExisting(IUserFieldDefinition field)
-        {
-            throw new NotImplementedException();
-        }
+        ///<inheritdoc/>
+        public bool IsContainer { get; }
+        ///<inheritdoc/>
+        public abstract IUserFieldDefinition this[int index] { get; }
+        ///<inheritdoc/>
+        public abstract IUserFieldDefinition this[string name] { get; }
+        ///<inheritdoc/>
+        public abstract int Count { get; }
+        ///<inheritdoc/>
+        public abstract IUserFieldDefinition Add(CoaFieldTypes type);
+        ///<inheritdoc/>
+        public abstract IUserFieldDefinition Add();
+        ///<inheritdoc/>
+        public abstract void AddExisting(IUserFieldDefinition field);
+        ///<inheritdoc/>
+        public abstract void Remove(IUserFieldDefinition obj);
+        ///<inheritdoc/>
+        public abstract void Remove(int index);
+        ///<inheritdoc/>
+        public abstract void RemoveExisting(IUserFieldDefinition field);
     }
 }

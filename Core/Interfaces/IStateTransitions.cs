@@ -1,71 +1,39 @@
-﻿/*
- *  "Custom object application core"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
- *
- *  This file is part of "Custom object application".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-namespace CoaApp.Core.Interfaces
+﻿namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Транзакция перевода состояния
+    /// Transition collection
     /// </summary>
     public interface IStateTransitions : IBase
     {
         /// <summary>
-        /// Добавление транзакции в коллекцию
+        /// Add transition to collection
         /// </summary>
-        /// <param name="state"></param>
-        void Add(IStateTransition state);
+        /// <param name="transition">Early created transition</param>
+        void Add(IStateTransition transition);
         /// <summary>
-        /// Создание транзакции перевода
+        /// Create new transition
         /// </summary>
         /// <returns></returns>
-        IStateTransition CreateStateTransition();
+        IStateTransition Create();
         /// <summary>
-        /// Удаление транзакции по идентификатору
+        /// Remove transition by index
         /// </summary>
-        /// <param name="idx"></param>
+        /// <param name="idx">0..Count-1 index value</param>
         void Remove(int idx);
         /// <summary>
-        /// Удаление указанной транзакции
+        /// Remove existing transition
         /// </summary>
-        /// <param name="transition"></param>
+        /// <param name="transition">Transition to remove</param>
         void Remove(IStateTransition transition);
         /// <summary>
-        /// Удаление транзакции по ключу
-        /// </summary>
-        /// <param name="name"></param>
-        void RemoveByName(string name);
-        /// <summary>
-        /// Количество транзакций в коллекции
+        /// Collection count
         /// </summary>
         int Count { get; }
         /// <summary>
-        /// Доступ к транзакции по индексу
+        /// Access to transition by index
         /// </summary>
-        /// <param name="idx"></param>
+        /// <param name="idx">0..Count-1 index value</param>
         /// <returns></returns>
-        IStateTransition this[int idx] { get; }
-        /// <summary>
-        /// Доступ к транзакции по алиасу
-        /// </summary>
-        /// <param name="alias"></param>
-        /// <returns></returns>
-        IStateTransition this[string alias] { get; }
+        IStateTransition this[int idx] { get; }        
     }
 }

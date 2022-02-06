@@ -1,145 +1,185 @@
 ﻿using CoaApp.Core.Enumes;
 using CoaApp.Core.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace CoaApp.Core.Folder
+namespace CoaApp.Core
 {
-    public abstract class CustomFolder<T>: AppBase<T>, ICustomFolder
+    /// <inheritdoc/>
+    public abstract class CustomFolder : AppBase, ICustomFolder
     {
-        protected CustomFolder(Application app, T parent) : base(app, parent)
+        private int _uniqueId;
+        /// <summary>
+        /// Constructor for new objects
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="parent"></param>
+        protected CustomFolder(IApplication app, object parent) : base(app, parent)
         {
 
         }
-
-        public bool this[CoaApplicationFolders type] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IUserFieldDefinition this[CoaApplicationFolders folderType, CoaApplicationFoldersProperties propType] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public int UniqueId => throw new NotImplementedException();
-
-        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Alias { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool InheritNamingScheme { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string NamingScheme { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public string Path => throw new NotImplementedException();
-
-        public IForms Forms => throw new NotImplementedException();
-
-        public ICustomFolder ParentFolder => throw new NotImplementedException();
-
-        public IActions AfterCreateActions => throw new NotImplementedException();
-
-        public IActions AfterDeleteActions => throw new NotImplementedException();
-
-        public IActions AfterModificationActions => throw new NotImplementedException();
-
-        public IActions BeforCreateActions => throw new NotImplementedException();
-
-        public IActions BeforDeleteActions => throw new NotImplementedException();
-
-        public IActions BeforModificationActions => throw new NotImplementedException();
-
-        public IPrivileges Privileges => throw new NotImplementedException();
-
-        public IPicture PictureOpen { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IPicture PictureClose { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public ICustomObjects Requests => throw new NotImplementedException();
-
-        public IScripts Scripts => throw new NotImplementedException();
-
-        public IUserFieldDefinitions UserFieldDefinitions => throw new NotImplementedException();
-
-        public ICustomFolders SubFolders => throw new NotImplementedException();
-
-        public IAutocalculations Autocalculations => throw new NotImplementedException();
-
+        /// <summary>
+        /// Constructor for existing objects
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="parent"></param>
+        /// <param name="uniqueId"></param>
+        protected CustomFolder(IApplication app, object parent, int uniqueId) : base(app, parent)
+        {
+            _uniqueId = uniqueId;
+        }
+        /// <include file='commonDocs.xml' path='docs/members[@name="comparisons"]/equality/*'/>
+        public static bool operator ==(CustomFolder left, ICustomFolder right)
+        {
+            return (left?.Equals(right) ?? (right?.Equals(left) ?? true));
+        }
+        /// <include file='commonDocs.xml' path='docs/members[@name="comparisons"]/inequality/*'/>
+        public static bool operator !=(CustomFolder left, ICustomFolder right)
+        {
+            return !(left?.Equals(right) ?? (right?.Equals(left) ?? true));
+        }
+        /// <inheritdoc/>
+        public int UniqueId => _uniqueId;
+        /// <inheritdoc/>
+        public abstract bool this[CoaApplicationFolders type] { get; set; }
+        /// <inheritdoc/>
+        public abstract IUserFieldDefinition this[CoaApplicationFolders folderType, CoaApplicationFoldersProperties propType] { get; set; }
+        /// <inheritdoc/>
+        public abstract string Name { get; set; }
+        /// <inheritdoc/>
+        public abstract string Alias { get; set; }
+        /// <inheritdoc/>
+        public abstract bool InheritNamingScheme { get; set; }
+        /// <inheritdoc/>
+        public abstract string NamingScheme { get; set; }
+        /// <inheritdoc/>
+        public abstract string Path { get; set; }
+        /// <inheritdoc/>
+        public abstract IForms Forms { get; set; }
+        /// <inheritdoc/>
+        public abstract ICustomFolder ParentFolder { get; set; }
+        /// <inheritdoc/>
+        public abstract IPrivileges Privileges { get; set; }
+        /// <inheritdoc/>
+        public abstract IPicture PictureOpen { get; set; }
+        /// <inheritdoc/>
+        public abstract IPicture PictureClose { get; set; }
+        /// <inheritdoc/>
+        public abstract ICustomObjects Requests { get; }
+        /// <inheritdoc/>
+        public abstract IScripts Scripts { get; }
+        /// <inheritdoc/>
+        public abstract IUserFieldDefinitions UserFieldDefinitions { get; }
+        /// <inheritdoc/>
+        public abstract ICustomFolders SubFolders { get; }
+        /// <inheritdoc/>
+        public abstract IAutocalculations Autocalculations { get; }
+        /// <inheritdoc/>
         public IRule VisibilityRule { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public ISchemaHistory SchemaHistory => throw new NotImplementedException();
-
-        public IUserFieldDefinition HistoryWorkflowField { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public void DeleteImportDefinition(object settings)
+        /// <inheritdoc/>
+        public abstract ISchemaHistory SchemaHistory { get; }
+        /// <inheritdoc/>
+        public abstract IUserFieldDefinition HistoryWorkflowField { get; set; }
+        /// <inheritdoc/>
+        public abstract void DeleteImportDefinition(object settings);
+        /// <inheritdoc/>
+        public abstract IColumnLayout GetColumnLayout();
+        /// <inheritdoc/>
+        public abstract IView GetInitialView(int context, int type = 0);
+        /// <inheritdoc/>
+        public override bool Equals(object obj)
         {
-            throw new NotImplementedException();
+            return Equals(obj as ICustomFolder);
         }
-
-        public IColumnLayout GetColumnLayout()
+        /// <inheritdoc/>
+        public override int GetHashCode()
         {
-            throw new NotImplementedException();
+            return base.GetHashCode();
         }
-
-        public IView GetInitialView(int context, int type = 0)
+        /// <inheritdoc/>
+        public bool Equals(ICustomFolder other)
         {
-            throw new NotImplementedException();
+            if (other == null)
+                return false;
+            return other.UniqueId == UniqueId;     
         }
-
-        public CoaEnumPrivilegeLevel GetPrivilegeLevel(IUser user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public CoaEnumPrivilegeLevel GetPrivilegeLevel(IGroup group)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IColumnLayout MakeColumnLayout()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IFilter MakeFilter()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IImport MakeImport()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IImportDefinition MakeImportDefinition()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQuery MakeQuery()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IView MakeView()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Move(ICustomFolder folder)
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <inheritdoc/>
         public void Save()
         {
-            throw new NotImplementedException();
+            _uniqueId = OnSave();
         }
-
-        public ICustomObjects Search(IFilter filter)
+        /// <inheritdoc/>
+        public CoaEnumPrivilegeLevel GetPrivilegeLevel(IUser user)
         {
-            throw new NotImplementedException();
+            if (user == null)
+                return CoaEnumPrivilegeLevel.NoPrivilege;
+            if (user.SuperUser)
+                return CoaEnumPrivilegeLevel.Administration;
+            var result = CoaEnumPrivilegeLevel.NoPrivilege;
+            for (var i = 0; i < Privileges.Count; i++)
+            {
+                if (Privileges[i].AllUsers)
+                {
+                    if (result < Privileges[i].PrivilegeLevel)
+                        result = Privileges[i].PrivilegeLevel;
+                    continue;
+                }
+                if (Privileges[i].User is IUser)
+                {
+                    if (result < Privileges[i].PrivilegeLevel)
+                        result = Privileges[i].PrivilegeLevel;
+                }
+                if (Privileges[i].User is IGroup group)
+                {
+                    if (result < Privileges[i].PrivilegeLevel && user.IsInGroup(group.Name))
+                        result = Privileges[i].PrivilegeLevel;
+                }
+            }
+            return result;
         }
-
-        public void SetColumnLayout(IColumnLayout layout)
+        /// <inheritdoc/>
+        public CoaEnumPrivilegeLevel GetPrivilegeLevel(IGroup group)
         {
-            throw new NotImplementedException();
-        }
+            var result = CoaEnumPrivilegeLevel.NoPrivilege;
+            for (var i = 0; i < Privileges.Count; i++)
+                if (Privileges[i].User as CoaGroup == group)
+                {
+                    if (Privileges[i].AllUsers)
+                    {
+                        if (result < Privileges[i].PrivilegeLevel)
+                            result = Privileges[i].PrivilegeLevel;
+                    }
 
-        public void SetCurrentView(int context, int viewId)
-        {
-            throw new NotImplementedException();
+                    if (result < Privileges[i].PrivilegeLevel)
+                        result = Privileges[i].PrivilegeLevel;
+                }
+            return result;
         }
+        /// <inheritdoc/>
+        public abstract IActions GetActionList(CoaActionListType type);
+        /// <inheritdoc/>
+        public abstract IColumnLayout MakeColumnLayout();
+        /// <inheritdoc/>
+        public abstract IFilter MakeFilter();
+        /// <inheritdoc/>
+        public abstract IImport MakeImport();
+        /// <inheritdoc/>
+        public abstract IImportDefinition MakeImportDefinition();
+        /// <inheritdoc/>
+        public abstract IQuery MakeQuery();
+        /// <inheritdoc/>
+        public abstract IView MakeView();
+        /// <inheritdoc/>
+        public abstract void Move(ICustomFolder folder);
+        /// <inheritdoc/>
+        public abstract ICustomObjects Search(IFilter filter);
+        /// <inheritdoc/>
+        public abstract void SetColumnLayout(IColumnLayout layout);
+        /// <inheritdoc/>
+        public abstract void SetCurrentView(int context, int viewId);
+        /// <summary>
+        /// Saving method implementation
+        /// </summary>
+        /// <returns></returns>
+        protected abstract int OnSave();
     }
 }

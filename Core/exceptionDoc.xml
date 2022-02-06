@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<docs>
+	<members name="exception">
+		<default>
+			<summary>
+				Default constructor with predefined text message
+			</summary>
+		</default>
+		<innerException>
+			<summary>
+				Constructor with predefined exception message and inner Exception information
+			</summary>
+			<param name="innerException">Additional exception info</param>
+		</innerException>
+		<message>
+			<summary>
+				Constructor with overriding default text message
+			</summary>
+			<param name="message">Exception text message</param>
+		</message>
+		<messageInnerException>
+			<summary>
+				Constructor with overriding default text message and additional exception info
+			</summary>
+			<param name="message">Exception text message</param>
+			<param name="innerException">Additional exception information</param>
+		</messageInnerException>
+	</members>
+</docs>

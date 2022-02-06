@@ -1,123 +1,66 @@
-﻿/*
- *  "Custom object application core"
- *  An application that implements the ability to customize object templates and actions on them.
- *  Copyright (C) 2019 by Maxim V. Yugov.
- *
- *  This file is part of "Custom object application".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-using CoaApp.Core.Interfaces;
-using System;
+﻿using CoaApp.Core.Interfaces;
 
 namespace CoaApp.Core
 {
-    public abstract class Session : AppBase<Application>, ISession
+    ///<inheritdoc/>
+    public abstract class CoaSession : AppBase, ISession
     {
-        protected Session(Application app): base(app, app)
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="app"></param>
+        protected CoaSession(CoaApplication app): base(app, app)
         {
 
         }
-        public ICustomFolders RequestFolders => throw new NotImplementedException();
-
-        public IActiveSessions ActiveSessions => throw new NotImplementedException();
-
-        public string Username => throw new NotImplementedException();
-
-        public IPictures Pictures => throw new NotImplementedException();
-
-        public IUser ActiveUser => throw new NotImplementedException();
-
-        public IGroups Groups => throw new NotImplementedException();
-
-        public IUsers Users => throw new NotImplementedException();
-
-        public IScheduledTasks ScheduledTasks => throw new NotImplementedException();
-
-        public IQueryResult ExecuteSqlRequest(string sqlCommand, params object[] parameters)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICustomObjects GetDeletedRequests()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IGroup GetGroupByUniqueId(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICustomObject GetRequestByUniqueId(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICustomFolder GetRequestFolderByPath(string path)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICustomFolder GetRequestFolderByUniqueId(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IScript GetServerScript(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IState GetStateByUniqueId(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string GetSystemParameter(string table, string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IUser GetUserByUniqueId(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IUserFieldDefinition GetUserFieldDefinitionByUniqueId(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IView GetViewByUniqueId(int id)
-        {
-            throw new NotImplementedException();
-        }
-
+        ///<inheritdoc/>
+        public abstract ICustomFolders RequestFolders { get; }
+        ///<inheritdoc/>
+        public abstract IActiveSessions ActiveSessions { get; }
+        ///<inheritdoc/>
+        public abstract string Username { get; }
+        ///<inheritdoc/>
+        public abstract IPictures Pictures { get; }
+        ///<inheritdoc/>
+        public abstract IUser ActiveUser { get; }
+        ///<inheritdoc/>
+        public abstract IGroups Groups { get; }
+        ///<inheritdoc/>
+        public abstract IUsers Users { get; }
+        ///<inheritdoc/>
+        public abstract IScheduledTasks ScheduledTasks { get; }
+        ///<inheritdoc/>
+        public abstract IQueryResult ExecuteSqlRequest(string sqlCommand, params object[] parameters);
+        ///<inheritdoc/>
+        public abstract ICustomObjects GetDeletedRequests();
+        ///<inheritdoc/>
+        public abstract IGroup GetGroupByUniqueId(int id);
+        ///<inheritdoc/>
+        public abstract ICustomObject GetRequestByUniqueId(long id);
+        ///<inheritdoc/>
+        public abstract ICustomFolder GetRequestFolderByPath(string path);
+        ///<inheritdoc/>
+        public abstract ICustomFolder GetRequestFolderByUniqueId(int id);
+        ///<inheritdoc/>
+        public abstract IScript GetServerScript(string name);
+        ///<inheritdoc/>
+        public abstract IState GetStateByUniqueId(int id);
+        ///<inheritdoc/>
+        public abstract string GetSystemParameter(string table, string name);
+        ///<inheritdoc/>
+        public abstract IUser GetUserByUniqueId(int id);
+        ///<inheritdoc/>
+        public abstract IUserFieldDefinition GetUserFieldDefinitionByUniqueId(int id);
+        ///<inheritdoc/>
+        public abstract IView GetViewByUniqueId(int id);
+        ///<inheritdoc/>
         public void LogMessage(string msg)
         {
-            throw new NotImplementedException();
+            Application.WriteLogMessage(msg);
         }
-
-        public void Logoff()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void NotifyUser(object reciever, string message, ICustomObject linkedRequest)
-        {
-            throw new NotImplementedException();
-        }
+        ///<inheritdoc/>
+        public abstract void Logoff();
+        ///<inheritdoc/>
+        public abstract void NotifyUser(object reciever, string message, ICustomObject linkedRequest);
     }
 }

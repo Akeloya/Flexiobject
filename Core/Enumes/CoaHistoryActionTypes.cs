@@ -1,36 +1,16 @@
-﻿/*
- *  "Custom object application core"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
- *
- *  This file is part of "Custom object application".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-namespace CoaApp.Core.Enumes
+﻿namespace CoaApp.Core.Enumes
 {
     /// <summary>
-    /// Коллекция типов записей истории изменения объектов
+    /// Object modification history action types
     /// </summary>
     public enum CoaHistoryActionTypes
     {
         /// <summary>
-        /// Объект создан
+        /// Object created record type
         /// </summary>
         ObjCreated = 1,
         /// <summary>
-        /// Удаление объекта
+        /// Object deleted record type
         /// </summary>
         ObjDeleted,
         /// <summary>
@@ -42,43 +22,43 @@ namespace CoaApp.Core.Enumes
         /// </summary>
         ObjCopied,
         /// <summary>
-        /// Изменено пользовательское поле
+        /// Object field was modificated
         /// </summary>
         FieldModified,
         /// <summary>
-        /// Изменен список объектов
+        /// Object list was modified
         /// </summary>
-        ModifyObjectLIst,
+        ModifyObjectList,
         /// <summary>
-        /// Перемещение вложения
+        /// Attachment was moved
         /// </summary>
         AttachmentMoved,
         /// <summary>
-        /// Добавление ссылки
+        /// Reference to another object was added
         /// </summary>
         ReferenceAdded,
         /// <summary>
-        /// Удаление ссылки
+        /// Reference to another object was removed (field value cleared)
         /// </summary>
         ReferenceRemoved,
         /// <summary>
-        /// Добавлено вложение
+        /// Attachment was added
         /// </summary>
         AttachmentAdded,
         /// <summary>
-        /// Вложение удалено
+        /// Attachment was deleted
         /// </summary>
         AttachmentDeleted,
         /// <summary>
-        /// Изменение вложения
+        /// Attachment was modified
         /// </summary>
         AttachmentModified,
         /// <summary>
-        /// Изменение описания вложения
+        /// Attachment description was modified
         /// </summary>
         AttachmentDescriptionModified,
         /// <summary>
-        /// Создание схемы импорта
+        /// Schema import was created
         /// </summary>
         CreatedSchemaImport
     }

@@ -1,88 +1,69 @@
-﻿/*
- *  "Custom object application core"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
- *
- *  This file is part of "Custom object application".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CoaApp.Core.Enumes;
 
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Автокалькуляция на папке
+    /// Automatic calculation for object on folder
     /// </summary>
     public interface IAutocalculation : IBase
     {
         /// <summary>
-        /// Название
+        /// Calculation name
         /// </summary>
         string Name { get; set; }
         /// <summary>
-        /// Описание
+        /// Description
         /// </summary>
         string Description { get; set; }
         /// <summary>
-        /// Тип автокалькуляции
+        /// Calculation type
         /// </summary>
         CoaSummaryTypes AutoCalculationType { get; set; }
         /// <summary>
-        /// Флаги состояния модификации автокалькуляции
+        /// Autocalculation execution flags
         /// </summary>
         CoaExecutionFlags Flags { get; set; }
         /// <summary>
-        /// Скрипт расчета
+        /// Autocalculation script
         /// </summary>
         IScript Script { get; set; }
         /// <summary>
-        /// Фильтр дополнительной фильтрации объектов автокалькуляции
+        /// Filter for additional filtering of autocalculated objects
         /// </summary>
         IRule SummarisingFilter { get; set; }
         /// <summary>
-        /// Поля хранения данных
+        /// Data storage fields
+        /// Each field in which the result of the calculation is written must be specified in the collection.
         /// </summary>
         IUserFieldDefinitions DataStoredFields { get; set; }
         /// <summary>
-        /// Поля от которых зависит расчет калькуляции скриптом
+        /// The fields on which the calculation by the script depends
         /// </summary>
-        List<string> ScriptDependencyFields { get; set; }
+        IList<string> ScriptDependencyFields { get; set; }
         /// <summary>
-        /// Поле типа "ObjectList" с объектами для калькуляции
-        /// <seealso cref="CoaEnumFieldType"/>
+        /// Field definition of type "ObjectList" which stores object to calculate data
+        /// <seealso cref="CoaFieldTypes"/>
         /// <seealso cref="IUserFieldDefinition"/>
         /// <seealso cref="SummarizedFieldPath"/>
         /// </summary>
-        IUserFieldDefinition ObjectsStoredField { get; set; }        
+        IUserFieldDefinition ObjectsStoredField { get; set; }
         /// <summary>
-        /// Путь к полю, в котором содержатся данные
+        /// The path to the field that contains the data
         /// </summary>
         string SummarizedFieldPath { get; set; }
         /// <summary>
-        /// Хранить 0 вместо "пусто"
+        /// Store 0 instead null or empty
         /// </summary>
         bool StoreZero { get; set; }
         /// <summary>
-        /// Сохранение изменений в БД
+        /// Save changes
         /// </summary>
         void Save();
         /// <summary>
-        /// Пересчет автокалькуляции        
+        /// Recalc data
         /// </summary>
-        /// <param name="variant">Объект IRequest для которого производится пересчет или IRequests для которых проводится пересчет</param>
+        /// <param name="variant">The ICustomObject or ICustomObjects for which the recalculation is performed</param>
         void Recalc(object variant);
     }
 }

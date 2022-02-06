@@ -1,59 +1,38 @@
-﻿/*
- *  "Custom object application core"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
- *
- *  This file is part of "Custom object application".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-using CoaApp.Core.Enumes;
+﻿using CoaApp.Core.Enumes;
 
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Разрешения для группу или пользователя, связанные с папкой
+    /// Privilege for a group or user associated with a folder
     /// </summary>
     public interface IPrivilege : IBase
     {
         /// <summary>
-        /// Флаг, определяющий правила применения привилегий.
-        /// true - если привилегия применяется для всех пользователей. Тогда поле <see cref="User"/> будет null
-        /// false - если привилегия применяется для пользователей указанных в <see cref="User"/>
+        /// Flag defining the rules for applying privileges.
+        /// true - if the privilege applies to all users. Then the field <see cref="User"/> will be null
+        /// false - if the privilege applies to users specified in <see cref="User"/>
         /// </summary>
         bool AllUsers { get; set; }
         /// <summary>
-        /// Флаг наследована ли привелегия от родительской папки
+        /// Flag indicates inheritance of this privilege from parent folder
         /// </summary>
         bool Inherited { get; }
         /// <summary>
-        /// true - если привилегия использована для группы
-        /// false - для пользователя
+        /// true - if privilege is group
+        /// false - privilege is user
         /// </summary>
         bool IsGroup { get; }
         /// <summary>
-        /// Уровень привилегии для пользователя или группы
+        /// Privilege level of user or group
         /// </summary>
         CoaEnumPrivilegeLevel PrivilegeLevel { get; set; }
         /// <summary>
-        /// Пользователь или группа, для которого применяется привилегия.
-        /// Возвращается объект <see cref="IUser"/> или <see cref="IGroup"/>.
-        /// Для уточнения поспользуйтесь <see cref="IsGroup"/>
+        /// User or group that have this privilege
+        /// Returns <see cref="IUser"/> or <see cref="IGroup"/>.
         /// </summary>
         dynamic User { get; set; }
         /// <summary>
-        /// Сохранение изменение разрешения
+        /// Save changes
         /// </summary>
         void Save();
     }

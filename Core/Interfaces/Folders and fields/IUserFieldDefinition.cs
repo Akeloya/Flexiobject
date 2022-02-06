@@ -1,104 +1,86 @@
-﻿/*
- *  "Custom object application core"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
- *
- *  This file is part of "Custom object application".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-using CoaApp.Core.Enumes;
+﻿using CoaApp.Core.Enumes;
+using System;
 
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Определение пользовательского поля
+    /// Field definition for user objects
     /// </summary>
-    public interface IUserFieldDefinition : IBase
+    public interface IUserFieldDefinition : IBase, IEquatable<IUserFieldDefinition>
     {
         /// <summary>
-        /// Ид определения
+        /// Field Id
         /// </summary>
         int Id { get; }
         /// <summary>
-        /// Алиас определения
+        /// Field alias (for multilangual interface)
         /// </summary>
         string Alias { get; set; }
         /// <summary>
-        /// Название пользовательского определения
+        /// Field label
         /// </summary>
         string Label { get; set; }
         /// <summary>
-        /// Детали пользовательского определения
+        /// Field definitiona detailes
         /// </summary>
         dynamic Details { get; }
         /// <summary>
-        /// Тип пользовательского определения
+        /// Field type
         /// </summary>
         CoaFieldTypes Type { get; set; }
         /// <summary>
-        /// Необходимость записывать в историю изменения значения поля объекта
+        /// Flag for write changes to history
         /// </summary>
         bool WriteHistory { get; set; }
         /// <summary>
-        /// Значение по умолчанию. Для даты подробности получения значения по умолчанию определяются в деталях
+        /// Default value. Settings for calculating default value stores in detailes
+        /// <seealso cref="Details"/>
         /// </summary>
         object DefaultValue { get; set; }
         /// <summary>
-        /// Вычисление необходимости установить значение в поле
+        /// Calculating
         /// </summary>
-        /// <param name="oldReq">Копия объекта до изменения</param>
-        /// <param name="newReq">Копия объекта после изменения</param>
-        /// <returns>истина/ложь</returns>
-        bool IsRequired(ICustomObject oldReq, ICustomObject newReq);
+        /// <param name="oldObj">Old object copy</param>
+        /// <param name="newObj">New object copy</param>
+        /// <returns>Required/Not required</returns>
+        bool IsRequired(ICustomObject oldObj, ICustomObject newObj);
         /// <summary>
-        /// Доступно ли поле для использования
+        /// Flag indicates enabled field for editing
         /// </summary>
-        /// <param name="oldReq"></param>
-        /// <param name="newReq"></param>
+        /// <param name="oldObj">Old copy of object</param>
+        /// <param name="newObj">New copy of object</param>
         /// <returns></returns>
-        bool IsEnabled(ICustomObject oldReq, ICustomObject newReq);
+        bool IsEnabled(ICustomObject oldObj, ICustomObject newObj);
         /// <summary>
-        /// Возможна ли смена типа поля
+        /// Is it possible to change the field type
         /// </summary>
-        bool CanEditFieldType { get; }
+        bool CanEditFieldType(CoaFieldTypes newType);
         /// <summary>
-        /// Необходим ли использовать правило обязательности заполнения данных
+        /// Use rule required field value
         /// </summary>
         bool UseRuleRequired { get; set; }
         /// <summary>
-        /// Доступно ли поле для редактирования
+        /// Use rule enabled field edit
         /// </summary>
         bool UseRuleEnabled { get; set; }
         /// <summary>
-        /// Правило обязательности заполнения
+        /// Required value rule
         /// </summary>
         IRule RequiredRule { get; set; }
         /// <summary>
-        /// Правило доступности редактирования
+        /// Enabled for editing field value
         /// </summary>
         IRule EnabledRule { get; set; }
         /// <summary>
-        /// Индекс в БД
+        /// Index for field in database
         /// </summary>
         bool IndexFieldDb { get; set; }
         /// <summary>
-        /// Индекс поля
+        /// Index for field in server memory
         /// </summary>
         bool IndexField { get; set; }
         /// <summary>
-        /// Сохранение измений
+        /// Save changes
         /// </summary>
         void Save();
     }

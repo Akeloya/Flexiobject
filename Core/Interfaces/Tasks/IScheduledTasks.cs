@@ -1,55 +1,35 @@
-﻿/*
- *  "Custom object application core"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
- *
- *  This file is part of "Custom object application".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-namespace CoaApp.Core.Interfaces
+﻿namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Коллекция запланированных заданий на сервере
+    /// Scheduled tasks collection
     /// </summary>
     public interface IScheduledTasks : IBase
     {
         /// <summary>
-        /// Доступ к элементу коллекции по индексу
+        /// Access to shceduled task by index
         /// </summary>
-        /// <param name="idx">Индекс 0..Count-1</param>
+        /// <param name="idx">0..Count-1 index value</param>
         /// <returns></returns>
         IScheduledTask this[int idx] { get; }
         /// <summary>
-        /// Доступ к элементу коллекции по алиасу
+        /// Access to scheduled task by alias
         /// </summary>
-        /// <param name="alias">Строка - алиас запланированного задания в коллекции</param>
+        /// <param name="alias">Scheduled task alias</param>
         /// <returns></returns>
         IScheduledTask this[string alias] { get; }
         /// <summary>
-        /// Количество запланированных заданий в коллекции
+        /// Collection count
         /// </summary>
         int Count { get; }
         /// <summary>
-        /// Добавить новое запланированное задание
+        /// Add new scheduled task
         /// </summary>
         /// <returns></returns>
         IScheduledTask Add();
         /// <summary>
-        /// Удаление запланированного задания
+        /// Delete scheduled task
         /// </summary>
-        /// <param name="variant">Индекс или IScheduledTask объект, удаляемый с сервера</param>
+        /// <param name="variant">Scheduled task object or element collection index</param>
         void Delete(dynamic variant);
     }
 }

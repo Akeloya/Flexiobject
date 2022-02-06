@@ -1,51 +1,30 @@
 ﻿using CoaApp.Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CoaApp.Core.Folder
 {
-    public abstract class CustomFolders<T>: AppBase<T>, ICustomFolders
+    ///<inheritdoc/>
+    public abstract class CustomFolders: AppBase, ICustomFolders
     {
-        protected CustomFolders(Application app, T parent) : base(app, parent)
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="parent"></param>
+        protected CustomFolders(IApplication app, object parent) : base(app, parent)
         {
 
         }
-
-        public ICustomFolder this[int index] => throw new NotImplementedException();
-
-        public ICustomFolder this[string name] => throw new NotImplementedException();
-
-        public int Count => throw new NotImplementedException();
-
-        public ICustomFolder Add(string name, string alias, ICustomFolder parentFolder)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICustomFolder Add()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(int id, bool force = false)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(ICustomFolder folder, bool force = false)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(ICustomFolder obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(int index)
-        {
-            throw new NotImplementedException();
-        }
+        ///<inheritdoc/>
+        public abstract ICustomFolder this[int index] { get; }
+        ///<inheritdoc/>
+        public abstract ICustomFolder this[string alias] { get; }
+        ///<inheritdoc/>
+        public abstract int Count { get; }
+        ///<inheritdoc/>
+        public abstract ICustomFolder Add(string name, string alias, ICustomFolder parentFolder);
+        ///<inheritdoc/>
+        public abstract void Remove(int id, bool force = false);
+        ///<inheritdoc/>
+        public abstract void Remove(ICustomFolder folder, bool force = false);
     }
 }

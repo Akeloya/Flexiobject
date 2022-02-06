@@ -105,7 +105,7 @@ namespace DbProvider
                     break;
                 case DbTypes.PostgreSql:
                     optionsBuilder.UseNpgsql($"");
-                    break;             
+                    break;        
                 case DbTypes.Oracle:
                     break;
                 case DbTypes.SqlLight:

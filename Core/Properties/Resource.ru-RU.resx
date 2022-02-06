@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AuthenticationException" xml:space="preserve">
+    <value>Во время аутентификации возникли проблемы</value>
+  </data>
+  <data name="BaseGroupDisplayName" xml:space="preserve">
+    <value>(Все группы)</value>
+  </data>
+  <data name="CoaGroupCollectionReadonlyException" xml:space="preserve">
+    <value>Коллекция групп только для чтения</value>
+  </data>
+  <data name="CoaGroupModificationException" xml:space="preserve">
+    <value>Изменение группы доступа приложения не разрешено</value>
+  </data>
+  <data name="CoaGroup_AllUserName" xml:space="preserve">
+    <value>[Все пользователи и группы]</value>
+  </data>
+  <data name="CoaIndexOutOfRangeException" xml:space="preserve">
+    <value>Индекс вне диапазона коллекции</value>
+  </data>
+  <data name="CoaIndexOutOfRangeException_CollectionType" xml:space="preserve">
+    <value>Индекс вне диапазона коллекции типа [{0}]</value>
+  </data>
+  <data name="CoaObjectNotBelontToCollectionException" xml:space="preserve">
+    <value>Объект не принадлежит коллекции</value>
+  </data>
+  <data name="CoaObjectNotFoundException" xml:space="preserve">
+    <value>Объекта id={0} не был найден</value>
+  </data>
+  <data name="CoaProblemOnFormException" xml:space="preserve">
+    <value>Обнаружена проблема или ошибка на форме</value>
+  </data>
+  <data name="CoaRuleCombinationTermsAnd" xml:space="preserve">
+    <value>И</value>
+  </data>
+  <data name="CoaRuleCombinationTermsOr" xml:space="preserve">
+    <value>ИЛИ</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesBelongsToGroup" xml:space="preserve">
+    <value>принадлежит группе</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesContains" xml:space="preserve">
+    <value>содержит</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesContainsCurrentUser" xml:space="preserve">
+    <value>содержит текущего пользователя</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesContainsUser" xml:space="preserve">
+    <value>содержит пользователя</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesDoesNotBelongToGroup" xml:space="preserve">
+    <value>не принадлежит группе</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesDoesNotContainCurrentUser" xml:space="preserve">
+    <value>не содержит текущего пользователя</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesDoesNotMatch" xml:space="preserve">
+    <value>не совпадает</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesEqualTo" xml:space="preserve">
+    <value>=</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesGreaterThan" xml:space="preserve">
+    <value>&gt;</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesGreaterThanOptionListText" xml:space="preserve">
+    <value>выше чем</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesGreaterThanOrEqual" xml:space="preserve">
+    <value>&gt;=</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesGreaterThanOrEqualOptionListText" xml:space="preserve">
+    <value>выше начиная с</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIs" xml:space="preserve">
+    <value>является</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsApiInterface" xml:space="preserve">
+    <value>является API интерфейсом</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsBackgroundProcess" xml:space="preserve">
+    <value>является фоновым процессом</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsGroup" xml:space="preserve">
+    <value>является группой</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsInitialState" xml:space="preserve">
+    <value>начальное состояние</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsInternalUser" xml:space="preserve">
+    <value>является внутренним пользователем</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsNot" xml:space="preserve">
+    <value>не является</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsNotInitialState" xml:space="preserve">
+    <value>не начальное состояние</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsNotInternalUser" xml:space="preserve">
+    <value>не является внутренним пользователем</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsNotMemberOf" xml:space="preserve">
+    <value>не является членом</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsSuperuser" xml:space="preserve">
+    <value>является суперпользователем</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsUser" xml:space="preserve">
+    <value>является пользователем</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsUserClient" xml:space="preserve">
+    <value>является пользовательским клиентом</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesIsVisibleForCurrentUser" xml:space="preserve">
+    <value>видим для текущего пользователя</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesLessThan" xml:space="preserve">
+    <value>&lt;</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesLessThanOptionListText" xml:space="preserve">
+    <value>ниже</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesLessThanOrEqual" xml:space="preserve">
+    <value>&lt;=</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesLessThanOrEqualOptionListText" xml:space="preserve">
+    <value>ниже начиная с</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesMatches" xml:space="preserve">
+    <value>совпадает с</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesNotContains" xml:space="preserve">
+    <value>не содержит</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesNotContainsUser" xml:space="preserve">
+    <value>не содержит пользователя</value>
+  </data>
+  <data name="CoaRuleComparisonsTypesNotEqualTo" xml:space="preserve">
+    <value>!=</value>
+  </data>
+  <data name="CoaRuleStringAlways" xml:space="preserve">
+    <value>&lt;Всегда&gt;</value>
+  </data>
+  <data name="CoaUserCollectionReadonlyException" xml:space="preserve">
+    <value>Коллекция пользователей приложения только для чтения</value>
+  </data>
+  <data name="CoaUserFieldAnotherFolderException" xml:space="preserve">
+    <value>Невозможно установить объект из другой папки в качестве значения</value>
+  </data>
+  <data name="CoaUserFieldArgumentObjListTypeException" xml:space="preserve">
+    <value>Неверный тип данных для поля типа ObjectList</value>
+  </data>
+  <data name="CoaUserFieldException" xml:space="preserve">
+    <value>Произошла ошибка во время установки или получения значения</value>
+  </data>
+  <data name="CoaUserFieldForeignCollectionException" xml:space="preserve">
+    <value>Невозможно установить чужую коллекцию</value>
+  </data>
+  <data name="CoaUserFieldIncorrectInitializationException" xml:space="preserve">
+    <value>Неправильно инициализирован вызов [SetObjectListValue]</value>
+  </data>
+  <data name="CoaUserFieldInitializationValueException" xml:space="preserve">
+    <value>Невозможно установить значение отличное от начального состояния пока объект не создан</value>
+  </data>
+  <data name="CoaUserFieldValidationGreaterThenErrorMessage" xml:space="preserve">
+    <value>Поле "{0}" больше максимальной длины в {1} символов</value>
+  </data>
+  <data name="CoaUserFieldValidationLessThenErrorMessage" xml:space="preserve">
+    <value>Поле "{0}" меньше минимальной длины ({1})</value>
+  </data>
+  <data name="CoaUserLoginRequiredException" xml:space="preserve">
+    <value>Для указанного типа аутентификации необходимо установить логин</value>
+  </data>
+  <data name="CoaUserPasswordRequiredException" xml:space="preserve">
+    <value>Для указанного типа аутентификации необходимо установить пароль</value>
+  </data>
+  <data name="FormSetScriptExceptionStr" xml:space="preserve">
+    <value>Невозможно установить скрипт для формы, так как он содержит ошибки</value>
+  </data>
+  <data name="GroupFolderSyncException" xml:space="preserve">
+    <value>Невозможно установить объект для папки, не синхронизированной с группами приложения</value>
+  </data>
+  <data name="GroupName" xml:space="preserve">
+    <value>Группа ид={0}</value>
+  </data>
+  <data name="GroupSyncRequestException" xml:space="preserve">
+    <value>Невозможно обновить группу, так как связанный объект не поддерживает обновления</value>
+  </data>
+  <data name="MissingStatusOnServerException" xml:space="preserve">
+    <value>Статус отсутствует на сервере, обновите редактор поля</value>
+  </data>
+  <data name="RemovingUserNotInCollectionExceptionStr" xml:space="preserve">
+    <value>Удаляемый пользователь не принадлежит коллекции</value>
+  </data>
+  <data name="RestrictionRuleFailedException" xml:space="preserve">
+    <value>Провалено правило ограничения ссылки</value>
+  </data>
+  <data name="RestrictionRuleFailedException_ForField" xml:space="preserve">
+    <value>Невозможно установить значения поля [{0}]</value>
+  </data>
+  <data name="SchemaHistoryArgumentException" xml:space="preserve">
+    <value>При записи переименования объекта в историю схемы, необходимо указывать старое и новое название объекта</value>
+  </data>
+  <data name="SchemaHistoryArgumentExceptionWithArgName" xml:space="preserve">
+    <value>При записи переименования объекта в историю схемы был указано не допустимое значение аргумента {0}</value>
+  </data>
+  <data name="SchemeNotFoundException" xml:space="preserve">
+    <value>Схема не была найдена в базе данных</value>
+  </data>
+  <data name="SerializationMessageException" xml:space="preserve">
+    <value>Имеются проблемы десериализации данных</value>
+  </data>
+  <data name="UserSyncRequestException" xml:space="preserve">
+    <value>Невозможно установить объект для папки, не синхронизированной с пользователями приложения</value>
+  </data>
+  <data name="WorkflowNullValueException" xml:space="preserve">
+    <value>Невозможно установить null в качестве значения поля рабочего процесса</value>
+  </data>
+</root>
