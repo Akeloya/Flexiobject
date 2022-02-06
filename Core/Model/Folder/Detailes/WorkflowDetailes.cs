@@ -2,7 +2,7 @@
 
 namespace CoaApp.Core.Model.Folder.Detailes
 {
-    ///<inheritdoc>/>
+    ///<inheritdoc/>
     public abstract class WorkflowDetailes : AppBase, IWorkflowDetails
     {
         /// <include file='commonDocs.xml' path='docs/members[@name="constructors"]/defaultProtected/*'/>
