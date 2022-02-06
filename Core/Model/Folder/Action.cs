@@ -1,7 +1,7 @@
 ﻿using CoaApp.Core.Enumes;
 using CoaApp.Core.Interfaces;
 
-namespace CoaApp.Core.Model.Folder.Detailes
+namespace CoaApp.Core
 {
     /// <inheritdoc/>
     public abstract class Action : AppBase, IAction

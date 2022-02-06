@@ -1,11 +1,6 @@
 ﻿using CoaApp.Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CoaApp.Core.Model.Folder.Detailes
+namespace CoaApp.Core
 {
     ///<inheritdoc/>
     public abstract class StateTransition: AppBase, IStateTransition

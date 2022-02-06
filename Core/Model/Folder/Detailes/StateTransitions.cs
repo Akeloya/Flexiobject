@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CoaApp.Core.Model.Folder.Detailes
+namespace CoaApp.Core
 {
     ///<inheritdoc/>
     public abstract class StateTransitions: AppBase, IStateTransitions
