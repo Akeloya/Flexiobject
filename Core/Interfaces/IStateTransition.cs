@@ -24,6 +24,13 @@
         /// <summary>
         /// Actions than will be executed after transition
         /// </summary>
-        IActions ActionListAfter { get; }        
+        IActions ActionListAfter { get; }
+        /// <summary>
+        /// Checking required fields and calculating scripts
+        /// </summary>
+        /// <param name="oldObj">Old object state</param>
+        /// <param name="newObj">Current object state</param>
+        /// <returns>True/false</returns>
+        bool CheckRule(CoaCustomObject oldObj, CoaCustomObject newObj);
     }
 }
