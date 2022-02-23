@@ -22,7 +22,7 @@ namespace AppClient.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace AppClient.Properties {
         ///   Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AppClient.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace AppClient.Properties {
         ///   обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Custom object application.
         /// </summary>
-        internal static string AppTitle {
+        public static string AppTitle {
             get {
                 return ResourceManager.GetString("AppTitle", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Avalon Edit.
         /// </summary>
-        internal static string License_AvalonEdit {
+        public static string License_AvalonEdit {
             get {
                 return ResourceManager.GetString("License_AvalonEdit", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Custom object application.
         /// </summary>
-        internal static string License_CustomObjectApplication {
+        public static string License_CustomObjectApplication {
             get {
                 return ResourceManager.GetString("License_CustomObjectApplication", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Extended.Wpf.Toolkit.
         /// </summary>
-        internal static string License_ExtendedWpfToolkit {
+        public static string License_ExtendedWpfToolkit {
             get {
                 return ResourceManager.GetString("License_ExtendedWpfToolkit", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на LinqToExcel.
         /// </summary>
-        internal static string License_LinqToExcel {
+        public static string License_LinqToExcel {
             get {
                 return ResourceManager.GetString("License_LinqToExcel", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на WPF extended controls.
         /// </summary>
-        internal static string License_WpfExtendedControls {
+        public static string License_WpfExtendedControls {
             get {
                 return ResourceManager.GetString("License_WpfExtendedControls", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на MainVisual.
         /// </summary>
-        internal static string MainVisual {
+        public static string MainVisual {
             get {
                 return ResourceManager.GetString("MainVisual", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Edit.
         /// </summary>
-        internal static string MenuItemEdit {
+        public static string MenuItemEdit {
             get {
                 return ResourceManager.GetString("MenuItemEdit", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Add object.
         /// </summary>
-        internal static string MenuItemEditAdd {
+        public static string MenuItemEditAdd {
             get {
                 return ResourceManager.GetString("MenuItemEditAdd", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Add folder.
         /// </summary>
-        internal static string MenuItemEditAddFolder {
+        public static string MenuItemEditAddFolder {
             get {
                 return ResourceManager.GetString("MenuItemEditAddFolder", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Subfolder.
         /// </summary>
-        internal static string MenuItemEditAddFolderFolder {
+        public static string MenuItemEditAddFolderFolder {
             get {
                 return ResourceManager.GetString("MenuItemEditAddFolderFolder", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Same leverl.
         /// </summary>
-        internal static string MenuItemEditAddFolderFolderSameLevel {
+        public static string MenuItemEditAddFolderFolderSameLevel {
             get {
                 return ResourceManager.GetString("MenuItemEditAddFolderFolderSameLevel", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Edit object.
         /// </summary>
-        internal static string MenuItemEditEdit {
+        public static string MenuItemEditEdit {
             get {
                 return ResourceManager.GetString("MenuItemEditEdit", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Edit folder.
         /// </summary>
-        internal static string MenuItemEditEditFolder {
+        public static string MenuItemEditEditFolder {
             get {
                 return ResourceManager.GetString("MenuItemEditEditFolder", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Refresh.
         /// </summary>
-        internal static string MenuItemEditRefresh {
+        public static string MenuItemEditRefresh {
             get {
                 return ResourceManager.GetString("MenuItemEditRefresh", resourceCulture);
             }
@@ -198,7 +198,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Delete object.
         /// </summary>
-        internal static string MenuItemEditRemove {
+        public static string MenuItemEditRemove {
             get {
                 return ResourceManager.GetString("MenuItemEditRemove", resourceCulture);
             }
@@ -207,7 +207,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Delete folder.
         /// </summary>
-        internal static string MenuItemEditRemoveFolder {
+        public static string MenuItemEditRemoveFolder {
             get {
                 return ResourceManager.GetString("MenuItemEditRemoveFolder", resourceCulture);
             }
@@ -216,7 +216,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на File.
         /// </summary>
-        internal static string MenuItemFile {
+        public static string MenuItemFile {
             get {
                 return ResourceManager.GetString("MenuItemFile", resourceCulture);
             }
@@ -225,7 +225,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Administring.
         /// </summary>
-        internal static string MenuItemFileAdmin {
+        public static string MenuItemFileAdmin {
             get {
                 return ResourceManager.GetString("MenuItemFileAdmin", resourceCulture);
             }
@@ -234,7 +234,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Active sessions.
         /// </summary>
-        internal static string MenuItemFileAdminActiveSessions {
+        public static string MenuItemFileAdminActiveSessions {
             get {
                 return ResourceManager.GetString("MenuItemFileAdminActiveSessions", resourceCulture);
             }
@@ -243,7 +243,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Blocked objects.
         /// </summary>
-        internal static string MenuItemFileAdminBlockedObjects {
+        public static string MenuItemFileAdminBlockedObjects {
             get {
                 return ResourceManager.GetString("MenuItemFileAdminBlockedObjects", resourceCulture);
             }
@@ -252,7 +252,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Client parameters.
         /// </summary>
-        internal static string MenuItemFileAdminClientParameters {
+        public static string MenuItemFileAdminClientParameters {
             get {
                 return ResourceManager.GetString("MenuItemFileAdminClientParameters", resourceCulture);
             }
@@ -261,7 +261,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Coloring schema.
         /// </summary>
-        internal static string MenuItemFileAdminColorSchema {
+        public static string MenuItemFileAdminColorSchema {
             get {
                 return ResourceManager.GetString("MenuItemFileAdminColorSchema", resourceCulture);
             }
@@ -270,7 +270,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Delete all client objects.
         /// </summary>
-        internal static string MenuItemFileAdminDeleteAllObjects {
+        public static string MenuItemFileAdminDeleteAllObjects {
             get {
                 return ResourceManager.GetString("MenuItemFileAdminDeleteAllObjects", resourceCulture);
             }
@@ -279,7 +279,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Deletion log.
         /// </summary>
-        internal static string MenuItemFileAdminDeletionLog {
+        public static string MenuItemFileAdminDeletionLog {
             get {
                 return ResourceManager.GetString("MenuItemFileAdminDeletionLog", resourceCulture);
             }
@@ -288,7 +288,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Global forms.
         /// </summary>
-        internal static string MenuItemFileAdminGlobalForms {
+        public static string MenuItemFileAdminGlobalForms {
             get {
                 return ResourceManager.GetString("MenuItemFileAdminGlobalForms", resourceCulture);
             }
@@ -297,7 +297,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Image collection.
         /// </summary>
-        internal static string MenuItemFileAdminImageCollection {
+        public static string MenuItemFileAdminImageCollection {
             get {
                 return ResourceManager.GetString("MenuItemFileAdminImageCollection", resourceCulture);
             }
@@ -306,7 +306,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Scheduled tasks.
         /// </summary>
-        internal static string MenuItemFileAdminScheduledTasks {
+        public static string MenuItemFileAdminScheduledTasks {
             get {
                 return ResourceManager.GetString("MenuItemFileAdminScheduledTasks", resourceCulture);
             }
@@ -315,7 +315,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Schema history.
         /// </summary>
-        internal static string MenuItemFileAdminSchemaHistory {
+        public static string MenuItemFileAdminSchemaHistory {
             get {
                 return ResourceManager.GetString("MenuItemFileAdminSchemaHistory", resourceCulture);
             }
@@ -324,7 +324,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на System parameters.
         /// </summary>
-        internal static string MenuItemFileAdminSystemParameters {
+        public static string MenuItemFileAdminSystemParameters {
             get {
                 return ResourceManager.GetString("MenuItemFileAdminSystemParameters", resourceCulture);
             }
@@ -333,7 +333,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Exit.
         /// </summary>
-        internal static string MenuItemFileExit {
+        public static string MenuItemFileExit {
             get {
                 return ResourceManager.GetString("MenuItemFileExit", resourceCulture);
             }
@@ -342,7 +342,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Exit and enter.
         /// </summary>
-        internal static string MenuItemFileExitAndEnter {
+        public static string MenuItemFileExitAndEnter {
             get {
                 return ResourceManager.GetString("MenuItemFileExitAndEnter", resourceCulture);
             }
@@ -351,7 +351,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Notify user.
         /// </summary>
-        internal static string MenuItemFileNotifyUser {
+        public static string MenuItemFileNotifyUser {
             get {
                 return ResourceManager.GetString("MenuItemFileNotifyUser", resourceCulture);
             }
@@ -360,7 +360,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Print.
         /// </summary>
-        internal static string MenuItemFilePrint {
+        public static string MenuItemFilePrint {
             get {
                 return ResourceManager.GetString("MenuItemFilePrint", resourceCulture);
             }
@@ -369,7 +369,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Recent objects.
         /// </summary>
-        internal static string MenuItemFileRecentObjects {
+        public static string MenuItemFileRecentObjects {
             get {
                 return ResourceManager.GetString("MenuItemFileRecentObjects", resourceCulture);
             }
@@ -378,7 +378,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Global scenarios.
         /// </summary>
-        internal static string MenuItemFileSciptsGlobal {
+        public static string MenuItemFileSciptsGlobal {
             get {
                 return ResourceManager.GetString("MenuItemFileSciptsGlobal", resourceCulture);
             }
@@ -387,7 +387,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Scenarios.
         /// </summary>
-        internal static string MenuItemFileScripts {
+        public static string MenuItemFileScripts {
             get {
                 return ResourceManager.GetString("MenuItemFileScripts", resourceCulture);
             }
@@ -396,7 +396,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Search.
         /// </summary>
-        internal static string MenuItemFileScriptsSearch {
+        public static string MenuItemFileScriptsSearch {
             get {
                 return ResourceManager.GetString("MenuItemFileScriptsSearch", resourceCulture);
             }
@@ -405,7 +405,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Status.
         /// </summary>
-        internal static string MenuItemFileScriptsState {
+        public static string MenuItemFileScriptsState {
             get {
                 return ResourceManager.GetString("MenuItemFileScriptsState", resourceCulture);
             }
@@ -414,7 +414,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Help.
         /// </summary>
-        internal static string MenuItemHelp {
+        public static string MenuItemHelp {
             get {
                 return ResourceManager.GetString("MenuItemHelp", resourceCulture);
             }
@@ -423,7 +423,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на About.
         /// </summary>
-        internal static string MenuItemHelpAbout {
+        public static string MenuItemHelpAbout {
             get {
                 return ResourceManager.GetString("MenuItemHelpAbout", resourceCulture);
             }
@@ -432,7 +432,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Help.
         /// </summary>
-        internal static string MenuItemHelpHelp {
+        public static string MenuItemHelpHelp {
             get {
                 return ResourceManager.GetString("MenuItemHelpHelp", resourceCulture);
             }
@@ -441,7 +441,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Instruments.
         /// </summary>
-        internal static string MenuItemInstruments {
+        public static string MenuItemInstruments {
             get {
                 return ResourceManager.GetString("MenuItemInstruments", resourceCulture);
             }
@@ -450,7 +450,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Open object by id.
         /// </summary>
-        internal static string MenuItemInstrumentsOpenObjectById {
+        public static string MenuItemInstrumentsOpenObjectById {
             get {
                 return ResourceManager.GetString("MenuItemInstrumentsOpenObjectById", resourceCulture);
             }
@@ -459,7 +459,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Open scenario editor.
         /// </summary>
-        internal static string MenuItemInstrumentsOpenScenarioEditor {
+        public static string MenuItemInstrumentsOpenScenarioEditor {
             get {
                 return ResourceManager.GetString("MenuItemInstrumentsOpenScenarioEditor", resourceCulture);
             }
@@ -468,7 +468,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Settings.
         /// </summary>
-        internal static string MenuItemInstrumentsSettings {
+        public static string MenuItemInstrumentsSettings {
             get {
                 return ResourceManager.GetString("MenuItemInstrumentsSettings", resourceCulture);
             }
@@ -477,7 +477,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Settings.
         /// </summary>
-        internal static string MenuItemSettings {
+        public static string MenuItemSettings {
             get {
                 return ResourceManager.GetString("MenuItemSettings", resourceCulture);
             }
@@ -486,7 +486,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Open settings.
         /// </summary>
-        internal static string MenuItemSettingsApp {
+        public static string MenuItemSettingsApp {
             get {
                 return ResourceManager.GetString("MenuItemSettingsApp", resourceCulture);
             }
@@ -495,7 +495,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Open setup folder.
         /// </summary>
-        internal static string MenuItemSettingsOpenSetupFolder {
+        public static string MenuItemSettingsOpenSetupFolder {
             get {
                 return ResourceManager.GetString("MenuItemSettingsOpenSetupFolder", resourceCulture);
             }
@@ -504,7 +504,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на View.
         /// </summary>
-        internal static string MenuItemView {
+        public static string MenuItemView {
             get {
                 return ResourceManager.GetString("MenuItemView", resourceCulture);
             }
@@ -513,7 +513,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Instrument panels.
         /// </summary>
-        internal static string MenuItemViewInstrumentPanels {
+        public static string MenuItemViewInstrumentPanels {
             get {
                 return ResourceManager.GetString("MenuItemViewInstrumentPanels", resourceCulture);
             }
@@ -522,7 +522,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на User notifies.
         /// </summary>
-        internal static string MenuItemViewNotifies {
+        public static string MenuItemViewNotifies {
             get {
                 return ResourceManager.GetString("MenuItemViewNotifies", resourceCulture);
             }
@@ -531,7 +531,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Folder tree.
         /// </summary>
-        internal static string MenuItemViewTreeFolder {
+        public static string MenuItemViewTreeFolder {
             get {
                 return ResourceManager.GetString("MenuItemViewTreeFolder", resourceCulture);
             }
@@ -540,7 +540,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Working with folder.
         /// </summary>
-        internal static string MenuItemViewWorkWithFolder {
+        public static string MenuItemViewWorkWithFolder {
             get {
                 return ResourceManager.GetString("MenuItemViewWorkWithFolder", resourceCulture);
             }
@@ -549,7 +549,7 @@ namespace AppClient.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Working with object.
         /// </summary>
-        internal static string MenuItemViewWorkWithObject {
+        public static string MenuItemViewWorkWithObject {
             get {
                 return ResourceManager.GetString("MenuItemViewWorkWithObject", resourceCulture);
             }
