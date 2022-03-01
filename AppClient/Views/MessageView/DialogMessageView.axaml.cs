@@ -1,20 +1,16 @@
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
 using PropertyChanged;
 
-namespace AppClient.Views
+namespace AppClient.Views.MessageView
 {
     [DoNotNotify]
-    public partial class MainWindow : Window
+    public partial class DialogMessageView : Window
     {
-        public MainWindow()
+        public DialogMessageView()
         {
             InitializeComponent();
-#if DEBUG
-            this.AttachDevTools();
-#endif
         }
 
         private void InitializeComponent()

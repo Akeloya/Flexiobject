@@ -16,7 +16,9 @@ namespace AppClient
 
             if (type != null)
             {
-                return (Control)Activator.CreateInstance(type)!;
+                var control =  (Control)Activator.CreateInstance(type)!;
+                control.DataContext = data;
+                return control;
             }
             else
             {

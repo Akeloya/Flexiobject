@@ -120,6 +120,18 @@
   <data name="AppTitle" xml:space="preserve">
     <value>Custom object application</value>
   </data>
+  <data name="ButtonCloseText" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="DialogWindowCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="DialogWindowClose" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="DialogWindowOkay" xml:space="preserve">
+    <value>Ok</value>
+  </data>
   <data name="License_AvalonEdit" xml:space="preserve">
     <value>Avalon Edit</value>
   </data>

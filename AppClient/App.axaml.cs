@@ -5,10 +5,25 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 
+using Ninject;
+
+using PropertyChanged;
+
 namespace AppClient
 {
+    [DoNotNotify]
     public class App : Application
     {
+        private readonly static IKernel _kernel;
+        public static IKernel Kernel => _kernel;
+        static App()
+        {
+            _kernel = new StandardKernel();
+        }
+        public App()
+        {
+            Bootstrapper.Register(_kernel);
+        }
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
@@ -20,7 +35,7 @@ namespace AppClient
             {
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainWindowViewModel(),
+                    DataContext = _kernel.Get<MainWindowViewModel>()
                 };
             }
 

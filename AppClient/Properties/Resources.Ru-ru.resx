@@ -120,6 +120,18 @@
   <data name="AppTitle" xml:space="preserve">
     <value>Приложение настраеваемых объектов</value>
   </data>
+  <data name="ButtonCloseText" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="DialogWindowCancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="DialogWindowClose" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="DialogWindowOkay" xml:space="preserve">
+    <value>ОК</value>
+  </data>
   <data name="License_AvalonEdit" xml:space="preserve">
     <value>Avalon Edit</value>
   </data>

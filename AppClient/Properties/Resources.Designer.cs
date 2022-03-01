@@ -70,6 +70,42 @@ namespace AppClient.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Close.
+        /// </summary>
+        public static string ButtonCloseText {
+            get {
+                return ResourceManager.GetString("ButtonCloseText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Cancel.
+        /// </summary>
+        public static string DialogWindowCancel {
+            get {
+                return ResourceManager.GetString("DialogWindowCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Close.
+        /// </summary>
+        public static string DialogWindowClose {
+            get {
+                return ResourceManager.GetString("DialogWindowClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ok.
+        /// </summary>
+        public static string DialogWindowOkay {
+            get {
+                return ResourceManager.GetString("DialogWindowOkay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Avalon Edit.
         /// </summary>
         public static string License_AvalonEdit {

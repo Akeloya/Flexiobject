@@ -5,14 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:avalon="https://github.com/Dirkster99/AvalonDock"
         xmlns:res="using:AppClient.Properties"
+		xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+        xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="AppClient.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="AppClient">
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
-
+        Title="AppClient"
+		DataContext="{x:Static vm:MainWindowViewModel.Create}"
+		Name="MainWnd"
+		>
+	<i:Interaction.Behaviors>
+		<ia:DataTriggerBehavior Binding="{Binding CloseWindow}" ComparisonCondition="Equal" Value="True">
+			<ia:CallMethodAction TargetObject="{Binding #MainWnd}" MethodName="Close"/>
+		</ia:DataTriggerBehavior>
+	</i:Interaction.Behaviors>
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="20"/>

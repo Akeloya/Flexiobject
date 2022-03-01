@@ -1,0 +1,42 @@
+<Window xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+			 xmlns:r="using:AppClient.Properties"
+             mc:Ignorable="d"
+			 Design.Width="400" Design.Height="150"
+             x:Class="AppClient.Views.MessageView.DialogMessageView"
+			 Name="DialogWnd">
+	<i:Interaction.Behaviors>
+		<ia:DataTriggerBehavior Binding="{Binding CloseWindow}" ComparisonCondition="Equal" Value="True">
+			<ia:CallMethodAction TargetObject="{Binding #DialogWnd}" MethodName="Close"/>
+		</ia:DataTriggerBehavior>
+	</i:Interaction.Behaviors>
+	<Window.Styles>
+		<Style Selector="Button.DialogBtn">
+			<Setter Property="Width" Value="80"></Setter>
+			<Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+			<Setter Property="HorizontalAlignment" Value="Right"></Setter>
+		</Style>
+		<Style Selector="WrapPanel.DialogWrp">
+			<Setter Property="HorizontalAlignment" Value="Right"></Setter>
+			<Setter Property="Margin" Value="5"></Setter>
+		</Style>
+	</Window.Styles>
+	<DockPanel LastChildFill="True">
+		<WrapPanel Classes="DialogWrp" DockPanel.Dock="Bottom">
+			<Button Classes="DialogBtn" 
+					Content="{x:Static r:Resources.DialogWindowOkay}" 
+					Command="{Binding Submit}"
+					IsVisible="{Binding ShowOkButton}"></Button>
+			<Button Classes="DialogBtn" 
+					Content="{x:Static r:Resources.DialogWindowCancel}"
+					Command="{Binding Cancel}"
+					IsVisible="{Binding ShowCancelButton}"></Button>
+			<Button Classes="DialogBtn" Content="{x:Static r:Resources.DialogWindowClose}" Command="{Binding Close}"></Button>
+		</WrapPanel>
+		<ContentControl Content="{Binding DisplaingContent}" DockPanel.Dock="Top"/>
+	</DockPanel>
+</Window>
