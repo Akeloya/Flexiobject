@@ -8,7 +8,7 @@
              mc:Ignorable="d"
 			 Design.Width="400" Design.Height="150"
              x:Class="AppClient.Views.MessageView.DialogMessageView"
-			 Name="DialogWnd">
+			 Name="DialogWnd">	
 	<i:Interaction.Behaviors>
 		<ia:DataTriggerBehavior Binding="{Binding CloseWindow}" ComparisonCondition="Equal" Value="True">
 			<ia:CallMethodAction TargetObject="{Binding #DialogWnd}" MethodName="Close"/>
@@ -37,6 +37,6 @@
 					IsVisible="{Binding ShowCancelButton}"></Button>
 			<Button Classes="DialogBtn" Content="{x:Static r:Resources.DialogWindowClose}" Command="{Binding Close}"></Button>
 		</WrapPanel>
-		<ContentControl Content="{Binding DisplaingContent}" DockPanel.Dock="Top"/>
+		<ContentControl Content="{Binding DisplaingContent}" DockPanel.Dock="Left" Padding="5"/>
 	</DockPanel>
 </Window>
