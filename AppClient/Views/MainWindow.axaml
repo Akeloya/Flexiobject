@@ -98,7 +98,7 @@
 			<MenuItem Header="{x:Static res:Resources.MenuItemHelp}">
 				<MenuItem Header="{x:Static res:Resources.MenuItemHelpHelp}" Command="{Binding Help}"></MenuItem>
 				<Separator/>
-				<MenuItem Header="{x:Static res:Resources.MenuItemHelpAbout}">
+				<MenuItem Header="{x:Static res:Resources.MenuItemHelpAbout}" Command="{Binding About}">
 				</MenuItem>
 			</MenuItem>
 		</Menu>		

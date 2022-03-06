@@ -5,8 +5,6 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 
-using Ninject;
-
 using PropertyChanged;
 
 namespace AppClient
@@ -14,15 +12,11 @@ namespace AppClient
     [DoNotNotify]
     public class App : Application
     {
-        private readonly static IKernel _kernel;
-        public static IKernel Kernel => _kernel;
-        static App()
+        private readonly MainWindowViewModel _viewModel;
+        public App() { }
+        public App(MainWindowViewModel view)
         {
-            _kernel = new StandardKernel();
-        }
-        public App()
-        {
-            Bootstrapper.Register(_kernel);
+            _viewModel = view;
         }
         public override void Initialize()
         {
@@ -35,7 +29,7 @@ namespace AppClient
             {
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = _kernel.Get<MainWindowViewModel>()
+                    DataContext = _viewModel
                 };
             }
 
