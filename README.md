@@ -4,9 +4,9 @@ Application for creating and using freely customizable configuration of data, fo
 
 ## Solution description
 
-| Language | Platform      | Win GUI  | Linux GUI     |
-|:--------:|:-------------:|:--------:|:-------------:|
-|   c#     | .Net Core 3.1 | WPF app  | Not specified |
+| Language | Platform      | Application GUI |
+|:--------:|:-------------:|:---------------:|
+|   c#     | .Net Core 6   | Avalonia app    |
 
 ## Development
 
