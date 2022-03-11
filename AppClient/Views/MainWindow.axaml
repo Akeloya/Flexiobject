@@ -85,9 +85,9 @@
 				<MenuItem Header="{x:Static res:Resources.MenuItemEditRemoveFolder}"></MenuItem>
 			</MenuItem>
 			<MenuItem Header="{x:Static res:Resources.MenuItemSettings}">
-				<MenuItem Header="{x:Static res:Resources.MenuItemSettingsApp}"></MenuItem>
+				<MenuItem Header="{x:Static res:Resources.MenuItemSettingsApp}" Command="{Binding Settings}"></MenuItem>
 				<Separator></Separator>
-				<MenuItem Header="{x:Static res:Resources.MenuItemSettingsOpenSetupFolder}"></MenuItem>
+				<MenuItem Header="{x:Static res:Resources.MenuItemSettingsOpenSetupFolder}" Command="{Binding OpenSetupFolder}"></MenuItem>
 			</MenuItem>
 			<MenuItem Header="{x:Static res:Resources.MenuItemInstruments}">
 				<MenuItem Header="{x:Static res:Resources.MenuItemInstrumentsSettings}"></MenuItem>

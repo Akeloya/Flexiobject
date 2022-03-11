@@ -11,5 +11,6 @@ namespace AppClient.Services
         void ShowInformation(string text, string title = null);
         void ShowWarning(string text, string title = null);
         DialogMessageResult ShowQuestionDialog(string text, string title = null);
+        public void OpenSetupFolder();
     }
 }

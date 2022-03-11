@@ -19,5 +19,15 @@ namespace AppClient.ViewModels
         {
             _navigation.Navigate<AboutAppViewModel>();
         }
+
+        public void Settings()
+        {
+            _navigation.Navigate<SettingsViewModel>();
+        }
+
+        public void OpenSetupFolder()
+        {
+            DialogService.OpenSetupFolder();
+        }
     }
 }
