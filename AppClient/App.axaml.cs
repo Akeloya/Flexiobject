@@ -1,5 +1,5 @@
+using AppClient.Services;
 using AppClient.ViewModels;
-using AppClient.Views;
 
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -12,11 +12,12 @@ namespace AppClient
     [DoNotNotify]
     public class App : Application
     {
-        private readonly MainWindowViewModel _viewModel;
+        private readonly IWindowService _windowService;
         public App() { }
-        public App(MainWindowViewModel view)
+        public App(IWindowService windowService, IContainer container)
         {
-            _viewModel = view;
+            _windowService = windowService;
+            DataTemplates.Add(new ViewLocator(container));
         }
         public override void Initialize()
         {
@@ -27,10 +28,7 @@ namespace AppClient
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                desktop.MainWindow = new MainWindow
-                {
-                    DataContext = _viewModel
-                };
+                desktop.MainWindow = _windowService.CreateDefault<MainWindowViewModel>();
             }
 
             base.OnFrameworkInitializationCompleted();

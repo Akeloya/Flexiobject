@@ -1,4 +1,3 @@
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
@@ -7,14 +6,11 @@ using PropertyChanged;
 namespace AppClient.Views
 {
     [DoNotNotify]
-    public partial class MainWindow : Window
+    public partial class MainWindowView : UserControl
     {
-        public MainWindow()
+        public MainWindowView()
         {
             InitializeComponent();
-#if DEBUG
-            this.AttachDevTools();
-#endif
         }
 
         private void InitializeComponent()

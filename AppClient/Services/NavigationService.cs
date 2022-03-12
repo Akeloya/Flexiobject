@@ -7,9 +7,12 @@ namespace AppClient.Services
 {
     public class NavigationService : INavigationService
     {
+        private readonly IWindowService _windowService;
         private readonly IContainer _container;
-        public NavigationService(IContainer container)
+
+        public NavigationService(IWindowService windowService, IContainer container)
         {
+            _windowService = windowService;
             _container = container;
         }
         public void Navigate<T>(params object[] args)
@@ -34,12 +37,9 @@ namespace AppClient.Services
 
         private Window CreateWindow(object view)
         {
-            var locator = new ViewLocator();
-            return new Window
-            {
-                Content = locator.Build(view),
-                DataContext = view,
-            };
+            var wnd = _windowService.CreateDefault();
+            wnd.DataContext = view;
+            return wnd;
         }
     }
 }

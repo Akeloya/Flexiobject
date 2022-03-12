@@ -1,6 +1,7 @@
 ﻿using AppClient.Views.MessageView;
 
 using System;
+using System.Threading.Tasks;
 
 namespace AppClient.Services
 {
@@ -11,6 +12,8 @@ namespace AppClient.Services
         void ShowInformation(string text, string title = null);
         void ShowWarning(string text, string title = null);
         DialogMessageResult ShowQuestionDialog(string text, string title = null);
-        public void OpenSetupFolder();
+        void OpenSetupFolder();
+        Task<string[]> OpenFileDialogAsync(bool allowMultiple);
+        Task<string> OpenFolderDialogAsync();
     }
-}
+} 

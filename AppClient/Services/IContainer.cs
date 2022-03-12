@@ -6,5 +6,6 @@ namespace AppClient.Services
     {
         public T Get<T>();
         public object Get(Type type);
+        public T Get<T>(Type type);
     }
 }

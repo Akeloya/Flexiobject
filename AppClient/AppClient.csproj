@@ -17,7 +17,9 @@
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.13" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.13" />
     <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.10.12.2" />
-    <PackageReference Include="Fody" Version="6.6.0" PrivateAssets="All">
+    <PackageReference Include="Dock.Avalonia" Version="0.10.12" />
+    <PackageReference Include="Dock.Model.ReactiveUI" Version="0.10.12" />
+    <PackageReference Include="Fody" Version="6.6.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -40,6 +42,9 @@
     </Compile>
     <Compile Update="Views\AboutAppView.axaml.cs">
       <DependentUpon>AboutAppView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MainWindowView.axaml.cs">
+      <DependentUpon>MainWindowView.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

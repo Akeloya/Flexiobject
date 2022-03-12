@@ -1,20 +1,14 @@
-<Window xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-			 xmlns:r="using:AppClient.Properties"
-             mc:Ignorable="d"
-			 Design.Width="400" Design.Height="150"
-             x:Class="AppClient.Views.MessageView.DialogMessageView"
-			 Name="DialogWnd">	
-	<i:Interaction.Behaviors>
-		<ia:DataTriggerBehavior Binding="{Binding CloseWindow}" ComparisonCondition="Equal" Value="True">
-			<ia:CallMethodAction TargetObject="{Binding #DialogWnd}" MethodName="Close"/>
-		</ia:DataTriggerBehavior>
-	</i:Interaction.Behaviors>
-	<Window.Styles>
+<UserControl xmlns="https://github.com/avaloniaui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+						xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+						xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+						xmlns:r="using:AppClient.Properties"
+						mc:Ignorable="d"
+						Design.Width="400" Design.Height="150"
+						x:Class="AppClient.Views.MessageView.DialogMessageView">
+	<UserControl.Styles>
 		<Style Selector="Button.DialogBtn">
 			<Setter Property="Width" Value="80"></Setter>
 			<Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
@@ -24,7 +18,7 @@
 			<Setter Property="HorizontalAlignment" Value="Right"></Setter>
 			<Setter Property="Margin" Value="5"></Setter>
 		</Style>
-	</Window.Styles>
+	</UserControl.Styles>
 	<DockPanel LastChildFill="True">
 		<WrapPanel Classes="DialogWrp" DockPanel.Dock="Bottom">
 			<Button Classes="DialogBtn" 
@@ -39,4 +33,4 @@
 		</WrapPanel>
 		<ContentControl Content="{Binding DisplaingContent}" DockPanel.Dock="Left" Padding="5"/>
 	</DockPanel>
-</Window>
+</UserControl>

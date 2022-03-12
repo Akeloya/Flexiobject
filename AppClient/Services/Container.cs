@@ -21,5 +21,15 @@ namespace AppClient.Services
         {
             return _kernel.GetService(type);
         }
+        /// <summary>
+        /// Get by type and convert to T
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public T Get<T>(Type type)
+        {            
+            return (T)Get(type);
+        }
     }
 }

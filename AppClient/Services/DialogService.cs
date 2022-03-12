@@ -11,16 +11,18 @@ using NLog;
 
 using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace AppClient.Services
 {
     public class DialogService : IDialogService
     {
-        private readonly LogFactory _logFactory;
         private readonly ILogger _logger;
-        public DialogService(LogFactory logFactory)
+        private readonly IWindowService _windowService;
+        public DialogService(LogFactory logFactory, IWindowService windowService)
         {
             _logger = logFactory.GetLogger(nameof(DialogService));
+            _windowService = windowService;
         }
         public void ShowError(string text, string title = null)
         {
@@ -60,14 +62,13 @@ namespace AppClient.Services
                 DisplaingContent = content,
                 DialogButtons = dialogButtons,
             };
-            var wind = new DialogMessageView {
-                Width = 450,
-                Height = 150,
-                CanResize = false,
-                Title = title ?? Resources.AppTitle,                
-                Icon = new WindowIcon(bitmap),
-                DataContext = contentView
-            };
+            var wind = _windowService.CreateDialog();
+            if(title != null)
+                wind.Title = title;
+            wind.Icon = new WindowIcon(bitmap);
+
+            wind.Content = new DialogMessageView();
+            wind.DataContext = contentView;
             _logger.Info("Opening dialog window");
             wind.Open();
             _logger.Info("Dialog window closed");
@@ -82,6 +83,20 @@ namespace AppClient.Services
                 UseShellExecute = true,
                 Verb = "open"
             });
+        }
+
+        public Task<string[]> OpenFileDialogAsync(bool allowMultipel = false)
+        {
+            var ofd = new OpenFileDialog
+            {
+                AllowMultiple = allowMultipel
+            };
+            return ofd.ShowAsync(_windowService.Current);
+        }
+
+        public Task<string> OpenFolderDialogAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 

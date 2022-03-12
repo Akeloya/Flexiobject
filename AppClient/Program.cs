@@ -1,4 +1,4 @@
-using AppClient.ViewModels;
+using AppClient.Services;
 
 using Avalonia;
 using Avalonia.Controls;
@@ -22,6 +22,7 @@ namespace AppClient
             _kernel = new StandardKernel();
             var diBindings = new DiBindings();
             _kernel.Load(diBindings);
+
             BuildAvaloniaApp()
             .StartWithClassicDesktopLifetime(args);
 
@@ -30,7 +31,7 @@ namespace AppClient
 
         // Avalonia configuration, don't remove; also used by visual designer.
         public static AppBuilder BuildAvaloniaApp()
-            => AppBuilder.Configure(()=> new App(Design.IsDesignMode ? null :_kernel.Get<MainWindowViewModel>()))
+            => AppBuilder.Configure(()=> new App(_kernel.Get<IWindowService>(), _kernel.Get<IContainer>()))
                 .UsePlatformDetect()
                 .LogToTrace()
                 .UseReactiveUI();

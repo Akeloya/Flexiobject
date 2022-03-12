@@ -1,3 +1,4 @@
+using AppClient.Services;
 using AppClient.ViewModels;
 
 using Avalonia.Controls;
@@ -9,6 +10,11 @@ namespace AppClient
 {
     public class ViewLocator : IDataTemplate
     {
+        private readonly IContainer _container;
+        public ViewLocator(IContainer container)
+        {
+            _container = container;
+        }
         public IControl Build(object data)
         {
             var name = data.GetType().FullName!.Replace("ViewModel", "View");
@@ -16,8 +22,8 @@ namespace AppClient
 
             if (type != null)
             {
-                var control =  (Control)Activator.CreateInstance(type)!;
-                control.DataContext = data;
+                var control =  _container.Get<IControl>(type);
+                control.DataContext = data;//TODO realy need it here?
                 return control;
             }
             else

@@ -11,11 +11,11 @@ namespace DbProvider
     public class SqlManager
     {
         [ThreadStatic] private static DbConnection _dbConnection;
-        [ThreadStatic] private static Dictionary<Guid, ISqlConnectionItem> _sqlConnectionItems = new Dictionary<Guid, ISqlConnectionItem>();
+        [ThreadStatic] private static Dictionary<Guid, ISqlConnectionItem> _sqlConnectionItems = new();
         [ThreadStatic] private static Guid _owner;
         [ThreadStatic] private static DbTransaction _transaction;
         private static AppDbSettings _settings;
-        private static object _syncConnections = new object();
+        private static readonly object _syncConnections = new();
 
         public static void RegisterManager(AppDbSettings settings)
         {
