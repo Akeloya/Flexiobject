@@ -1,14 +1,14 @@
-using AppClient.Services;
-
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.ReactiveUI;
+
+using FlexiObject.AppClient.Services;
 
 using Ninject;
 
 using System;
 
-namespace AppClient
+namespace FlexiObject.AppClient
 {
     internal class Program
     {
@@ -31,7 +31,7 @@ namespace AppClient
 
         // Avalonia configuration, don't remove; also used by visual designer.
         public static AppBuilder BuildAvaloniaApp()
-            => AppBuilder.Configure(()=> new App(_kernel.Get<IWindowService>(), _kernel.Get<IContainer>()))
+            => AppBuilder.Configure(()=> new App(_kernel?.Get<IWindowService>(), _kernel?.Get<IContainer>()))
                 .UsePlatformDetect()
                 .LogToTrace()
                 .UseReactiveUI();

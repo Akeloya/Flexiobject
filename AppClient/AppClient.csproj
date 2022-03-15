@@ -1,14 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <Copyright>Akeloya</Copyright>
+        <Description>Application for flexible creation, modification, storage of objects and more.</Description>
+        <Product>Flexiobject</Product>
+        <AssemblyTitle>Flexiobject</AssemblyTitle>
+        <Version>1.0.0.1</Version>
+        <VersionSuffix>dev</VersionSuffix>
+    </PropertyGroup>
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FlexiObject.AppClient</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Controls\" />
-    <Folder Include="Models\" />
     <AvaloniaResource Include="Assets\**" />
-    <None Remove=".gitignore" />
+    <None Remove=".gitignore" />    
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.10.13" />
@@ -32,20 +39,14 @@
     <PackageReference Include="Ninject" Version="3.3.4" />
     <PackageReference Include="NLog" Version="4.7.14" />
     <PackageReference Include="NLog.Extensions.Logging" Version="1.7.4" />
-    <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" />
+    <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Views\AboutAppView.axaml.cs">
-      <DependentUpon>AboutAppView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\MainWindowView.axaml.cs">
-      <DependentUpon>MainWindowView.axaml</DependentUpon>
-    </Compile>
+    </Compile>    
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">

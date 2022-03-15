@@ -1,13 +1,13 @@
-using AppClient.Services;
-using AppClient.ViewModels;
-
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 
+using FlexiObject.AppClient.Services;
+using FlexiObject.AppClient.ViewModels;
+
 using PropertyChanged;
 
-namespace AppClient
+namespace FlexiObject.AppClient
 {
     [DoNotNotify]
     public class App : Application

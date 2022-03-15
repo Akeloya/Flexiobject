@@ -1,9 +1,11 @@
-using AppClient.Services;
+using Avalonia.Controls;
+
+using FlexiObject.AppClient.Services;
 
 using ReactiveUI;
 
 
-namespace AppClient.ViewModels
+namespace FlexiObject.AppClient.ViewModels
 {
     public class ViewModelBase : ReactiveObject, IClosableWnd
     {
@@ -12,8 +14,12 @@ namespace AppClient.ViewModels
         {
             DialogService = dialog;
         }
+        public virtual int Width { get; set; }
+        public virtual int Height { get; set; }
+        public bool CloseWindow { get; set; }
+        public bool CanResize { get; set; } = true;
+        public WindowState SizeState { get; set; } = WindowState.Maximized;
 
-        public bool CloseWindow { get; set; }        
         public void Close()
         {
             CloseWindow = true;

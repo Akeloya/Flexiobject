@@ -1,5 +1,4 @@
-﻿using AppClient.Properties;
-using AppClient.Views.MessageView;
+﻿using FlexiObject.AppClient.Properties;
 
 using Avalonia;
 using Avalonia.Controls;
@@ -12,8 +11,9 @@ using NLog;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using FlexiObject.AppClient.Views.MessageView;
 
-namespace AppClient.Services
+namespace FlexiObject.AppClient.Services
 {
     public class DialogService : IDialogService
     {
@@ -62,13 +62,11 @@ namespace AppClient.Services
                 DisplaingContent = content,
                 DialogButtons = dialogButtons,
             };
-            var wind = _windowService.CreateDialog();
+            var wind = _windowService.CreateDialog(contentView);
             if(title != null)
                 wind.Title = title;
             wind.Icon = new WindowIcon(bitmap);
-
-            wind.Content = new DialogMessageView();
-            wind.DataContext = contentView;
+            
             _logger.Info("Opening dialog window");
             wind.Open();
             _logger.Info("Dialog window closed");

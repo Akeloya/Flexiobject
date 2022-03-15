@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AppClient.Properties {
+namespace FlexiObject.AppClient.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace AppClient.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AppClient.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FlexiObject.AppClient.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,7 +61,52 @@ namespace AppClient.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Custom object application.
+        ///   Ищет локализованную строку, похожую на Description.
+        /// </summary>
+        public static string AboutAppViewAppDescriptionTextBlock {
+            get {
+                return ResourceManager.GetString("AboutAppViewAppDescriptionTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Application title.
+        /// </summary>
+        public static string AboutAppViewAppTitleTextBlock {
+            get {
+                return ResourceManager.GetString("AboutAppViewAppTitleTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Version.
+        /// </summary>
+        public static string AboutAppViewAppVersionTextBlock {
+            get {
+                return ResourceManager.GetString("AboutAppViewAppVersionTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Operation system.
+        /// </summary>
+        public static string AboutAppViewCurrentPlatformTextBlock {
+            get {
+                return ResourceManager.GetString("AboutAppViewCurrentPlatformTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Using components.
+        /// </summary>
+        public static string AboutAppViewUsingComponentsTextBlock {
+            get {
+                return ResourceManager.GetString("AboutAppViewUsingComponentsTextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Flexible object application.
         /// </summary>
         public static string AppTitle {
             get {
@@ -102,51 +147,6 @@ namespace AppClient.Properties {
         public static string DialogWindowOkay {
             get {
                 return ResourceManager.GetString("DialogWindowOkay", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Avalon Edit.
-        /// </summary>
-        public static string License_AvalonEdit {
-            get {
-                return ResourceManager.GetString("License_AvalonEdit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Custom object application.
-        /// </summary>
-        public static string License_CustomObjectApplication {
-            get {
-                return ResourceManager.GetString("License_CustomObjectApplication", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Extended.Wpf.Toolkit.
-        /// </summary>
-        public static string License_ExtendedWpfToolkit {
-            get {
-                return ResourceManager.GetString("License_ExtendedWpfToolkit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на LinqToExcel.
-        /// </summary>
-        public static string License_LinqToExcel {
-            get {
-                return ResourceManager.GetString("License_LinqToExcel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на WPF extended controls.
-        /// </summary>
-        public static string License_WpfExtendedControls {
-            get {
-                return ResourceManager.GetString("License_WpfExtendedControls", resourceCulture);
             }
         }
         

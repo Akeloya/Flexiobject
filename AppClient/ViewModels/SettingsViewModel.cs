@@ -1,12 +1,6 @@
-﻿using AppClient.Services;
+﻿using FlexiObject.AppClient.Services;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AppClient.ViewModels
+namespace FlexiObject.AppClient.ViewModels
 {
     public class SettingsViewModel
     {

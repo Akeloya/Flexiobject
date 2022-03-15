@@ -1,12 +1,12 @@
-using AppClient.Services;
-using AppClient.ViewModels;
-
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 
+using FlexiObject.AppClient.Services;
+using FlexiObject.AppClient.ViewModels;
+
 using System;
 
-namespace AppClient
+namespace FlexiObject.AppClient
 {
     public class ViewLocator : IDataTemplate
     {
@@ -22,9 +22,7 @@ namespace AppClient
 
             if (type != null)
             {
-                var control =  _container.Get<IControl>(type);
-                control.DataContext = data;//TODO realy need it here?
-                return control;
+                return _container.Get<IControl>(type);
             }
             else
             {

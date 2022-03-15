@@ -3,7 +3,7 @@ using Avalonia.Markup.Xaml;
 
 using PropertyChanged;
 
-namespace AppClient.Views
+namespace FlexiObject.AppClient.Views
 {
     [DoNotNotify]
     public partial class MainWindowView : UserControl

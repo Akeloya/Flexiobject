@@ -3,7 +3,7 @@ using Avalonia.Markup.Xaml;
 
 using PropertyChanged;
 
-namespace AppClient.Views.MessageView
+namespace FlexiObject.AppClient.Views.MessageView
 {
     [DoNotNotify]
     public partial class DialogMessageView : UserControl

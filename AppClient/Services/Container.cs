@@ -2,7 +2,7 @@
 
 using System;
 
-namespace AppClient.Services
+namespace FlexiObject.AppClient.Services
 {
     public class Container : IContainer
     {

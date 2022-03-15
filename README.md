@@ -1,4 +1,4 @@
-# Custom object application [![License: GPL v3](https://img.shields.io/github/license/Akeloya/CustomObjectApplication.svg)](http://www.gnu.org/licenses/gpl-3.0) [![Build](https://github.com/Akeloya/CustomObjectApplication/workflows/.NET%20Core/badge.svg)](https://github.com/Akeloya/CustomObjectApplication/actions?query=workflow%3A%22.NET+Core%22) [![CodeQL](https://github.com/Akeloya/CustomObjectApplication/workflows/CodeQL/badge.svg)](https://github.com/Akeloya/CustomObjectApplication/actions?query=workflow%3ACodeQL) [![BCH compliance](https://bettercodehub.com/edge/badge/Akeloya/CustomObjectApplication?branch=master)](https://bettercodehub.com/)
+# Flexiobject [![License: GPL v3](https://img.shields.io/github/license/Akeloya/CustomObjectApplication.svg)](http://www.gnu.org/licenses/gpl-3.0) [![Build](https://github.com/Akeloya/CustomObjectApplication/workflows/.NET%20Core/badge.svg)](https://github.com/Akeloya/CustomObjectApplication/actions?query=workflow%3A%22.NET+Core%22) [![CodeQL](https://github.com/Akeloya/CustomObjectApplication/workflows/CodeQL/badge.svg)](https://github.com/Akeloya/CustomObjectApplication/actions?query=workflow%3ACodeQL) [![BCH compliance](https://bettercodehub.com/edge/badge/Akeloya/CustomObjectApplication?branch=master)](https://bettercodehub.com/)
 
 Application for creating and using freely customizable configuration of data, forms, actions and other things
 
@@ -6,7 +6,7 @@ Application for creating and using freely customizable configuration of data, fo
 
 | Language | Platform      | Application GUI |
 |:--------:|:-------------:|:---------------:|
-|   c#     | .Net Core 6   | Avalonia app    |
+|   C#     | .Net Core 6   | Avalonia app    |
 
 ## Development
 
@@ -14,7 +14,6 @@ Application for creating and using freely customizable configuration of data, fo
 - Fork this repo
 - Clone to computer
 - Open solution, run build
-- Read [Coding style](https://github.com/Akeloya/CustomObjectApplication/blob/master/CODINGSTYLE.md)
 
 Solution contains several projects:
 
@@ -22,7 +21,7 @@ Solution contains several projects:
 - DbProvider - EF core database schema description and methods work with it
 - AppServer - Application server for this app, all app logic implements here
 - API - client side api
-- WpfClient - GUI application using client API
+- AppClient - GUI application using client API
 
 ## Languages
 
@@ -33,7 +32,7 @@ Solution contains several projects:
 
 ### Purpose
 
-This project is an application of custom objects that allows the user to describe objects in the domain using fields in the window interface, add various actions on objects, create forms for editing objects without deep knowledge of programming.
+This project is an application of flexible customization of user-defined objects that allows the user to describe objects in the domain using fields in the window interface, add various actions on objects, create forms for editing objects without deep knowledge of programming.
 
 ### Description
 
@@ -73,7 +72,7 @@ Everyone can help the project, especially for Linux development.
 
 ### Цель
 
-Данный проект это приложение настраеваемых объектов, позволяющее пользователю в оконном интерфейсе описать объекты предметной области с помощью полей, добавить различные действия над объектами, создать формы редактирования объектов без глубоких знаний в программировании.
+Данный проект это приложение гибко настраеваемых объектов, позволяющее пользователю в оконном интерфейсе описать объекты предметной области с помощью полей, добавить различные действия над объектами, создать формы редактирования объектов без глубоких знаний в программировании.
 
 ### Описание
 

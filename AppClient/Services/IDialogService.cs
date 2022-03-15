@@ -1,9 +1,9 @@
-﻿using AppClient.Views.MessageView;
+﻿using FlexiObject.AppClient.Views.MessageView;
 
 using System;
 using System.Threading.Tasks;
 
-namespace AppClient.Services
+namespace FlexiObject.AppClient.Services
 {
     public interface IDialogService
     {

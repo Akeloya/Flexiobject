@@ -1,13 +1,13 @@
-﻿using AppClient.Services;
-using AppClient.ViewModels;
-using AppClient.Views;
+﻿using FlexiObject.AppClient.Services;
+using FlexiObject.AppClient.ViewModels;
+using FlexiObject.AppClient.Views;
 
 using Ninject;
 using Ninject.Modules;
 
 using NLog;
 
-namespace AppClient
+namespace FlexiObject.AppClient
 {
     internal class DiBindings : NinjectModule
     {

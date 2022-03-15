@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace AppClient.Services
+namespace FlexiObject.AppClient.Services
 {
     public class JsonConfiguration : IJsonConfiguration
     {

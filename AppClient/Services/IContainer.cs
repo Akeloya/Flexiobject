@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AppClient.Services
+namespace FlexiObject.AppClient.Services
 {
     public interface IContainer
     {

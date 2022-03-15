@@ -1,10 +1,9 @@
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
 using PropertyChanged;
 
-namespace AppClient.Views
+namespace FlexiObject.AppClient.Views
 {
     [DoNotNotify]
     public partial class AboutAppView : UserControl

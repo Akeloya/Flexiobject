@@ -1,86 +1,83 @@
-﻿using AppClient.Views;
+﻿using Avalonia.Controls;
 
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Media.Imaging;
-using Avalonia.Platform;
+using FlexiObject.AppClient.ViewModels;
+using FlexiObject.AppClient.Views;
 
 using System;
-using System.Collections.Concurrent;
+using System.Collections.Generic;
 
-namespace AppClient.Services
+namespace FlexiObject.AppClient.Services
 {
     public class WindowService : IWindowService
     {
-        private readonly ConcurrentStack<Window> _openedWindows = new();
+        private Window _current;
+        private readonly IList<Window> _openedWindows = new List<Window>();
         private static readonly object _lock = new();
-        private readonly IContainer _container;
         private readonly ViewLocator _viewLocator;
+        private readonly IContainer _container;
         public WindowService(IContainer container, ViewLocator viewLocator)
         {
             _container = container;
             _viewLocator = viewLocator;
         }
-        public Window Current
-        {
-            get
-            {
-                if(_openedWindows.TryPeek(out Window window))
-                    return window;
-                return null;
-            }
-        }
+        public Window Current => _current;
 
-        public Window CreateDefault()
+        public Window CreateDefault(IClosableWnd model)
         {
-            var assets = AvaloniaLocator.Current.GetService<IAssetLoader>()!;
-            var bitmap = new Bitmap(assets.Open(new Uri($"avares://AppClient/Assets/avalonia-logo.ico")));
+
+            var wnd = new DefaultWindow
+            {
+                DataContext = model,
+                Content = _viewLocator.Build(model),
+                Width = model.Width,
+                Height= model.Height,
+                WindowState = model.SizeState
+            };
+            wnd.Closed += WndClosed;
+            wnd.GotFocus += WndGotFocus;
             lock (_lock)
             {
-                var wnd = new DefaultWindow();
-                wnd.DataTemplates.Add(_viewLocator);
-                wnd.Closed += WndClosed;
-                _openedWindows.Push(wnd);
+                _openedWindows.Add(wnd);
                 return wnd;
             }
         }
-
-        public Window CreateDialog()
+        public Window CreateDefault<T>() where T : IClosableWnd
         {
-            var assets = AvaloniaLocator.Current.GetService<IAssetLoader>()!;
-            var bitmap = new Bitmap(assets.Open(new Uri($"avares://AppClient/Assets/avalonia-logo.ico")));
-            lock (_lock)
-            {
-                var wnd = new DefaultWindow
-                {
-                    Width = 400,
-                    Height = 200,
-                    CanResize = false
-                };
-                wnd.DataTemplates.Add(_viewLocator);
-                wnd.Closed += WndClosed;
-                
-                _openedWindows.Push(wnd);
-                return wnd;
-            }
-        }
-
-        public Window CreateDefault<T>()
-        {
-            var wnd = CreateDefault();
             var view = _container.Get<T>();
-            wnd.Content = _viewLocator.Build(view);
-            wnd.DataContext = view;
-            return wnd;
+            return CreateDefault(view);
         }
+
+        private void WndGotFocus(object sender, Avalonia.Input.GotFocusEventArgs e)
+        {
+            _current = (Window)sender;
+        }
+
+        public Window CreateDialog(IClosableWnd model)
+        {
+            var wnd = new DefaultWindow
+            {
+                Width = 400,
+                Height = 200,
+                CanResize = false,
+                WindowState = model.SizeState,
+                DataContext = model
+            };
+            wnd.Content = _viewLocator.Build(model);
+            wnd.Closed += WndClosed;
+            lock (_lock)
+            {
+                _openedWindows.Add(wnd);
+                return wnd;
+            }
+        }
+
         private void WndClosed(object sender, EventArgs e)
         {
             lock (_lock)
             {
                 var wnd = (Window)sender;
-                if (_openedWindows.TryPop(out Window window) && window != wnd)
+                if (!_openedWindows.Remove(wnd))
                 {
-                    _openedWindows.Push(window);
                     throw new Exception();//TODO need idea how to catch window, that creates not from IWindowService
                 }
             }

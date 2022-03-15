@@ -1,10 +1,12 @@
-﻿using AppClient.ViewModels;
+﻿using Avalonia.Controls;
+
+using FlexiObject.AppClient.ViewModels;
 
 using ReactiveUI;
 
 using System;
 
-namespace AppClient.Views.MessageView
+namespace FlexiObject.AppClient.Views.MessageView
 {
     [Flags]
     public enum DialogMessageResult
@@ -21,6 +23,11 @@ namespace AppClient.Views.MessageView
         public DialogMessageResult DialogButtons { get; set; }
         public bool ShowOkButton => (DialogButtons & DialogMessageResult.Ok) == DialogMessageResult.Ok;
         public bool ShowCancelButton => (DialogButtons & DialogMessageResult.Cancel) == DialogMessageResult.Cancel;
+        public int Width { get; set; } = 400;
+        public int Height { get; set; } = 150;
+        public bool CanResize { get; set; } = false;
+        public WindowState SizeState { get; set; } = WindowState.Normal;
+
         public void Close()
         {
             CloseWindow = true;

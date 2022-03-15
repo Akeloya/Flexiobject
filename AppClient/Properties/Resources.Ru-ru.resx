@@ -117,8 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutAppViewAppDescriptionTextBlock" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="AboutAppViewAppTitleTextBlock" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="AboutAppViewAppVersionTextBlock" xml:space="preserve">
+    <value>Версия</value>
+  </data>
+  <data name="AboutAppViewCurrentPlatformTextBlock" xml:space="preserve">
+    <value>Операционная система</value>
+  </data>
+  <data name="AboutAppViewUsingComponentsTextBlock" xml:space="preserve">
+    <value>Используемые компоненты</value>
+  </data>
   <data name="AppTitle" xml:space="preserve">
-    <value>Приложение настраеваемых объектов</value>
+    <value>Приложение гибких объектов</value>
   </data>
   <data name="ButtonCloseText" xml:space="preserve">
     <value>Закрыть</value>
@@ -131,21 +146,6 @@
   </data>
   <data name="DialogWindowOkay" xml:space="preserve">
     <value>ОК</value>
-  </data>
-  <data name="License_AvalonEdit" xml:space="preserve">
-    <value>Avalon Edit</value>
-  </data>
-  <data name="License_CustomObjectApplication" xml:space="preserve">
-    <value>Приложение настраеваемых объектов</value>
-  </data>
-  <data name="License_ExtendedWpfToolkit" xml:space="preserve">
-    <value>Extended.Wpf.Toolkit</value>
-  </data>
-  <data name="License_LinqToExcel" xml:space="preserve">
-    <value>LinqToExcel</value>
-  </data>
-  <data name="License_WpfExtendedControls" xml:space="preserve">
-    <value>Wpf extended controls</value>
   </data>
   <data name="MenuItemEdit" xml:space="preserve">
     <value>Редактирование</value>
@@ -262,7 +262,7 @@
     <value>Открыть редактор сценариев</value>
   </data>
   <data name="MenuItemInstrumentsSettings" xml:space="preserve">
-    <value>Настройки</value>
+    <value>Настройка меню</value>
   </data>
   <data name="MenuItemSettings" xml:space="preserve">
     <value>Настройки</value>
