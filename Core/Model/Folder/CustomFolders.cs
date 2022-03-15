@@ -1,9 +1,9 @@
-﻿using CoaApp.Core.Interfaces;
+﻿using Flexiobject.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CoaApp.Core.Folder
+namespace Flexiobject.Core.Folder
 {
     public abstract class CustomFolders<T>: AppBase<T>, ICustomFolders
     {

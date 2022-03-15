@@ -1,9 +1,9 @@
 ﻿/*
- *  "Custom object application database provider"
+ *  "Flexiobject database provider"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
  *  Copyright (C) 2020 by Maxim V. Yugov.
  *
- *  This file is part of "Custom object application".
+ *  This file is part of "Flexiobject".
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DbProvider.Entities
+namespace Flexiobject.DbProvider.Entities
 {
     [Table("ObjectFolder")]
     public class ObjectFolder

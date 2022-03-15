@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DbProvider\DbProvider.csproj" />
+    <ProjectReference Include="..\DbProvider\Flexiobject.DbProvider.csproj" />
   </ItemGroup>
 
 </Project>

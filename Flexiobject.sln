@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{4A7AB7F6-31E8-45A7-9244-BDCF102E3020}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flexiobject.Core", "Core\Flexiobject.Core.csproj", "{4A7AB7F6-31E8-45A7-9244-BDCF102E3020}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbProvider", "DbProvider\DbProvider.csproj", "{7D13544F-EC88-457D-8691-582F37C9D03B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flexiobject.DbProvider", "DbProvider\Flexiobject.DbProvider.csproj", "{7D13544F-EC88-457D-8691-582F37C9D03B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppServer", "AppServer\AppServer.csproj", "{E5634E7A-83FA-4917-9740-2A9CB910EF5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flexiobject.AppServer", "AppServer\Flexiobject.AppServer.csproj", "{E5634E7A-83FA-4917-9740-2A9CB910EF5F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{F1CB39CD-A138-455D-B91D-CC92CD29507F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flexiobject.API", "API\Flexiobject.API.csproj", "{F1CB39CD-A138-455D-B91D-CC92CD29507F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFiles", "SolutionFiles", "{267491CD-8D2D-401E-923B-B0EB859382EF}"
 	ProjectSection(SolutionItems) = preProject
@@ -18,11 +18,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFiles", "SolutionFi
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Tests", "API.Tests\Api.Tests.csproj", "{97169B09-9EC8-4E58-B163-EEF4B985B1F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flexiobject.Api.Tests", "API.Tests\Flexiobject.Api.Tests.csproj", "{97169B09-9EC8-4E58-B163-EEF4B985B1F8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbProvider.Test", "DbProvider.Test\DbProvider.Test.csproj", "{C15B33A3-CFC4-4BA6-B046-83CBD7E33021}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flexiobject.DbProvider.Test", "DbProvider.Test\Flexiobject.DbProvider.Test.csproj", "{C15B33A3-CFC4-4BA6-B046-83CBD7E33021}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppClient", "AppClient\AppClient.csproj", "{94B67073-C2B7-483A-A098-15225C65F9CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flexiobject.AppClient", "AppClient\Flexiobject.AppClient.csproj", "{94B67073-C2B7-483A-A098-15225C65F9CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj" />
-    <ProjectReference Include="..\DbProvider\DbProvider.csproj" />
+    <ProjectReference Include="..\Core\Flexiobject.Core.csproj" />
+    <ProjectReference Include="..\DbProvider\Flexiobject.DbProvider.csproj" />
   </ItemGroup>
 </Project>

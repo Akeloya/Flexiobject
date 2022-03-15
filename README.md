@@ -43,7 +43,7 @@ This project is an application of flexible customization of user-defined objects
 To describe the subject area, the user is offered a basic set of objects:
 
 - Folder - contains a description of the object (fields, actions, forms, object naming rules, user privileges, scripts, object display views)
-- Custom object - located in a folder, inherits the folder fields that describe it. Edited through the form linked to the folder.
+- Flexiobject object - located in a folder, inherits the folder fields that describe it. Edited through the form linked to the folder.
 - Custom fields - a set of fields that can be created to describe an object in a folder (number, string, list, workflow, object link, object list, text field, currency, date)
 - Forms in a folder (forms for editing objects, forms for filtering the list)
 - Types of displaying objects in a folder (currently only a table)

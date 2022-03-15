@@ -1,9 +1,9 @@
 ﻿/*
- *  "Custom object application core"
+ *  "Flexiobject core"
  *  An application that implements the ability to customize object templates and actions on them.
  *  Copyright (C) 2019 by Maxim V. Yugov.
  *
- *  This file is part of "Custom object application".
+ *  This file is part of "Flexiobject".
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,10 +18,10 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using CoaApp.Core.Interfaces;
+using Flexiobject.Core.Interfaces;
 using System;
 
-namespace CoaApp.Core
+namespace Flexiobject.Core
 {
     public abstract class Session : AppBase<Application>, ISession
     {
