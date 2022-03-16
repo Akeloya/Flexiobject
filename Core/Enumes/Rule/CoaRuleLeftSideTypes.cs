@@ -1,9 +1,9 @@
 ﻿/*
- *  "Custom object application core"
+ *  "Flexiobject core"
  *  An application that implements the ability to customize object templates and actions on them.
  *  Copyright (C) 2020 by Maxim V. Yugov.
  *
- *  This file is part of "Custom object application".
+ *  This file is part of "Flexiobject".
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  */
 using System;
 
-namespace CoaApp.Core.Enumes
+namespace Flexiobject.Core.Enumes
 {
     /// <summary>
     /// Left side operand type

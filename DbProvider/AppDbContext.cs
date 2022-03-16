@@ -1,9 +1,9 @@
 ﻿/*
- *  "Custom object application database provider"
+ *  "Flexiobject database provider"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
  *  Copyright (C) 2020 by Maxim V. Yugov.
  *
- *  This file is part of "Custom object application".
+ *  This file is part of "Flexiobject".
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,9 +18,9 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using CoaApp.Core.Enumes;
+using Flexiobject.Core.Enumes;
 
-using DbProvider.Entities;
+using Flexiobject.DbProvider.Entities;
 
 using Microsoft.Data.SqlClient;
 using Microsoft.Data.Sqlite;
@@ -29,7 +29,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Data.Common;
 
-namespace DbProvider
+namespace Flexiobject.DbProvider
 {
     public partial class AppDbContext : DbContext
     {

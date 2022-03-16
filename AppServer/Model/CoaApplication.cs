@@ -1,9 +1,9 @@
-﻿using CoaApp.Core;
+﻿using Flexiobject.Core;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AppServer.Model
+namespace Flexiobject.AppServer.Model
 {
     internal class CoaApplication: Application
     {

@@ -1,9 +1,9 @@
 /*
- *  "Custom object application server"
+ *  "Flexiobject server"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
  *  Copyright (C) 2020 by Maxim V. Yugov.
  *
- *  This file is part of "Custom object application".
+ *  This file is part of "Flexiobject".
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace AppServer
+namespace Flexiobject.AppServer
 {
     public class Program
     {

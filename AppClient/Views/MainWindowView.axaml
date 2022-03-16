@@ -1,0 +1,117 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AppClient.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:avalon="https://github.com/Dirkster99/AvalonDock"
+        xmlns:dock="using:Dock.Avalonia.Controls"
+        xmlns:res="using:FlexiObject.AppClient.Properties"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="FlexiObject.AppClient.Views.MainWindowView"        
+        d:DataContext="{x:Static vm:MainWindowViewModel.Create}"
+    >
+    <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="20"/>
+          <RowDefinition Height="9*"/>
+          <RowDefinition Height="25"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Menu Grid.ColumnSpan="3" Grid.Row="0">
+            <MenuItem Header="{x:Static res:Resources.MenuItemFile}">
+                <MenuItem Header="Open" Command="{Binding Open}"></MenuItem>
+                <MenuItem Header="Close" Command="{Binding Close}"></MenuItem>            
+                <Separator/>
+                <MenuItem Header="{x:Static res:Resources.MenuItemFileNotifyUser}"></MenuItem>
+                <Separator/>
+                <MenuItem Header="{x:Static res:Resources.MenuItemFilePrint}" Command="{Binding Print}">
+                    <MenuItem.Icon>
+                        <Image Source="/Assets/print.png"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="{x:Static res:Resources.MenuItemFileRecentObjects}"></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="{x:Static res:Resources.MenuItemFileExitAndEnter}"></MenuItem>
+                <MenuItem Header="{x:Static res:Resources.MenuItemFileExit}" Command="{Binding Close}">
+                    <MenuItem.Icon>
+                        <Image Source="/Assets/Actions-exit.png"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="{x:Static res:Resources.MenuItemView}">
+                <MenuItem Header="{x:Static res:Resources.MenuItemViewTreeFolder}"></MenuItem>
+                <MenuItem Header="{x:Static res:Resources.MenuItemViewNotifies}"></MenuItem>
+                <MenuItem Header="{x:Static res:Resources.MenuItemViewInstrumentPanels}">
+                    <MenuItem Header="{x:Static res:Resources.MenuItemViewWorkWithObject}"></MenuItem>
+                    <MenuItem Header="{x:Static res:Resources.MenuItemViewWorkWithFolder}"></MenuItem>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="{x:Static res:Resources.MenuItemEdit}">
+                <MenuItem Header="{x:Static res:Resources.MenuItemEditAdd}"></MenuItem>
+                <MenuItem Header="{x:Static res:Resources.MenuItemEditEdit}"></MenuItem>
+                <MenuItem Header="{x:Static res:Resources.MenuItemEditRemove}"></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="{x:Static res:Resources.MenuItemEditRefresh}"></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="{x:Static res:Resources.MenuItemEditAddFolder}">
+                    <MenuItem Header="{x:Static res:Resources.MenuItemEditAddFolderFolder}"></MenuItem>
+                    <MenuItem Header="{x:Static res:Resources.MenuItemEditAddFolderFolderSameLevel}"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="{x:Static res:Resources.MenuItemEditEditFolder}"></MenuItem>
+                <MenuItem Header="{x:Static res:Resources.MenuItemEditRemoveFolder}"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="{x:Static res:Resources.MenuItemSettings}">
+                <MenuItem Header="{x:Static res:Resources.MenuItemSettingsApp}" Command="{Binding Settings}"></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="{x:Static res:Resources.MenuItemFileAdmin}">
+                    <MenuItem Header="{x:Static res:Resources.MenuItemFileAdminActiveSessions}"></MenuItem>
+                    <MenuItem Header="{x:Static res:Resources.MenuItemFileAdminGlobalForms}"></MenuItem>
+                    <MenuItem Header="{x:Static res:Resources.MenuItemFileAdminBlockedObjects}"></MenuItem>
+                    <MenuItem Header="{x:Static res:Resources.MenuItemFileAdminScheduledTasks}"></MenuItem>
+                    <MenuItem Header="{x:Static res:Resources.MenuItemFileAdminSchemaHistory}"></MenuItem>
+                    <MenuItem Header="{x:Static res:Resources.MenuItemFileAdminImageCollection}"></MenuItem>
+                    <MenuItem Header="{x:Static res:Resources.MenuItemFileAdminDeletionLog}"></MenuItem>
+                    <MenuItem Header="{x:Static res:Resources.MenuItemFileAdminClientParameters}"></MenuItem>
+                    <MenuItem Header="{x:Static res:Resources.MenuItemFileAdminSystemParameters}"></MenuItem>
+                    <MenuItem Header="{x:Static res:Resources.MenuItemFileAdminDeleteAllObjects}"></MenuItem>
+                    <MenuItem Header="{x:Static res:Resources.MenuItemFileAdminColorSchema}"></MenuItem>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="{x:Static res:Resources.MenuItemFileScripts}">
+                    <MenuItem Header="{x:Static res:Resources.MenuItemFileSciptsGlobal}"></MenuItem>
+                    <MenuItem Header="{x:Static res:Resources.MenuItemFileScriptsSearch}"></MenuItem>
+                    <MenuItem Header="{x:Static res:Resources.MenuItemFileScriptsState}"></MenuItem>
+                </MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="{x:Static res:Resources.MenuItemSettingsOpenSetupFolder}" Command="{Binding OpenSetupFolder}"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="{x:Static res:Resources.MenuItemInstruments}">
+                <MenuItem Header="{x:Static res:Resources.MenuItemInstrumentsSettings}"></MenuItem>
+                <Separator/>
+                <MenuItem Header="{x:Static res:Resources.MenuItemInstrumentsOpenObjectById}"></MenuItem>
+                <MenuItem Header="{x:Static res:Resources.MenuItemInstrumentsOpenScenarioEditor}"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="{x:Static res:Resources.MenuItemHelp}">
+                <MenuItem Header="{x:Static res:Resources.MenuItemHelpHelp}" Command="{Binding Help}">
+                    <MenuItem.Icon>
+                        <Image Source="/Assets/help-contents.png"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="{x:Static res:Resources.MenuItemHelpAbout}" Command="{Binding About}">
+                    <MenuItem.Icon>
+                        <Image Source="/Assets/help-icon.png"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <ContentPresenter Grid.Row="2" Content="{Binding DockContent}"></ContentPresenter>
+        <WrapPanel Classes="statusbar" Grid.Row="2">
+            <UniformGrid Rows="1" Columns="3">
+                <TextBlock Text="{Binding CurrentTime}"></TextBlock>
+                <TextBlock Text="{Binding OsVersion}"></TextBlock>
+                <TextBlock Text="here will be data"></TextBlock>
+            </UniformGrid>          
+        </WrapPanel>
+    </Grid>
+</UserControl>

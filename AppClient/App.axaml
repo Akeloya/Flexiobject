@@ -1,0 +1,15 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:AppClient"
+             x:Class="FlexiObject.AppClient.App">    
+    <Application.Styles>
+        <FluentTheme Mode="Light"/>
+        <StyleInclude Source="avares://Dock.Avalonia/Themes/DockFluentTheme.axaml"/>
+        <Styles>
+            <!--Statusbar-->
+            <Style Selector="WrapPanel.statusbar">
+                <Setter Property="Margin" Value="5 2"></Setter>
+            </Style>
+        </Styles>
+    </Application.Styles>
+</Application>

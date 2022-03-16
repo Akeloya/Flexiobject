@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Text;
 
-namespace DbProvider
+namespace Flexiobject.DbProvider
 {
     public class SqlConnectionItem : ISqlConnectionItem
     {

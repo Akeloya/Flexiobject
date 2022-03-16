@@ -1,9 +1,9 @@
 ﻿/*
- *  "Custom object application core"
+ *  "Flexiobject core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
  *  Copyright (C) 2020 by Maxim V. Yugov.
  *
- *  This file is part of "Custom object application".
+ *  This file is part of "Flexiobject".
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,9 +18,9 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using CoaApp.Core.Interfaces;
+using Flexiobject.Core.Interfaces;
 
-namespace CoaApp.Core
+namespace Flexiobject.Core
 {
     public abstract class UserFields<T> : AppBase<T>, IUserFields
     {

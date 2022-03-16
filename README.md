@@ -1,12 +1,12 @@
-# Custom object application [![License: GPL v3](https://img.shields.io/github/license/Akeloya/CustomObjectApplication.svg)](http://www.gnu.org/licenses/gpl-3.0) [![Build](https://github.com/Akeloya/CustomObjectApplication/workflows/.NET%20Core/badge.svg)](https://github.com/Akeloya/CustomObjectApplication/actions?query=workflow%3A%22.NET+Core%22) [![CodeQL](https://github.com/Akeloya/CustomObjectApplication/workflows/CodeQL/badge.svg)](https://github.com/Akeloya/CustomObjectApplication/actions?query=workflow%3ACodeQL) [![BCH compliance](https://bettercodehub.com/edge/badge/Akeloya/CustomObjectApplication?branch=master)](https://bettercodehub.com/)
+# Flexiobject [![License: GPL v3](https://img.shields.io/github/license/Akeloya/CustomObjectApplication.svg)](http://www.gnu.org/licenses/gpl-3.0) [![Build](https://github.com/Akeloya/CustomObjectApplication/workflows/.NET%20Core/badge.svg)](https://github.com/Akeloya/CustomObjectApplication/actions?query=workflow%3A%22.NET+Core%22) [![CodeQL](https://github.com/Akeloya/CustomObjectApplication/workflows/CodeQL/badge.svg)](https://github.com/Akeloya/CustomObjectApplication/actions?query=workflow%3ACodeQL) [![BCH compliance](https://bettercodehub.com/edge/badge/Akeloya/CustomObjectApplication?branch=master)](https://bettercodehub.com/)
 
 Application for creating and using freely customizable configuration of data, forms, actions and other things
 
 ## Solution description
 
-| Language | Platform      | Win GUI  | Linux GUI     |
-|:--------:|:-------------:|:--------:|:-------------:|
-|   c#     | .Net Core 3.1 | WPF app  | Not specified |
+| Language | Platform      | Application GUI |
+|:--------:|:-------------:|:---------------:|
+|   C#     | .Net Core 6   | Avalonia app    |
 
 ## Development
 
@@ -14,7 +14,6 @@ Application for creating and using freely customizable configuration of data, fo
 - Fork this repo
 - Clone to computer
 - Open solution, run build
-- Read [Coding style](https://github.com/Akeloya/CustomObjectApplication/blob/master/CODINGSTYLE.md)
 
 Solution contains several projects:
 
@@ -22,7 +21,7 @@ Solution contains several projects:
 - DbProvider - EF core database schema description and methods work with it
 - AppServer - Application server for this app, all app logic implements here
 - API - client side api
-- WpfClient - GUI application using client API
+- AppClient - GUI application using client API
 
 ## Languages
 
@@ -33,7 +32,7 @@ Solution contains several projects:
 
 ### Purpose
 
-This project is an application of custom objects that allows the user to describe objects in the domain using fields in the window interface, add various actions on objects, create forms for editing objects without deep knowledge of programming.
+This project is an application of flexible customization of user-defined objects that allows the user to describe objects in the domain using fields in the window interface, add various actions on objects, create forms for editing objects without deep knowledge of programming.
 
 ### Description
 
@@ -44,7 +43,7 @@ This project is an application of custom objects that allows the user to describ
 To describe the subject area, the user is offered a basic set of objects:
 
 - Folder - contains a description of the object (fields, actions, forms, object naming rules, user privileges, scripts, object display views)
-- Custom object - located in a folder, inherits the folder fields that describe it. Edited through the form linked to the folder.
+- Flexiobject object - located in a folder, inherits the folder fields that describe it. Edited through the form linked to the folder.
 - Custom fields - a set of fields that can be created to describe an object in a folder (number, string, list, workflow, object link, object list, text field, currency, date)
 - Forms in a folder (forms for editing objects, forms for filtering the list)
 - Types of displaying objects in a folder (currently only a table)
@@ -73,7 +72,7 @@ Everyone can help the project, especially for Linux development.
 
 ### Цель
 
-Данный проект это приложение настраеваемых объектов, позволяющее пользователю в оконном интерфейсе описать объекты предметной области с помощью полей, добавить различные действия над объектами, создать формы редактирования объектов без глубоких знаний в программировании.
+Данный проект это приложение гибко настраеваемых объектов, позволяющее пользователю в оконном интерфейсе описать объекты предметной области с помощью полей, добавить различные действия над объектами, создать формы редактирования объектов без глубоких знаний в программировании.
 
 ### Описание
 

@@ -1,9 +1,9 @@
 ﻿/*
- *  "Custom object application core"
+ *  "Flexiobject core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
  *  Copyright (C) 2020 by Maxim V. Yugov.
  *
- *  This file is part of "Custom object application".
+ *  This file is part of "Flexiobject".
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,9 +21,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using CoaApp.Core.Enumes;
+using Flexiobject.Core.Enumes;
 
-namespace CoaApp.Core.Interfaces
+namespace Flexiobject.Core.Interfaces
 {
     /// <summary>
     /// Код (скрипт) c# для выполнения
