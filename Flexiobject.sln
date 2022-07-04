@@ -19,6 +19,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFiles", "SolutionFi
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flexiobject.Api.Tests", "API.Tests\Flexiobject.Api.Tests.csproj", "{97169B09-9EC8-4E58-B163-EEF4B985B1F8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F1CB39CD-A138-455D-B91D-CC92CD29507F} = {F1CB39CD-A138-455D-B91D-CC92CD29507F}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flexiobject.DbProvider.Test", "DbProvider.Test\Flexiobject.DbProvider.Test.csproj", "{C15B33A3-CFC4-4BA6-B046-83CBD7E33021}"
 EndProject

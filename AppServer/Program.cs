@@ -19,36 +19,49 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using CoaApp.Core.Config;
+
+using Ninject;
+
+using System;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Flexiobject.AppServer
 {
     public class Program
     {
+        private static IKernel Kernel;
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
-        }
+            Kernel = new StandardKernel();
+            var bindings = new ServerBindings();
+            Kernel.Load(bindings);
 
-#if Linux || OSX
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)            
-                .ConfigureServices((hostContext, services) =>
-                {
-                    services.AddHostedService<Worker>();
-                });
-#endif
-#if Windows
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureLogging(loggerFactory => loggerFactory.AddEventLog())
-                .UseWindowsService()
-                .ConfigureServices(services =>
-                {
-                    services.AddHostedService<Worker>();
-                });
-#endif
+            Worker worker = Kernel.Get<Worker>();
+            var cts = new CancellationTokenSource();
+
+            var sr = new StreamWriter(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "app.log"));
+            Console.SetOut(sr);
+            try
+            {
+                Task.Factory.StartNew(() => worker.ExecuteAsync(cts.Token)).Wait();
+            }
+            finally
+            {
+                sr.Close();
+                Kernel.Dispose();
+            }
+        }
+    }
+
+    public class ServerBindings : DiBindings
+    {
+        public override void Load()
+        {
+            Kernel.Bind<Worker>().ToSelf();
+            base.Load();
+        }
     }
 }

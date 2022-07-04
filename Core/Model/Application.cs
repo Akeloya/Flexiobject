@@ -124,10 +124,7 @@ namespace Flexiobject.Core
         /// <param name="host">Host name</param>
         /// <param name="port">Port number</param>
         /// <returns></returns>
-        protected virtual Session OnOpenSession(string host, int port)
-        {
-            throw new NotImplementedException();
-        }
+        protected abstract Session OnOpenSession(string host, int port);
 
         /// <summary>
         /// Realization of opening session method by using internal auth
@@ -137,17 +134,11 @@ namespace Flexiobject.Core
         /// <param name="login">User login name</param>
         /// <param name="password">User password string</param>
         /// <returns></returns>
-        protected virtual Session OnOpenSessionWithLoginPassword(string host, int port, string login, string password)
-        {
-            throw new NotImplementedException();
-        }
+        protected abstract Session OnOpenSessionWithLoginPassword(string host, int port, string login, string password);
         /// <summary>
         /// Realization of logging message
         /// </summary>
         /// <param name="message"></param>
-        protected virtual void OnLogMessage(string message)
-        {
-            throw new NotImplementedException();
-        }
+        protected abstract void OnLogMessage(string message);
     }
 }

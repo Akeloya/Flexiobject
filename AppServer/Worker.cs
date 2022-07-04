@@ -22,26 +22,38 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using CoaApp.Core.Logging;
+
+using Flexiobject.AppServer.Services;
 
 namespace Flexiobject.AppServer
 {
-    public class Worker : BackgroundService
+    public class Worker
     {
-        private readonly ILogger<Worker> _logger;
-
-        public Worker(ILogger<Worker> logger)
+        private readonly ILogger _logger;
+        private readonly Server _server;
+        public Worker(LoggerFactory loggerFactory, Server server)
         {
-            _logger = logger;
+            _logger = loggerFactory.Create(nameof(Worker));
+            _server = server;
         }
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        public void ExecuteAsync(CancellationToken stoppingToken)
         {
-            while (!stoppingToken.IsCancellationRequested)
+            try
             {
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                await Task.Delay(1000, stoppingToken);
+                _server.Start();
+                while (!stoppingToken.IsCancellationRequested)
+                {
+                    _logger.Info($"Worker running at: {DateTimeOffset.Now}");
+                    Thread.Sleep(1000);
+                    Console.Out.Flush();
+                }
+                _server.Stop();
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex,"");
             }
         }
     }

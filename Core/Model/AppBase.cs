@@ -35,6 +35,7 @@ namespace Flexiobject.Core
         /// Never dismount in domains
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public override object InitializeLifetimeService()
         {
             return null;

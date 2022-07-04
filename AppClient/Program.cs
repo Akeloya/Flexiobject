@@ -20,7 +20,7 @@ namespace FlexiObject.AppClient
         public static void Main(string[] args)
         {
             _kernel = new StandardKernel();
-            var diBindings = new DiBindings();
+            var diBindings = new AppBindings();
             _kernel.Load(diBindings);
 
             BuildAvaloniaApp()

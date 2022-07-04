@@ -1,0 +1,243 @@
+﻿using CoaApp.Core.Transport;
+
+using System;
+using System.Collections.Concurrent;
+using System.IO;
+using System.Linq;
+using System.Net.Sockets;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Flexiobject.API.Transport
+{
+    /// <summary>
+    /// Клиентская реализация общения с сервером.
+    /// Отправляем сообщение и засыпаем до наступления таймаута.
+    /// В бэкграунде поток ловит сообщения от сервера. Если сообщение есть в куче - обновляет его и вызывает синхронизацию с заснувшим потоком,
+    /// чтобы он забрал сообщение из кучи и отдал ответ.
+    /// </summary>
+    class Client
+    {
+        private static readonly object _lockObject = new();
+
+        private TcpClient _client;
+        private NetworkStream _stream;
+        private readonly Guid _clientUid = Guid.NewGuid();
+        private readonly ConcurrentDictionary<Guid, ExchangeMessage> _sendedMessages = new();
+        private Task _backgroundReader;
+        private readonly CancellationTokenSource _cancellationTokenSource;        
+        internal static ClientFactory Factory { get; } 
+        static Client()
+        {
+            Factory = new ClientFactory();
+        }
+        public Client()
+        {
+            _cancellationTokenSource = new CancellationTokenSource();
+            
+        }
+        public void Open(string hostName, int port)
+        {
+            try
+            {
+                _client = new TcpClient(hostName, port);
+                _stream = _client.GetStream();
+                _backgroundReader = ReadDataFromServerAsync(_cancellationTokenSource.Token);
+                //_backgroundReader.Start(Task.Factory.Scheduler);
+            }
+            catch (SocketException ex)
+            {
+                switch (ex.SocketErrorCode)
+                {
+                    case SocketError.ConnectionRefused:
+                    case SocketError.ConnectionAborted:
+                        //TODO: log error later
+                        throw;
+                }
+                throw;
+            }
+
+            _stream = _client.GetStream();
+        }
+
+        public Task<ExchangeMessage> CallServerAsync(object data, [CallerMemberName] string method = null, params object[] parameters)
+        {
+            return Task.Factory.StartNew(() => {
+                return CallServer(data, 60, method, parameters);
+            });
+        }
+        public Task<ExchangeMessage> CallServerAsync(object data, int timeOutInSec, [CallerMemberName]  string method = null, params object[] parameters)
+        {
+            return Task.Factory.StartNew(() => {
+                return CallServer(data, timeOutInSec, method, parameters);
+            });
+        }
+        public ExchangeMessage CallServer(object data, [CallerMemberName] string method = null, params object[] parameters)
+        {
+            return CallServer(data, 60, method, parameters);
+        }
+        public ExchangeMessage CallServer(object data, int timeOutInSec, [CallerMemberName] string method = null, params object[] parameters)
+        {
+            var msg = new ExchangeMessage
+            {
+                ClientUid = _clientUid,
+                TimeSend = DateTime.Now,
+                Method = method,
+                Data = data,
+                Parameters = parameters,
+                ThreadId = Environment.CurrentManagedThreadId                
+            };
+            var sendingJson = msg.Serialize();
+            var sendData = Encoding.UTF8.GetBytes(sendingJson);
+            try
+            {
+                var prm = msg.Parameters?.Aggregate(string.Empty, (current, parameter) => current + ((parameter ?? "null") + ","));
+                if (prm?.Length > 1)
+                    prm = prm.Remove(prm.Length - 1);
+                //TODO: log caling server with parameters
+                
+                if (_sendedMessages.TryAdd(msg.MessageID, msg))
+                {
+                    lock (_lockObject)
+                    {
+                        _stream.Write(sendData, 0, sendData.Length); //передали данные
+                        _stream.Flush();
+                        msg.SyncObj = new ManualResetEvent(false);
+                    }
+                }
+                else
+                {
+                    //TODO: log, and? think...
+                    throw new InvalidOperationException();
+                }
+                
+            }
+            catch(Exception e)
+            {
+                //TODO: log
+                msg.Error = e;
+                throw;
+            }
+            lock (msg.SyncObj)
+            {
+                //TODO: check recieve time before wait
+                if (!msg.SyncObj.WaitOne(timeOutInSec * 1000))
+                {
+                    _sendedMessages.TryRemove(msg.MessageID, out _);
+                    throw new TimeoutException();
+                }
+            }
+            return msg;
+        }
+
+        private async Task ReadDataFromServerAsync(CancellationToken token)
+        {
+            bool closeFromServer = false;
+            while (!token.IsCancellationRequested && !closeFromServer)
+            {
+                if (!_stream.DataAvailable)
+                    await Task.Delay(100, token);
+                
+                var msg = new ExchangeMessage();
+                var buffer = new byte[1024];
+                try
+                {
+                    var reads = await _stream.ReadAsync(buffer,0,1024, token);
+                    if (reads == 0)
+                    {
+                        await Task.Delay(100, token);
+                        continue;
+                    }
+                    buffer = buffer.AsSpan(0, reads).ToArray();
+                }
+                catch (IOException e)
+                {
+                    //TODO: log error
+                    try
+                    {
+                        OnErrorRaised?.Invoke(this, e);
+                    }
+                    catch
+                    {
+                        //TODO: log error
+                        //supress errors
+                    }
+                    continue;//TODO: Требуется более корректная обработка ошибки, возможно со счётчиком ошибочных чтений...
+                }
+
+                try
+                {
+                    msg = Encoding.UTF8.GetString(buffer.ToArray()).Deserialize();
+                    var prm = msg.Parameters?.Aggregate(string.Empty, (current, parameter) => current + (parameter ?? "null") + ",");
+                    if (prm?.Length > 1)
+                        prm = prm.Remove(prm.Length - 1);
+                    //TODO: log recieve data
+
+                    if(!_sendedMessages.TryGetValue(msg.MessageID, out var sendedMsg))
+                    {
+                        //TODO: log, here no message because of timeout
+                        continue;
+                    }
+                    sendedMsg.Data = msg.Data;
+                    sendedMsg.Error = msg.Error;
+                    sendedMsg.TimeRecieve = DateTime.Now;
+                    sendedMsg.SyncObj.Set();
+                }
+                catch (Exception ex)
+                {
+                    //TODO: log error
+                    try
+                    {
+                        OnErrorRaised.Invoke(this, ex);
+                    }
+                    catch 
+                    { 
+                        //TODO: log error
+                    }
+                    continue;
+                }
+
+                switch (msg.Method)
+                {
+                    case "NotifyServer":
+                        {
+                            try
+                            {
+                                GetMessage?.BeginInvoke(this, (ApiMessageDataContract)msg.Data, x => { }, null);
+                            }
+                            catch
+                            {
+                                //TODO: log error
+                            }
+                        }
+                        break;
+                    case "Logoff":
+                        {
+                            closeFromServer = true;
+                            try
+                            {
+                                Closing?.Invoke(this, null);
+                            }
+                            catch
+                            {
+                                //TODO: log error
+                            }
+                        }
+                        break;
+                }
+            }
+        }
+
+        public event EventHandler<Exception> OnErrorRaised;
+        public event EventHandler<ApiMessageDataContract> GetMessage;
+        public event EventHandler Closing;
+    }
+
+    internal class SendedMessage
+    {
+        public ExchangeMessage Message { get; set; }
+        public string Method { get; set; }
+    }
+}

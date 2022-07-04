@@ -31,7 +31,7 @@ namespace Flexiobject.Core
         }
         public ICustomFolders RequestFolders => throw new NotImplementedException();
 
-        public IActiveSessions ActiveSessions => throw new NotImplementedException();
+        public abstract IActiveSessions ActiveSessions { get; }
 
         public string Username => throw new NotImplementedException();
 
@@ -105,15 +105,9 @@ namespace Flexiobject.Core
             throw new NotImplementedException();
         }
 
-        public void LogMessage(string msg)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void LogMessage(string msg);
 
-        public void Logoff()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void Logoff();
 
         public void NotifyUser(object reciever, string message, ICustomObject linkedRequest)
         {

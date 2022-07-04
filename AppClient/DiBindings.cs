@@ -1,18 +1,20 @@
-﻿using FlexiObject.AppClient.Services;
+﻿using CoaApp.Core.Config;
+
+using FlexiObject.AppClient.Services;
 using FlexiObject.AppClient.ViewModels;
 using FlexiObject.AppClient.Views;
 
 using Ninject;
-using Ninject.Modules;
 
 using NLog;
 
 namespace FlexiObject.AppClient
 {
-    internal class DiBindings : NinjectModule
+    internal class AppBindings : DiBindings
     {
         public override void Load()
         {
+            base.Load();
             Bind<LogFactory>().ToSelf().InSingletonScope();
 
             Bind<IContainer>().To<Container>().InSingletonScope();
