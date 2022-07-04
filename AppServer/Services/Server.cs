@@ -58,34 +58,21 @@ namespace Flexiobject.AppServer.Services
             var isProccessing = true;
             while (isProccessing)
             {
-                if (stream.CanRead)
+                if (stream.ReadData(out var msg))
                 {
-                    var memory = new byte[1024];
-                    var reads = 0;
-                    lock (_lock)
+                    _logger.Info($"client {clientNum}: {msg.Method} {msg.MessageID}");
+                    if (msg.Method == "Logoff")
                     {
-                        reads = stream.Read(memory, 0, 1024);                        
-                    }
-                    if (reads > 0)
-                    {
-                        var data = memory.AsSpan(0, reads);
-                        var msgString = Encoding.UTF8.GetString(data);
-                        var msg = msgString.Deserialize();
-                        _logger.Info($"client {clientNum}: {msg.Method} {msg.MessageID}");
-                        if (msg.Method == "Logoff")
+                        lock (_lock)
                         {
-                            lock (_lock)
-                            {
-                                stream.Write(data);
-                                //stream.Flush();
-                                isProccessing = false;
-                            }
-                            break;
+                            stream.Write(Encoding.UTF8.GetBytes(msg.Serialize()));
+                            isProccessing = false;
                         }
+                        break;
                     }
 
                 }
-                Thread.Sleep(500);
+                Thread.Sleep(50);
             }
             stream.Close();
             tcpClient.Close();

@@ -137,20 +137,57 @@ namespace Flexiobject.API.Transport
             bool closeFromServer = false;
             while (!token.IsCancellationRequested && !closeFromServer)
             {
-                if (!_stream.DataAvailable)
-                    await Task.Delay(100, token);
-                
-                var msg = new ExchangeMessage();
-                var buffer = new byte[1024];
                 try
                 {
-                    var reads = await _stream.ReadAsync(buffer,0,1024, token);
-                    if (reads == 0)
+                    var msg = await _stream.ReadDataAsync(token);
+                    if (msg == null)
                     {
                         await Task.Delay(100, token);
                         continue;
                     }
-                    buffer = buffer.AsSpan(0, reads).ToArray();
+                    var prm = msg.Parameters?.Aggregate(string.Empty, (current, parameter) => current + (parameter ?? "null") + ",");
+                    if (prm?.Length > 1)
+                        prm = prm.Remove(prm.Length - 1);
+                    //TODO: log recieve data
+
+                    if (!_sendedMessages.TryGetValue(msg.MessageID, out var sendedMsg))
+                    {
+                        //TODO: log, here no message because of timeout
+                        continue;
+                    }
+                    sendedMsg.Data = msg.Data;
+                    sendedMsg.Error = msg.Error;
+                    sendedMsg.TimeRecieve = DateTime.Now;
+                    sendedMsg.SyncObj.Set();
+
+                    switch (msg.Method)
+                    {
+                        case "NotifyServer":
+                            {
+                                try
+                                {
+                                    GetMessage?.BeginInvoke(this, (ApiMessageDataContract)msg.Data, x => { }, null);
+                                }
+                                catch
+                                {
+                                    //TODO: log error
+                                }
+                            }
+                            break;
+                        case "Logoff":
+                            {
+                                closeFromServer = true;
+                                try
+                                {
+                                    Closing?.Invoke(this, null);
+                                }
+                                catch
+                                {
+                                    //TODO: log error
+                                }
+                            }
+                            break;
+                    }
                 }
                 catch (IOException e)
                 {
@@ -165,67 +202,6 @@ namespace Flexiobject.API.Transport
                         //supress errors
                     }
                     continue;//TODO: Требуется более корректная обработка ошибки, возможно со счётчиком ошибочных чтений...
-                }
-
-                try
-                {
-                    msg = Encoding.UTF8.GetString(buffer.ToArray()).Deserialize();
-                    var prm = msg.Parameters?.Aggregate(string.Empty, (current, parameter) => current + (parameter ?? "null") + ",");
-                    if (prm?.Length > 1)
-                        prm = prm.Remove(prm.Length - 1);
-                    //TODO: log recieve data
-
-                    if(!_sendedMessages.TryGetValue(msg.MessageID, out var sendedMsg))
-                    {
-                        //TODO: log, here no message because of timeout
-                        continue;
-                    }
-                    sendedMsg.Data = msg.Data;
-                    sendedMsg.Error = msg.Error;
-                    sendedMsg.TimeRecieve = DateTime.Now;
-                    sendedMsg.SyncObj.Set();
-                }
-                catch (Exception ex)
-                {
-                    //TODO: log error
-                    try
-                    {
-                        OnErrorRaised.Invoke(this, ex);
-                    }
-                    catch 
-                    { 
-                        //TODO: log error
-                    }
-                    continue;
-                }
-
-                switch (msg.Method)
-                {
-                    case "NotifyServer":
-                        {
-                            try
-                            {
-                                GetMessage?.BeginInvoke(this, (ApiMessageDataContract)msg.Data, x => { }, null);
-                            }
-                            catch
-                            {
-                                //TODO: log error
-                            }
-                        }
-                        break;
-                    case "Logoff":
-                        {
-                            closeFromServer = true;
-                            try
-                            {
-                                Closing?.Invoke(this, null);
-                            }
-                            catch
-                            {
-                                //TODO: log error
-                            }
-                        }
-                        break;
                 }
             }
         }
