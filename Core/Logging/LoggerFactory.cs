@@ -1,5 +1,4 @@
-﻿
-using Microsoft.Extensions.Logging;
+﻿using NLog;
 
 using System;
 
@@ -7,27 +6,24 @@ namespace CoaApp.Core.Logging
 {
     public class LoggerFactory
     {
-        private ILoggerFactory loggerFactory;
+        private LogFactory loggerFactory;
         public LoggerFactory()
         {
-            loggerFactory = Microsoft.Extensions.Logging.LoggerFactory.Create(builder =>
-            {
-                builder.AddConsole();
-            });
+            loggerFactory = LogManager.LogFactory;
         }
         public ILogger Create(string name)
         {
-            return new Logger(loggerFactory.CreateLogger(name));
+            return new Logger(loggerFactory.GetLogger(name));
         }
 
         public ILogger Create<T>()
         {
-            return new Logger(loggerFactory.CreateLogger<T>());
+            return new Logger(loggerFactory.GetLogger(nameof(T)));
         }
 
         public ILogger Create(Type type)
         {
-            return new Logger(loggerFactory.CreateLogger(type));
+            return new Logger(loggerFactory.GetLogger(type.Name));
         }
     }
 }

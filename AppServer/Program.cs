@@ -21,6 +21,8 @@
 
 using CoaApp.Core.Config;
 
+using Flexiobject.AppServer.Settings;
+
 using Ninject;
 
 using System;
@@ -35,6 +37,9 @@ namespace Flexiobject.AppServer
         private static IKernel Kernel;
         public static void Main(string[] args)
         {
+            var setupLogs = new ServerLogSetup();
+            setupLogs.Setup();
+
             Kernel = new StandardKernel();
             var bindings = new ServerBindings();
             Kernel.Load(bindings);
@@ -42,15 +47,12 @@ namespace Flexiobject.AppServer
             Worker worker = Kernel.Get<Worker>();
             var cts = new CancellationTokenSource();
 
-            var sr = new StreamWriter(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "app.log"));
-            Console.SetOut(sr);
             try
             {
                 Task.Factory.StartNew(() => worker.ExecuteAsync(cts.Token)).Wait();
             }
             finally
             {
-                sr.Close();
                 Kernel.Dispose();
             }
         }

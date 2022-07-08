@@ -1,7 +1,5 @@
 ﻿using System;
 
-using Microsoft.Extensions.Logging;
-
 namespace CoaApp.Core.Logging
 {
     public interface ILogger
@@ -14,35 +12,35 @@ namespace CoaApp.Core.Logging
 
     public class Logger : ILogger
     {
-        private readonly Microsoft.Extensions.Logging.ILogger _logger;
-        internal Logger(Microsoft.Extensions.Logging.ILogger logger)
+        private readonly NLog.ILogger _logger;
+        internal Logger(NLog.ILogger logger)
         {
             _logger = logger;
         }
 
         public void Debug(string msg)
         {
-            _logger.LogInformation(msg);
+            _logger.Debug(msg);
         }
 
         public void Error(Exception ex, string msg = null)
         {
-            _logger.LogError(msg, ex);
+            _logger.Error(msg, ex, null);
         }
 
         public void Info(string msg)
         {
-            _logger.LogInformation(msg);
+            _logger.Info(msg);
         }
 
         public void Warn(string msg)
         {
-            _logger.LogWarning(msg);
+            _logger.Warn(msg);
         }
 
         public void Trace(string msg)
         {
-            _logger.LogTrace(msg);
+            _logger.Trace(msg);
         }
     }
 }

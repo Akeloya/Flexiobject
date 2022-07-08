@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NLog;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
@@ -10,6 +12,7 @@ namespace CoaApp.Core.Transport
 {
     public static class TransportHelpers
     {
+        public static Logger Logger = LogManager.GetCurrentClassLogger();
         public static bool ReadData(this NetworkStream stream, out ExchangeMessage data)
         {
             const int arrSize = 1024;
@@ -53,9 +56,9 @@ namespace CoaApp.Core.Transport
                 }
                 data = Encoding.UTF8.GetString(dataArr).Deserialize();
             }
-            catch
+            catch(Exception ex)
             {
-                //TODO: log exeption
+                Logger.Error(ex);
                 data = null;
                 return false;
             }
@@ -98,9 +101,9 @@ namespace CoaApp.Core.Transport
                 }
                 return Encoding.UTF8.GetString(dataArr).Deserialize();
             }
-            catch
+            catch(Exception ex)
             {
-                //TODO: log exeption
+                Logger.Error(ex);
                 return null;
             }
         }
