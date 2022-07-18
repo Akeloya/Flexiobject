@@ -18,7 +18,7 @@ namespace CoaApp.Core.Logging
 
         public ILogger Create<T>()
         {
-            return new Logger(loggerFactory.GetLogger(nameof(T)));
+            return new Logger(loggerFactory.GetLogger(typeof(T).Name));
         }
 
         public ILogger Create(Type type)

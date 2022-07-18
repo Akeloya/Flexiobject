@@ -20,36 +20,45 @@
  */
 
 using CoaApp.Core.Config;
+using CoaApp.Core.Logging;
 
+using Flexiobject.AppServer.Model;
 using Flexiobject.AppServer.Settings;
 
 using Ninject;
 
-using System;
-using System.IO;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Flexiobject.AppServer
 {
     public class Program
     {
-        private static IKernel Kernel;
+        private static readonly IKernel Kernel = new StandardKernel();
         public static void Main(string[] args)
         {
-            var setupLogs = new ServerLogSetup();
-            setupLogs.Setup();
-
-            Kernel = new StandardKernel();
             var bindings = new ServerBindings();
             Kernel.Load(bindings);
-
-            Worker worker = Kernel.Get<Worker>();
-            var cts = new CancellationTokenSource();
+            
+            var logSetuper = Kernel.Get<AlogSetuper>();
+            logSetuper.Setup();
+            var application = Kernel.Get<CoaApplication>();            
 
             try
             {
-                Task.Factory.StartNew(() => worker.ExecuteAsync(cts.Token)).Wait();
+                using var cts = new CancellationTokenSource();
+                application.Start(cts.Token);
+
+                var consoleWorker = Kernel.Get<ConsoleWorker>();
+                consoleWorker.Execute(cts.Token, ()=> cts.Cancel());
+
+                var logger = Kernel.Get<ILogger>();
+                while (!cts.Token.IsCancellationRequested)
+                {
+                    Thread.Sleep(60000);
+                    logger.Info("Server is alive");
+                }
+
+                application.Stop();
             }
             finally
             {
@@ -62,8 +71,10 @@ namespace Flexiobject.AppServer
     {
         public override void Load()
         {
-            Kernel.Bind<Worker>().ToSelf();
             base.Load();
+            Kernel.Bind<CoaApplication>().ToSelf().InSingletonScope();
+            Kernel.Bind<ConsoleWorker>().ToSelf();
+            Kernel.Rebind<AlogSetuper>().To<ServerLogSetup>().InSingletonScope();
         }
     }
 }

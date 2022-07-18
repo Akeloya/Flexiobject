@@ -25,7 +25,7 @@ namespace Flexiobject.Core.Interfaces
     /// <summary>
     /// Пользовательское поле объекта
     /// </summary>
-    public interface IUserField : IBase, IDataErrorInfo, INotifyPropertyChanged
+    public interface IUserField : IBase, IDataErrorInfo
     {
         /// <summary>
         /// Значение поля

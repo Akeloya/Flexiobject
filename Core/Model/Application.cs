@@ -106,17 +106,7 @@ namespace Flexiobject.Core
         /// Loggin message to server log
         /// </summary>
         /// <param name="msg">Message string</param>
-        public void WriteLogMessage(string msg)
-        {
-            if (string.IsNullOrEmpty(msg))
-                return;
-            var rows = msg.Split("\n", StringSplitOptions.RemoveEmptyEntries);
-            var logMsg = string.Empty;
-            var now = DateTime.Now.ToShortDateString();
-            foreach (string row in rows)
-                logMsg += string.Format("[{0}] {1}\n", now, row);
-            OnLogMessage(logMsg);
-        }
+        public abstract void WriteLogMessage(string msg);
 
         /// <summary>
         /// Realization of opening session method by using NTML auth
@@ -135,10 +125,5 @@ namespace Flexiobject.Core
         /// <param name="password">User password string</param>
         /// <returns></returns>
         protected abstract Session OnOpenSessionWithLoginPassword(string host, int port, string login, string password);
-        /// <summary>
-        /// Realization of logging message
-        /// </summary>
-        /// <param name="message"></param>
-        protected abstract void OnLogMessage(string message);
     }
 }

@@ -8,6 +8,7 @@ namespace CoaApp.Core.Logging
         void Warn(string msg);
         void Error(Exception ex, string msg = null);
         void Debug(string msg);
+        void Trace(string msg);
     }
 
     public class Logger : ILogger
@@ -17,7 +18,6 @@ namespace CoaApp.Core.Logging
         {
             _logger = logger;
         }
-
         public void Debug(string msg)
         {
             _logger.Debug(msg);

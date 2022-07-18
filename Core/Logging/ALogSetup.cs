@@ -3,6 +3,7 @@ using NLog.Config;
 using NLog.Layouts;
 using NLog.Targets;
 
+using System;
 using System.IO;
 
 namespace CoaApp.Core.Logging
@@ -12,7 +13,7 @@ namespace CoaApp.Core.Logging
         public virtual bool HasConsoleLog { get; }
         public virtual bool HasNetworkLog { get; }
         public virtual bool HasDbLogging { get; }
-        public virtual string LogPath { get; } = Path.Combine(Directory.GetCurrentDirectory(), "Logs");
+        public virtual string LogPath { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),"Flexiobject", "Logs");
         public virtual LoggingConfiguration Setup()
         {
             var commonTargetName = GetType().Assembly.GetName().Name;
@@ -62,8 +63,19 @@ namespace CoaApp.Core.Logging
             config.AddRuleForAllLevels("console");
             config.AddRuleForAllLevels("network");
 
+            SetupCustomLogging(config);
+
             LogManager.Configuration = config;
             return config;
+        }
+
+        /// <summary>
+        /// Declare custom logging targets and rules
+        /// </summary>
+        /// <param name="config"></param>
+        public virtual void SetupCustomLogging(LoggingConfiguration config)
+        {
+
         }
     }
 }

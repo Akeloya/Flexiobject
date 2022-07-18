@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NLog;
+
+using System;
 using System.IO;
 using System.Text;
 using System.Text.Json;
@@ -34,15 +36,16 @@ namespace CoaApp.Core.Config
             }
             catch (Exception ex)
             {
+                var logger = LogManager.GetCurrentClassLogger();
+                logger.Error(ex);
                 try
                 {
                     Save(result);
                 }
-                catch
-                { 
-                    //TODO: log exception
+                catch(Exception ex2)
+                {
+                    logger.Error(ex2);
                 }
-                //TODO: log exception
             }
             return result;
         }

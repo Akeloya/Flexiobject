@@ -20,13 +20,12 @@
  */
 
 using Flexiobject.Core.Interfaces;
-using System.ComponentModel;
 
 namespace Flexiobject.Core.Object
 {
     public abstract class UserField<T> : AppBase<T>, IUserField
     {
-        protected UserField(Application app, T parent) : base (app, parent)
+        protected UserField(Application app, T parent) : base(app, parent)
         {
 
         }
@@ -45,6 +44,5 @@ namespace Flexiobject.Core.Object
 
         public string Error => throw new System.NotImplementedException();
 
-        public event PropertyChangedEventHandler PropertyChanged;
-    } 
+    }
 }
