@@ -123,6 +123,7 @@ namespace Flexiobject.AppServer.Services
                     var msg = await stream.ReadDataAsync(token);
                     if (msg != null)
                     {
+                        msg.TimeRecieve = DateTime.Now;
                         _logger.Info($"client {clientNum}: {msg.Method} {msg.MessageID}");
                         try
                         {
@@ -131,11 +132,13 @@ namespace Flexiobject.AppServer.Services
                         catch(Exception ex)
                         {
                             _logger.Error(ex);
+                            msg.Error = ex;
                         }
+
+                        await stream.WriteAsync(Encoding.UTF8.GetBytes(msg.Serialize()));
 
                         if (msg.Method == "Logoff")
                         {
-                            await stream.WriteAsync(Encoding.UTF8.GetBytes(msg.Serialize()));
                             isProccessing = false;
                             break;
                         }

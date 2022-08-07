@@ -51,7 +51,7 @@ namespace CoaApp.Core.Logging
             {
                 var networkTarget = new NetworkTarget
                 {
-                    Address = "tcp://127.0.0.1:5095",
+                    Address = "tcp4://127.0.0.1:5095",
                     Layout = log4jLayout,
                     Name = "network"
                 };

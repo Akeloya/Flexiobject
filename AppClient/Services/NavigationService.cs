@@ -29,12 +29,12 @@ namespace FlexiObject.AppClient.Services
 
         public Task NavigateAsync<T>(params object[] args)
         {
-            throw new NotImplementedException();
+            return Task.Factory.StartNew(() => Navigate<T>(args));
         }
 
         public Task NavigateAsync(Type type, params object[] args)
         {
-            throw new NotImplementedException();
+            return Task.Factory.StartNew(() => Navigate(type, args));
         }
 
         private Window CreateWindow(ViewModelBase view)

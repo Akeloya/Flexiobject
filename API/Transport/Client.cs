@@ -1,5 +1,7 @@
 ﻿using CoaApp.Core.Transport;
 
+using NLog;
+
 using System;
 using System.Collections.Concurrent;
 using System.IO;
@@ -18,17 +20,18 @@ namespace Flexiobject.API.Transport
     /// В бэкграунде поток ловит сообщения от сервера. Если сообщение есть в куче - обновляет его и вызывает синхронизацию с заснувшим потоком,
     /// чтобы он забрал сообщение из кучи и отдал ответ.
     /// </summary>
-    class Client
+    class Client : IDisposable
     {
         private static readonly object _lockObject = new();
-
-        private TcpClient _client;
-        private NetworkStream _stream;
         private readonly Guid _clientUid = Guid.NewGuid();
         private readonly ConcurrentDictionary<Guid, ExchangeMessage> _sendedMessages = new();
+        private readonly CancellationTokenSource _cancellationTokenSource;
+        private readonly ILogger _logger;
+        private TcpClient _client;
+        private NetworkStream _stream;
         private Task _backgroundReader;
-        private readonly CancellationTokenSource _cancellationTokenSource;        
-        internal static ClientFactory Factory { get; } 
+        
+        internal static ClientFactory Factory { get; }
         static Client()
         {
             Factory = new ClientFactory();
@@ -36,7 +39,7 @@ namespace Flexiobject.API.Transport
         public Client()
         {
             _cancellationTokenSource = new CancellationTokenSource();
-            
+            _logger = LogManager.GetCurrentClassLogger();
         }
         public void Open(string hostName, int port)
         {
@@ -49,6 +52,7 @@ namespace Flexiobject.API.Transport
             }
             catch (SocketException ex)
             {
+                _logger.Error(ex);
                 switch (ex.SocketErrorCode)
                 {
                     case SocketError.ConnectionRefused:
@@ -64,13 +68,15 @@ namespace Flexiobject.API.Transport
 
         public Task<ExchangeMessage> CallServerAsync(object data, [CallerMemberName] string method = null, params object[] parameters)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Factory.StartNew(() =>
+            {
                 return CallServer(data, 60, method, parameters);
             });
         }
-        public Task<ExchangeMessage> CallServerAsync(object data, int timeOutInSec, [CallerMemberName]  string method = null, params object[] parameters)
+        public Task<ExchangeMessage> CallServerAsync(object data, int timeOutInSec, [CallerMemberName] string method = null, params object[] parameters)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Factory.StartNew(() =>
+            {
                 return CallServer(data, timeOutInSec, method, parameters);
             });
         }
@@ -87,7 +93,7 @@ namespace Flexiobject.API.Transport
                 Method = method,
                 Data = data,
                 Parameters = parameters,
-                ThreadId = Environment.CurrentManagedThreadId                
+                ThreadId = Environment.CurrentManagedThreadId
             };
             var sendingJson = msg.Serialize();
             var sendData = Encoding.UTF8.GetBytes(sendingJson);
@@ -96,8 +102,8 @@ namespace Flexiobject.API.Transport
                 var prm = msg.Parameters?.Aggregate(string.Empty, (current, parameter) => current + ((parameter ?? "null") + ","));
                 if (prm?.Length > 1)
                     prm = prm.Remove(prm.Length - 1);
-                //TODO: log caling server with parameters
-                
+                _logger.Debug(prm);
+
                 if (_sendedMessages.TryAdd(msg.MessageID, msg))
                 {
                     lock (_lockObject)
@@ -109,14 +115,15 @@ namespace Flexiobject.API.Transport
                 }
                 else
                 {
+                    _logger.Error("Cannot add message to queue");
                     //TODO: log, and? think...
                     throw new InvalidOperationException();
                 }
-                
+
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                //TODO: log
+                _logger.Error(e);
                 msg.Error = e;
                 throw;
             }
@@ -148,10 +155,11 @@ namespace Flexiobject.API.Transport
                     var prm = msg.Parameters?.Aggregate(string.Empty, (current, parameter) => current + (parameter ?? "null") + ",");
                     if (prm?.Length > 1)
                         prm = prm.Remove(prm.Length - 1);
-                    //TODO: log recieve data
+                    _logger.Debug(prm);
 
                     if (!_sendedMessages.TryGetValue(msg.MessageID, out var sendedMsg))
                     {
+                        _logger.Debug("No message! Time out?");
                         //TODO: log, here no message because of timeout
                         continue;
                     }
@@ -168,8 +176,9 @@ namespace Flexiobject.API.Transport
                                 {
                                     GetMessage?.BeginInvoke(this, (ApiMessageDataContract)msg.Data, x => { }, null);
                                 }
-                                catch
+                                catch(Exception ex)
                                 {
+                                    _logger.Error(ex);
                                     //TODO: log error
                                 }
                             }
@@ -181,8 +190,9 @@ namespace Flexiobject.API.Transport
                                 {
                                     Closing?.Invoke(this, null);
                                 }
-                                catch
+                                catch(Exception ex)
                                 {
+                                    _logger.Error(ex);
                                     //TODO: log error
                                 }
                             }
@@ -191,19 +201,24 @@ namespace Flexiobject.API.Transport
                 }
                 catch (IOException e)
                 {
-                    //TODO: log error
+                    _logger.Error(e);
                     try
                     {
                         OnErrorRaised?.Invoke(this, e);
                     }
-                    catch
+                    catch(Exception ex)
                     {
-                        //TODO: log error
+                        _logger.Error(ex);
                         //supress errors
                     }
                     continue;//TODO: Требуется более корректная обработка ошибки, возможно со счётчиком ошибочных чтений...
                 }
             }
+        }
+
+        public void Dispose()
+        {
+            _cancellationTokenSource.Dispose();
         }
 
         public event EventHandler<Exception> OnErrorRaised;

@@ -8,23 +8,22 @@ namespace API
 {
     public class CoaSession : Session
     {
-        internal CoaSession(CoaApplication app): base(app)
+        private readonly Client _client;
+        internal CoaSession(CoaApplication app, Client client): base(app)
         {
-
+            _client = client;
         }
 
         public override IActiveSessions ActiveSessions => throw new NotImplementedException();
 
         public override void LogMessage(string msg)
         {
-            var client = Client.Factory.GetSinglton();
-            client.CallServer(msg);
+            _client.CallServer(msg);
         }
 
         public override void Logoff()
         {
-            var client = Client.Factory.GetSinglton();
-            client.CallServer(null);
+            _client.CallServer(null);
         }
     }
 }
