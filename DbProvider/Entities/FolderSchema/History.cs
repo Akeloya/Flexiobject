@@ -21,7 +21,7 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Flexiobject.DbProvider.Entities
+namespace FlexiObject.DbProvider.Entities
 {
     [Table("ObjHistory")]
     public partial class History

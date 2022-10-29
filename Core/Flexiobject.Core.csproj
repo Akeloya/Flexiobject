@@ -1,9 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+    <Import Project="../.config/build.conf"></Import>
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>Core</AssemblyName>
-    <RootNamespace>CoaApp.Core</RootNamespace>
+    <RootNamespace>Flexiobject.Core</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

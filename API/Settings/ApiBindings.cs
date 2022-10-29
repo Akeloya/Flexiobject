@@ -1,10 +1,10 @@
-﻿using CoaApp.Core.Config;
-using CoaApp.Core.Logging;
+﻿
+using FlexiObject.API.Logging;
+using FlexiObject.API.Transport;
+using FlexiObject.Core.Config;
+using FlexiObject.Core.Logging;
 
-using Flexiobject.API.Logging;
-using Flexiobject.API.Transport;
-
-namespace Flexiobject.API.Settings
+namespace FlexiObject.API.Settings
 {
     internal class ApiBindings : DiBindings
     {

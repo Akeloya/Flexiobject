@@ -19,17 +19,18 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using CoaApp.Core.Config;
-using CoaApp.Core.Logging;
+using FlexiObject.Core.Config;
+using FlexiObject.Core.Logging;
 
-using Flexiobject.AppServer.Model;
-using Flexiobject.AppServer.Settings;
+using FlexiObject.AppServer.Model;
+using FlexiObject.AppServer.Settings;
+using FlexiObject.Core;
 
 using Ninject;
 
 using System.Threading;
 
-namespace Flexiobject.AppServer
+namespace FlexiObject.AppServer
 {
     public class Program
     {
@@ -72,9 +73,10 @@ namespace Flexiobject.AppServer
         public override void Load()
         {
             base.Load();
-            Kernel.Bind<CoaApplication>().ToSelf().InSingletonScope();
-            Kernel.Bind<ConsoleWorker>().ToSelf();
-            Kernel.Rebind<AlogSetuper>().To<ServerLogSetup>().InSingletonScope();
+            Bind<Application>().To<CoaApplication>().InSingletonScope();
+            Bind<ConsoleWorker>().ToSelf();
+            Rebind<AlogSetuper>().To<ServerLogSetup>().InSingletonScope();
+            Bind<ObjectFactory>().ToSelf().InSingletonScope();
         }
     }
 }

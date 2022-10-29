@@ -20,7 +20,7 @@
  */
 using System;
 
-namespace Flexiobject.Core.Enumes
+namespace FlexiObject.Core.Enumes
 {
     /// <summary>
     /// Right side operand type

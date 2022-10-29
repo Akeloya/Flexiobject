@@ -19,7 +19,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Flexiobject.Core.Interfaces
+namespace FlexiObject.Core.Interfaces
 {
     /// <summary>
     /// История изменений объекта

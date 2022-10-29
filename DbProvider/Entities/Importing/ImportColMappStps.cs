@@ -20,11 +20,11 @@
  */
 
 
-using Flexiobject.DbProvider.Entities;
+using FlexiObject.DbProvider.Entities;
 
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Flexiobject.DbProvider
+namespace FlexiObject.DbProvider
 {
     [Table("ImportCmStps")]
     public partial class ImportCmSteps

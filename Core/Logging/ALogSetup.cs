@@ -6,10 +6,12 @@ using NLog.Targets;
 using System;
 using System.IO;
 
-namespace CoaApp.Core.Logging
+namespace FlexiObject.Core.Logging
 {
     public abstract class AlogSetuper
     {
+        protected readonly Log4JXmlEventLayout _log4XmlLayout = new ();
+        protected readonly string _commonLayout = "${longdate}|${level}|${message} |${all-event-properties} ${exception:format=tostring}";
         public virtual bool HasConsoleLog { get; }
         public virtual bool HasNetworkLog { get; }
         public virtual bool HasDbLogging { get; }
@@ -17,9 +19,6 @@ namespace CoaApp.Core.Logging
         public virtual LoggingConfiguration Setup()
         {
             var commonTargetName = GetType().Assembly.GetName().Name;
-            var commonLayout = "${longdate}|${level}|${message} |${all-event-properties} ${exception:format=tostring}";
-
-            var log4jLayout = new Log4JXmlEventLayout();
             var config = new LoggingConfiguration();
 
             var target =
@@ -28,7 +27,7 @@ namespace CoaApp.Core.Logging
                         FileName = Path.Combine(LogPath, commonTargetName + ".log4j"),
                         Name = commonTargetName,
                         AutoFlush = true,
-                        Layout = log4jLayout
+                        Layout = _log4XmlLayout
                     };
 
             config.AddTarget("logfile", target);
@@ -41,7 +40,7 @@ namespace CoaApp.Core.Logging
                     AutoFlush = true,
                     Encoding = System.Text.Encoding.UTF8,
                     Name = "console",
-                    Layout = commonLayout
+                    Layout = _commonLayout
                 };
 
                 config.AddTarget(consoleTarget);
@@ -52,7 +51,7 @@ namespace CoaApp.Core.Logging
                 var networkTarget = new NetworkTarget
                 {
                     Address = "tcp4://127.0.0.1:5095",
-                    Layout = log4jLayout,
+                    Layout = _log4XmlLayout,
                     Name = "network"
                 };
 

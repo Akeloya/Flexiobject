@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CoaApp.Core.Transport
+namespace FlexiObject.Core.Transport
 {
     public static class TransportHelpers
     {

@@ -2,9 +2,9 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-using CoaApp.Core.Logging;
+using FlexiObject.Core.Logging;
 
-namespace Flexiobject.AppServer
+namespace FlexiObject.AppServer
 {
     public class ConsoleWorker
     {

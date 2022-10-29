@@ -18,11 +18,11 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using Flexiobject.Core.Enumes;
+using FlexiObject.Core.Enumes;
 
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Flexiobject.DbProvider.Entities
+namespace FlexiObject.DbProvider.Entities
 {
     [Table("AppFolderFields")]
     public class AppFolderField

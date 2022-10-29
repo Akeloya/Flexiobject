@@ -18,10 +18,11 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using Flexiobject.Core.Interfaces;
+using FlexiObject.Core.Interfaces;
 using System;
+using System.Text.Json.Serialization;
 
-namespace Flexiobject.Core
+namespace FlexiObject.Core
 {
     public abstract class Session : AppBase<Application>, ISession
     {
@@ -29,20 +30,21 @@ namespace Flexiobject.Core
         {
 
         }
+        [JsonIgnore]//TODO: check after implement
         public ICustomFolders RequestFolders => throw new NotImplementedException();
-
+        [JsonIgnore]
         public abstract IActiveSessions ActiveSessions { get; }
-
+        [JsonIgnore]//TODO: check after implement
         public string Username => throw new NotImplementedException();
-
+        [JsonIgnore]//TODO: check after implement
         public IPictures Pictures => throw new NotImplementedException();
-
+        [JsonIgnore]//TODO: check after implement
         public IUser ActiveUser => throw new NotImplementedException();
-
+        [JsonIgnore]//TODO: check after implement
         public IGroups Groups => throw new NotImplementedException();
-
+        [JsonIgnore]//TODO: check after implement
         public IUsers Users => throw new NotImplementedException();
-
+        [JsonIgnore]//TODO: check after implement
         public IScheduledTasks ScheduledTasks => throw new NotImplementedException();
 
         public IQueryResult ExecuteSqlRequest(string sqlCommand, params object[] parameters)

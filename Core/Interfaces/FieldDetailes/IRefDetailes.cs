@@ -20,7 +20,7 @@
  */
 using System.ComponentModel;
 
-namespace Flexiobject.Core.Interfaces
+namespace FlexiObject.Core.Interfaces
 {
     /// <summary>
     /// Дополнительная информация поля типа объект и список объектов

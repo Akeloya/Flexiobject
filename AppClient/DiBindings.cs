@@ -1,4 +1,4 @@
-﻿using CoaApp.Core.Config;
+﻿using FlexiObject.Core.Config;
 
 using FlexiObject.AppClient.Services;
 using FlexiObject.AppClient.ViewModels;
@@ -16,8 +16,7 @@ namespace FlexiObject.AppClient
         {
             base.Load();
             Bind<LogFactory>().ToSelf().InSingletonScope();
-
-            Bind<IContainer>().To<Container>().InSingletonScope();
+            
             Bind<INavigationService>().To<NavigationService>().InSingletonScope();
             Bind<IDialogService>().To<DialogService>().InSingletonScope();
             Bind<IJsonConfiguration>().To<JsonConfiguration>().InSingletonScope();

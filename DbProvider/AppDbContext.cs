@@ -18,9 +18,9 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using Flexiobject.Core.Enumes;
+using FlexiObject.Core.Enumes;
 
-using Flexiobject.DbProvider.Entities;
+using FlexiObject.DbProvider.Entities;
 
 using Microsoft.Data.SqlClient;
 using Microsoft.Data.Sqlite;
@@ -29,7 +29,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Data.Common;
 
-namespace Flexiobject.DbProvider
+namespace FlexiObject.DbProvider
 {
     public partial class AppDbContext : DbContext
     {

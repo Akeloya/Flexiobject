@@ -18,9 +18,9 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using Flexiobject.Core.Enumes;
+using FlexiObject.Core.Enumes;
 
-namespace Flexiobject.Core.Interfaces
+namespace FlexiObject.Core.Interfaces
 {
     /// <summary>
     /// Интерфейс установки сравнения для поля в правиле

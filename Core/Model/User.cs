@@ -18,13 +18,13 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using Flexiobject.Core.Enumes;
-using Flexiobject.Core.Interfaces;
+using FlexiObject.Core.Enumes;
+using FlexiObject.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Flexiobject.Core
+namespace FlexiObject.Core
 {
     public abstract class User<T> : AppBase<T>, IUser
     {

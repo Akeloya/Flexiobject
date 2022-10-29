@@ -19,12 +19,12 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using Flexiobject.Core.Interfaces;
+using FlexiObject.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Flexiobject.Core
+namespace FlexiObject.Core
 {
     public abstract class History<T> : AppBase<T>, IHistory
     {

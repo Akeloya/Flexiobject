@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace CoaApp.Core.Config
+namespace FlexiObject.Core.Config
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public class JsonSettingSubFolderAttribute : Attribute

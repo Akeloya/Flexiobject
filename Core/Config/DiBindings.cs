@@ -1,23 +1,24 @@
-﻿using CoaApp.Core.Logging;
+﻿using FlexiObject.Core.Logging;
 
 using Ninject.Modules;
 
 using System.Reflection;
 
-namespace CoaApp.Core.Config
+namespace FlexiObject.Core.Config
 {
     public class DiBindings : NinjectModule
     {
         public override void Load()
         {
-            Kernel.Bind<LoggerFactory>().ToSelf().InSingletonScope();
-            Kernel.Bind<IJsonSettingsStore>().To<JsonSettingsStore>();
-            Kernel.Bind<ILogger>().ToMethod((context) =>
+            Bind<IContainer>().To<Container>().InSingletonScope();
+            Bind<LoggerFactory>().ToSelf().InSingletonScope();
+            Bind<IJsonSettingsStore>().To<JsonSettingsStore>();
+            Bind<ILogger>().ToMethod((context) =>
             {
                 var factory = Kernel.GetService(typeof(LoggerFactory)) as LoggerFactory;
                 return factory.Create(context.Request?.ParentRequest?.Target.Name ?? Assembly.GetExecutingAssembly().GetName().Name);
             });
-            Kernel.Bind<AlogSetuper>().To<LogDefaultSetuper>().InSingletonScope();
+            Bind<AlogSetuper>().To<LogDefaultSetuper>().InSingletonScope();
         }
     }
 }

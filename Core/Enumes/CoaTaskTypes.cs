@@ -20,7 +20,7 @@
  */
 
 
-namespace Flexiobject.Core.Enumes
+namespace FlexiObject.Core.Enumes
 {
     public enum CoaTaskTypes
     {

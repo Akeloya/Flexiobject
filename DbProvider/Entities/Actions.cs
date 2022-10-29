@@ -20,9 +20,9 @@
  */
 using System.ComponentModel.DataAnnotations.Schema;
 
-using Flexiobject.Core.Enumes;
+using FlexiObject.Core.Enumes;
 
-namespace Flexiobject.DbProvider.Entities
+namespace FlexiObject.DbProvider.Entities
 {
     [Table("ModifyActions")]
     public partial class ModifyAction

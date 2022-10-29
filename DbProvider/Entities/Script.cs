@@ -19,9 +19,9 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using Flexiobject.Core.Enumes;
+using FlexiObject.Core.Enumes;
 
-namespace Flexiobject.DbProvider.Entities
+namespace FlexiObject.DbProvider.Entities
 {
     public partial class Script
     {

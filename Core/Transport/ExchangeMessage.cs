@@ -3,7 +3,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 
-namespace CoaApp.Core.Transport
+namespace FlexiObject.Core.Transport
 {
     public class ExchangeMessage
     {
@@ -14,6 +14,7 @@ namespace CoaApp.Core.Transport
         public DateTime TimeSend { get; set; }
         public DateTime TimeRecieve { get; set; }
         public object Data { get; set; }
+        public string ObjectType { get; set; }
         public object[] Parameters { get; set; }
         public Exception Error { get; set; }
         [JsonIgnore]

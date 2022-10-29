@@ -18,13 +18,14 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using Flexiobject.Core.Enumes;
-using Flexiobject.Core.Interfaces;
+using FlexiObject.Core.Enumes;
+using FlexiObject.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 
-namespace Flexiobject.Core
+namespace FlexiObject.Core
 {
     /// <summary>
     /// Application instance
@@ -37,7 +38,8 @@ namespace Flexiobject.Core
         /// <returns></returns>
         public static List<CoaApplicationFolders> GetApplicationFolders()
         {
-            List<CoaApplicationFolders> result = new List<CoaApplicationFolders> {
+            List<CoaApplicationFolders> result = new()
+            {
                 CoaApplicationFolders.UserAccounts,
                 CoaApplicationFolders.UserGroups
             };
@@ -48,9 +50,9 @@ namespace Flexiobject.Core
         /// </summary>
         /// <param name="type">Internal folder type</param>
         /// <returns></returns>
-        public static Dictionary<CoaApplicationFoldersProperties, bool> GetAllowedFielsByAppFolderType(CoaApplicationFolders type)
+        public static Dictionary<CoaApplicationFoldersProperties, bool> GetAllowedFieldsByAppFolderType(CoaApplicationFolders type)
         {
-            Dictionary<CoaApplicationFoldersProperties, bool> result = new Dictionary<CoaApplicationFoldersProperties, bool>();
+            Dictionary<CoaApplicationFoldersProperties, bool> result = new();
             switch (type)
             {
                 case CoaApplicationFolders.UserAccounts:
@@ -83,6 +85,7 @@ namespace Flexiobject.Core
         }
 
         [ThreadStatic]private static Session _activeSession;
+        [JsonIgnore]//TODO: check after implement
         public Session ActiveSession => _activeSession;
         public ISession OpenSession(string hostName, int port, string userName = null, string password = null)
         {

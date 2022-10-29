@@ -19,9 +19,9 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using Flexiobject.Core.Interfaces;
+using FlexiObject.Core.Interfaces;
 
-namespace Flexiobject.Core.Object
+namespace FlexiObject.Core.Object
 {
     public abstract class UserField<T> : AppBase<T>, IUserField
     {

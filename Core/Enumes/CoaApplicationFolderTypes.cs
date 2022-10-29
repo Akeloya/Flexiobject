@@ -20,7 +20,7 @@
  */
 using System.ComponentModel;
 
-namespace Flexiobject.Core.Enumes
+namespace FlexiObject.Core.Enumes
 {
     /// <summary>
     /// Коллекция предустановленных папок приложения

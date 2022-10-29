@@ -21,7 +21,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Flexiobject.DbProvider.Entities
+namespace FlexiObject.DbProvider.Entities
 {
     [Table("AppUsers_UsersGroups")]
     public partial class AppUsersUserGroups

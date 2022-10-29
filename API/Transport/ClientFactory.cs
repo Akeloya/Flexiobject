@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Flexiobject.API.Transport
+namespace FlexiObject.API.Transport
 {
     internal class ClientFactory
     {

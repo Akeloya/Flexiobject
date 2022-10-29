@@ -1,8 +1,9 @@
 ﻿using Ninject;
 
 using System;
+using FlexiObject.Core.Config;
 
-namespace FlexiObject.AppClient.Services
+namespace FlexiObject.Core
 {
     public class Container : IContainer
     {
@@ -28,7 +29,7 @@ namespace FlexiObject.AppClient.Services
         /// <param name="type"></param>
         /// <returns></returns>
         public T Get<T>(Type type)
-        {            
+        {
             return (T)Get(type);
         }
     }

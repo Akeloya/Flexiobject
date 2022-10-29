@@ -20,7 +20,7 @@
  */
 using System;
 
-namespace Flexiobject.Core.Interfaces
+namespace FlexiObject.Core.Interfaces
 {
     /// <summary>
     /// Интерфейс поиска записей в истории изменени объектов

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Flexiobject.DbProvider
+namespace FlexiObject.DbProvider
 {
     public interface ISqlConnectionItem : IDisposable
     {

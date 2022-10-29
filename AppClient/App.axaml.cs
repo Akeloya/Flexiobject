@@ -1,11 +1,11 @@
-using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 
 using FlexiObject.AppClient.Services;
 using FlexiObject.AppClient.ViewModels;
-
+using FlexiObject.Core.Config;
 using PropertyChanged;
+using Application = Avalonia.Application;
 
 namespace FlexiObject.AppClient
 {

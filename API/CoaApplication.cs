@@ -1,6 +1,6 @@
-﻿using Flexiobject.API.Settings;
-using Flexiobject.API.Transport;
-using Flexiobject.Core;
+﻿using FlexiObject.API.Settings;
+using FlexiObject.API.Transport;
+using FlexiObject.Core;
 
 using Ninject;
 

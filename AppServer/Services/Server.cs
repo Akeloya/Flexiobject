@@ -1,8 +1,8 @@
-﻿using CoaApp.Core.Config;
-using CoaApp.Core.Logging;
-using CoaApp.Core.Transport;
+﻿using FlexiObject.Core.Config;
+using FlexiObject.Core.Logging;
+using FlexiObject.Core.Transport;
 
-using Flexiobject.AppServer.Settings;
+using FlexiObject.AppServer.Settings;
 
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Flexiobject.AppServer.Services
+namespace FlexiObject.AppServer.Services
 {
     public class Server
     {
@@ -21,8 +21,8 @@ namespace Flexiobject.AppServer.Services
         private ServerSettings _serverSettings;
         private int _tcpClientCounter;
         private bool _serverStopped;
-        private readonly static object _lock = new object();//remove
-        private readonly LinkedList<TcpClient> _tcpClients = new LinkedList<TcpClient>();
+        private readonly static object _lock = new ();//remove
+        private readonly LinkedList<TcpClient> _tcpClients = new();
         public Server(JsonSettingsStore jsonSettingsStore, LoggerFactory loggerFactory)
         {
             _jsonSettingsStore = jsonSettingsStore;

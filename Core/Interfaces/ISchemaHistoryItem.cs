@@ -19,9 +19,9 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using System;
-using Flexiobject.Core.Enumes;
+using FlexiObject.Core.Enumes;
 
-namespace Flexiobject.Core.Interfaces
+namespace FlexiObject.Core.Interfaces
 {
     /// <summary>
     /// Интерфейс записи истории схемы изменения папок и связанных объектов

@@ -20,7 +20,7 @@
  */
 using System.Collections.Generic;
 
-namespace Flexiobject.DbProvider.Entities
+namespace FlexiObject.DbProvider.Entities
 {
     public partial class SummaryDefinition
     {

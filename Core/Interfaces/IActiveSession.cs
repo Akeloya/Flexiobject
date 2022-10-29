@@ -20,7 +20,7 @@
  */
 using System;
 
-namespace Flexiobject.Core.Interfaces
+namespace FlexiObject.Core.Interfaces
 {
     /// <summary>
     /// Активная (текущая) сессия пользователя

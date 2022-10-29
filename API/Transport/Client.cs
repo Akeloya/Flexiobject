@@ -1,4 +1,4 @@
-﻿using CoaApp.Core.Transport;
+﻿using FlexiObject.Core.Transport;
 
 using NLog;
 
@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Flexiobject.API.Transport
+namespace FlexiObject.API.Transport
 {
     /// <summary>
     /// Клиентская реализация общения с сервером.
@@ -92,6 +92,7 @@ namespace Flexiobject.API.Transport
                 TimeSend = DateTime.Now,
                 Method = method,
                 Data = data,
+                ObjectType = data.GetType().AssemblyQualifiedName,
                 Parameters = parameters,
                 ThreadId = Environment.CurrentManagedThreadId
             };
@@ -164,6 +165,7 @@ namespace Flexiobject.API.Transport
                         continue;
                     }
                     sendedMsg.Data = msg.Data;
+                    sendedMsg.ObjectType = msg.ObjectType;
                     sendedMsg.Error = msg.Error;
                     sendedMsg.TimeRecieve = DateTime.Now;
                     sendedMsg.SyncObj.Set();
@@ -179,7 +181,6 @@ namespace Flexiobject.API.Transport
                                 catch(Exception ex)
                                 {
                                     _logger.Error(ex);
-                                    //TODO: log error
                                 }
                             }
                             break;
@@ -193,7 +194,6 @@ namespace Flexiobject.API.Transport
                                 catch(Exception ex)
                                 {
                                     _logger.Error(ex);
-                                    //TODO: log error
                                 }
                             }
                             break;

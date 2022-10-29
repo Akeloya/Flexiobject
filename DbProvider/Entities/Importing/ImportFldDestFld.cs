@@ -19,9 +19,9 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using Flexiobject.DbProvider.Entities;
+using FlexiObject.DbProvider.Entities;
 
-namespace Flexiobject.DbProvider
+namespace FlexiObject.DbProvider
 {
     public partial class ImportFldDestFld
     {

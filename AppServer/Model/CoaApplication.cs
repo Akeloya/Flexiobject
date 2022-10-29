@@ -1,24 +1,29 @@
-﻿using CoaApp.Core.Transport;
+﻿using FlexiObject.Core.Transport;
 
-using Flexiobject.AppServer.Services;
-using Flexiobject.Core;
+using FlexiObject.AppServer.Services;
+using FlexiObject.AppServer.Settings;
+using FlexiObject.Core;
 
 using NLog;
 
 using System;
+using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Flexiobject.AppServer.Model
+namespace FlexiObject.AppServer.Model
 {
     internal class CoaApplication: Application
     {
         private readonly Server _server;
         private readonly ILogger _logger;
-        public CoaApplication(Server server) : base()
+        private readonly ObjectFactory _objectFactory;
+        public CoaApplication(Server server, ObjectFactory objectFactory) : base()
         {
             _server = server;
-            _logger = LogManager.GetLogger("userLogging");
+            _objectFactory = objectFactory;
+            _logger = LogManager.GetLogger(ServerLogSetup.UserLogName);
         }
 
         public void Start(CancellationToken token)
@@ -52,7 +57,29 @@ namespace Flexiobject.AppServer.Model
 
         private Task OnMessageRecievedAsync(ExchangeMessage msg, int clientId)
         {
+            if (msg.Data == null)
+                throw new NotSupportedException();
+            var type = Type.GetType(msg.ObjectType) ?? ByName(msg.ObjectType);
+            var obj = _objectFactory.GetByType(type);
+            var method = type.GetMethod(msg.Method);
+            method.Invoke(obj, msg.Parameters);
             return Task.CompletedTask;
+        }
+
+        private static Type ByName(string name)
+        {
+            return
+                AppDomain.CurrentDomain.GetAssemblies()
+                    .Reverse()
+                    .Select(assembly => assembly.GetType(name))
+                    .FirstOrDefault(t => t != null)
+                // Safely delete the following part
+                // if you do not want fall back to first partial result
+                ??
+                AppDomain.CurrentDomain.GetAssemblies()
+                    .Reverse()
+                    .SelectMany(assembly => assembly.GetTypes())
+                    .FirstOrDefault(t => t.Name.Contains(name));
         }
     }
 }

@@ -20,7 +20,7 @@
  */
 
 
-namespace Flexiobject.DbProvider
+namespace FlexiObject.DbProvider
 {
     public partial class ImportColMapping
     {

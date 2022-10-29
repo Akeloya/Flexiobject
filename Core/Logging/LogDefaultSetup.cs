@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoaApp.Core.Logging
+namespace FlexiObject.Core.Logging
 {
     public class LogDefaultSetuper : AlogSetuper
     {

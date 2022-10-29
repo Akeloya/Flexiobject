@@ -2,7 +2,7 @@
 
 using System;
 
-namespace CoaApp.Core.Logging
+namespace FlexiObject.Core.Logging
 {
     public class LoggerFactory
     {

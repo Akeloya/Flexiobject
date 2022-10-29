@@ -4,6 +4,7 @@ using FlexiObject.AppClient.ViewModels;
 
 using System;
 using System.Threading.Tasks;
+using FlexiObject.Core.Config;
 
 namespace FlexiObject.AppClient.Services
 {

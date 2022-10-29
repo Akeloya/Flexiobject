@@ -21,7 +21,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Flexiobject.DbProvider.Entities
+namespace FlexiObject.DbProvider.Entities
 {
     public partial class DeletionLog
     {

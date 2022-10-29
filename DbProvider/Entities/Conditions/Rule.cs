@@ -21,7 +21,7 @@
 
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Flexiobject.DbProvider.Entities
+namespace FlexiObject.DbProvider.Entities
 {
     [Table("Rules")]
     public partial class Rule

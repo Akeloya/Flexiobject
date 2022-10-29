@@ -19,11 +19,11 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using Flexiobject.Core.Enumes;
-using Flexiobject.Core.Interfaces;
+using FlexiObject.Core.Enumes;
+using FlexiObject.Core.Interfaces;
 using System;
 
-namespace Flexiobject.Core.Object
+namespace FlexiObject.Core.Object
 {
     public class HistoryRecord<T> : AppBase<T>, IHistoryRecord
     {

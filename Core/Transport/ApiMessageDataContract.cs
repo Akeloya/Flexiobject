@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CoaApp.Core.Transport
+namespace FlexiObject.Core.Transport
 {
     [Serializable]
     public class ApiMessageDataContract

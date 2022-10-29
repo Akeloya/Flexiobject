@@ -1,10 +1,10 @@
-﻿using Flexiobject.Core.Enumes;
-using Flexiobject.Core.Interfaces;
+﻿using FlexiObject.Core.Enumes;
+using FlexiObject.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Flexiobject.Core.Folder
+namespace FlexiObject.Core.Folder
 {
     public abstract class UserFieldDefinition<T> : AppBase<T>, IUserFieldDefinition
     {

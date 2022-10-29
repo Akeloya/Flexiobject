@@ -21,9 +21,9 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-using Flexiobject.Core.Enumes;
+using FlexiObject.Core.Enumes;
 
-namespace Flexiobject.DbProvider.Entities
+namespace FlexiObject.DbProvider.Entities
 {
     [Table("AppUsers")]
     public partial class AppUser

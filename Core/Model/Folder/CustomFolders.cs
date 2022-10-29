@@ -1,9 +1,9 @@
-﻿using Flexiobject.Core.Interfaces;
+﻿using FlexiObject.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Flexiobject.Core.Folder
+namespace FlexiObject.Core.Folder
 {
     public abstract class CustomFolders<T>: AppBase<T>, ICustomFolders
     {

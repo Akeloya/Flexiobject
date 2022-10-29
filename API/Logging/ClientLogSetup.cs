@@ -1,6 +1,6 @@
-﻿using CoaApp.Core.Logging;
+﻿using FlexiObject.Core.Logging;
 
-namespace Flexiobject.API.Logging
+namespace FlexiObject.API.Logging
 {
     internal class ClientLogSetup : AlogSetuper
     {

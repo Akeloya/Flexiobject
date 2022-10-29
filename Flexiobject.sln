@@ -14,6 +14,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFiles", "SolutionFiles", "{267491CD-8D2D-401E-923B-B0EB859382EF}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		.config\build.conf = .config\build.conf
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection

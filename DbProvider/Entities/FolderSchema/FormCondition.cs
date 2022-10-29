@@ -20,9 +20,9 @@
  */
 
 
-using Flexiobject.DbProvider.Entities;
+using FlexiObject.DbProvider.Entities;
 
-namespace Flexiobject.DbProvider
+namespace FlexiObject.DbProvider
 {
     public partial class FormCondition
     {

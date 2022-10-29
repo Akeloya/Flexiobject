@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Flexiobject.AppServer.Settings
+namespace FlexiObject.AppServer.Settings
 {
     public class ServerSettings
     {

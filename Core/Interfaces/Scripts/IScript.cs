@@ -21,9 +21,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Flexiobject.Core.Enumes;
+using FlexiObject.Core.Enumes;
 
-namespace Flexiobject.Core.Interfaces
+namespace FlexiObject.Core.Interfaces
 {
     /// <summary>
     /// Код (скрипт) c# для выполнения

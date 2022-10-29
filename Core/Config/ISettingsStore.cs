@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace CoaApp.Core.Config
+namespace FlexiObject.Core.Config
 {
     public interface ISettingsStore
     {

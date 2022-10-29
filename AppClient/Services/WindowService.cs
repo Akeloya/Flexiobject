@@ -5,6 +5,7 @@ using FlexiObject.AppClient.Views;
 
 using System;
 using System.Collections.Generic;
+using FlexiObject.Core.Config;
 
 namespace FlexiObject.AppClient.Services
 {

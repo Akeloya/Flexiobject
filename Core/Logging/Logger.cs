@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CoaApp.Core.Logging
+namespace FlexiObject.Core.Logging
 {
     public interface ILogger
     {

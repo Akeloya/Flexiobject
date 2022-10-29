@@ -1,4 +1,4 @@
-using Flexiobject.DbProvider;
+using FlexiObject.DbProvider;
 
 using System;
 using Xunit;
@@ -19,7 +19,7 @@ namespace DbProvider.Test
             using ISqlConnectionItem connection = SqlManager.Register(Guid.NewGuid());
             connection.BeginTransaction();
             var ctx = connection.Context;
-            ctx.ObjectReport.Add(new Flexiobject.DbProvider.Entities.ObjectDef
+            ctx.ObjectReport.Add(new FlexiObject.DbProvider.Entities.ObjectDef
             {
                 Id = 1,
                 Created = DateTime.Now,

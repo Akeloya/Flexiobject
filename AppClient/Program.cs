@@ -1,5 +1,4 @@
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.ReactiveUI;
 
 using FlexiObject.AppClient.Services;
@@ -7,6 +6,7 @@ using FlexiObject.AppClient.Services;
 using Ninject;
 
 using System;
+using FlexiObject.Core.Config;
 
 namespace FlexiObject.AppClient
 {

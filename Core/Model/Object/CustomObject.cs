@@ -19,10 +19,10 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using Flexiobject.Core.Enumes;
-using Flexiobject.Core.Interfaces;
+using FlexiObject.Core.Enumes;
+using FlexiObject.Core.Interfaces;
 
-namespace Flexiobject.Core
+namespace FlexiObject.Core
 {
     public class CustomObject<T> : AppBase<T>, ICustomObject
     {

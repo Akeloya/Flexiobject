@@ -20,7 +20,7 @@
  */
 using System.Collections.Generic;
 
-namespace Flexiobject.Core.Interfaces
+namespace FlexiObject.Core.Interfaces
 {
     /// <summary>
     /// Интерфейс коллекции действий модификации объектов
