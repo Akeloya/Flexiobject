@@ -1,4 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="../.config/build.conf"></Import>
   <PropertyGroup> 
     <TargetFramework>net6.0</TargetFramework>
     <IsWindows Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Windows)))' == 'true'">true</IsWindows> 
@@ -30,7 +31,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\Core\Flexiobject.Core.csproj" />
+    <ProjectReference Include="..\Core\FlexiObject.Core.csproj" />
   </ItemGroup>
 
 </Project>

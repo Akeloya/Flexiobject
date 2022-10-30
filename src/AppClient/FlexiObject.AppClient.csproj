@@ -1,15 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="../.config/build.conf"></Import>
     <PropertyGroup>
         <Copyright>Akeloya</Copyright>
         <Description>Application for flexible creation, modification, storage of objects and more.</Description>
-        <Product>Flexiobject</Product>
-        <AssemblyTitle>Flexiobject</AssemblyTitle>
         <Version>1.0.0.1</Version>
         <VersionSuffix>dev</VersionSuffix>
     </PropertyGroup>
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FlexiObject.AppClient</RootNamespace>
   </PropertyGroup>
@@ -40,7 +38,7 @@
     <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Flexiobject.Core.csproj" />
+    <ProjectReference Include="..\Core\FlexiObject.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">

@@ -2,9 +2,8 @@
 
     <Import Project="../.config/build.conf"></Import>
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <AssemblyName>Core</AssemblyName>
-    <RootNamespace>Flexiobject.Core</RootNamespace>
+      <AssemblyName>FlexiObject.Core</AssemblyName>
+    <RootNamespace>FlexiObject.Core</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

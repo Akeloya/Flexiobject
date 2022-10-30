@@ -1,9 +1,8 @@
-using FlexiObject.DbProvider;
-
 using System;
+using FlexiObject.DbProvider;
 using Xunit;
 
-namespace DbProvider.Test
+namespace Flexiobject.DbProvider.Test
 {
     public class InitiateDb : IDisposable
     {
