@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
 
-    <Import Project="../.config/build.conf"></Import>
+  <Import Project="../.config/build.conf"></Import>
   <PropertyGroup> 
     <OutputType>Exe</OutputType> 
     <IsWindows Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Windows)))' == 'true'">true</IsWindows> 
@@ -17,7 +17,6 @@
     <DefineConstants>Linux</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
     <UserSecretsId>dotnet-AppServer-C6B0002B-4543-427B-AACA-2C63B226D4A3</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>

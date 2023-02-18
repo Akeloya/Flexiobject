@@ -21,7 +21,7 @@ namespace FlexiObject.AppServer.Services
         private ServerSettings _serverSettings;
         private int _tcpClientCounter;
         private bool _serverStopped;
-        private readonly static object _lock = new ();//remove
+        private static readonly object Lock = new ();//remove
         private readonly LinkedList<TcpClient> _tcpClients = new();
         public Server(JsonSettingsStore jsonSettingsStore, LoggerFactory loggerFactory)
         {
@@ -83,24 +83,25 @@ namespace FlexiObject.AppServer.Services
             _tcpClientCounter++;
             var clientNum = _tcpClientCounter;
             _logger.Info($"client {_tcpClientCounter} connected");
+            if (listener == null) 
+                return;
             using TcpClient tcpClient = listener.EndAcceptTcpClient(asyncResult);
             listener.BeginAcceptTcpClient(DoAcceptTcpListener, listener);
 
             using var stream = tcpClient.GetStream();
-            var isProccessing = true;
-            while (isProccessing)
+            var isProcessing = true;
+            while (isProcessing)
             {
                 if (stream.ReadData(out var msg))
                 {
                     _logger.Info($"client {clientNum}: {msg.Method} {msg.MessageID}");
                     if (msg.Method == "Logoff")
                     {
-                        lock (_lock)
+                        lock (Lock)
                         {
                             stream.Write(Encoding.UTF8.GetBytes(msg.Serialize()));
-                            isProccessing = false;
+                            isProcessing = false;
                         }
-                        break;
                     }
 
                 }
@@ -116,34 +117,43 @@ namespace FlexiObject.AppServer.Services
             NewClientArrived(clientNum);
             Task.Factory.StartNew(async () =>
             {
-                using var stream = tcpClient.GetStream();
+                await using var stream = tcpClient.GetStream();
                 var isProccessing = true;
                 while (isProccessing && !token.IsCancellationRequested)
                 {
-                    var msg = await stream.ReadDataAsync(token);
-                    if (msg != null)
+                    try
                     {
-                        msg.TimeRecieve = DateTime.Now;
-                        _logger.Info($"client {clientNum}: {msg.Method} {msg.MessageID}");
-                        try
-                        {
-                            await OnMessageRecieved(msg, clientNum);
-                        }
-                        catch(Exception ex)
-                        {
-                            _logger.Error(ex);
-                            msg.Error = ex;
-                        }
 
-                        await stream.WriteAsync(Encoding.UTF8.GetBytes(msg.Serialize()));
-
-                        if (msg.Method == "Logoff")
+                        var msg = await stream.ReadDataAsync(token);
+                        if (msg != null)
                         {
-                            isProccessing = false;
-                            break;
-                        }
+                            msg.TimeRecieve = DateTime.Now;
+                            _logger.Info($"client {clientNum}: {msg.Method} {msg.MessageID}");
+                            try
+                            {
+                                await OnMessageRecieved(msg, clientNum);
+                            }
+                            catch (Exception ex)
+                            {
+                                _logger.Error(ex);
+                                msg.Error = ex;
+                            }
 
+                            await stream.WriteAsync(Encoding.UTF8.GetBytes(msg.Serialize()), token);
+
+                            if (msg.Method == "Logoff")
+                            {
+                                isProccessing = false;
+                                break;
+                            }
+
+                        }
                     }
+                    catch (Exception ex)
+                    {
+                        _logger.Error(ex,"Loop error");
+                    }
+
                     Thread.Sleep(50);
                 }
                 stream.Close();
