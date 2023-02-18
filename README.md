@@ -6,11 +6,11 @@ Application for creating and using freely customizable configuration of data, fo
 
 | Language | Platform      | Application GUI |
 |:--------:|:-------------:|:---------------:|
-|   C#     | .Net Core 6   | Avalonia app    |
+|   C#     | .Net Core 7   | Avalonia app    |
 
 ## Development
 
-- Make sure you have Visual Studio 2019 Community (or higher)
+- Make sure you have Visual Studio 2022 Community (or higher)
 - Fork this repo
 - Clone to computer
 - Open solution, run build
