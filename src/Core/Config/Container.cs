@@ -20,7 +20,16 @@ namespace FlexiObject.Core
 
         public object Get(Type type)
         {
+            return _kernel.Get(type);
+        }
+
+        public object GetService(Type type)
+        {
             return _kernel.GetService(type);
+        }
+        public T GetService<T>()
+        {
+            return (T)_kernel.GetService(typeof(T));
         }
         /// <summary>
         /// Get by type and convert to T

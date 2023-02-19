@@ -57,6 +57,9 @@ namespace FlexiObject.AppServer.Model
 
         private Task OnMessageRecievedAsync(ExchangeMessage msg, int clientId)
         {
+            //Сюда прилетел тип с FlexiObject.API, но его в домене нет.
+            //Необходимо либо маршрутизировать типы до базовых интерфейсов и на клиентской части и тут
+            //Чтобы они корректно парсились и объекты корректно подставлялись.
             if (msg.Data == null)
                 throw new NotSupportedException();
             var type = Type.GetType(msg.ObjectType) ?? ByName(msg.ObjectType);

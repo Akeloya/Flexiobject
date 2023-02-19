@@ -14,8 +14,11 @@ namespace FlexiObject.AppServer.Model
         }
         public object GetByType(Type type)
         {
-            if(type is IApplication)
+            if(type == typeof(IApplication))
                 return _conterner.Get(type);
+            if(type == typeof(ISession))
+                return _conterner.Get(type);
+
             throw new NotImplementedException();
         }
     }

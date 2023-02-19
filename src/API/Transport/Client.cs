@@ -1,4 +1,5 @@
-﻿using FlexiObject.Core.Transport;
+﻿using FlexiObject.Core.Interfaces;
+using FlexiObject.Core.Transport;
 
 using NLog;
 
@@ -92,7 +93,7 @@ namespace FlexiObject.API.Transport
                 TimeSend = DateTime.Now,
                 Method = method,
                 Data = data,
-                ObjectType = data.GetType().AssemblyQualifiedName,
+                ObjectType = GetObjType(data),
                 Parameters = parameters,
                 ThreadId = Environment.CurrentManagedThreadId
             };
@@ -214,6 +215,19 @@ namespace FlexiObject.API.Transport
                     continue;//TODO: Требуется более корректная обработка ошибки, возможно со счётчиком ошибочных чтений...
                 }
             }
+        }
+
+        private string GetObjType(object obj)
+        {
+            var objType = obj.GetType();
+            var interfaces = objType.GetInterfaces();
+            foreach ( var iface in interfaces )
+            {
+                if(iface == typeof(IBase))
+                    continue;
+                return iface.AssemblyQualifiedName;
+            }
+            return objType.AssemblyQualifiedName;
         }
 
         public void Dispose()

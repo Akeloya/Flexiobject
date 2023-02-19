@@ -29,6 +29,7 @@ using FlexiObject.Core;
 using Ninject;
 
 using System.Threading;
+using FlexiObject.Core.Interfaces;
 
 namespace FlexiObject.AppServer
 {
@@ -50,7 +51,7 @@ namespace FlexiObject.AppServer
                 application.Start(cts.Token);
 
                 var consoleWorker = Kernel.Get<ConsoleWorker>();
-                consoleWorker.Execute(cts.Token, ()=> cts.Cancel());
+                consoleWorker.Execute(cts.Token, cts.Cancel);
 
                 var logger = Kernel.Get<ILogger>();
                 while (!cts.Token.IsCancellationRequested)
@@ -74,6 +75,8 @@ namespace FlexiObject.AppServer
         {
             base.Load();
             Bind<Application>().To<CoaApplication>().InSingletonScope();
+            Rebind<ISession>().To<CoaSession>().InSingletonScope();
+
             Bind<ConsoleWorker>().ToSelf();
             Rebind<AlogSetuper>().To<ServerLogSetup>().InSingletonScope();
             Bind<ObjectFactory>().ToSelf().InSingletonScope();
