@@ -2,24 +2,23 @@
 
 using FlexiObject.AppServer.Services;
 using FlexiObject.AppServer.Settings;
-using FlexiObject.Core;
 
 using NLog;
 
 using System;
 using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace FlexiObject.AppServer.Model
 {
-    internal class CoaApplication: Application
+    internal class Server
     {
-        private readonly Server _server;
+        private readonly ConnectionServer _server;
         private readonly ILogger _logger;
         private readonly ObjectFactory _objectFactory;
-        public CoaApplication(Server server, ObjectFactory objectFactory) : base()
+        public Server(ConnectionServer server, ObjectFactory objectFactory)
         {
             _server = server;
             _objectFactory = objectFactory;
@@ -35,24 +34,10 @@ namespace FlexiObject.AppServer.Model
         {
             _server.Stop();
         }
-        public override void WriteLogMessage(string message)
-        {
-            _logger.Info(message);
-        }
-
-        protected override Session OnOpenSession(string host, int port)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override Session OnOpenSessionWithLoginPassword(string host, int port, string login, string password)
-        {
-            throw new NotImplementedException();
-        }
 
         private void NewClientArrived(int clientNum)
         {
-            
+            _logger.Info($"Client connected: {clientNum}");
         }
 
         private Task OnMessageRecievedAsync(ExchangeMessage msg, int clientId)
@@ -63,7 +48,8 @@ namespace FlexiObject.AppServer.Model
             if (msg.Data == null)
                 throw new NotSupportedException();
             var type = Type.GetType(msg.ObjectType) ?? ByName(msg.ObjectType);
-            var obj = _objectFactory.GetByType(type);
+            //var obj = _objectFactory.GetByType(type);
+            var obj = JsonSerializer.Deserialize(msg.Data,type);
             var method = type.GetMethod(msg.Method);
             method.Invoke(obj, msg.Parameters);
             return Task.CompletedTask;

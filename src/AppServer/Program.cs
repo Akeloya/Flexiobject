@@ -1,35 +1,14 @@
-/*
- *  "Flexiobject server"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
- *
- *  This file is part of "Flexiobject".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 using FlexiObject.Core.Config;
 using FlexiObject.Core.Logging;
 
 using FlexiObject.AppServer.Model;
 using FlexiObject.AppServer.Settings;
-using FlexiObject.Core;
 
 using Ninject;
 
 using System.Threading;
-using FlexiObject.Core.Interfaces;
+using FlexiObject.Core.Repository;
+using FlexiObject.AppServer.Repositories;
 
 namespace FlexiObject.AppServer
 {
@@ -43,12 +22,12 @@ namespace FlexiObject.AppServer
             
             var logSetuper = Kernel.Get<AlogSetuper>();
             logSetuper.Setup();
-            var application = Kernel.Get<CoaApplication>();            
+            var server = Kernel.Get<Server>();            
 
             try
             {
                 using var cts = new CancellationTokenSource();
-                application.Start(cts.Token);
+                server.Start(cts.Token);
 
                 var consoleWorker = Kernel.Get<ConsoleWorker>();
                 consoleWorker.Execute(cts.Token, cts.Cancel);
@@ -60,7 +39,7 @@ namespace FlexiObject.AppServer
                     logger.Info("Server is alive");
                 }
 
-                application.Stop();
+                server.Stop();
             }
             finally
             {
@@ -74,12 +53,12 @@ namespace FlexiObject.AppServer
         public override void Load()
         {
             base.Load();
-            Bind<Application>().To<CoaApplication>().InSingletonScope();
-            Rebind<ISession>().To<CoaSession>().InSingletonScope();
 
             Bind<ConsoleWorker>().ToSelf();
             Rebind<AlogSetuper>().To<ServerLogSetup>().InSingletonScope();
             Bind<ObjectFactory>().ToSelf().InSingletonScope();
+
+            Rebind<ISessionRepository>().To<ServerSessionRepository>().InSingletonScope();
         }
     }
 }

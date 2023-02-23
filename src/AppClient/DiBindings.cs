@@ -7,6 +7,7 @@ using FlexiObject.AppClient.Views;
 using Ninject;
 
 using NLog;
+using FlexiObject.API.Model;
 
 namespace FlexiObject.AppClient
 {
@@ -22,6 +23,8 @@ namespace FlexiObject.AppClient
             Bind<IJsonConfiguration>().To<JsonConfiguration>().InSingletonScope();
 
             Bind<IWindowService>().To<WindowService>().InSingletonScope();
+
+            Bind<Api>().ToSelf().InSingletonScope();
 
             RegisterViews(Kernel);
         }

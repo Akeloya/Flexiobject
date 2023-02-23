@@ -13,7 +13,7 @@ namespace FlexiObject.Core.Transport
         public int ThreadId { get; set; }
         public DateTime TimeSend { get; set; }
         public DateTime TimeRecieve { get; set; }
-        public object Data { get; set; }
+        public string Data { get; set; }
         public string ObjectType { get; set; }
         public object[] Parameters { get; set; }
         public Exception Error { get; set; }
@@ -30,6 +30,21 @@ namespace FlexiObject.Core.Transport
         public ExchangeMessage()
         {
 
+        }
+
+        public object Deserialize(Type type)
+        {
+            return JsonSerializer.Deserialize(Data, type);
+        }
+
+        public T Deserialize<T>()
+        {
+            return JsonSerializer.Deserialize<T>(Data);
+        }
+
+        public void Serialize(object data)
+        {
+            Data = JsonSerializer.Serialize(data);
         }
     }
 

@@ -38,6 +38,7 @@
     <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\API\FlexiObject.API.csproj" />
     <ProjectReference Include="..\Core\FlexiObject.Core.csproj" />
   </ItemGroup>
   <ItemGroup>

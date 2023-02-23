@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -92,12 +93,15 @@ namespace FlexiObject.API.Transport
                 ClientUid = _clientUid,
                 TimeSend = DateTime.Now,
                 Method = method,
-                Data = data,
                 ObjectType = GetObjType(data),
                 Parameters = parameters,
                 ThreadId = Environment.CurrentManagedThreadId
             };
+            msg.Serialize(data);
             var sendingJson = msg.Serialize();
+
+            _logger.Debug(sendingJson);
+
             var sendData = Encoding.UTF8.GetBytes(sendingJson);
             try
             {
@@ -177,7 +181,7 @@ namespace FlexiObject.API.Transport
                             {
                                 try
                                 {
-                                    GetMessage?.BeginInvoke(this, (ApiMessageDataContract)msg.Data, x => { }, null);
+                                    GetMessage?.BeginInvoke(this, JsonSerializer.Deserialize<ApiMessageDataContract>(msg.Data), x => { }, null);
                                 }
                                 catch(Exception ex)
                                 {

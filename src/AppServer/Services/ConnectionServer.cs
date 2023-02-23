@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace FlexiObject.AppServer.Services
 {
-    public class Server
+    public class ConnectionServer
     {
         private TcpListener _listener;
         private readonly ILogger _logger;
@@ -23,12 +23,12 @@ namespace FlexiObject.AppServer.Services
         private bool _serverStopped;
         private static readonly object Lock = new ();//remove
         private readonly LinkedList<TcpClient> _tcpClients = new();
-        public Server(JsonSettingsStore jsonSettingsStore, LoggerFactory loggerFactory)
+        public ConnectionServer(JsonSettingsStore jsonSettingsStore, LoggerFactory loggerFactory)
         {
             _jsonSettingsStore = jsonSettingsStore;
 
 
-            _logger = loggerFactory.Create(nameof(Server));
+            _logger = loggerFactory.Create(nameof(ConnectionServer));
 
         }
 

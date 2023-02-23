@@ -1,28 +1,10 @@
-﻿/*
- *  "Flexiobject core"
- *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
- *
- *  This file is part of "Flexiobject".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+﻿using FlexiObject.Core.Config;
 using FlexiObject.Core.Enumes;
 using FlexiObject.Core.Interfaces;
+using FlexiObject.Core.Repository;
+
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json.Serialization;
 
 namespace FlexiObject.Core
@@ -30,8 +12,14 @@ namespace FlexiObject.Core
     /// <summary>
     /// Application instance
     /// </summary>
-    public abstract class Application : MarshalByRefObject, IApplication
+    [Serializable]
+    public class Application : MarshalByRefObject, IApplication
     {
+        private readonly IContainer _container;
+        public Application(IContainer container)
+        {
+            _container = container;
+        }
         /// <summary>
         /// Internal application folders
         /// </summary>
@@ -84,9 +72,9 @@ namespace FlexiObject.Core
             return result;
         }
 
-        [ThreadStatic]private static Session _activeSession;
+        [ThreadStatic]private static ISession _activeSession;
         [JsonIgnore]//TODO: check after implement
-        public Session ActiveSession => _activeSession;
+        public ISession ActiveSession => _activeSession;
         public ISession OpenSession(string hostName, int port, string userName = null, string password = null)
         {
             if (string.IsNullOrEmpty(hostName))
@@ -109,7 +97,10 @@ namespace FlexiObject.Core
         /// Loggin message to server log
         /// </summary>
         /// <param name="msg">Message string</param>
-        public abstract void WriteLogMessage(string msg);
+        public void WriteLogMessage(string msg)
+        {
+            _container.Get<ILogRepository>().LogMessage(msg);
+        }
 
         /// <summary>
         /// Realization of opening session method by using NTML auth
@@ -117,7 +108,10 @@ namespace FlexiObject.Core
         /// <param name="host">Host name</param>
         /// <param name="port">Port number</param>
         /// <returns></returns>
-        protected abstract Session OnOpenSession(string host, int port);
+        protected ISession OnOpenSession(string host, int port)
+        {
+            return _container.Get<ISessionRepository>().CreateSession(host, port);
+        }
 
         /// <summary>
         /// Realization of opening session method by using internal auth
@@ -127,6 +121,9 @@ namespace FlexiObject.Core
         /// <param name="login">User login name</param>
         /// <param name="password">User password string</param>
         /// <returns></returns>
-        protected abstract Session OnOpenSessionWithLoginPassword(string host, int port, string login, string password);
+        protected ISession OnOpenSessionWithLoginPassword(string host, int port, string login, string password)
+        {
+            return _container.Get<ISessionRepository>().CreateSession(host, port, login, password);
+        }
     }
 }

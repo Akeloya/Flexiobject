@@ -1,5 +1,4 @@
-using Avalonia.Threading;
-
+using FlexiObject.API.Model;
 using FlexiObject.AppClient.Services;
 
 using System;
@@ -10,16 +9,17 @@ namespace FlexiObject.AppClient.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         private readonly INavigationService _navigation;
-        private readonly DispatcherTimer _dispatcherTimer;
-        public static MainWindowViewModel Create => new(null, null);        
-        public MainWindowViewModel(IDialogService dialog, INavigationService navigation) : base(dialog)
+        public static MainWindowViewModel Create => new(null, null, new Api());        
+        public MainWindowViewModel(IDialogService dialog, INavigationService navigation, Api api) : base(dialog, api)
         {
             _navigation = navigation;
-            _dispatcherTimer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Normal, (_,_) =>
-            {
-                CurrentTime = DateTime.Now.ToString("HH:mm:ss");
-            });
-            _dispatcherTimer.Start();
+            StartTimer();
+            var app = api.Create(true);
+            app.OpenSession("localhost", 555, null, null);
+        }
+        protected override void OnTimerTick()
+        {
+            CurrentTime = DateTime.Now.ToString("HH:mm:ss");
         }
 
         public string OsVersion => Environment.OSVersion.Platform.ToString();
