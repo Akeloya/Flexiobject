@@ -1,7 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Threading;
-
-using FlexiObject.API.Model;
+using FlexiObject.API;
 using FlexiObject.AppClient.Services;
 
 using ReactiveUI;

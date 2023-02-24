@@ -2,7 +2,7 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace FlexiObject.Core
+namespace FlexiObject.API.Model
 {
     public class Session : AppBase, ISession
     {

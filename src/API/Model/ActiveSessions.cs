@@ -1,11 +1,10 @@
-﻿using FlexiObject.Core;
-using FlexiObject.Core.Interfaces;
+﻿using FlexiObject.Core.Interfaces;
 
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace FlexiObject.Core.Model
+namespace FlexiObject.API.Model.Model
 {
     public abstract class ActiveSessions : AppBase, IActiveSessions
     {

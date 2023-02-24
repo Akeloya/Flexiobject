@@ -1,27 +1,29 @@
-﻿using FlexiObject.Core;
+﻿using FlexiObject.API.Model;
 using FlexiObject.Core.Config;
 using FlexiObject.Core.Interfaces;
-using FlexiObject.Core.Repository.Default;
+using FlexiObject.Core.Repository;
 
 namespace FlexiObject.AppServer.Repositories
 {
-    internal class ServerSessionRepository : SessionRepository
+    internal class ServerSessionRepository : ISessionRepository
     {
-        public ServerSessionRepository(IContainer container) : base(container)
+        private readonly IContainer _container;
+        public ServerSessionRepository(IContainer container)
         {
+            _container = container;
         }
 
-        public override ISession CreateSession(string host, int port)
+        public ISession CreateSession(string host, int port)
         {
-            return new Session(Container.Get<Application>());
+            return new Session(_container.Get<Application>());
         }
 
-        public override ISession CreateSession(string host, int port, string username, string password)
+        public ISession CreateSession(string host, int port, string username, string password)
         {
-            return new Session(Container.Get<Application>());
+            return new Session(_container.Get<Application>());
         }
 
-        public override void LogOff(ISession session)
+        public void LogOff(ISession session)
         {
             session.Logoff();
         }

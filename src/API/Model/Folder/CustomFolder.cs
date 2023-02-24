@@ -1,10 +1,8 @@
 ﻿using FlexiObject.Core.Enumes;
 using FlexiObject.Core.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace FlexiObject.Core.Folder
+namespace FlexiObject.API.Model.Folder
 {
     public abstract class CustomFolder: AppBase, ICustomFolder
     {

@@ -1,11 +1,10 @@
 ﻿using FlexiObject.Core.Enumes;
 using FlexiObject.Core.Interfaces;
-using FlexiObject.Core.Model.Object;
 using FlexiObject.Core.Repository.Database;
 
 using System;
 
-namespace FlexiObject.Core
+namespace FlexiObject.API.Model
 {
     public class Group : AppBase, IGroup
     {

@@ -26,8 +26,7 @@ namespace FlexiObject.DbProvider
         {
             lock (_syncConnections)
             {
-                if (_sqlConnectionItems == null)
-                    _sqlConnectionItems = new Dictionary<Guid, ISqlConnectionItem>();
+                _sqlConnectionItems ??= new Dictionary<Guid, ISqlConnectionItem>();
                 if (_sqlConnectionItems.ContainsKey(owner))
                     return _sqlConnectionItems[owner];
                 if (_owner != Guid.Empty && _owner != owner)

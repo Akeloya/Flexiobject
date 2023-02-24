@@ -3,7 +3,7 @@ using FlexiObject.Core.Interfaces;
 
 using Ninject;
 
-namespace FlexiObject.API.Model
+namespace FlexiObject.API
 {
     public class Api
     {

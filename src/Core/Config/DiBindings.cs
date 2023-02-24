@@ -1,7 +1,4 @@
-﻿using FlexiObject.Core.Interfaces;
-using FlexiObject.Core.Logging;
-using FlexiObject.Core.Repository;
-using FlexiObject.Core.Repository.Default;
+﻿using FlexiObject.Core.Logging;
 
 using Ninject.Modules;
 
@@ -22,10 +19,6 @@ namespace FlexiObject.Core.Config
                 return factory.Create(context.Request?.ParentRequest?.Target.Name ?? Assembly.GetExecutingAssembly().GetName().Name);
             });
             Bind<AlogSetuper>().To<LogDefaultSetuper>().InSingletonScope();
-
-            Bind<IApplication>().To<Application>().InSingletonScope();
-
-            Bind<ISessionRepository>().To<SessionRepository>().InSingletonScope();
         }
     }
 }

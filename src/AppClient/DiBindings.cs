@@ -7,7 +7,7 @@ using FlexiObject.AppClient.Views;
 using Ninject;
 
 using NLog;
-using FlexiObject.API.Model;
+using FlexiObject.API;
 
 namespace FlexiObject.AppClient
 {

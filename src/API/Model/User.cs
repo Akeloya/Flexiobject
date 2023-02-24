@@ -1,32 +1,30 @@
 ﻿using FlexiObject.Core.Enumes;
 using FlexiObject.Core.Interfaces;
-using FlexiObject.Core.Model.Object;
 using FlexiObject.Core.Repository.Database;
-using FlexiObject.Core.Repository.DataContracts;
+using FlexiObject.DbProvider.Entities;
 
-namespace FlexiObject.Core
+namespace FlexiObject.API.Model
 {
     public class User : AppBase, IUser
     {
         private readonly IUserDbRepository _dbRepository;
         private readonly ICustomObjectRepository _dbObjectRepository;
         private int _uniqueId;
-        public User(Application app, object parent, IUserDbRepository repository, ICustomObjectRepository objRepository, UserDataContract contract = null) : base(app, parent)
+        public User(Application app, object parent, IUserDbRepository repository, ICustomObjectRepository objRepository, AppUser contract = null) : base(app, parent)
         {
             _dbRepository  = repository;
             _dbObjectRepository = objRepository;
 
             if(contract == null)
                 return;
-            Active = contract.Active;
+            Active = contract.IsActive;
             Department = contract.Department;
             DisplayName = contract.DisplayName;
-            EmailAddress = contract.EmailAddress;
-            LastName= contract.LastName;
+            Email = contract.Email;
             LoginName = contract.LoginName;
             Phone= contract.Phone;
-            Administrator = contract.Administrator;
-            _uniqueId = contract.UniqueId;
+            Administrator = contract.IsAdministrator;
+            _uniqueId = contract.Id;
         }
         
         public bool Active { get; set; }
@@ -34,11 +32,10 @@ namespace FlexiObject.Core
         public string Department { get; set; }
         public string DisplayName { get; set; }
         public string DomainName { get; set; }
-        public string EmailAddress { get; set; }
+        public string Email { get; set; }
         public IGroups Groups => new Groups(Application, this, _dbRepository, false);
         public IGroups GroupsRecursive => new Groups(Application, this, _dbRepository, true);
         public bool HasDefaultCustomObjectFolder { get; set; }
-        public string LastName { get; set; }
         public string LoginName { get; set; }
         public string Name => GetName(_uniqueId, null);
         public ICustomObject Object => _dbObjectRepository.GetByUserId(UniqueId);

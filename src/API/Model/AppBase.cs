@@ -1,7 +1,7 @@
 ﻿using FlexiObject.Core.Interfaces;
 using System;
 
-namespace FlexiObject.Core
+namespace FlexiObject.API.Model
 {
     [Serializable]
     public abstract class AppBase : MarshalByRefObject, IBase

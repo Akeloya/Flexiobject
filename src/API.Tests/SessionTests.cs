@@ -1,4 +1,4 @@
-using FlexiObject.API.Model;
+using FlexiObject.API;
 
 using Xunit;
 

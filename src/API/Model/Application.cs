@@ -6,7 +6,7 @@ using FlexiObject.Core.Repository;
 using System;
 using System.Collections.Generic;
 
-namespace FlexiObject.Core
+namespace FlexiObject.API.Model
 {
     /// <summary>
     /// Application instance

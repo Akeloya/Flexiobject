@@ -30,7 +30,7 @@ namespace FlexiObject.Core.Interfaces
         /// <summary>
         /// Почтовый адрес
         /// </summary>
-        string EmailAddress { get; set; }
+        string Email { get; set; }
         /// <summary>
         /// Коллекция групп, в которую непосредственно включен пользователь
         /// </summary>
@@ -44,10 +44,6 @@ namespace FlexiObject.Core.Interfaces
         /// <see cref="DefaultRequestFolder"/>
         /// </summary>
         bool HasDefaultCustomObjectFolder { get; set; }
-        /// <summary>
-        /// Фамилия пользователя
-        /// </summary>
-        string LastName { get; set; }
         /// <summary>
         /// Логин пользователя
         /// </summary>

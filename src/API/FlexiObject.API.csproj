@@ -3,6 +3,7 @@
   <Import Project="../.config/build.conf"></Import>
   <ItemGroup>
     <ProjectReference Include="..\Core\FlexiObject.Core.csproj" />
+    <ProjectReference Include="..\DbProvider\FlexiOject.DbProvider.csproj" />
   </ItemGroup>
 
 </Project>
