@@ -23,9 +23,9 @@ using System;
 
 namespace FlexiObject.Core
 {
-    public abstract class Users<T> : AppBase<T>, IUsers
+    public abstract class Users: AppBase, IUsers
     {
-        protected Users(Application app, T parent) : base(app, parent)
+        protected Users(Application app, object parent) : base(app, parent)
         {
 
         }

@@ -6,9 +6,9 @@ using System.Text;
 
 namespace FlexiObject.Core.Folder
 {
-    public abstract class UserFieldDefinition<T> : AppBase<T>, IUserFieldDefinition
+    public abstract class UserFieldDefinition: AppBase, IUserFieldDefinition
     {
-        protected UserFieldDefinition(Application app, T parent): base(app, parent)
+        protected UserFieldDefinition(Application app, object parent): base(app, parent)
         {
 
         }

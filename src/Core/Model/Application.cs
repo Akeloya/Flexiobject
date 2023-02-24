@@ -5,7 +5,6 @@ using FlexiObject.Core.Repository;
 
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace FlexiObject.Core
 {
@@ -73,7 +72,6 @@ namespace FlexiObject.Core
         }
 
         [ThreadStatic]private static ISession _activeSession;
-        [JsonIgnore]//TODO: check after implement
         public ISession ActiveSession => _activeSession;
         public ISession OpenSession(string hostName, int port, string userName = null, string password = null)
         {

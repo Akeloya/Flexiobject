@@ -24,9 +24,9 @@ using FlexiObject.Core.Interfaces;
 
 namespace FlexiObject.Core
 {
-    public class CustomObject<T> : AppBase<T>, ICustomObject
+    public class CustomObject: AppBase, ICustomObject
     {
-        protected CustomObject(Application app, T parent) : base(app, parent)
+        protected CustomObject(Application app, object parent) : base(app, parent)
         {
 
         }

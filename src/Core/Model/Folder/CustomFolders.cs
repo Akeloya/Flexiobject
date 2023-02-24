@@ -5,9 +5,9 @@ using System.Text;
 
 namespace FlexiObject.Core.Folder
 {
-    public abstract class CustomFolders<T>: AppBase<T>, ICustomFolders
+    public abstract class CustomFolders<T>: AppBase, ICustomFolders
     {
-        protected CustomFolders(Application app, T parent) : base(app, parent)
+        protected CustomFolders(Application app, object parent) : base(app, parent)
         {
 
         }

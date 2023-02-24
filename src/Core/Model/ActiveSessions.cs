@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 
 namespace FlexiObject.Core.Model
 {
-    public abstract class ActiveSessions : AppBase<ISession>, IActiveSessions
+    public abstract class ActiveSessions : AppBase, IActiveSessions
     {
         private readonly Lazy<IReadOnlyList<IActiveSession>> _sessions;
         protected ActiveSessions(Application application, ISession parent): base(application, parent)

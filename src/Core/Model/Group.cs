@@ -1,34 +1,18 @@
-﻿/*
- *  "Flexiobject core"
- *  An application that implements the ability to customize object templates and actions on them.
- *  Copyright (C) 2019 by Maxim V. Yugov.
- *
- *  This file is part of "Flexiobject".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-using FlexiObject.Core.Enumes;
+﻿using FlexiObject.Core.Enumes;
 using FlexiObject.Core.Interfaces;
+using FlexiObject.Core.Model.Object;
+using FlexiObject.Core.Repository.Database;
+
 using System;
 
 namespace FlexiObject.Core
 {
-    public abstract class Group<T> : AppBase<T>, IGroup
+    public class Group : AppBase, IGroup
     {
-        protected Group(Application app, T parent) : base(app, parent)
+        private IUserDbRepository _dbRepository;
+        internal protected Group(IApplication app, object parent, IUserDbRepository userDbRepository) : base(app, parent)
         {
-
+            _dbRepository = userDbRepository;
         }
         public int UniqueId => throw new NotImplementedException();
 
@@ -38,7 +22,7 @@ namespace FlexiObject.Core
         public string EmailAddress { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public CoaGroupBehaviorTypes EmailBehavior { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public IGroups Groups => throw new NotImplementedException();
+        public IGroups Groups => new Groups(Application, this, _dbRepository);
 
         public IGroups GroupsRecursive => throw new NotImplementedException();
 

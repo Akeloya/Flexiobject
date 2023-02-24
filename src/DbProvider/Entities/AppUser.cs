@@ -41,7 +41,7 @@ namespace FlexiObject.DbProvider.Entities
         public bool IsActive { get; set; }
         public CoaUserAuthTypes LoginMode { get; set; }
         public string DomainName { get; set; }
-        public int ObjectId { get; set; }
+        public int? ObjectId { get; set; }
         public DateTime? Modified { get; set; }
         public virtual ObjectDef Object { get; set; }
     }

@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Linq;
-using System.Text;
 
 namespace FlexiObject.DbProvider
 {
@@ -48,7 +48,7 @@ namespace FlexiObject.DbProvider
                     _dbConnection.Open();
                     var item = new SqlConnectionItem(owner, _dbConnection);
                     item.OnClose += OnClose;
-                    item.OnComminTransaction += OnComminTransaction; ;
+                    item.OnComminTransaction += OnComminTransaction;
                     item.OnRollbackTransaction += OnRollbackTransaction;
                     item.OnBeginTransaction += OnBeginTransaction;
                     _sqlConnectionItems.Add(owner, item);

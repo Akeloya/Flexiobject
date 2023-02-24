@@ -22,9 +22,9 @@ using FlexiObject.Core.Interfaces;
 
 namespace FlexiObject.Core
 {
-    public abstract class UserFields<T> : AppBase<T>, IUserFields
+    public abstract class UserFields: AppBase, IUserFields
     {
-        protected UserFields(Application app, T parent) : base(app, parent)
+        protected UserFields(Application app, object parent) : base(app, parent)
         {
 
         }

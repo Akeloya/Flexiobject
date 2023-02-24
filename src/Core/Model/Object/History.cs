@@ -26,7 +26,7 @@ using System.Linq;
 
 namespace FlexiObject.Core
 {
-    public abstract class History<T> : AppBase<T>, IHistory
+    public abstract class History: AppBase, IHistory
     {
         /// <summary>
         /// History constructor for existing object
@@ -34,7 +34,7 @@ namespace FlexiObject.Core
         /// <param name="app">Link to application</param>
         /// <param name="parent">Link to object-creator</param>
         /// <param name="custObjUniqueId">Existing object uniqueId</param>
-        protected History(Application app, T parent, long custObjUniqueId) : base(app, parent)
+        protected History(Application app, object parent, long custObjUniqueId) : base(app, parent)
         {
             _objUniqueId = custObjUniqueId;
         }        

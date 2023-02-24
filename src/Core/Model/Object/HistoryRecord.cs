@@ -25,15 +25,15 @@ using System;
 
 namespace FlexiObject.Core.Object
 {
-    public class HistoryRecord<T> : AppBase<T>, IHistoryRecord
+    public class HistoryRecord: AppBase, IHistoryRecord
     {
-        protected HistoryRecord(Application app, T parent) : base(app, parent)
+        protected HistoryRecord(Application app, object parent) : base(app, parent)
         {
 
         }
 
         protected HistoryRecord(Application app, 
-                                T parent,
+                                object parent,
                                 int fieldId,
                                 CoaHistoryActionTypes action,
                                 DateTime date,

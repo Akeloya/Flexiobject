@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace FlexiObject.Core
 {
-    public class Session : AppBase<Application>, ISession
+    public class Session : AppBase, ISession
     {
         public Session(Application app): base(app, app)
         {

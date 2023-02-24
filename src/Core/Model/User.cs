@@ -1,87 +1,78 @@
-﻿/*
- *  "Flexiobject core"
- *  An application that implements the ability to customize object templates and actions on them.
- *  Copyright (C) 2019 by Maxim V. Yugov.
- *
- *  This file is part of "Flexiobject".
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-using FlexiObject.Core.Enumes;
+﻿using FlexiObject.Core.Enumes;
 using FlexiObject.Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using FlexiObject.Core.Model.Object;
+using FlexiObject.Core.Repository.Database;
+using FlexiObject.Core.Repository.DataContracts;
 
 namespace FlexiObject.Core
 {
-    public abstract class User<T> : AppBase<T>, IUser
+    public class User : AppBase, IUser
     {
-        protected User(Application app, T parent) : base(app, parent)
+        private readonly IUserDbRepository _dbRepository;
+        private readonly ICustomObjectRepository _dbObjectRepository;
+        private int _uniqueId;
+        public User(Application app, object parent, IUserDbRepository repository, ICustomObjectRepository objRepository, UserDataContract contract = null) : base(app, parent)
         {
+            _dbRepository  = repository;
+            _dbObjectRepository = objRepository;
 
+            if(contract == null)
+                return;
+            Active = contract.Active;
+            Department = contract.Department;
+            DisplayName = contract.DisplayName;
+            EmailAddress = contract.EmailAddress;
+            LastName= contract.LastName;
+            LoginName = contract.LoginName;
+            Phone= contract.Phone;
+            Administrator = contract.Administrator;
+            _uniqueId = contract.UniqueId;
         }
-        public bool Active { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public ICustomFolder DefaultRequestFolder { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Department { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string DisplayName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string DomainName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string EmailAddress { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public IGroups Groups => throw new NotImplementedException();
-        public IGroups GroupsRecursive => throw new NotImplementedException();
-        public bool HasDefaultRequestFolder { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string LastName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string LdapProfile { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string LoginName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public string Name => throw new NotImplementedException();
-
-        public ICustomObject Object => throw new NotImplementedException();
-
-        public string OutgoingEmailAccount { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Password { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Phone { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool SuperUser { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public int UniqueId => throw new NotImplementedException();
-
-        public CoaUserAuthenticationTypes AuthenticationType { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        
+        public bool Active { get; set; }
+        public ICustomFolder DefaultRequestFolder { get; set; }
+        public string Department { get; set; }
+        public string DisplayName { get; set; }
+        public string DomainName { get; set; }
+        public string EmailAddress { get; set; }
+        public IGroups Groups => new Groups(Application, this, _dbRepository, false);
+        public IGroups GroupsRecursive => new Groups(Application, this, _dbRepository, true);
+        public bool HasDefaultCustomObjectFolder { get; set; }
+        public string LastName { get; set; }
+        public string LoginName { get; set; }
+        public string Name => GetName(_uniqueId, null);
+        public ICustomObject Object => _dbObjectRepository.GetByUserId(UniqueId);
+        public string OutgoingEmailAccount { get; set; }
+        public string Password { get; set; }
+        public string Phone { get; set; }
+        public bool Administrator { get; set; }
+        public int UniqueId => _uniqueId;
+        public CoaUserAuthenticationTypes AuthenticationType { get; set; }
 
         public void AddToGroup(IGroup group)
         {
-            throw new NotImplementedException();
+            _dbRepository.AddToGroup(this, group);
         }
 
         public void Delete()
         {
-            throw new NotImplementedException();
+            _dbRepository.Delete(UniqueId);
         }
 
         public bool IsInGroup(string groupName)
         {
-            throw new NotImplementedException();
+            return _dbRepository.IsInGroup(this, groupName, false);
         }
 
         public bool IsInGroupRecursive(string groupName)
         {
-            throw new NotImplementedException();
+            return _dbRepository.IsInGroup(this, groupName, true);
         }
 
         public void Save()
         {
-            throw new NotImplementedException();
+            var user = _dbRepository.Save(this);
+            _uniqueId = user.UniqueId;
         }
     }
 }
