@@ -1,10 +1,16 @@
 ﻿
+using FlexiObject.API.DataLayer;
 using FlexiObject.API.Logging;
+using FlexiObject.API.Model;
 using FlexiObject.API.Repositories;
 using FlexiObject.API.Transport;
 using FlexiObject.Core.Config;
+using FlexiObject.Core.Interfaces;
 using FlexiObject.Core.Logging;
 using FlexiObject.Core.Repository;
+using FlexiObject.DbProvider;
+
+using FlexiOject.DbProvider;
 
 namespace FlexiObject.API.Settings
 {
@@ -19,12 +25,21 @@ namespace FlexiObject.API.Settings
         {
             base.Load();
             Rebind<AlogSetuper>().To<ClientLogSetup>().InSingletonScope();
+            
+            Bind<IApplication>().To<Application>().InSingletonScope();
+            Bind<DbContextFactory>().ToSelf().InSingletonScope();
 
-            if(!_standalone)
+            if(_standalone)
+            {
+                //TODO: настройки нужно загружать из json файла настроек
+                Bind<AppDbContext>().ToConstant(new AppDbContext(new AppDbSettings(DbTypes.Memory, "localhost", "TestDb", "TestUser", "TestPassword")));
+                Bind<ISessionRepository>().To<StandaloneSessionRepository>().InSingletonScope();
+            }
+            else
             {
                 Bind<Client>().ToMethod((ctx) => Client.Factory.GetSinglton());
-                Rebind<ISessionRepository>().To<ClientSessionRepository>().InSingletonScope();
+                Bind<ISessionRepository>().To<ClientSessionRepository>().InSingletonScope();
             }
-        }
+        }        
     }
 }

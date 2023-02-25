@@ -18,12 +18,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFiles", "SolutionFi
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlexiObject.Api.Tests", "API.Tests\FlexiObject.Api.Tests.csproj", "{97169B09-9EC8-4E58-B163-EEF4B985B1F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlexiObject.Tests", "API.Tests\FlexiObject.Tests.csproj", "{97169B09-9EC8-4E58-B163-EEF4B985B1F8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F1CB39CD-A138-455D-B91D-CC92CD29507F} = {F1CB39CD-A138-455D-B91D-CC92CD29507F}
 	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlexiObject.DbProvider.Test", "DbProvider.Test\FlexiObject.DbProvider.Test.csproj", "{C15B33A3-CFC4-4BA6-B046-83CBD7E33021}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlexiObject.AppClient", "AppClient\FlexiObject.AppClient.csproj", "{94B67073-C2B7-483A-A098-15225C65F9CD}"
 EndProject
@@ -53,10 +51,6 @@ Global
 		{97169B09-9EC8-4E58-B163-EEF4B985B1F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97169B09-9EC8-4E58-B163-EEF4B985B1F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97169B09-9EC8-4E58-B163-EEF4B985B1F8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C15B33A3-CFC4-4BA6-B046-83CBD7E33021}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C15B33A3-CFC4-4BA6-B046-83CBD7E33021}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C15B33A3-CFC4-4BA6-B046-83CBD7E33021}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C15B33A3-CFC4-4BA6-B046-83CBD7E33021}.Release|Any CPU.Build.0 = Release|Any CPU
 		{94B67073-C2B7-483A-A098-15225C65F9CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{94B67073-C2B7-483A-A098-15225C65F9CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94B67073-C2B7-483A-A098-15225C65F9CD}.Release|Any CPU.ActiveCfg = Release|Any CPU

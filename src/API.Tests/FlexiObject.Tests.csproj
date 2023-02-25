@@ -23,4 +23,9 @@
     <ProjectReference Include="..\API\FlexiObject.API.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Api\" />
+    <Folder Include="Client\" />
+  </ItemGroup>
+
 </Project>

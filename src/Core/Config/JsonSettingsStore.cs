@@ -22,17 +22,27 @@ namespace FlexiObject.Core.Config
     {
         public T Load<T>()
         {
-            var path = GetSettingsFolderPath(typeof(T));
+            var type = typeof(T);
+            var path = GetSettingsFolderPath(type);
             if(!Directory.Exists(path))
                 Directory.CreateDirectory(path);
-            path = Path.Combine(path,GetFileName(typeof(T)));
+            path = Path.Combine(path,GetFileName(type));
+            T result = (T)Activator.CreateInstance(type);
             if(!File.Exists(path))
-                File.Create(path);
+            {
+                Save(result);
+                return result;
+            }
             var text= File.ReadAllText(path);
-            T result = (T)Activator.CreateInstance(typeof(T));
             try
             {
                 result = JsonSerializer.Deserialize<T>(text);
+                if(result == null)
+                {
+                    File.Delete(path);
+                    result = (T)Activator.CreateInstance(type);
+                    Save(result);
+                }
             }
             catch (Exception ex)
             {
@@ -71,7 +81,7 @@ namespace FlexiObject.Core.Config
 
         private static string GetFileName(Type type)
         {
-            string jsonFileName = type.FullName;
+            string jsonFileName = type.Name;
             if (!jsonFileName.EndsWith(".json"))
                 jsonFileName += ".json";
             return jsonFileName;
@@ -79,7 +89,7 @@ namespace FlexiObject.Core.Config
 
         private static string GetSettingsFolderPath(Type type)
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory;
+            string path = PathConfigs.GetCommongDataDirectory();
             Attribute[] attrs = Attribute.GetCustomAttributes(type);
             foreach (var attr in attrs)
             {
