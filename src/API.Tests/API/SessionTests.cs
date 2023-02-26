@@ -11,7 +11,7 @@ namespace FlexiObject.Tests.API
         [Fact]
         public void TestOpenCloseSession()
         {
-            var api = new Api(true);
+            var api = new Api();
             var app = api.Create();
             var session = app.OpenSession("localhost", 5555, Environment.UserName, Environment.UserName);
             session.LogMessage("Test logging message from client");

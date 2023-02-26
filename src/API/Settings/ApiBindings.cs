@@ -29,10 +29,10 @@ namespace FlexiObject.API.Settings
             Rebind<AlogSetuper>().To<ClientLogSetup>().InSingletonScope();
             
             Bind<IApplication>().To<Application>().InSingletonScope();
-            Bind<DbContextFactory>().ToSelf().InSingletonScope();
 
             if(_standalone)
             {
+                Bind<DbContextFactory>().ToSelf().InSingletonScope();
                 Bind<AppDbContext>().ToConstant(Kernel.Get<DbContextFactory>().Create());
                 Bind<ISessionRepository>().To<StandaloneSessionRepository>().InSingletonScope();
             }

@@ -93,11 +93,11 @@ namespace FlexiObject.API.Transport
                 ClientUid = _clientUid,
                 TimeSend = DateTime.Now,
                 Method = method,
-                ObjectType = GetObjType(data),
+                ObjectType = data.GetType().FullName,
                 Parameters = parameters,
                 ThreadId = Environment.CurrentManagedThreadId
             };
-            msg.Serialize(data);
+            msg.SerializeData(data);
             var sendingJson = msg.Serialize();
 
             _logger.Debug(sendingJson);

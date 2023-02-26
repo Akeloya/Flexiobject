@@ -1,7 +1,11 @@
-﻿using System;
+﻿using FlexiObject.Core.Config;
+
+using System;
+using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
+using System.Xml.Serialization;
 
 namespace FlexiObject.Core.Transport
 {
@@ -34,17 +38,22 @@ namespace FlexiObject.Core.Transport
 
         public object Deserialize(Type type)
         {
-            return JsonSerializer.Deserialize(Data, type);
+            return JsonSerializer.Deserialize(Data, type, DefaultJsonSerializerOptions.Value);
         }
 
         public T Deserialize<T>()
         {
-            return JsonSerializer.Deserialize<T>(Data);
+            return JsonSerializer.Deserialize<T>(Data, DefaultJsonSerializerOptions.Value);
         }
 
-        public void Serialize(object data)
+        public void SerializeData(object data)
         {
-            Data = JsonSerializer.Serialize(data);
+            Data = JsonSerializer.Serialize(data, DefaultJsonSerializerOptions.Value);
+        }
+
+        public object DeserializeData(Type type)
+        {
+            return JsonSerializer.Deserialize(Data, type, DefaultJsonSerializerOptions.Value);
         }
     }
 
@@ -57,7 +66,12 @@ namespace FlexiObject.Core.Transport
         /// <returns>Двоичные данные для передачи</returns>
         public static string Serialize(this ExchangeMessage anySerializableObject)
         {
-            return JsonSerializer.Serialize(anySerializableObject);
+            var xmlSerializer = new XmlSerializer(typeof(ExchangeMessage));
+            using var memoryStream = new MemoryStream();
+            xmlSerializer.Serialize(memoryStream, anySerializableObject);
+            var tr = new StreamReader(memoryStream);
+            var str = tr.ReadToEnd();
+            return JsonSerializer.Serialize(anySerializableObject, DefaultJsonSerializerOptions.Value);
         }
         /// <summary>
         /// Десереализация
@@ -66,7 +80,7 @@ namespace FlexiObject.Core.Transport
         /// <returns>Полученное сообщение</returns>
         public static ExchangeMessage Deserialize(this string data)
         {
-            return JsonSerializer.Deserialize<ExchangeMessage>(data);
+            return JsonSerializer.Deserialize<ExchangeMessage>(data, DefaultJsonSerializerOptions.Value);
         }
     }
 }

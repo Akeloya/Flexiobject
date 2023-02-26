@@ -9,7 +9,8 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Text.Json;
+using FlexiObject.Core.Interfaces;
+using System.Reflection;
 
 namespace FlexiObject.AppServer.Model
 {
@@ -47,28 +48,19 @@ namespace FlexiObject.AppServer.Model
             //Чтобы они корректно парсились и объекты корректно подставлялись.
             if (msg.Data == null)
                 throw new NotSupportedException();
-            var type = Type.GetType(msg.ObjectType) ?? ByName(msg.ObjectType);
-            //var obj = _objectFactory.GetByType(type);
-            var obj = JsonSerializer.Deserialize(msg.Data,type);
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(p=> p.FullName.Contains("FlexiObject")).SelectMany(p=> p.DefinedTypes);
+            var type = assemblies.FirstOrDefault(p=> p.FullName == msg.ObjectType);
+            if(type == null)
+                throw new NotSupportedException();
+            //var type = Type.GetType(msg.ObjectType);
+            object obj;
+            if(type.GetInterfaces().Contains(typeof(IApplication)))
+                obj = _objectFactory.GetByType(typeof(IApplication));
+            else
+                obj = msg.DeserializeData(type);
             var method = type.GetMethod(msg.Method);
             method.Invoke(obj, msg.Parameters);
             return Task.CompletedTask;
-        }
-
-        private static Type ByName(string name)
-        {
-            return
-                AppDomain.CurrentDomain.GetAssemblies()
-                    .Reverse()
-                    .Select(assembly => assembly.GetType(name))
-                    .FirstOrDefault(t => t != null)
-                // Safely delete the following part
-                // if you do not want fall back to first partial result
-                ??
-                AppDomain.CurrentDomain.GetAssemblies()
-                    .Reverse()
-                    .SelectMany(assembly => assembly.GetTypes())
-                    .FirstOrDefault(t => t.Name.Contains(name));
         }
     }
 }

@@ -26,6 +26,7 @@ namespace FlexiObject.API.Repositories
 
         public ISession CreateSession(string host, int port, string username, string password)
         {
+            _client.Open(host, port);
             var result = _client.CallServer(_application, "OpenSession", host, port, username, password);
             if(result.Error!= null)
                 throw result.Error;

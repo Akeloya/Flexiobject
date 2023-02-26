@@ -9,6 +9,8 @@ using Ninject;
 using System.Threading;
 using FlexiObject.Core.Repository;
 using FlexiObject.AppServer.Repositories;
+using FlexiObject.API;
+using FlexiObject.API.Settings;
 
 namespace FlexiObject.AppServer
 {
@@ -48,8 +50,12 @@ namespace FlexiObject.AppServer
         }
     }
 
-    public class ServerBindings : DiBindings
+    public class ServerBindings : ApiBindings
     {
+        public ServerBindings() : base(false)
+        {
+        }
+
         public override void Load()
         {
             base.Load();
