@@ -25,12 +25,28 @@ namespace FlexiObject.API
             var contextFactory = kernel.Get<DbContextFactory>();
             var context = contextFactory.Create();
 
-            //if(context.Database.IsInMemory())
+            
             context.Database.EnsureCreated();
             //TODO: убедиться что к БД есть подключение, она создана
-            var sqlCreateScript = context.Database.GenerateCreateScript();
-            context.Database.ExecuteSqlRaw(sqlCreateScript);
-
+            if(context.Database.IsInMemory())
+            {
+                context.AppUsers.Add(new DbProvider.Entities.AppUser
+                {
+                    LoginMode = Core.Enumes.CoaUserAuthTypes.Internal,
+                    LoginName = Environment.UserName,
+                    Password = Environment.UserName,
+                    DisplayName = Environment.UserName,
+                    IsActive = true,
+                    IsGroup = false,
+                    IsAdministrator = true,
+                });
+                context.SaveChanges();
+            }
+            else
+            {
+                var sqlCreateScript = context.Database.GenerateCreateScript();
+                context.Database.ExecuteSqlRaw(sqlCreateScript);
+            }
             return kernel.Get<IApplication>();
         }
 

@@ -24,20 +24,20 @@ namespace FlexiObject.Core.Config
         {
             var type = typeof(T);
             var path = GetSettingsFolderPath(type);
-            if(!Directory.Exists(path))
+            if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
-            path = Path.Combine(path,GetFileName(type));
+            path = Path.Combine(path, GetFileName(type));
             T result = (T)Activator.CreateInstance(type);
-            if(!File.Exists(path))
+            if (!File.Exists(path))
             {
                 Save(result);
                 return result;
             }
-            var text= File.ReadAllText(path);
+            var text = File.ReadAllText(path);
             try
             {
-                result = JsonSerializer.Deserialize<T>(text);
-                if(result == null)
+                result = JsonSerializer.Deserialize<T>(text, DefaultJsonSerializerOptions.Value);
+                if (result == null)
                 {
                     File.Delete(path);
                     result = (T)Activator.CreateInstance(type);
@@ -52,7 +52,7 @@ namespace FlexiObject.Core.Config
                 {
                     Save(result);
                 }
-                catch(Exception ex2)
+                catch (Exception ex2)
                 {
                     logger.Error(ex2);
                 }
@@ -70,8 +70,8 @@ namespace FlexiObject.Core.Config
             var path = GetSettingsFolderPath(typeof(T));
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
-            var content = JsonSerializer.Serialize(settings);
-            File.WriteAllText(Path.Combine(path, GetFileName(typeof(T))), content, Encoding.UTF8);            
+            var content = JsonSerializer.Serialize(settings, DefaultJsonSerializerOptions.Value);
+            File.WriteAllText(Path.Combine(path, GetFileName(typeof(T))), content, Encoding.UTF8);
         }
 
         public Task SaveAsync<T>(T settings)

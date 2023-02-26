@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Common;
-using System.Text;
 
 namespace FlexiObject.DbProvider
 {
@@ -12,7 +10,7 @@ namespace FlexiObject.DbProvider
         public AppDbContext Context { get; }
         public Guid Owner { get; }
 
-        public SqlConnectionItem(Guid  owner, AppDbContext context, DbConnection connection)
+        public SqlConnectionItem(Guid owner, AppDbContext context, DbConnection connection)
         {
             _connection = connection;
             Owner = owner;
@@ -60,7 +58,7 @@ namespace FlexiObject.DbProvider
             if (disposing)
             {
                 Close();
-                _connection.Dispose();                
+                _connection.Dispose();
             }
 
             _disposed = true;

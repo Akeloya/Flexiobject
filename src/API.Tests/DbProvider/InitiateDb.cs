@@ -1,12 +1,14 @@
-using System;
 using FlexiObject.DbProvider;
+
+using System;
+
 using Xunit;
 
 namespace FlexiObject.Tests.DbProvider
 {
     public class InitiateDb : IDisposable
     {
-        AppDbSettings _settings = new AppDbSettings(DbTypes.SqlLight, "localhost", "TestDb", null, null);
+        private readonly AppDbSettings _settings = new() { DbType = DbTypes.SqlLight, ServerName = "localhost", DatabaseName = "TestDb" };
 
         public InitiateDb()
         {

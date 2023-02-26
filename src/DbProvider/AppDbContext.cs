@@ -1,4 +1,5 @@
-﻿using FlexiObject.Core.Enumes;
+﻿using FlexiObject.Core.Config;
+using FlexiObject.Core.Enumes;
 
 using FlexiObject.DbProvider.Entities;
 
@@ -18,11 +19,12 @@ namespace FlexiObject.DbProvider
             _settings = settings;
         }
 
-        public AppDbContext(DbConnection connection): base()
+        public AppDbContext(DbConnection connection) : base()
         {
             _connection = connection;
+            _settings = new JsonSettingsStore().Load<AppDbSettings>();
         }
-        
+
         public virtual DbSet<ModifyAction> Actions { get; set; }
         public virtual DbSet<AppFolderField> AppFolderFields { get; set; }
         public virtual DbSet<AppFolder> AppFolders { get; set; }
@@ -83,11 +85,14 @@ namespace FlexiObject.DbProvider
                     break;
                 case DbTypes.PostgreSql:
                     optionsBuilder.UseNpgsql($"");
-                    break;             
+                    break;
                 case DbTypes.Oracle:
                     break;
                 case DbTypes.SqlLight:
-                        SqlLigntBuidlString(optionsBuilder);
+                    SqlLigntBuidlString(optionsBuilder);
+                    break;
+                case DbTypes.Memory:
+                    optionsBuilder.UseInMemoryDatabase(_settings.DatabaseName);
                     break;
                 default:
                     optionsBuilder.UseSqlite("Filename=:memory:");
@@ -937,14 +942,14 @@ namespace FlexiObject.DbProvider
                     break;
                 case DbTypes.PostgreSql:
                     optionsBuilder.UseNpgsql(_connection);
-                    break;     
+                    break;
                 case DbTypes.Oracle:
-                    
+
                     break;
                 default:
                     optionsBuilder.UseInMemoryDatabase("AppDbTest");
                     break;
-            }            
+            }
         }
 
         private void MsSqlInitiate(DbContextOptionsBuilder optionsBuilder)

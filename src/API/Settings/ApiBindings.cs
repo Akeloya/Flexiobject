@@ -12,6 +12,8 @@ using FlexiObject.DbProvider;
 
 using FlexiOject.DbProvider;
 
+using Ninject;
+
 namespace FlexiObject.API.Settings
 {
     public class ApiBindings : DiBindings
@@ -31,8 +33,7 @@ namespace FlexiObject.API.Settings
 
             if(_standalone)
             {
-                //TODO: настройки нужно загружать из json файла настроек
-                Bind<AppDbContext>().ToConstant(new AppDbContext(new AppDbSettings(DbTypes.Memory, "localhost", "TestDb", "TestUser", "TestPassword")));
+                Bind<AppDbContext>().ToConstant(Kernel.Get<DbContextFactory>().Create());
                 Bind<ISessionRepository>().To<StandaloneSessionRepository>().InSingletonScope();
             }
             else

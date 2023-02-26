@@ -1,8 +1,10 @@
 using FlexiObject.API;
 
+using System;
+
 using Xunit;
 
-namespace FlexiObject.Tests.Core
+namespace FlexiObject.Tests.API
 {
     public class SessionTests
     {
@@ -11,7 +13,7 @@ namespace FlexiObject.Tests.Core
         {
             var api = new Api(true);
             var app = api.Create();
-            var session = app.OpenSession("localhost", 5555, null, null);
+            var session = app.OpenSession("localhost", 5555, Environment.UserName, Environment.UserName);
             session.LogMessage("Test logging message from client");
             session.Logoff();
         }
