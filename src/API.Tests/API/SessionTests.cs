@@ -13,7 +13,7 @@ namespace FlexiObject.Tests.API
         {
             var api = new Api();
             var app = api.Create();
-            var session = app.OpenSession("localhost", 5555, Environment.UserName, Environment.UserName);
+            var session = app.OpenSession("localhost", 9696, Environment.UserName, Environment.UserName);
             session.LogMessage("Test logging message from client");
             session.Logoff();
         }

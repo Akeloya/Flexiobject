@@ -1,16 +1,13 @@
-using FlexiObject.Core.Config;
-using FlexiObject.Core.Logging;
-
+using FlexiObject.API.Settings;
 using FlexiObject.AppServer.Model;
+using FlexiObject.AppServer.Repositories;
 using FlexiObject.AppServer.Settings;
+using FlexiObject.Core.Logging;
+using FlexiObject.Core.Repository;
 
 using Ninject;
 
 using System.Threading;
-using FlexiObject.Core.Repository;
-using FlexiObject.AppServer.Repositories;
-using FlexiObject.API;
-using FlexiObject.API.Settings;
 
 namespace FlexiObject.AppServer
 {
@@ -21,10 +18,10 @@ namespace FlexiObject.AppServer
         {
             var bindings = new ServerBindings();
             Kernel.Load(bindings);
-            
+
             var logSetuper = Kernel.Get<AlogSetuper>();
             logSetuper.Setup();
-            var server = Kernel.Get<Server>();            
+            var server = Kernel.Get<Server>();
 
             try
             {
@@ -40,8 +37,6 @@ namespace FlexiObject.AppServer
                     Thread.Sleep(60000);
                     logger.Info("Server is alive");
                 }
-
-                server.Stop();
             }
             finally
             {
