@@ -2,18 +2,30 @@
 using EmbedIO.WebApi;
 
 using FlexiObject.Core.Transport.DataContracts;
+using FlexiObject.DbProvider;
 
-using System;
+using Microsoft.EntityFrameworkCore;
+
 using System.Threading.Tasks;
 
 namespace FlexiObject.AppServer.Controllers
 {
     internal class AppController : WebApiController
     {
-        [Route(EmbedIO.HttpVerbs.Get, "/OpenSession")]
-        public Task<PingDataContract> OpenSession(string username, string password)
+        private readonly AppDbContext _context;
+        public AppController(AppDbContext context)
         {
-            return Task.FromResult(new PingDataContract());
+            _context = context;
+        }
+        [Route(EmbedIO.HttpVerbs.Get, "/OpenSession")]
+        public async Task<PingDataContract> OpenSession([QueryField]string username, [QueryField]string password)
+        {
+            var user = await _context.AppUsers.FirstOrDefaultAsync(p=> p.LoginName == username && p.Password == password && p.LoginMode == Core.Enumes.CoaUserAuthTypes.Internal);
+            if (user != null)
+            {
+                return new PingDataContract();
+            }
+            return null;
         }
     }
 }

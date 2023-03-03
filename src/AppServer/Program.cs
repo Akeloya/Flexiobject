@@ -1,9 +1,13 @@
 using FlexiObject.API.Settings;
+using FlexiObject.AppServer.Controllers;
 using FlexiObject.AppServer.Model;
 using FlexiObject.AppServer.Repositories;
 using FlexiObject.AppServer.Settings;
 using FlexiObject.Core.Logging;
 using FlexiObject.Core.Repository;
+using FlexiObject.DbProvider;
+
+using FlexiOject.DbProvider;
 
 using Ninject;
 
@@ -55,11 +59,14 @@ namespace FlexiObject.AppServer
         {
             base.Load();
 
+            Rebind<AppDbContext>().ToMethod((ctx)=> ctx.Kernel.Get<DbContextFactory>().Create()).InSingletonScope();
             Bind<ConsoleWorker>().ToSelf();
             Rebind<AlogSetuper>().To<ServerLogSetup>().InSingletonScope();
-            Bind<ObjectFactory>().ToSelf().InSingletonScope();
 
             Rebind<ISessionRepository>().To<ServerSessionRepository>().InSingletonScope();
+
+            Bind<DefaultController>().ToSelf().InSingletonScope();
+            Bind<AppController>().ToSelf().InSingletonScope();
         }
     }
 }

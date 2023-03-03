@@ -5,15 +5,25 @@ using FlexiObject.DbProvider.Entities;
 
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 
 using System.Data.Common;
 
 namespace FlexiObject.DbProvider
 {
+
+    public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
+    {
+        public AppDbContext CreateDbContext(string[] args)
+        {
+            return new AppDbContext(new JsonSettingsStore().Load<AppDbSettings>());
+        }
+    }
     public partial class AppDbContext : DbContext
     {
         private readonly AppDbSettings _settings;
         private DbConnection _connection;
+        
         public AppDbContext(AppDbSettings settings) : base()
         {
             _settings = settings;
@@ -335,6 +345,12 @@ namespace FlexiObject.DbProvider
                 entity.Property(e => e.NewValue).HasMaxLength(256);
 
                 entity.Property(e => e.OldValue).HasMaxLength(256);
+                
+                entity.HasOne(e=> e.Object)
+                    .WithMany(e => e.HistoryList)
+                    .HasForeignKey(e=> e.ObjectId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_ObjHistory_ToObjDef");
             });
         }
 
@@ -529,6 +545,12 @@ namespace FlexiObject.DbProvider
                     .IsFixedLength();
 
                 entity.Property(e => e.Phone).HasMaxLength(254);
+
+                entity.HasOne(e => e.Object)
+                .WithOne(p=> p.AppUser)
+                .HasForeignKey<AppUser>(e => e.ObjectId)
+                .OnDelete(DeleteBehavior.SetNull)
+                .HasConstraintName("FK_AppUser_To_ObjectDef");
 
             });
         }

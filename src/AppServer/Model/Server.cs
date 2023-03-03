@@ -16,11 +16,12 @@ namespace FlexiObject.AppServer.Model
         private readonly JsonSettingsStore _jsonSettingsStore;
         private ServerSettings _serverSettings;
         private WebServer _server;
-        private CancellationTokenSource _cts = new();
-        public Server(JsonSettingsStore jsonSettingsStore, LoggerFactory loggerFactory)
+        private IContainer _container;
+        public Server(JsonSettingsStore jsonSettingsStore, LoggerFactory loggerFactory, IContainer container)
         {
             _jsonSettingsStore = jsonSettingsStore;
             _logger = loggerFactory.Create(nameof(Server));
+            _container = container;
         }
 
         public void Start(CancellationToken cts)
@@ -37,9 +38,9 @@ namespace FlexiObject.AppServer.Model
                     .WithMode(HttpListenerMode.EmbedIO))
                 .WithLocalSessionManager()
                 .WithWebApi("/api", m => m
-                    .WithController<AppController>())
+                    .WithController(()=> _container.Get<AppController>()))
                 .WithWebApi("/", m=> m
-                    .WithController<DefaultController>())
+                    .WithController(()=> _container.Get<DefaultController>()))
                 .WithModule(new WebSocketsSessionModule("/session"))
                 .WithModule(new ActionModule("/", HttpVerbs.Any, ctx => ctx.SendDataAsync(new { Message = "Error" })));
 

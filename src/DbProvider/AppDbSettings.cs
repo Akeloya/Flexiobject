@@ -5,7 +5,7 @@ namespace FlexiObject.DbProvider
     [JsonSettingSubFolder("Settings")]
     public class AppDbSettings : AJsonSettings
     {
-        public DbTypes DbType { get; set; } = DbTypes.Memory;
+        public DbTypes DbType { get; set; } = DbTypes.SqlLight;
         public string ServerName { get; set; } = "localhost";
         public string DatabaseName { get; set; } = "FlexiObjectDatabase";
         public string UserName { get; set; } = "FlexiObject_User";
