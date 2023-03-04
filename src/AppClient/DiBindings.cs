@@ -24,7 +24,7 @@ namespace FlexiObject.AppClient
 
             Bind<IWindowService>().To<WindowService>().InSingletonScope();
 
-            Bind<Api>().ToConstant(new Api(true)).InSingletonScope();
+            Bind<Api>().ToConstant(new Api()).InSingletonScope();
 
             RegisterViews(Kernel);
         }

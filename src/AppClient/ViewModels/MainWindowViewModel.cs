@@ -15,7 +15,7 @@ namespace FlexiObject.AppClient.ViewModels
             _navigation = navigation;
             StartTimer();
             var app = api.Create();
-            app.OpenSession("localhost", 555, null, null);
+            app.OpenSession("localhost", 9696, null, null);
         }
         protected override void OnTimerTick()
         {
