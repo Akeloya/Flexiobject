@@ -49,6 +49,10 @@ namespace FlexiObject.Core.Interfaces
         /// </summary>
         string LoginName { get; set; }
         /// <summary>
+        /// Способ входа
+        /// </summary>
+        CoaUserAuthTypes LoginMode{get;set; }
+        /// <summary>
         /// Название объекта
         /// </summary>
         string Name { get; }

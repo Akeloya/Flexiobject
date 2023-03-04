@@ -19,4 +19,9 @@ namespace FlexiObject.Core.Exceptions
     {
 
     }
+
+    public class ObjectAlreadyExistsException : ApplicationException
+    {
+
+    }
 }

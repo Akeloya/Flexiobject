@@ -2,7 +2,11 @@
 
 using Ninject.Modules;
 
+using System.Collections.Generic;
+using System;
 using System.Reflection;
+using FlexiObject.Core.Repository;
+using System.Linq;
 
 namespace FlexiObject.Core.Config
 {
@@ -19,6 +23,32 @@ namespace FlexiObject.Core.Config
                 return factory.Create(context.Request?.ParentRequest?.Target.Name ?? Assembly.GetExecutingAssembly().GetName().Name);
             });
             Bind<AlogSetuper>().To<LogDefaultSetuper>().InSingletonScope();
+
+            LoadRepositories();
+        }
+
+        protected virtual void LoadRepositories()
+        {
+            var repoImplementations = GetTypesWithHelpAttribute<RepositoryAttribute>(Assembly.GetAssembly(GetType()));
+            foreach (var repo in repoImplementations)
+            {
+                if(repo.WithRebind)
+                    Kernel.Rebind(repo.Type).To(repo.TargetType).InSingletonScope();
+                else
+                    Kernel.Bind(repo.Type).To(repo.TargetType).InSingletonScope();
+            }
+        }
+
+        protected IEnumerable<T> GetTypesWithHelpAttribute<T>(Assembly assembly) 
+        {
+            foreach(Type type in assembly.GetTypes()) 
+            {
+                var attributes = type.GetCustomAttributes(typeof(T), true);
+                if (attributes.Length > 0) 
+                {
+                    yield return (T)attributes.First();
+                }
+            }
         }
     }
 }

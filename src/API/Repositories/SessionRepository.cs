@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace FlexiObject.API.Repositories
 {
+    [Repository(typeof(ISessionRepository), typeof(ClientSessionRepository))]
     internal class ClientSessionRepository : ISessionRepository
     {
         private readonly Client _client;

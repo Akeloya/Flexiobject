@@ -5,6 +5,7 @@ using FlexiObject.Core.Repository;
 
 namespace FlexiObject.AppServer.Repositories
 {
+    [Repository(typeof(ISessionRepository), typeof(ServerSessionRepository), true)]
     internal class ServerSessionRepository : ISessionRepository
     {
         private readonly IContainer _container;

@@ -63,8 +63,6 @@ namespace FlexiObject.AppServer
             Bind<ConsoleWorker>().ToSelf();
             Rebind<AlogSetuper>().To<ServerLogSetup>().InSingletonScope();
 
-            Rebind<ISessionRepository>().To<ServerSessionRepository>().InSingletonScope();
-
             Bind<DefaultController>().ToSelf().InSingletonScope();
             Bind<AppController>().ToSelf().InSingletonScope();
         }

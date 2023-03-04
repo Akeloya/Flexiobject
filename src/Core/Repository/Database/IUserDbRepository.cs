@@ -19,6 +19,6 @@ namespace FlexiObject.Core.Repository.Database
         bool IsInGroup(IUser user, string  groupName, bool recursive);
         IUser Save(IUser user);
         IGroup Save(IGroup group);
-        void Delete(int id);
+        void Delete(int id);        
     }
 }

@@ -22,6 +22,7 @@ namespace FlexiObject.API.Model
             DisplayName = contract.DisplayName;
             Email = contract.Email;
             LoginName = contract.LoginName;
+            LoginMode = contract.LoginMode;
             Phone= contract.Phone;
             Administrator = contract.IsAdministrator;
             _uniqueId = contract.Id;
@@ -45,6 +46,7 @@ namespace FlexiObject.API.Model
         public bool Administrator { get; set; }
         public int UniqueId => _uniqueId;
         public CoaUserAuthenticationTypes AuthenticationType { get; set; }
+        public CoaUserAuthTypes LoginMode { get; set; }
 
         public void AddToGroup(IGroup group)
         {
