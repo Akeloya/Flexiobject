@@ -15,7 +15,7 @@ namespace FlexiObject.API.Model.Object
         protected HistoryRecord(Application app,
                                 object parent,
                                 int fieldId,
-                                CoaHistoryActionTypes action,
+                                FlexiHistoryActionTypes action,
                                 DateTime date,
                                 string desc,
                                 string oldVal,
@@ -38,13 +38,13 @@ namespace FlexiObject.API.Model.Object
         private IState _state;
         private int _userId;
         private int _fieldId;
-        private CoaHistoryActionTypes _action;
+        private FlexiHistoryActionTypes _action;
         private DateTime _date;
         private string _description;
         private string _oldValue;
         private string _newValue;
 
-        public CoaHistoryActionTypes Action => _action;
+        public FlexiHistoryActionTypes Action => _action;
 
         public DateTime Date => _date;
 

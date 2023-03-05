@@ -30,7 +30,7 @@ namespace FlexiObject.DbProvider.Entities
         public int Id { get; set; }
         public int FolderFieldId { get; set; }
         public virtual AppFolder AppFolder { get; set; }
-        public CoaApplicationFoldersProperties AppField { get; set; }
+        public FlexiApplicationFoldersProperties AppField { get; set; }
         public virtual FieldDefinition FolderField { get; set; }
     }
 }

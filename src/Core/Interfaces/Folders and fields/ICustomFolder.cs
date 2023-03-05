@@ -205,14 +205,14 @@ namespace FlexiObject.Core.Interfaces
         /// Получить уровень привилегий пользователя для папки
         /// </summary>
         /// <param name="user">Пользователь, для которого происходит проверка</param>
-        /// <returns>Уровень привелегий, см <see cref="CoaEnumPermissionDefinition"/></returns>
-        CoaEnumPrivilegeLevel GetPrivilegeLevel(IUser user);
+        /// <returns>Уровень привелегий, см <see cref="FlexiPermissionDefinition"/></returns>
+        FlexiEnumPrivilegeLevel GetPrivilegeLevel(IUser user);
         /// <summary>
         /// Получить уровень привилегий группы для папки
         /// </summary>
         /// <param name="group">Группа, для которого происходит проверка</param>
-        /// <returns>Уровень привелегий, см <see cref="CoaEnumPermissionDefinition"/></returns>
-        CoaEnumPrivilegeLevel GetPrivilegeLevel(IGroup group);
+        /// <returns>Уровень привелегий, см <see cref="FlexiPermissionDefinition"/></returns>
+        FlexiEnumPrivilegeLevel GetPrivilegeLevel(IGroup group);
         /// <summary>
         /// Правило видимости папки
         /// </summary>
@@ -222,14 +222,14 @@ namespace FlexiObject.Core.Interfaces
         /// </summary>
         /// <param name="type">Тип папки</param>
         /// <returns></returns>
-        bool this[CoaApplicationFolders type] { get;set; }
+        bool this[FlexiApplicationFolders type] { get;set; }
         /// <summary>
         /// Установка связи пользовательского поля и поля приложения
         /// </summary>
         /// <param name="folderType"></param>
         /// <param name="propType"></param>
         /// <returns></returns>
-        IUserFieldDefinition this[CoaApplicationFolders folderType, CoaApplicationFoldersProperties propType] { get; set; }
+        IUserFieldDefinition this[FlexiApplicationFolders folderType, FlexiApplicationFoldersProperties propType] { get; set; }
         /// <summary>
         /// Получение истории изменения схемы
         /// </summary>

@@ -67,7 +67,7 @@ namespace FlexiObject.Core.Interfaces
         /// <summary>
         /// Тип формы
         /// </summary>
-        CoaFormTypes Type { get; }
+        FlexiFormTypes Type { get; }
         /// <summary>
         /// Сохранение изменений в форме, при ее изменении
         /// </summary>

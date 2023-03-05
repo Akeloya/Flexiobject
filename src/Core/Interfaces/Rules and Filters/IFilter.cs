@@ -48,7 +48,7 @@ namespace FlexiObject.Core.Interfaces
         /// </summary>
         /// <param name="filter">Фильтр с которым комбинируется текущий фильтр</param>
         /// <param name="term">Правило комбинирования фильтра И/ИЛИ</param>
-        void Combine(IFilter filter, CoaRuleCombinationTerms term);
+        void Combine(IFilter filter, FlexiRuleCombinationTerms term);
         /// <summary>
         /// Сохранение фильтра на сервер
         /// </summary>

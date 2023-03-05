@@ -60,7 +60,7 @@ namespace FlexiObject.DbProvider
         public virtual DbSet<ImportSettings> ImportSettings { get; set; }
         public virtual DbSet<ListProperty> ListProperties { get; set; }
         public virtual DbSet<Numbering> Numbering { get; set; }
-        public virtual DbSet<ObjectDef> ObjectReport { get; set; }
+        public virtual DbSet<ObjectDef> ObjectDef { get; set; }
         public virtual DbSet<ObjectFolder> ObjectFolders { get; set; }
         public virtual DbSet<Picture> Picture { get; set; }
         public virtual DbSet<Privilege> Privilege { get; set; }
@@ -614,7 +614,7 @@ namespace FlexiObject.DbProvider
 
                 entity.Property(e => e.IsSyncronized).HasColumnName("syncronized");
 
-                entity.Property(e => e.Type).HasConversion(c => (byte)c, c => (CoaFieldTypes)c);
+                entity.Property(e => e.Type).HasConversion(c => (byte)c, c => (FlexiFieldTypes)c);
 
                 entity.HasOne(d => d.Folder)
                     .WithMany(p => p.FieldDefinitions)

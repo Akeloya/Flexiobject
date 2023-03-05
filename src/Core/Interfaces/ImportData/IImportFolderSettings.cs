@@ -31,7 +31,7 @@ namespace FlexiObject.Core.Interfaces
         /// <summary>
         /// Тип импорта (добавление, добавление и изменение,...)
         /// </summary>
-        CoaImportSettingsTypes Type { get; set; }
+        FlexiImportSettingsTypes Type { get; set; }
         /// <summary>
         /// Необходимо ли создавать записи в истории
         /// </summary>

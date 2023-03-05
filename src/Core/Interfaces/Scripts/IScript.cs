@@ -49,7 +49,7 @@ namespace FlexiObject.Core.Interfaces
         /// <summary>
         /// Тип
         /// </summary>
-        CoaScriptTypes Type { get; set; }
+        FlexiScriptTypes Type { get; set; }
         /// <summary>
         /// Ссылка на форме
         /// </summary>

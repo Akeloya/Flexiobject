@@ -46,7 +46,7 @@ namespace FlexiObject.Core.Interfaces
         /// <summary>
         /// Тип пользовательского определения
         /// </summary>
-        CoaFieldTypes Type { get; set; }
+        FlexiFieldTypes Type { get; set; }
         /// <summary>
         /// Необходимость записывать в историю изменения значения поля объекта
         /// </summary>

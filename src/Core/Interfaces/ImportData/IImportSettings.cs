@@ -31,7 +31,7 @@ namespace FlexiObject.Core.Interfaces
         /// <summary>
         /// Тип импорта данных
         /// </summary>
-        CoaImportDataTypes Type { get; set; } 
+        FlexiImportDataTypes Type { get; set; } 
         /// <summary>
         /// Источник данных
         /// </summary>

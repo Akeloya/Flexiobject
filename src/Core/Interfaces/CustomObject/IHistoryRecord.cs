@@ -31,7 +31,7 @@ namespace FlexiObject.Core.Interfaces
         /// <summary>
         /// Действие
         /// </summary>
-        CoaHistoryActionTypes Action { get; }
+        FlexiHistoryActionTypes Action { get; }
         /// <summary>
         /// Дата-время изменения
         /// </summary>

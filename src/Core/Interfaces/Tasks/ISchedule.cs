@@ -43,7 +43,7 @@ namespace FlexiObject.Core.Interfaces
         /// <summary>
         /// Формат продолжительности
         /// </summary>
-        CoaScheduleTimeUnits DurationTimeUnit { get; set; }
+        FlexiScheduleTimeUnits DurationTimeUnit { get; set; }
         /// <summary>
         /// Активно
         /// </summary>
@@ -63,7 +63,7 @@ namespace FlexiObject.Core.Interfaces
         /// <summary>
         /// Тип завершения
         /// </summary>
-        CoaScheduleEndTypes EndType { get; set; }
+        FlexiScheduleEndTypes EndType { get; set; }
         /// <summary>
         /// Задержка
         /// </summary>
@@ -71,11 +71,11 @@ namespace FlexiObject.Core.Interfaces
         /// <summary>
         /// Формат задержки
         /// </summary>
-        CoaScheduleTimeUnits LeadTimeUnit { get; set; }
+        FlexiScheduleTimeUnits LeadTimeUnit { get; set; }
         /// <summary>
         /// Номер месяца
         /// </summary>
-        CoaScheduleTimeUnits MonthNumber { get; set; }
+        FlexiScheduleTimeUnits MonthNumber { get; set; }
         /// <summary>
         /// Следующая дата запуска
         /// </summary>

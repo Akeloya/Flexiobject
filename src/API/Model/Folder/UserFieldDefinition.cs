@@ -18,7 +18,7 @@ namespace FlexiObject.API.Model.Folder
 
         public dynamic Details => throw new NotImplementedException();
 
-        public CoaFieldTypes Type { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public FlexiFieldTypes Type { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public bool WriteHistory { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public object DefaultValue { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 

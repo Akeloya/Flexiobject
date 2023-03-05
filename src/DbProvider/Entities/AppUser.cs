@@ -19,7 +19,7 @@ namespace FlexiObject.DbProvider.Entities
         public bool IsGroup { get; set; }
         public byte GroupMail { get; set; }
         public bool IsActive { get; set; }
-        public CoaUserAuthTypes LoginMode { get; set; }
+        public FlexiUserAuthTypes LoginMode { get; set; }
         public string DomainName { get; set; }
         public long? ObjectId { get; set; }
         public DateTime? Modified { get; set; }

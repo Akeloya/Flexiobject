@@ -23,12 +23,12 @@ namespace FlexiObject.API.Model
         /// Internal application folders
         /// </summary>
         /// <returns></returns>
-        public static List<CoaApplicationFolders> GetApplicationFolders()
+        public static List<FlexiApplicationFolders> GetApplicationFolders()
         {
-            List<CoaApplicationFolders> result = new()
+            List<FlexiApplicationFolders> result = new()
             {
-                CoaApplicationFolders.UserAccounts,
-                CoaApplicationFolders.UserGroups
+                FlexiApplicationFolders.UserAccounts,
+                FlexiApplicationFolders.UserGroups
             };
             return result;
         }
@@ -37,35 +37,35 @@ namespace FlexiObject.API.Model
         /// </summary>
         /// <param name="type">Internal folder type</param>
         /// <returns></returns>
-        public static Dictionary<CoaApplicationFoldersProperties, bool> GetAllowedFieldsByAppFolderType(CoaApplicationFolders type)
+        public static Dictionary<FlexiApplicationFoldersProperties, bool> GetAllowedFieldsByAppFolderType(FlexiApplicationFolders type)
         {
-            Dictionary<CoaApplicationFoldersProperties, bool> result = new();
+            Dictionary<FlexiApplicationFoldersProperties, bool> result = new();
             switch (type)
             {
-                case CoaApplicationFolders.UserAccounts:
-                    result = new Dictionary<CoaApplicationFoldersProperties, bool>{
-                        { CoaApplicationFoldersProperties.UserActive, true},
-                        { CoaApplicationFoldersProperties.UserAuthentication, true},
-                        { CoaApplicationFoldersProperties.UserCalendar, false},
-                        { CoaApplicationFoldersProperties.UserDepartment, false},
-                        { CoaApplicationFoldersProperties.UserDescription, false},
-                        { CoaApplicationFoldersProperties.UserDisplayName, true},
-                        { CoaApplicationFoldersProperties.UserEmailAddress, false},
-                        { CoaApplicationFoldersProperties.UserLastLogin, false},
-                        { CoaApplicationFoldersProperties.UserLocked, true},
-                        { CoaApplicationFoldersProperties.UserLoginName, false},
-                        { CoaApplicationFoldersProperties.UserPassword, true},
-                        { CoaApplicationFoldersProperties.UserPhone, false},
-                        { CoaApplicationFoldersProperties.UserSuperuser, false},
-                        { CoaApplicationFoldersProperties.UserWindowsDomainName, false } };
+                case FlexiApplicationFolders.UserAccounts:
+                    result = new Dictionary<FlexiApplicationFoldersProperties, bool>{
+                        { FlexiApplicationFoldersProperties.UserActive, true},
+                        { FlexiApplicationFoldersProperties.UserAuthentication, true},
+                        { FlexiApplicationFoldersProperties.UserCalendar, false},
+                        { FlexiApplicationFoldersProperties.UserDepartment, false},
+                        { FlexiApplicationFoldersProperties.UserDescription, false},
+                        { FlexiApplicationFoldersProperties.UserDisplayName, true},
+                        { FlexiApplicationFoldersProperties.UserEmailAddress, false},
+                        { FlexiApplicationFoldersProperties.UserLastLogin, false},
+                        { FlexiApplicationFoldersProperties.UserLocked, true},
+                        { FlexiApplicationFoldersProperties.UserLoginName, false},
+                        { FlexiApplicationFoldersProperties.UserPassword, true},
+                        { FlexiApplicationFoldersProperties.UserPhone, false},
+                        { FlexiApplicationFoldersProperties.UserIsAdministrator, false},
+                        { FlexiApplicationFoldersProperties.UserWindowsDomainName, false } };
                     break;
-                case CoaApplicationFolders.UserGroups:
-                    result = new Dictionary<CoaApplicationFoldersProperties, bool> {
-                        { CoaApplicationFoldersProperties.GroupContainedGroups, false },
-                        { CoaApplicationFoldersProperties.GroupContainedUsers, false },
-                        { CoaApplicationFoldersProperties.GroupEmailAddress, false },
-                        { CoaApplicationFoldersProperties.GroupEmailBehavior, false },
-                        { CoaApplicationFoldersProperties.GroupName, true } };
+                case FlexiApplicationFolders.UserGroups:
+                    result = new Dictionary<FlexiApplicationFoldersProperties, bool> {
+                        { FlexiApplicationFoldersProperties.GroupContainedGroups, false },
+                        { FlexiApplicationFoldersProperties.GroupContainedUsers, false },
+                        { FlexiApplicationFoldersProperties.GroupEmailAddress, false },
+                        { FlexiApplicationFoldersProperties.GroupEmailBehavior, false },
+                        { FlexiApplicationFoldersProperties.GroupName, true } };
                     break;
             }
             return result;

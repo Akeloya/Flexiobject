@@ -46,7 +46,7 @@ namespace FlexiObject.Core.Interfaces
         /// <summary>
         /// Настройки отправки почтовых уведомлений на группу и пользователей
         /// </summary>
-        CoaGroupBehaviorTypes EmailBehavior { get; set; }
+        FlexiGroupBehaviorTypes EmailBehavior { get; set; }
         /// <summary>
         /// Дочерние группы
         /// </summary>

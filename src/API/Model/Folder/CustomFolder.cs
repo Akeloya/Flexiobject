@@ -11,8 +11,8 @@ namespace FlexiObject.API.Model.Folder
 
         }
 
-        public bool this[CoaApplicationFolders type] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IUserFieldDefinition this[CoaApplicationFolders folderType, CoaApplicationFoldersProperties propType] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool this[FlexiApplicationFolders type] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IUserFieldDefinition this[FlexiApplicationFolders folderType, FlexiApplicationFoldersProperties propType] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public int UniqueId => throw new NotImplementedException();
 
@@ -75,12 +75,12 @@ namespace FlexiObject.API.Model.Folder
             throw new NotImplementedException();
         }
 
-        public CoaEnumPrivilegeLevel GetPrivilegeLevel(IUser user)
+        public FlexiEnumPrivilegeLevel GetPrivilegeLevel(IUser user)
         {
             throw new NotImplementedException();
         }
 
-        public CoaEnumPrivilegeLevel GetPrivilegeLevel(IGroup group)
+        public FlexiEnumPrivilegeLevel GetPrivilegeLevel(IGroup group)
         {
             throw new NotImplementedException();
         }

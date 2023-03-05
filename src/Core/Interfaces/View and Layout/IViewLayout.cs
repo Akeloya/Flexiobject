@@ -38,7 +38,7 @@ namespace FlexiObject.Core.Interfaces
         /// <summary>
         /// Тип вида
         /// </summary>
-        CoaViewTypes Type { get; set; }
+        FlexiViewTypes Type { get; set; }
         /// <summary>
         /// Добавить колонку к табличному виду
         /// </summary>

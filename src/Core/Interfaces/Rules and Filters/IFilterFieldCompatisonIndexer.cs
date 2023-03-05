@@ -32,6 +32,6 @@ namespace FlexiObject.Core.Interfaces
         /// </summary>
         /// <param name="name">Алиас поля для которого устанавливается значение</param>
         /// <returns>NULL или тип оператора сравнения</returns>
-        CoaRuleComparisonsTypes? this[string name] { get; set; }
+        FlexiRuleComparisonsTypes? this[string name] { get; set; }
     }
 }

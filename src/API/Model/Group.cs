@@ -19,7 +19,7 @@ namespace FlexiObject.API.Model
 
         public string DisplayName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string EmailAddress { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public CoaGroupBehaviorTypes EmailBehavior { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public FlexiGroupBehaviorTypes EmailBehavior { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public IGroups Groups => new Groups(Application, this, _dbRepository);
 

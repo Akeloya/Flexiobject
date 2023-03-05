@@ -39,11 +39,11 @@ namespace FlexiObject.Core.Interfaces
         /// <summary>
         /// Тип автокалькуляции
         /// </summary>
-        CoaSummaryTypes AutoCalculationType { get; set; }
+        FlexiSummaryTypes AutoCalculationType { get; set; }
         /// <summary>
         /// Флаги состояния модификации автокалькуляции
         /// </summary>
-        CoaExecutionFlags Flags { get; set; }
+        FlexiExecutionFlags Flags { get; set; }
         /// <summary>
         /// Скрипт расчета
         /// </summary>
@@ -62,7 +62,7 @@ namespace FlexiObject.Core.Interfaces
         List<string> ScriptDependencyFields { get; set; }
         /// <summary>
         /// Поле типа "ObjectList" с объектами для калькуляции
-        /// <seealso cref="CoaEnumFieldType"/>
+        /// <seealso cref="FlexiFieldTypes"/>
         /// <seealso cref="IUserFieldDefinition"/>
         /// <seealso cref="SummarizedFieldPath"/>
         /// </summary>

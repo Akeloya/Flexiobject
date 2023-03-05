@@ -38,7 +38,7 @@ namespace FlexiObject.Core.Interfaces
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        IScript Add(CoaScriptTypes type);
+        IScript Add(FlexiScriptTypes type);
         /// <summary>
         /// Удаление скрипта по его ИД
         /// </summary>

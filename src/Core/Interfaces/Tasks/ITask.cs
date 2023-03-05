@@ -42,7 +42,7 @@ namespace FlexiObject.Core.Interfaces
         /// <summary>
         /// Тип
         /// </summary>
-        CoaTaskTypes Type { get; set; }
+        FlexiTaskTypes Type { get; set; }
         /// <summary>
         /// Папка выполнения
         /// </summary>

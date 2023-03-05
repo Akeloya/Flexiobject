@@ -38,7 +38,7 @@ namespace FlexiObject.Core.Interfaces
         /// <param name="field">Путь к полю</param>
         /// <param name="width">Визуальная ширина</param>
         /// <param name="header">Название</param>
-        void AddColumn(CoaColumnType type, string field, int width, string header);
+        void AddColumn(FlexiColumnType type, string field, int width, string header);
         /// <summary>
         /// Получить поле колонки
         /// </summary>
@@ -56,7 +56,7 @@ namespace FlexiObject.Core.Interfaces
         /// </summary>
         /// <param name="index">Индекс 0..Count-1 в коллекции</param>
         /// <returns></returns>
-        CoaColumnType GetColumnType(int index);
+        FlexiColumnType GetColumnType(int index);
         /// <summary>
         /// Получить ширину колонки
         /// </summary>

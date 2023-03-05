@@ -29,7 +29,7 @@ namespace FlexiObject.DbProvider.Entities
     {
         public int Id { get; set; }
         public int FolderId { get; set; }
-        public CoaApplicationFolderTypes AppFolderId { get; set; }
+        public FlexiApplicationFolderTypes AppFolderId { get; set; }
         public virtual ObjectFolder Folder { get; set; }
     }
 }

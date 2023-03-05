@@ -19,7 +19,7 @@ namespace FlexiObject.API.Model.Folder
 
         public int Count => throw new NotImplementedException();
 
-        public IUserFieldDefinition Add(CoaFieldTypes type)
+        public IUserFieldDefinition Add(FlexiFieldTypes type)
         {
             throw new NotImplementedException();
         }

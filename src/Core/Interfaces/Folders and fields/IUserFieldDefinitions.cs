@@ -42,7 +42,7 @@ namespace FlexiObject.Core.Interfaces
         /// </summary>
         /// <param name="type">Тип пользовательского поля</param>
         /// <returns>IUserFieldDefinition объект нового определения</returns>
-        IUserFieldDefinition Add(CoaFieldTypes type);
+        IUserFieldDefinition Add(FlexiFieldTypes type);
         /// <summary>
         /// Удалить определение пользовательского поля по индексу или алиасу
         /// </summary>

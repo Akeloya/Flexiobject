@@ -38,7 +38,7 @@ namespace FlexiObject.API
                     {
                         context.AppUsers.Add(new DbProvider.Entities.AppUser
                         {
-                            LoginMode = Core.Enumes.CoaUserAuthTypes.Internal,
+                            LoginMode = Core.Enumes.FlexiUserAuthTypes.Internal,
                             LoginName = Environment.UserName,
                             Password = Environment.UserName,
                             DisplayName = Environment.UserName,

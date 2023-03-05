@@ -22,7 +22,7 @@ namespace FlexiObject.API.Model
 
         public bool IsModified => throw new System.NotImplementedException();
 
-        public void Delete(bool skipTrashbin = false, bool ignoreReferences = false, CoaDeletionObjectFlags? flags = null)
+        public void Delete(bool skipTrashbin = false, bool ignoreReferences = false, FlexiDeletionObjectFlags? flags = null)
         {
             throw new System.NotImplementedException();
         }

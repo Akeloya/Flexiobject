@@ -21,7 +21,7 @@ namespace FlexiObject.API.DataLayer
         }
         public ISession CreateSession(string host, int port)
         {
-            var users = _context.AppUsers.Where(p=> p.LoginName ==  Environment.UserName  && p.LoginMode == Core.Enumes.CoaUserAuthTypes.Windows);
+            var users = _context.AppUsers.Where(p=> p.LoginName ==  Environment.UserName  && p.LoginMode == Core.Enumes.FlexiUserAuthTypes.Windows);
             if(!string.IsNullOrEmpty(Environment.UserDomainName))
                 users = users.Where(p=> p.DomainName == Environment.UserDomainName);
             var user = users.FirstOrDefault();
@@ -32,7 +32,7 @@ namespace FlexiObject.API.DataLayer
 
         public ISession CreateSession(string host, int port, string username, string password)
         {
-            var user = _context.AppUsers.FirstOrDefault(p=> p.LoginName ==  username && p.Password == password && p.LoginMode == Core.Enumes.CoaUserAuthTypes.Internal);
+            var user = _context.AppUsers.FirstOrDefault(p=> p.LoginName ==  username && p.Password == password && p.LoginMode == Core.Enumes.FlexiUserAuthTypes.Internal);
             if(user == null)
                 throw new UnauthorizedException();
             return new Session(_contaner.Get<Application>());

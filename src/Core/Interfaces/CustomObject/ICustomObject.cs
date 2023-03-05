@@ -54,7 +54,7 @@ namespace FlexiObject.Core.Interfaces
         /// <param name="ignoreReferences">Проигнорировать ссылки при удалении</param>
         /// <param name="flags">Параметры удаления объекта</param>
         /// <returns></returns>
-        void Delete(bool skipTrashbin = false, bool ignoreReferences = false, CoaDeletionObjectFlags? flags = null);
+        void Delete(bool skipTrashbin = false, bool ignoreReferences = false, FlexiDeletionObjectFlags? flags = null);
         /// <summary>
         /// Родительская папка объекта
         /// </summary>

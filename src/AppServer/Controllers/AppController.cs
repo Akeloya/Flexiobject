@@ -20,7 +20,7 @@ namespace FlexiObject.AppServer.Controllers
         [Route(EmbedIO.HttpVerbs.Get, "/OpenSession")]
         public async Task<PingDataContract> OpenSession([QueryField]string username, [QueryField]string password)
         {
-            var user = await _context.AppUsers.FirstOrDefaultAsync(p=> p.LoginName == username && p.Password == password && p.LoginMode == Core.Enumes.CoaUserAuthTypes.Internal);
+            var user = await _context.AppUsers.FirstOrDefaultAsync(p=> p.LoginName == username && p.Password == password && p.LoginMode == Core.Enumes.FlexiUserAuthTypes.Internal);
             if (user != null)
             {
                 return new PingDataContract();

@@ -37,7 +37,7 @@ namespace FlexiObject.DbProvider.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string Alias { get; set; }
-        public CoaFieldTypes Type { get; set; }
+        public FlexiFieldTypes Type { get; set; }
         public bool WriteHistory { get; set; }
         public virtual ObjectFolder FolderReference { get; set; }
         public int DataProperty { get; set; }

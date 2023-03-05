@@ -47,7 +47,7 @@ namespace FlexiObject.Core.Interfaces
         /// <summary>
         /// Тип
         /// </summary>
-        CoaScheduledTaskTypes Type { get; set; }
+        FlexiScheduledTaskTypes Type { get; set; }
         /// <summary>
         /// Папка выполнения
         /// </summary>
@@ -63,7 +63,7 @@ namespace FlexiObject.Core.Interfaces
         /// <summary>
         /// Тип файла с результатами выполнения
         /// </summary>
-        CoaScheduledTaskResulFormatType ResultFileType { get; set; }
+        FlexiScheduledTaskResulFormatType ResultFileType { get; set; }
         /// <summary>
         /// Сохранение изменений
         /// </summary>

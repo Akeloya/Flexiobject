@@ -45,7 +45,7 @@ namespace FlexiObject.Core.Interfaces
         /// <summary>
         /// Уровень привилегии для пользователя или группы
         /// </summary>
-        CoaEnumPrivilegeLevel PrivilegeLevel { get; set; }
+        FlexiEnumPrivilegeLevel PrivilegeLevel { get; set; }
         /// <summary>
         /// Пользователь или группа, для которого применяется привилегия.
         /// Возвращается объект <see cref="IUser"/> или <see cref="IGroup"/>.

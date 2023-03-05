@@ -34,7 +34,7 @@ namespace FlexiObject.Core.Interfaces
         /// <summary>
         /// Тип действия
         /// </summary>
-        CoaActionTypes Type { get; set; } 
+        FlexiActionTypes Type { get; set; } 
         /// <summary>
         /// Название
         /// </summary>

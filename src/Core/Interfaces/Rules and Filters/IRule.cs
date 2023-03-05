@@ -31,7 +31,7 @@ namespace FlexiObject.Core.Interfaces
         /// <summary>
         /// Комбинирование правил
         /// </summary>
-        CoaRuleComparisonsTypes? CombinationOperator { get; set; }
+        FlexiRuleComparisonsTypes? CombinationOperator { get; set; }
         /// <summary>
         /// Xml представление правила
         /// </summary>
@@ -43,15 +43,15 @@ namespace FlexiObject.Core.Interfaces
         /// <summary>
         /// Логическая комбинация для текущего правила или атомарное сравнение значений
         /// </summary>
-        CoaRuleCombinationTerms Combination { get; set; }
+        FlexiRuleCombinationTerms Combination { get; set; }
         /// <summary>
         /// Тип правого операнда
         /// </summary>
-        CoaRuleRightSideTypes RightSideType { get; set; }
+        FlexiRuleRightSideTypes RightSideType { get; set; }
         /// <summary>
         /// Тип левого операнда
         /// </summary>
-        CoaRuleLeftSideTypes LeftSideType { get; set; }
+        FlexiRuleLeftSideTypes LeftSideType { get; set; }
         /// <summary>
         /// Путь к полю
         /// </summary>

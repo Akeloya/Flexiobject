@@ -20,7 +20,7 @@ namespace FlexiObject.Tests.DbProvider
             using ISqlConnectionItem connection = SqlManager.Register(Guid.NewGuid());
             connection.BeginTransaction();
             var ctx = connection.Context;
-            ctx.ObjectReport.Add(new FlexiObject.DbProvider.Entities.ObjectDef
+            ctx.ObjectDef.Add(new FlexiObject.DbProvider.Entities.ObjectDef
             {
                 Id = 1,
                 Created = DateTime.Now,

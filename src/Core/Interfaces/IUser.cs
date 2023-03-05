@@ -51,7 +51,7 @@ namespace FlexiObject.Core.Interfaces
         /// <summary>
         /// Способ входа
         /// </summary>
-        CoaUserAuthTypes LoginMode{get;set; }
+        FlexiUserAuthTypes LoginMode{get;set; }
         /// <summary>
         /// Название объекта
         /// </summary>
@@ -83,7 +83,7 @@ namespace FlexiObject.Core.Interfaces
         /// <summary>
         /// Способ входа в систему.
         /// </summary>
-        CoaUserAuthenticationTypes AuthenticationType { get; set; }
+        FlexiUserAuthenticationTypes AuthenticationType { get; set; }
         /// <summary>
         /// Добавить пользователя в группу
         /// </summary>

@@ -35,7 +35,7 @@ namespace FlexiObject.Core.Interfaces
         /// <summary>
         /// Тип события
         /// </summary>
-        CoaSchemaEventTypes Type { get; }
+        FlexiSchemaEventTypes Type { get; }
         /// <summary>
         /// Ид записи в базе связанного объекта
         /// </summary>
@@ -59,7 +59,7 @@ namespace FlexiObject.Core.Interfaces
         /// <summary>
         /// Действие над объектом
         /// </summary>
-        CoaSchemaActionTypes Action { get; }
+        FlexiSchemaActionTypes Action { get; }
         /// <summary>
         /// Версия сервера приложений во время изменения объекта
         /// </summary>
