@@ -16,7 +16,7 @@ namespace FlexiObject.AppServer.Model
         private readonly JsonSettingsStore _jsonSettingsStore;
         private ServerSettings _serverSettings;
         private WebServer _server;
-        private IContainer _container;
+        private readonly IContainer _container;
         public Server(JsonSettingsStore jsonSettingsStore, LoggerFactory loggerFactory, IContainer container)
         {
             _jsonSettingsStore = jsonSettingsStore;

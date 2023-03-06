@@ -11,6 +11,6 @@ namespace FlexiObject.Core.Repository.Database
     public interface ICustomObjectRepository
     {
         public ICustomObject GetById(long id);
-        public ICustomObject GetByUserId(int userId);
+        public ICustomObject GetByUserOrGroupId(int userId);
     }
 }

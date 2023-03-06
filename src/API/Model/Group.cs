@@ -1,6 +1,7 @@
 ﻿using FlexiObject.Core.Enumes;
 using FlexiObject.Core.Interfaces;
 using FlexiObject.Core.Repository.Database;
+using FlexiObject.DbProvider.Entities;
 
 using System;
 
@@ -8,67 +9,77 @@ namespace FlexiObject.API.Model
 {
     public class Group : AppBase, IGroup
     {
-        private IUserDbRepository _dbRepository;
-        internal protected Group(IApplication app, object parent, IUserDbRepository userDbRepository) : base(app, parent)
+        private readonly IUserDbRepository _dbRepository;
+        private readonly ICustomObjectRepository _objRepo;
+        private int _uniqueId;
+        public Group(IApplication app, object parent, IUserDbRepository userDbRepository, ICustomObjectRepository objRepo, AppUser dbGroup = null) : base(app, parent)
         {
             _dbRepository = userDbRepository;
+            _objRepo = objRepo;
+            if(dbGroup != null )
+            {
+                DisplayName = dbGroup.DisplayName;
+                EmailAddress = dbGroup.Email;
+                _uniqueId = dbGroup.Id;
+            }
         }
-        public int UniqueId => throw new NotImplementedException();
+        public int UniqueId => _uniqueId;
 
-        public string Name => throw new NotImplementedException();
+        public string Name => GetName(_uniqueId,null);
 
-        public string DisplayName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string EmailAddress { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public FlexiGroupBehaviorTypes EmailBehavior { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string DisplayName { get; set; }
+        public string EmailAddress { get; set; }
+        public FlexiGroupBehaviorTypes EmailBehavior { get; set; }
 
-        public IGroups Groups => new Groups(Application, this, _dbRepository);
+        public IGroups Groups => new Groups(Application, this, _dbRepository, _objRepo);
 
-        public IGroups GroupsRecursive => throw new NotImplementedException();
+        public IGroups GroupsRecursive => new Groups(Application, this, _dbRepository, _objRepo, true);
 
-        public ICustomObject Object => throw new NotImplementedException();
+        public ICustomObject Object => _objRepo.GetByUserOrGroupId(_uniqueId);
 
-        public IUsers Users => throw new NotImplementedException();
+        public IUsers Users => new Users(Application, this, _dbRepository, _objRepo);
 
-        public IUsers UsersRecurcive => throw new NotImplementedException();
+        public IUsers UsersRecurcive => new Users(Application, this, _dbRepository, _objRepo, true);
 
         public void AddGroup(IGroup group)
         {
-            throw new NotImplementedException();
+            _dbRepository.AddToGroup(this, group);
         }
 
         public void AddUser(IUser user)
         {
-            throw new NotImplementedException();
+            _dbRepository.AddToGroup(this, user);
         }
 
         public void Delete()
         {
-            throw new NotImplementedException();
+            _dbRepository.Delete(_uniqueId);
         }
 
         public bool IsInGroup(string groupName)
         {
-            throw new NotImplementedException();
+            return _dbRepository.IsInGroup(this, groupName, false);
         }
 
         public bool IsInGroupRecursive(string groupName)
         {
-            throw new NotImplementedException();
+            return _dbRepository.IsInGroup(this, groupName, true);
         }
 
         public void RemoveGroup(IGroup group)
         {
-            throw new NotImplementedException();
+            _dbRepository.RemoveFromGroup(this, group);
         }
 
         public void RemoveUser(IUser user)
         {
-            throw new NotImplementedException();
+            _dbRepository.RemoveFromGroup(this, user);
         }
 
         public void Save()
         {
-            throw new NotImplementedException();
+            var result =_dbRepository.Save(this);
+            _uniqueId = result.UniqueId;
         }
 
         public void SendEmail()

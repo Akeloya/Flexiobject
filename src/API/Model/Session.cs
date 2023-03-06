@@ -1,4 +1,6 @@
 ﻿using FlexiObject.Core.Interfaces;
+using FlexiObject.Core.Repository.Database;
+
 using System;
 using System.Text.Json.Serialization;
 
@@ -6,25 +8,20 @@ namespace FlexiObject.API.Model
 {
     public class Session : AppBase, ISession
     {
-        public Session(Application app): base(app, app)
+        private readonly IUserDbRepository _userDbRepository;
+        private readonly ICustomObjectRepository _customObjectRepository;
+        public Session(Application app, IUserDbRepository userDbRepo, ICustomObjectRepository customObjectRepository): base(app, app)
         {
-
+            _userDbRepository = userDbRepo;
+            _customObjectRepository = customObjectRepository;
         }
-        [JsonIgnore]//TODO: check after implement
         public ICustomFolders RequestFolders => throw new NotImplementedException();
-        [JsonIgnore]
         public IActiveSessions ActiveSessions { get; }
-        [JsonIgnore]//TODO: check after implement
         public string Username => throw new NotImplementedException();
-        [JsonIgnore]//TODO: check after implement
         public IPictures Pictures => throw new NotImplementedException();
-        [JsonIgnore]//TODO: check after implement
         public IUser ActiveUser => throw new NotImplementedException();
-        [JsonIgnore]//TODO: check after implement
-        public IGroups Groups => throw new NotImplementedException();
-        [JsonIgnore]//TODO: check after implement
-        public IUsers Users => throw new NotImplementedException();
-        [JsonIgnore]//TODO: check after implement
+        public IGroups Groups => new Groups(Application, this, _userDbRepository);
+        public IUsers Users => new Users(Application, this, _userDbRepository, _customObjectRepository);
         public IScheduledTasks ScheduledTasks => throw new NotImplementedException();
 
         public IQueryResult ExecuteSqlRequest(string sqlCommand, params object[] parameters)
@@ -39,12 +36,12 @@ namespace FlexiObject.API.Model
 
         public IGroup GetGroupByUniqueId(int id)
         {
-            throw new NotImplementedException();
+            return _userDbRepository.GetGroup(id, this);
         }
 
         public ICustomObject GetRequestByUniqueId(long id)
         {
-            throw new NotImplementedException();
+            return _customObjectRepository.GetById(id);
         }
 
         public ICustomFolder GetRequestFolderByPath(string path)
@@ -74,7 +71,7 @@ namespace FlexiObject.API.Model
 
         public IUser GetUserByUniqueId(int id)
         {
-            throw new NotImplementedException();
+            return _userDbRepository.GetUser(id, this);
         }
 
         public IUserFieldDefinition GetUserFieldDefinitionByUniqueId(int id)

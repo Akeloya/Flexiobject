@@ -12,10 +12,10 @@ namespace FlexiObject.API.Model
         private int _uniqueId;
         public User(IApplication app, object parent, IUserDbRepository repository, ICustomObjectRepository objRepository, AppUser contract = null) : base(app, parent)
         {
-            _dbRepository  = repository;
+            _dbRepository = repository;
             _dbObjectRepository = objRepository;
 
-            if(contract == null)
+            if (contract == null)
                 return;
             Active = contract.IsActive;
             Department = contract.Department;
@@ -23,11 +23,11 @@ namespace FlexiObject.API.Model
             Email = contract.Email;
             LoginName = contract.LoginName;
             LoginMode = contract.LoginMode;
-            Phone= contract.Phone;
+            Phone = contract.Phone;
             Administrator = contract.IsAdministrator;
             _uniqueId = contract.Id;
         }
-        
+
         public bool Active { get; set; }
         public ICustomFolder DefaultRequestFolder { get; set; }
         public string Department { get; set; }
@@ -39,7 +39,7 @@ namespace FlexiObject.API.Model
         public bool HasDefaultCustomObjectFolder { get; set; }
         public string LoginName { get; set; }
         public string Name => GetName(_uniqueId, null);
-        public ICustomObject Object => _dbObjectRepository.GetByUserId(UniqueId);
+        public ICustomObject Object => _dbObjectRepository.GetByUserOrGroupId(UniqueId);
         public string OutgoingEmailAccount { get; set; }
         public string Password { get; set; }
         public string Phone { get; set; }
@@ -50,7 +50,7 @@ namespace FlexiObject.API.Model
 
         public void AddToGroup(IGroup group)
         {
-            _dbRepository.AddToGroup(this, group);
+            _dbRepository.AddToGroup(group, this);
         }
 
         public void Delete()

@@ -68,9 +68,5 @@ namespace FlexiObject.API.Transport
         {
             _httpClient.Dispose();
         }
-
-        public event EventHandler<Exception> OnErrorRaised;
-        public event EventHandler<ApiMessageDataContract> GetMessage;
-        public event EventHandler Closing;
     }
 }

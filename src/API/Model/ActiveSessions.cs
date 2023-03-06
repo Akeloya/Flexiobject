@@ -1,23 +1,22 @@
-﻿using FlexiObject.Core.Interfaces;
+﻿using FlexiObject.AppServer.Repositories;
+using FlexiObject.Core.Interfaces;
 
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
 
 namespace FlexiObject.API.Model.Model
 {
-    public abstract class ActiveSessions : AppBase, IActiveSessions
+    public class ActiveSessions : AppBase, IActiveSessions
     {
         private readonly Lazy<IReadOnlyList<IActiveSession>> _sessions;
-        protected ActiveSessions(Application application, ISession parent): base(application, parent)
+        private readonly IActiveSessionRepository _activeSessionRepo;
+        protected ActiveSessions(IApplication application, ISession parent, IActiveSessionRepository activeSessionRepo): base(application, parent)
         {
-            _sessions = new Lazy<IReadOnlyList<IActiveSession>>(() => GetActiveSessions());
+            _sessions = new Lazy<IReadOnlyList<IActiveSession>>(()=>_activeSessionRepo.GetActiveSessions(parent).ToArray());
+            _activeSessionRepo = activeSessionRepo;
         }
-        [JsonIgnore]
         public IActiveSession this[int idx] => _sessions.Value[idx];
-        [JsonIgnore]
         public int Count => _sessions.Value.Count;
-
-        protected abstract IReadOnlyList<IActiveSession> GetActiveSessions();
     }
 }

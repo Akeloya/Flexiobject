@@ -18,7 +18,7 @@ namespace FlexiObject.AppServer.Repositories
         private readonly AppDbContext _context;
         private readonly IContainer _container;
         public UserRepository(AppDbContext context, IContainer container)
-        { 
+        {
             _context = context;
             _container = container;
         }
@@ -27,11 +27,15 @@ namespace FlexiObject.AppServer.Repositories
             throw new NotImplementedException();
         }
 
-        public void AddToGroup(IUser user, IGroup group)
+        public void AddToGroup(IGroup group, IUser user)
         {
             throw new NotImplementedException();
         }
 
+        public void AddToGroup(IGroup group, IGroup groupAddTo)
+        {
+            throw new NotImplementedException();
+        }
         public void AddUser(IUser user)
         {
             Save(user);
@@ -42,14 +46,19 @@ namespace FlexiObject.AppServer.Repositories
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IGroup> GetGrops()
+        public IEnumerable<IGroup> GetGroups(object requestor)
         {
-            throw new NotImplementedException();
+            var app = _container.Get<IApplication>();
+            var objRepo = _container.Get<ICustomObjectRepository>();
+            return _context.AppUsers.Where(p=> p.IsGroup == true).Select(p=> new Group(app, requestor, this, objRepo, p));
         }
 
-        public IGroup GetGroup(int id)
+        public IGroup GetGroup(int id, object requestor)
         {
-            throw new NotImplementedException();
+            var dbGroup = _context.AppUsers.FirstOrDefault(x => x.Id == id && x.IsGroup == false);
+            return dbGroup == null
+                ? throw new ObjectNotFoundException()
+                : (IGroup)new Group(_container.Get<IApplication>(), requestor, this, _container.Get<ICustomObjectRepository>(), dbGroup);
         }
 
         public IEnumerable<IGroup> GetGroupsByGroup(IGroup group, bool recursive)
@@ -62,14 +71,19 @@ namespace FlexiObject.AppServer.Repositories
             throw new NotImplementedException();
         }
 
-        public IUser GetUser(int id)
+        public IUser GetUser(int id, object requestor)
         {
-            throw new NotImplementedException();
+            var dbUser = _context.AppUsers.FirstOrDefault(x => x.Id == id && x.IsGroup == false);
+            return dbUser == null
+                ? throw new ObjectNotFoundException()
+                : (IUser)new User(_container.Get<IApplication>(), requestor, this, _container.Get<ICustomObjectRepository>(), dbUser);
         }
 
-        public IEnumerable<IUser> GetUsers()
+        public IEnumerable<IUser> GetUsers(object requestor)
         {
-            throw new NotImplementedException();
+            var app = _container.Get<IApplication>();
+            var objRepo = _container.Get<ICustomObjectRepository>();
+            return _context.AppUsers.Where(p=> p.IsGroup == false && p.Id != int.MinValue).Select(p=> new User(app, requestor, this, objRepo, p));
         }
 
         public bool IsInGroup(IUser user, string groupName, bool recursive)
@@ -77,17 +91,26 @@ namespace FlexiObject.AppServer.Repositories
             throw new NotImplementedException();
         }
 
-        public void RemoveFromGroup(IUser user, IGroup group)
+        public bool IsInGroup(IGroup group, string groupName, bool recursive)
+        {
+            throw new NotImplementedException();
+        }
+        public void RemoveFromGroup(IGroup group, IUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveFromGroup(IGroup group, IGroup removingGroup)
         {
             throw new NotImplementedException();
         }
 
         public IUser Save(IUser user)
         {
-            if(user.UniqueId == 0)
+            if (user.UniqueId == 0)
             {
-                var existedUser = _context.AppUsers.FirstOrDefault(p=> p.IsGroup == false && p.LoginMode == p.LoginMode && p.LoginName == p.LoginName);
-                if(existedUser != null)
+                var existedUser = _context.AppUsers.FirstOrDefault(p => p.IsGroup == false && p.LoginMode == p.LoginMode && p.LoginName == p.LoginName);
+                if (existedUser != null)
                     throw new ObjectAlreadyExistsException();
             }
 
@@ -106,8 +129,12 @@ namespace FlexiObject.AppServer.Repositories
                 Phone = user.Phone,
                 Password = user.Password,
                 Modified = DateTime.Now,
+                Id = user.UniqueId
             };
-            _context.AppUsers.Add(dbUser);
+            if(user.UniqueId == 0)
+                _context.AppUsers.Add(dbUser);
+            else
+                _context.AppUsers.Attach(dbUser);
             _context.SaveChanges();
 
             return new User(_container.Get<Application>(), user.Parent, this, _container.Get<ICustomObjectRepository>(), dbUser);
@@ -115,7 +142,31 @@ namespace FlexiObject.AppServer.Repositories
 
         public IGroup Save(IGroup group)
         {
-            throw new NotImplementedException();
+            var dbUser = new DbProvider.Entities.AppUser
+            {
+                Id = group.UniqueId,
+                IsGroup = true,
+                DisplayName = group.DisplayName,
+                Email = group.EmailAddress,
+                IsActive = true,
+                ObjectId = group.Object?.UniqueId,
+                Modified = DateTime.Now
+            };
+            if(group.UniqueId == 0)
+                _context.AppUsers.Add(dbUser);
+            else
+                _context.AppUsers.Attach(dbUser);
+            _context.SaveChanges();
+
+            return new Group(_container.Get<Application>(), group.Parent, this, _container.Get<ICustomObjectRepository>(), dbUser);
+        }
+
+        public IUser GetUser(string login, object requestor)
+        {
+            var dbUser = _context.AppUsers.FirstOrDefault(p => p.LoginName == login && p.IsGroup == false);
+            return dbUser == null
+                ? throw new ObjectNotFoundException()
+                : (IUser)new User(_container.Get<IApplication>(), requestor, this, _container.Get<ICustomObjectRepository>(), dbUser);
         }
     }
 }
