@@ -7,6 +7,7 @@ using System;
 using System.Reflection;
 using FlexiObject.Core.Repository;
 using System.Linq;
+using FlexiObject.Core.Config.SettingsStore;
 
 namespace FlexiObject.Core.Config
 {

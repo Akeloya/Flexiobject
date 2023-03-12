@@ -33,7 +33,7 @@ namespace FlexiObject.API.Repositories
                 var result = await _client.GetDataAsync<PingDataContract>("/api/OpenSession", new CancellationTokenSource(TimeSpan.FromSeconds(60)).Token);
             }).ConfigureAwait(false).GetAwaiter().GetResult();
             
-            return new Session(_application, _container.Get<IUserDbRepository>(), _container.Get<ICustomObjectRepository>());
+            return new Session(_application, _container.Get<IUserRepository>(), _container.Get<ICustomObjectRepository>());
         }
 
         public ISession CreateSession(string host, int port, string username, string password)
@@ -44,7 +44,7 @@ namespace FlexiObject.API.Repositories
                 var result = await _client.GetDataAsync<PingDataContract>("/api/OpenSession", new CancellationTokenSource(TimeSpan.FromSeconds(60)).Token);
             }).ConfigureAwait(false).GetAwaiter().GetResult();
 
-            return new Session(_application, _container.Get<IUserDbRepository>(), _container.Get<ICustomObjectRepository>());
+            return new Session(_application, _container.Get<IUserRepository>(), _container.Get<ICustomObjectRepository>());
         }
 
         public void LogOff(ISession session)

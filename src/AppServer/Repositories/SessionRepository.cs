@@ -17,12 +17,12 @@ namespace FlexiObject.AppServer.Repositories
 
         public ISession CreateSession(string host, int port)
         {
-            return new Session(_container.Get<Application>(), _container.Get<IUserDbRepository>(), _container.Get<ICustomObjectRepository>());
+            return new Session(_container.Get<Application>(), _container.Get<IUserRepository>(), _container.Get<ICustomObjectRepository>());
         }
 
         public ISession CreateSession(string host, int port, string username, string password)
         {
-            return new Session(_container.Get<Application>(), _container.Get<IUserDbRepository>(), _container.Get<ICustomObjectRepository>());
+            return new Session(_container.Get<Application>(), _container.Get<IUserRepository>(), _container.Get<ICustomObjectRepository>());
         }
 
         public void LogOff(ISession session)

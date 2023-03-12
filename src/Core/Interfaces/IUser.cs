@@ -81,10 +81,6 @@ namespace FlexiObject.Core.Interfaces
         /// </summary>
         int UniqueId { get; }
         /// <summary>
-        /// Способ входа в систему.
-        /// </summary>
-        FlexiUserAuthenticationTypes AuthenticationType { get; set; }
-        /// <summary>
         /// Добавить пользователя в группу
         /// </summary>
         /// <param name="group">Группа, в которую добавляется пользователь</param>

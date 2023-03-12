@@ -1,4 +1,4 @@
-﻿using FlexiObject.Core.Config;
+﻿using FlexiObject.Core.Config.SettingsStore;
 
 namespace FlexiObject.DbProvider
 {

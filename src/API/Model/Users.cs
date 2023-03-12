@@ -9,10 +9,10 @@ namespace FlexiObject.API.Model
 {
     public class Users : AppBase, IUsers
     {
-        private readonly IUserDbRepository _dbRepository;
+        private readonly IUserRepository _dbRepository;
         private readonly ICustomObjectRepository _objRepository;
         private readonly Lazy<ICollection<IUser>> _users;
-        internal Users(IApplication app, object parent, IUserDbRepository userDbRepository, ICustomObjectRepository objRepository, bool recursive = false) : base(app, parent)
+        internal Users(IApplication app, object parent, IUserRepository userDbRepository, ICustomObjectRepository objRepository, bool recursive = false) : base(app, parent)
         {
             _dbRepository = userDbRepository;
             _objRepository = objRepository;

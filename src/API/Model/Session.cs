@@ -8,9 +8,9 @@ namespace FlexiObject.API.Model
 {
     public class Session : AppBase, ISession
     {
-        private readonly IUserDbRepository _userDbRepository;
+        private readonly IUserRepository _userDbRepository;
         private readonly ICustomObjectRepository _customObjectRepository;
-        public Session(Application app, IUserDbRepository userDbRepo, ICustomObjectRepository customObjectRepository): base(app, app)
+        public Session(Application app, IUserRepository userDbRepo, ICustomObjectRepository customObjectRepository): base(app, app)
         {
             _userDbRepository = userDbRepo;
             _customObjectRepository = customObjectRepository;

@@ -1,4 +1,5 @@
 using FlexiObject.API;
+using FlexiObject.AppClient.Core;
 using FlexiObject.AppClient.Services;
 
 using System;
@@ -14,8 +15,6 @@ namespace FlexiObject.AppClient.ViewModels
         {
             _navigation = navigation;
             StartTimer();
-            var app = api.Create();
-            app.OpenSession("localhost", 9696, null, null);
         }
         protected override void OnTimerTick()
         {

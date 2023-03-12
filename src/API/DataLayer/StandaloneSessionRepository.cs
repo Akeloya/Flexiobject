@@ -28,7 +28,7 @@ namespace FlexiObject.API.DataLayer
             var user = users.FirstOrDefault();
             return user == null
                 ? throw new UnauthorizedException()
-                : (ISession)new Session(_contaner.Get<Application>(), _contaner.Get<IUserDbRepository>(), _contaner.Get<ICustomObjectRepository>());
+                : new Session(_contaner.Get<Application>(), _contaner.Get<IUserRepository>(), _contaner.Get<ICustomObjectRepository>());
         }
 
         public ISession CreateSession(string host, int port, string username, string password)
@@ -36,7 +36,7 @@ namespace FlexiObject.API.DataLayer
             var user = _context.AppUsers.FirstOrDefault(p=> p.LoginName ==  username && p.Password == password && p.LoginMode == Core.Enumes.FlexiUserAuthTypes.Internal);
             return user == null
                 ? throw new UnauthorizedException()
-                : (ISession)new Session(_contaner.Get<Application>(), _contaner.Get<IUserDbRepository>(), _contaner.Get<ICustomObjectRepository>());
+                : new Session(_contaner.Get<Application>(), _contaner.Get<IUserRepository>(), _contaner.Get<ICustomObjectRepository>());
         }
 
         public void LogOff(ISession session)

@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace FlexiObject.Core.Config
+namespace FlexiObject.Core.Config.SettingsStore
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public class JsonSettingSubFolderAttribute : Attribute
@@ -76,7 +76,7 @@ namespace FlexiObject.Core.Config
 
         public Task SaveAsync<T>(T settings)
         {
-            return Task.Factory.StartNew(() => Save<T>(settings));
+            return Task.Factory.StartNew(() => Save(settings));
         }
 
         private static string GetFileName(Type type)

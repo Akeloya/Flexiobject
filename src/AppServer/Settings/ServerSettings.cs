@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FlexiObject.Core.Config.SettingsStore;
 
 namespace FlexiObject.AppServer.Settings
 {
-    public class ServerSettings
+    [JsonSettingSubFolder("Settings")]
+    public class ServerSettings : AJsonSettings
     {
+        public string HostName { get; set; } = "localhost";
         public int Port { get; set; } = 5555;
     }
 }

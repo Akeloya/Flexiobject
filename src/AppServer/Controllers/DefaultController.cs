@@ -1,7 +1,6 @@
 ﻿using EmbedIO.Routing;
 using EmbedIO.WebApi;
-
-using FlexiObject.Core.Config;
+using FlexiObject.Core.Config.SettingsStore;
 using FlexiObject.Core.Logging;
 using FlexiObject.Core.Transport.DataContracts;
 using FlexiObject.DbProvider;

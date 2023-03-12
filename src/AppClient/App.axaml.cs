@@ -28,7 +28,7 @@ namespace FlexiObject.AppClient
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                desktop.MainWindow = _windowService.CreateDefault<MainWindowViewModel>();
+                desktop.MainWindow = _windowService.CreateDefault<LoginViewModel>();
             }
 
             base.OnFrameworkInitializationCompleted();

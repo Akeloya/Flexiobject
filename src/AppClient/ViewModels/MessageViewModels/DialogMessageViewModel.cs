@@ -1,7 +1,5 @@
 ﻿using Avalonia.Controls;
-
-using FlexiObject.AppClient.ViewModels;
-
+using FlexiObject.AppClient.Core;
 using ReactiveUI;
 
 using System;

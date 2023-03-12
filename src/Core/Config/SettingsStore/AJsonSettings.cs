@@ -1,4 +1,4 @@
-﻿namespace FlexiObject.Core.Config
+﻿namespace FlexiObject.Core.Config.SettingsStore
 {
     public abstract class AJsonSettings
     {

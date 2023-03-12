@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace FlexiObject.Core.Config
+namespace FlexiObject.Core.Config.SettingsStore
 {
     public interface ISettingsStore
     {

@@ -1,6 +1,6 @@
 ﻿using Avalonia.Controls;
 
-namespace FlexiObject.AppClient.ViewModels
+namespace FlexiObject.AppClient.Core
 {
     public interface IClosableWnd
     {

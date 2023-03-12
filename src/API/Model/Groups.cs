@@ -9,21 +9,21 @@ namespace FlexiObject.API.Model
 {
     public class Groups : AppBase, IGroups
     {
-        private readonly IUserDbRepository _dbRepository;
+        private readonly IUserRepository _dbRepository;
         private readonly ICustomObjectRepository _objRepo;
         private readonly Lazy<IEnumerable<IGroup>> _groups;
-        internal protected Groups(IApplication app, Group parent, IUserDbRepository userRepo, ICustomObjectRepository objRepo, bool recursive = false) : base(app, parent)
+        internal protected Groups(IApplication app, Group parent, IUserRepository userRepo, ICustomObjectRepository objRepo, bool recursive = false) : base(app, parent)
         {
             _dbRepository = userRepo;
             _objRepo = objRepo;
             _groups = new Lazy<IEnumerable<IGroup>>(_dbRepository.GetGroupsByGroup(parent, recursive));
         }
-        internal protected Groups(IApplication app, ISession parent, IUserDbRepository userRepo) : base(app, parent)
+        internal protected Groups(IApplication app, ISession parent, IUserRepository userRepo) : base(app, parent)
         {
             _dbRepository = userRepo;
             _groups = new Lazy<IEnumerable<IGroup>>(_dbRepository.GetGroups(this));
         }
-        internal protected Groups(IApplication app, User parent, IUserDbRepository userRepo, bool recursive = false) : base(app, parent)
+        internal protected Groups(IApplication app, User parent, IUserRepository userRepo, bool recursive = false) : base(app, parent)
         {
             _dbRepository = userRepo;
             _groups = new Lazy<IEnumerable<IGroup>>(_dbRepository.GetGroupsByUser(parent, recursive));

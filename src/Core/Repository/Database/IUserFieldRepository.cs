@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlexiObject.Core.Config
+namespace FlexiObject.Core.Repository.Database
 {
-    internal interface IJsonSettingsStore : ISettingsStore
+    internal class IUserFieldRepository
     {
     }
 }

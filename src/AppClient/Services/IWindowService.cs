@@ -1,6 +1,5 @@
 ﻿using Avalonia.Controls;
-
-using FlexiObject.AppClient.ViewModels;
+using FlexiObject.AppClient.Core;
 
 namespace FlexiObject.AppClient.Services
 {

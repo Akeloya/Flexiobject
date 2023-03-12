@@ -34,12 +34,11 @@ namespace FlexiObject.API.Settings
             {
                 Bind<DbContextFactory>().ToSelf().InSingletonScope();
                 Bind<AppDbContext>().ToConstant(Kernel.Get<DbContextFactory>().Create());
-                Bind<ISessionRepository>().To<StandaloneSessionRepository>().InSingletonScope();
+                Rebind<ISessionRepository>().To<StandaloneSessionRepository>().InSingletonScope();
             }
             else
             {
                 Bind<Client>().ToMethod((ctx) => Client.Factory.GetSinglton());
-                Bind<ISessionRepository>().To<ClientSessionRepository>().InSingletonScope();
             }
         }        
     }

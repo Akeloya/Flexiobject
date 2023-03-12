@@ -1,0 +1,81 @@
+<UserControl
+    x:Class="FlexiObject.AppClient.Views.LoginView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:FlexiObject.AppClient.ViewModels"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Padding="10"
+    d:DataContext="{x:Static local:LoginViewModel.Create}"
+    d:DesignHeight="450"
+    d:DesignWidth="1000"
+    mc:Ignorable="d">
+    <UserControl.Styles>
+        <Style Selector="Button.Controls">
+            <Setter Property="MinWidth" Value="100" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+        <Style Selector="TextBlock.Info">
+            <Setter Property="Margin" Value="2 5" />
+            <Setter Property="TextWrapping" Value="WrapWithOverflow" />
+        </Style>
+        <Style Selector="TextBox.Info">
+            <Setter Property="Margin" Value="2 5" />
+        </Style>
+        <Style Selector="CheckBox.Info">
+            <Setter Property="Margin" Value="2 5" />
+        </Style>
+    </UserControl.Styles>
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Left">
+            <TextBlock DockPanel.Dock="Top" Text="Flexible object application" />
+            <Image DockPanel.Dock="Bottom" Source="/Assets/flexibility.png" />
+        </DockPanel>
+        <Border
+            Margin="10"
+            Padding="20"
+            BorderBrush="Black"
+            BorderThickness="1"
+            CornerRadius="10">
+            <DockPanel>
+                <UniformGrid DockPanel.Dock="Bottom" Rows="1">
+                    <Button
+                        Classes="Controls"
+                        Command="{Binding DoLogin}"
+                        Content="Войти" />
+                    <Button
+                        Classes="Controls"
+                        Command="{Binding Close}"
+                        Content="Закрыть" />
+                </UniformGrid>
+                <UniformGrid Columns="2" DockPanel.Dock="Top">
+                    <TextBlock Classes="Info" Text="Login" />
+                    <TextBox Classes="Info" Text="{Binding LoginName}" />
+
+                    <TextBlock Classes="Info" Text="Password" />
+                    <TextBox Classes="Info" Text="{Binding LoginName}" />
+
+                    <TextBlock
+                        Classes="Info"
+                        IsVisible="{Binding UseLoginIsVisible}"
+                        Text="Use OS login" />
+                    <CheckBox
+                        Classes="Info"
+                        IsChecked="{Binding UseUserLogin}"
+                        IsVisible="{Binding UseLoginIsVisible}" />
+
+                    <TextBlock Classes="Info" Text="Connection" />
+                    <TextBlock Classes="Info" Text="Connection" />
+
+                    <TextBlock Classes="Info" Text="" />
+                    <ComboBox Classes="Info" />
+
+                    <TextBlock Classes="Info" Text="Version" />
+                    <TextBlock Classes="Info" Text="{Binding Version}" />
+                </UniformGrid>
+                <Panel />
+            </DockPanel>
+        </Border>
+    </DockPanel>
+</UserControl>

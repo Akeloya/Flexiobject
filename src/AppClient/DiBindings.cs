@@ -8,6 +8,7 @@ using Ninject;
 
 using NLog;
 using FlexiObject.API;
+using FlexiObject.AppClient.Core;
 
 namespace FlexiObject.AppClient
 {

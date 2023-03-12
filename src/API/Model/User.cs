@@ -7,10 +7,10 @@ namespace FlexiObject.API.Model
 {
     public class User : AppBase, IUser
     {
-        private readonly IUserDbRepository _dbRepository;
+        private readonly IUserRepository _dbRepository;
         private readonly ICustomObjectRepository _dbObjectRepository;
         private int _uniqueId;
-        public User(IApplication app, object parent, IUserDbRepository repository, ICustomObjectRepository objRepository, AppUser contract = null) : base(app, parent)
+        public User(IApplication app, object parent, IUserRepository repository, ICustomObjectRepository objRepository, AppUser contract = null) : base(app, parent)
         {
             _dbRepository = repository;
             _dbObjectRepository = objRepository;
@@ -45,7 +45,6 @@ namespace FlexiObject.API.Model
         public string Phone { get; set; }
         public bool Administrator { get; set; }
         public int UniqueId => _uniqueId;
-        public FlexiUserAuthenticationTypes AuthenticationType { get; set; }
         public FlexiUserAuthTypes LoginMode { get; set; }
 
         public void AddToGroup(IGroup group)

@@ -1,10 +1,9 @@
 ﻿using EmbedIO.Routing;
 using EmbedIO.WebApi;
 
+using FlexiObject.Core.Exceptions;
+using FlexiObject.Core.Repository.Database;
 using FlexiObject.Core.Transport.DataContracts;
-using FlexiObject.DbProvider;
-
-using Microsoft.EntityFrameworkCore;
 
 using System.Threading.Tasks;
 
@@ -12,20 +11,18 @@ namespace FlexiObject.AppServer.Controllers
 {
     internal class AppController : WebApiController
     {
-        private readonly AppDbContext _context;
-        public AppController(AppDbContext context)
+        private readonly IUserRepository _userRepository;
+        public AppController(IUserRepository userRepository)
         {
-            _context = context;
+            _userRepository = userRepository;
         }
         [Route(EmbedIO.HttpVerbs.Get, "/OpenSession")]
-        public async Task<PingDataContract> OpenSession([QueryField]string username, [QueryField]string password)
+        public async Task<PingDataContract> OpenSession([QueryField]string username, [QueryField]string password, [QueryField]string domain)
         {
-            var user = await _context.AppUsers.FirstOrDefaultAsync(p=> p.LoginName == username && p.Password == password && p.LoginMode == Core.Enumes.FlexiUserAuthTypes.Internal);
-            if (user != null)
-            {
-                return new PingDataContract();
-            }
-            return null;
+            if(!_userRepository.TestLogin(username, password, domain))
+                throw new UnauthorizedException();
+
+            return new PingDataContract();
         }
     }
 }

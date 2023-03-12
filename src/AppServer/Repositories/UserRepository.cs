@@ -1,10 +1,17 @@
 ﻿using FlexiObject.API.Model;
 using FlexiObject.Core.Config;
+using FlexiObject.Core.Enumes;
 using FlexiObject.Core.Exceptions;
 using FlexiObject.Core.Interfaces;
+using FlexiObject.Core.Logging;
 using FlexiObject.Core.Repository;
 using FlexiObject.Core.Repository.Database;
 using FlexiObject.DbProvider;
+using FlexiObject.DbProvider.Entities;
+
+using FlexiOject.DbProvider;
+
+using Microsoft.EntityFrameworkCore;
 
 using System;
 using System.Collections.Generic;
@@ -12,29 +19,43 @@ using System.Linq;
 
 namespace FlexiObject.AppServer.Repositories
 {
-    [Repository(typeof(IUserDbRepository), typeof(UserRepository), true)]
-    public class UserRepository : IUserDbRepository
+    [Repository(typeof(IUserRepository), typeof(UserRepository), true)]
+    public class UserRepository : BaseDbRepository, IUserRepository
     {
         private readonly AppDbContext _context;
         private readonly IContainer _container;
-        public UserRepository(AppDbContext context, IContainer container)
+        public UserRepository(AppDbContext context, IContainer container, LoggerFactory loggerFactory) : base(context, loggerFactory)
         {
             _context = context;
             _container = container;
         }
         public void AddGroup(IGroup group)
         {
-            throw new NotImplementedException();
+            Save(group);
         }
 
         public void AddToGroup(IGroup group, IUser user)
         {
-            throw new NotImplementedException();
+            ExecuteInTransaction(() =>
+            {
+                if(!_context.AppUsersUserGroups.Any(p=> p.UserGroupId == group.UniqueId && p.UserId == user.UniqueId))
+                {
+                    _context.AppUsersUserGroups.Add(new AppUsersUserGroups
+                    {
+                        UserId = user.UniqueId,
+                        UserGroupId = group.UniqueId                
+                    });
+                    _context.SaveChanges();
+                }
+            });
         }
 
         public void AddToGroup(IGroup group, IGroup groupAddTo)
         {
-            throw new NotImplementedException();
+            ExecuteInTransaction(() =>
+            {
+
+            });
         }
         public void AddUser(IUser user)
         {
@@ -43,7 +64,8 @@ namespace FlexiObject.AppServer.Repositories
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _context.AppUsers.Remove(_context.AppUsers.Find(id));
+            _context.SaveChanges();
         }
 
         public IEnumerable<IGroup> GetGroups(object requestor)
@@ -114,7 +136,7 @@ namespace FlexiObject.AppServer.Repositories
                     throw new ObjectAlreadyExistsException();
             }
 
-            var dbUser = new DbProvider.Entities.AppUser
+            var dbUser = new AppUser
             {
                 IsGroup = false,
                 LoginMode = user.LoginMode,
@@ -142,7 +164,7 @@ namespace FlexiObject.AppServer.Repositories
 
         public IGroup Save(IGroup group)
         {
-            var dbUser = new DbProvider.Entities.AppUser
+            var dbUser = new AppUser
             {
                 Id = group.UniqueId,
                 IsGroup = true,
@@ -167,6 +189,17 @@ namespace FlexiObject.AppServer.Repositories
             return dbUser == null
                 ? throw new ObjectNotFoundException()
                 : (IUser)new User(_container.Get<IApplication>(), requestor, this, _container.Get<ICustomObjectRepository>(), dbUser);
+        }
+
+        public bool TestLogin(string login, string password, string domain)
+        {
+            var authMode = string.IsNullOrEmpty(domain) ? FlexiUserAuthTypes.Internal : FlexiUserAuthTypes.Windows;
+
+            var users = _context.AppUsers.Where(p=> p.LoginName == login && p.Password == password && p.LoginMode == authMode);
+            if(authMode == FlexiUserAuthTypes.Windows)
+                users = users.Where(p=> p.DomainName == domain);
+
+            return users.Any();
         }
     }
 }

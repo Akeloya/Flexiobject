@@ -1,5 +1,5 @@
 ﻿using FlexiObject.Core.Config;
-
+using FlexiObject.Core.Config.SettingsStore;
 using System.IO;
 
 using Xunit;

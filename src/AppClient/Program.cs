@@ -37,8 +37,7 @@ namespace FlexiObject.AppClient
                 .UseReactiveUI();
         public static void DisposeThis()
         {
-            if(_kernel != null )
-                _kernel.Dispose();
+            _kernel?.Dispose();
         }
     }
 }

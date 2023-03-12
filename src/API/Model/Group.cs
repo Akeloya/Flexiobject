@@ -9,10 +9,10 @@ namespace FlexiObject.API.Model
 {
     public class Group : AppBase, IGroup
     {
-        private readonly IUserDbRepository _dbRepository;
+        private readonly IUserRepository _dbRepository;
         private readonly ICustomObjectRepository _objRepo;
         private int _uniqueId;
-        public Group(IApplication app, object parent, IUserDbRepository userDbRepository, ICustomObjectRepository objRepo, AppUser dbGroup = null) : base(app, parent)
+        public Group(IApplication app, object parent, IUserRepository userDbRepository, ICustomObjectRepository objRepo, AppUser dbGroup = null) : base(app, parent)
         {
             _dbRepository = userDbRepository;
             _objRepo = objRepo;

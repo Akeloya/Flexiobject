@@ -7,6 +7,7 @@ using FlexiObject.AppServer.Controllers;
 using FlexiObject.Core.Config;
 using FlexiObject.Core.Logging;
 using EmbedIO.WebApi;
+using FlexiObject.Core.Config.SettingsStore;
 
 namespace FlexiObject.AppServer.Model
 {
@@ -26,7 +27,8 @@ namespace FlexiObject.AppServer.Model
 
         public void Start(CancellationToken cts)
         {
-            _server = CreateWebServer("http://localhost:9696/");
+            _serverSettings = _jsonSettingsStore.Load<ServerSettings>();
+            _server = CreateWebServer($"http://{_serverSettings.HostName ?? "localhost"}:{_serverSettings.Port}/");
             _server.Start(cts);
         }
 

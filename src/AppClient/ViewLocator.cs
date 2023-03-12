@@ -1,10 +1,9 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 
-using FlexiObject.AppClient.ViewModels;
-
 using System;
 using FlexiObject.Core.Config;
+using FlexiObject.AppClient.Core;
 
 namespace FlexiObject.AppClient
 {

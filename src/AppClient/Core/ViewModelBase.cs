@@ -7,22 +7,22 @@ using ReactiveUI;
 
 using System;
 
-namespace FlexiObject.AppClient.ViewModels
+namespace FlexiObject.AppClient.Core
 {
     public class ViewModelBase : ReactiveObject, IClosableWnd
     {
         private readonly DispatcherTimer _dispatcherTimer;
-        protected IDialogService DialogService { get; set; }
+        protected IDialogService DialogService { get; }
         public ViewModelBase(IDialogService dialog, Api api)
         {
             Api = api;
             DialogService = dialog;
-            _dispatcherTimer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Normal, (_,_) =>
+            _dispatcherTimer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Normal, (_, _) =>
             {
                 OnTimerTick();
             });
         }
-        protected Api Api {get; }
+        protected Api Api { get; }
         public virtual int Width { get; set; }
         public virtual int Height { get; set; }
         public bool CloseWindow { get; set; }
