@@ -14,7 +14,9 @@ namespace FlexiObject.AppClient.ViewModels
         public MainWindowViewModel(IDialogService dialog, INavigationService navigation, Api api) : base(dialog, api)
         {
             _navigation = navigation;
-            StartTimer();
+            StartTimer();           
+            Width = 1200;
+            Height = 900;
         }
         protected override void OnTimerTick()
         {

@@ -42,7 +42,7 @@ namespace FlexiObject.AppClient.Core
         {
             _dispatcherTimer.Stop();
         }
-        public void Close()
+        public virtual void Close()
         {
             CloseWindow = true;
         }

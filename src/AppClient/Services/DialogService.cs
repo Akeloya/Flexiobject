@@ -12,6 +12,9 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using FlexiObject.AppClient.Views.MessageView;
+using Avalonia.Threading;
+using FlexiObject.Core.Utilities;
+using System.Threading;
 
 namespace FlexiObject.AppClient.Services
 {
@@ -56,19 +59,23 @@ namespace FlexiObject.AppClient.Services
         {
             _logger.Info("Creating dialog window");
             var assets = AvaloniaLocator.Current.GetService<IAssetLoader>()!;
-            var bitmap = new Bitmap(assets.Open(new Uri($"avares://AppClient/Assets/{iconName}")));
+            var bitmap = new Bitmap(assets.Open(new Uri($"avares://FlexiObject.AppClient/Assets/{iconName}")));
             var contentView = new DialogMessageViewModel
             {
                 DisplaingContent = content,
                 DialogButtons = dialogButtons,
             };
             var wind = _windowService.CreateDialog(contentView);
-            if(title != null)
-                wind.Title = title;
-            wind.Icon = new WindowIcon(bitmap);
             
             _logger.Info("Opening dialog window");
-            wind.Open();
+            
+            TaskHelper.RunSync(() => Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                if(title != null)
+                wind.Title = title;
+                wind.Icon = new WindowIcon(bitmap);
+                wind.Open();
+            }));
             _logger.Info("Dialog window closed");
             return contentView.DialogMessageResult;
         }
@@ -102,7 +109,7 @@ namespace FlexiObject.AppClient.Services
     {
         public static void Open(this Window wnd)
         {
-            if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop && desktop.MainWindow != null)
                 wnd.ShowDialog(desktop.MainWindow);
             else
                 wnd.Show();

@@ -3,6 +3,7 @@ using FlexiObject.AppClient.Core;
 using FlexiObject.AppClient.Services;
 using FlexiObject.Core.Config.SettingsStore;
 
+using System;
 using System.Threading.Tasks;
 
 namespace FlexiObject.AppClient.ViewModels
@@ -22,16 +23,37 @@ namespace FlexiObject.AppClient.ViewModels
         public string Password { get; set; }
         public bool UseUserLogin { get; set; }
         public bool UseUserLoginIsVisible { get; set; } = false;
-        public Task DoLogin()
+        public event EventHandler<bool> LoginCompleted;
+        public async Task DoLogin()
         {
-            var app = Api.Create();
-            app.OpenSession("localhost", 9696, null, null);
-            return Task.CompletedTask;
+            await Task.Run(() =>
+            {
+                try
+                {
+                    var app = Api.Create();
+
+                    var session = app.OpenSession("localhost", 9696, null, null);
+                    LoginCompleted?.Invoke(this, true);
+                }
+                catch (Exception ex)
+                {
+                    DialogService.ShowError(ex);
+                    LoginCompleted?.Invoke(this, false);
+                }
+                
+            });
+        }
+
+        public override void Close()
+        {
+            LoginCompleted?.Invoke(this, false);
+            base.Close();
         }
 
         public Task OpenConnectionSettings()
         {
             return Task.CompletedTask;
         }
+
     }
 }

@@ -4,7 +4,12 @@ using Avalonia.Markup.Xaml;
 using FlexiObject.AppClient.Services;
 using FlexiObject.AppClient.ViewModels;
 using FlexiObject.Core.Config;
+using FlexiObject.Core.Wizard;
+
 using PropertyChanged;
+
+using System.Threading.Tasks;
+
 using Application = Avalonia.Application;
 
 namespace FlexiObject.AppClient
@@ -12,11 +17,11 @@ namespace FlexiObject.AppClient
     [DoNotNotify]
     public class App : Application
     {
-        private readonly IWindowService _windowService;
+        private readonly IContainer _container;
         public App() { }
-        public App(IWindowService windowService, IContainer container)
+        public App(IContainer container)
         {
-            _windowService = windowService;
+            _container = container;
             DataTemplates.Add(new ViewLocator(container));
         }
         public override void Initialize()
@@ -28,10 +33,37 @@ namespace FlexiObject.AppClient
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                desktop.MainWindow = _windowService.CreateDefault<LoginViewModel>();
+                desktop.Startup += DesktopStartup;
+                desktop.Exit += DesktopExit;
+                desktop.ShutdownRequested += DesktopShutdownRequested;
+                desktop.MainWindow = _container.Get<IWindowService>().CreateDefault<MainWindowViewModel>();
             }
 
             base.OnFrameworkInitializationCompleted();
+            var wizardExecutor = _container.Get<IWizardExecutor>();
+            Task.Run(async () =>
+            {
+                try
+                {
+                    await wizardExecutor.SetupAsync();
+                }
+                catch
+                {
+                    ((IClassicDesktopStyleApplicationLifetime)Current.ApplicationLifetime).Shutdown();
+                }
+            });
+        }
+
+        private void DesktopShutdownRequested(object sender, ShutdownRequestedEventArgs e)
+        {
+        }
+
+        private void DesktopExit(object sender, ControlledApplicationLifetimeExitEventArgs e)
+        {
+        }
+
+        private void DesktopStartup(object sender, ControlledApplicationLifetimeStartupEventArgs e)
+        {
         }
     }
 }

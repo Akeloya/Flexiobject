@@ -9,6 +9,8 @@ using Ninject;
 using NLog;
 using FlexiObject.API;
 using FlexiObject.AppClient.Core;
+using FlexiObject.Core.Wizard;
+using FlexiObject.AppClient.Core.StartWizard;
 
 namespace FlexiObject.AppClient
 {
@@ -25,7 +27,11 @@ namespace FlexiObject.AppClient
 
             Bind<IWindowService>().To<WindowService>().InSingletonScope();
 
-            Bind<Api>().ToConstant(new Api()).InSingletonScope();
+            Bind<Api>().ToConstant(new Api(true)).InSingletonScope();
+
+            Bind<IWizardExecutor>().To<WizardExecutor>().InSingletonScope();
+            Bind<IWizardStep>().To<LoginWizardStep>().InSingletonScope();
+            Bind<IWizardStep>().To<SetupMainWindowStep>().InSingletonScope();
 
             RegisterViews(Kernel);
         }

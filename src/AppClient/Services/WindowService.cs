@@ -1,10 +1,16 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Threading;
+
+using FlexiObject.AppClient.Core;
 using FlexiObject.AppClient.Views;
+using FlexiObject.Core.Config;
+using FlexiObject.Core.Utilities;
 
 using System;
 using System.Collections.Generic;
-using FlexiObject.Core.Config;
-using FlexiObject.AppClient.Core;
+using System.Threading.Tasks;
 
 namespace FlexiObject.AppClient.Services
 {
@@ -24,13 +30,12 @@ namespace FlexiObject.AppClient.Services
 
         public Window CreateDefault(IClosableWnd model)
         {
-
             var wnd = new DefaultWindow
             {
                 DataContext = model,
                 Content = _viewLocator.Build(model),
                 Width = model.Width,
-                Height= model.Height,
+                Height = model.Height,
                 WindowState = model.SizeState
             };
             wnd.Closed += WndClosed;
@@ -54,21 +59,28 @@ namespace FlexiObject.AppClient.Services
 
         public Window CreateDialog(IClosableWnd model)
         {
-            var wnd = new DefaultWindow
-            {
-                Width = 400,
-                Height = 200,
-                CanResize = false,
-                WindowState = model.SizeState,
-                DataContext = model
-            };
-            wnd.Content = _viewLocator.Build(model);
-            wnd.Closed += WndClosed;
-            lock (_lock)
-            {
-                _openedWindows.Add(wnd);
-                return wnd;
-            }
+
+            return TaskHelper.RunSync(() =>
+                Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    var wnd = new DefaultWindow
+                    {
+                        Width = 400,
+                        Height = 200,
+                        CanResize = false,
+                        WindowState = model.SizeState,
+                        DataContext = model
+                    };
+                    wnd.Content = _viewLocator.Build(model);
+                    wnd.Closed += WndClosed;
+                    lock (_lock)
+                    {
+                        _openedWindows.Add(wnd);
+                        return wnd;
+                    }
+                })
+                );
+
         }
 
         private void WndClosed(object sender, EventArgs e)
@@ -80,6 +92,18 @@ namespace FlexiObject.AppClient.Services
                 {
                     throw new Exception();//TODO need idea how to catch window, that creates not from IWindowService
                 }
+            }
+        }
+
+        public async Task SetupMainWindowView(IClosableWnd view)
+        {
+            if(Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                await Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    desktop.MainWindow.DataContext = view;
+                    desktop.MainWindow.Content = _viewLocator.Build(view);
+                });
             }
         }
     }
