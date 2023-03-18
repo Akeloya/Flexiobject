@@ -8,7 +8,7 @@ namespace FlexiObject.Tests.API
 {
     public class SessionTests
     {
-        [Fact]
+        [Fact(Skip = "Manual")]
         public void TestOpenCloseSession()
         {
             var api = new Api();

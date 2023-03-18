@@ -14,7 +14,7 @@ namespace FlexiObject.Tests.DbProvider
         {
             SqlManager.RegisterManager(_settings);
         }
-        [Fact]
+        [Fact(Skip = "Manual")]
         public void OpenConnection()
         {
             using ISqlConnectionItem connection = SqlManager.Register(Guid.NewGuid());
