@@ -36,7 +36,6 @@ namespace FlexiObject.AppClient.ViewModels
                 catch (Exception ex)
                 {
                     DialogService.ShowError(ex);
-                    LoginCompleted?.Invoke(this, false);
                 }
 
             });
