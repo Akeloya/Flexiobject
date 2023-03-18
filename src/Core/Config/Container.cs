@@ -8,10 +8,11 @@ namespace FlexiObject.Core
     public class Container : IContainer
     {
         private readonly IKernel _kernel;
-
+        private readonly ServiceLocator _serviceLocator;
         public Container(IKernel kernel)
         {
             _kernel = kernel;
+            _serviceLocator = new ServiceLocator(this);
         }
         public T Get<T>()
         {

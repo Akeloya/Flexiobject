@@ -1,4 +1,3 @@
-using FlexiObject.API;
 using FlexiObject.AppClient.Core;
 using FlexiObject.AppClient.Services;
 
@@ -10,8 +9,8 @@ namespace FlexiObject.AppClient.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         private readonly INavigationService _navigation;
-        public static MainWindowViewModel Create => new(null, null, new Api());        
-        public MainWindowViewModel(IDialogService dialog, INavigationService navigation, Api api) : base(dialog, api)
+        public static MainWindowViewModel Create => new(null);        
+        public MainWindowViewModel(INavigationService navigation)
         {
             _navigation = navigation;
             StartTimer();           

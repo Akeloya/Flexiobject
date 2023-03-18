@@ -1,7 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Threading;
-using FlexiObject.API;
 using FlexiObject.AppClient.Services;
+using FlexiObject.Core.Config;
 
 using ReactiveUI;
 
@@ -13,16 +13,16 @@ namespace FlexiObject.AppClient.Core
     {
         private readonly DispatcherTimer _dispatcherTimer;
         protected IDialogService DialogService { get; }
-        public ViewModelBase(IDialogService dialog, Api api)
+        public ViewModelBase()
         {
-            Api = api;
-            DialogService = dialog;
+            DialogService = ServiceLocator.Get<IDialogService>();
+            ApiFactory = ServiceLocator.Get<ApiFactory>();
             _dispatcherTimer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Normal, (_, _) =>
             {
                 OnTimerTick();
             });
         }
-        protected Api Api { get; }
+        protected ApiFactory ApiFactory { get; }
         public virtual int Width { get; set; }
         public virtual int Height { get; set; }
         public bool CloseWindow { get; set; }

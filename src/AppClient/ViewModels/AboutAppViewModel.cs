@@ -1,6 +1,4 @@
-﻿using FlexiObject.API;
-using FlexiObject.AppClient.Core;
-using FlexiObject.AppClient.Services;
+﻿using FlexiObject.AppClient.Core;
 
 using System;
 using System.Collections.Generic;
@@ -11,7 +9,7 @@ namespace FlexiObject.AppClient.ViewModels
     public record ComponentInfo(string Name, string Description, string License);
     public class AboutAppViewModel : ViewModelBase
     {
-        public AboutAppViewModel(IDialogService dialog, Api api) : base(dialog, api)
+        public AboutAppViewModel()
         {
             var assembly = typeof(Program).Assembly;
             AppTitle = assembly.GetCustomAttribute<AssemblyTitleAttribute>().Title;
@@ -21,7 +19,7 @@ namespace FlexiObject.AppClient.ViewModels
             Height = 450;
             SizeState = Avalonia.Controls.WindowState.Normal;
         }
-        public static AboutAppViewModel Design => new(null, new Api());
+        public static AboutAppViewModel Design => new();
         public string OsPlatform => Environment.OSVersion.ToString();
         public string AppTitle { get; }
         public string Version { get; }

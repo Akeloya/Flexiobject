@@ -1,6 +1,4 @@
-﻿using FlexiObject.API;
-using FlexiObject.AppClient.Core;
-using FlexiObject.AppClient.Services;
+﻿using FlexiObject.AppClient.Core;
 using FlexiObject.Core.Config.SettingsStore;
 
 using System;
@@ -11,13 +9,13 @@ namespace FlexiObject.AppClient.ViewModels
     public class LoginViewModel : ViewModelBase
     {
         private readonly IJsonSettingsStore _settingsStore;
-        public LoginViewModel(IJsonSettingsStore jsonSettingsStore, IDialogService dialogService, Api api) : base(dialogService, api)
+        public LoginViewModel(IJsonSettingsStore jsonSettingsStore)
         {
             _settingsStore = jsonSettingsStore;
             Width = 1000;
             Height = 450;
         }
-        public static LoginViewModel Create => new(null, null, null);
+        public static LoginViewModel Create => new(null);
         public string Version { get; } = "some version";
         public string LoginName { get; set; }
         public string Password { get; set; }
@@ -30,7 +28,7 @@ namespace FlexiObject.AppClient.ViewModels
             {
                 try
                 {
-                    var app = Api.Create();
+                    var app = ApiFactory.GetOrCreateApi().Create();
 
                     var session = app.OpenSession("localhost", 9696, null, null);
                     LoginCompleted?.Invoke(this, true);
@@ -40,7 +38,7 @@ namespace FlexiObject.AppClient.ViewModels
                     DialogService.ShowError(ex);
                     LoginCompleted?.Invoke(this, false);
                 }
-                
+
             });
         }
 

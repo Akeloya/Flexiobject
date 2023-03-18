@@ -34,12 +34,13 @@ namespace FlexiObject.AppClient.Core.StartWizard
 
         public async Task SetupAsync()
         {
-            using var manualEvent = new ManualResetEvent(false);
+            var manualEvent = new ManualResetEvent(false);
             var loginResult = false;
             _loginViewModel.LoginCompleted += (_, result) =>
             {
                 loginResult = result;
                 manualEvent.Set();
+                manualEvent.Dispose();
             };
             await _windowService.SetupMainWindowView(_loginViewModel);
             manualEvent.WaitOne();

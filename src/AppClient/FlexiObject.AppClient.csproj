@@ -24,7 +24,7 @@
     <PackageReference Include="Avalonia.Xaml.Interactions" />
     <PackageReference Include="Dock.Avalonia" />
     <PackageReference Include="Dock.Model.ReactiveUI" />
-    <PackageReference Include="Fody" >
+    <PackageReference Include="Fody">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
