@@ -1,8 +1,6 @@
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 
-using FlexiObject.AppClient.Services;
-using FlexiObject.AppClient.ViewModels;
 using FlexiObject.Core.Config;
 using FlexiObject.Core.Wizard;
 
@@ -36,10 +34,13 @@ namespace FlexiObject.AppClient
                 desktop.Startup += DesktopStartup;
                 desktop.Exit += DesktopExit;
                 desktop.ShutdownRequested += DesktopShutdownRequested;
-                desktop.MainWindow = _container.Get<IWindowService>().CreateDefault<MainWindowViewModel>();
+                //desktop.MainWindow = _container.Get<IWindowService>().CreateDefault<MainWindowViewModel>();
             }
 
             base.OnFrameworkInitializationCompleted();
+            if (_container == null)
+                return;
+
             var wizardExecutor = _container.Get<IWizardExecutor>();
             Task.Run(async () =>
             {

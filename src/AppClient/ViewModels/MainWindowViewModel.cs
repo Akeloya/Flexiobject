@@ -9,11 +9,11 @@ namespace FlexiObject.AppClient.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         private readonly INavigationService _navigation;
-        public static MainWindowViewModel Create => new(null);        
+        public static MainWindowViewModel Create => new(null);
         public MainWindowViewModel(INavigationService navigation)
         {
             _navigation = navigation;
-            StartTimer();           
+            StartTimer();
             Width = 1200;
             Height = 900;
         }

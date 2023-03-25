@@ -4,19 +4,18 @@ using FlexiObject.Core.Exceptions;
 using FlexiObject.Core.Utilities;
 
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace FlexiObject.AppClient.Core.StartWizard
 {
     internal class LoginWizardStep : IWindowWizardStep
     {
-        private readonly IWindowService _windowService;
         private readonly LoginViewModel _loginViewModel;
-        public LoginWizardStep(IWindowService windowService, LoginViewModel loginViewModel)
+        private readonly IDialogService _dialogService;
+        public LoginWizardStep(LoginViewModel loginViewModel, IDialogService dialogService)
         {
-            _windowService = windowService;
             _loginViewModel = loginViewModel;
+            _dialogService = dialogService;
         }
 
         public ViewModelBase ViewModel => _loginViewModel;
@@ -34,18 +33,10 @@ namespace FlexiObject.AppClient.Core.StartWizard
 
         public async Task SetupAsync()
         {
-            var manualEvent = new ManualResetEvent(false);
-            var loginResult = false;
-            _loginViewModel.LoginCompleted += (_, result) =>
-            {
-                loginResult = result;
-                manualEvent.Set();
-                manualEvent.Dispose();
-            };
-            await _windowService.SetupMainWindowView(_loginViewModel);
-            manualEvent.WaitOne();
-            if (!loginResult)
-                    throw new WizardTerminateExeption();
+            bool? loginResult = await _dialogService.ShowDialogAsync(_loginViewModel);
+
+            if (loginResult != true)
+                throw new WizardTerminateExeption();
         }
     }
 }

@@ -1,12 +1,11 @@
 using Avalonia;
 using Avalonia.ReactiveUI;
 
-using FlexiObject.AppClient.Services;
+using FlexiObject.Core.Config;
 
 using Ninject;
 
 using System;
-using FlexiObject.Core.Config;
 
 namespace FlexiObject.AppClient
 {
@@ -31,7 +30,7 @@ namespace FlexiObject.AppClient
 
         // Avalonia configuration, don't remove; also used by visual designer.
         public static AppBuilder BuildAvaloniaApp()
-            => AppBuilder.Configure(()=> new App(_kernel?.Get<IContainer>()))
+            => AppBuilder.Configure(() => new App(_kernel?.Get<IContainer>()))
                 .UsePlatformDetect()
                 .LogToTrace()
                 .UseReactiveUI();

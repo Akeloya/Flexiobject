@@ -12,13 +12,4 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     Icon="/Assets/Appicon.ico"
-    mc:Ignorable="d">
-    <i:Interaction.Behaviors>
-        <ia:DataTriggerBehavior
-            Binding="{Binding CloseWindow}"
-            ComparisonCondition="Equal"
-            Value="True">
-            <ia:CallMethodAction MethodName="Close" TargetObject="{Binding #MainWnd}" />
-        </ia:DataTriggerBehavior>
-    </i:Interaction.Behaviors>
-</Window>
+    mc:Ignorable="d" />

@@ -1,8 +1,9 @@
 ﻿using Avalonia.Controls;
+
 using FlexiObject.AppClient.Core;
-using ReactiveUI;
 
 using System;
+using System.Threading.Tasks;
 
 namespace FlexiObject.AppClient.Views.MessageView
 {
@@ -13,7 +14,7 @@ namespace FlexiObject.AppClient.Views.MessageView
         Ok,
         Cancel
     }
-    public class DialogMessageViewModel : ReactiveObject, IClosableWnd
+    public class DialogMessageViewModel : Screen
     {
         public object DisplaingContent { get; set; }
         public bool CloseWindow { get; set; }
@@ -25,22 +26,16 @@ namespace FlexiObject.AppClient.Views.MessageView
         public int Height { get; set; } = 150;
         public bool CanResize { get; set; } = false;
         public WindowState SizeState { get; set; } = WindowState.Normal;
-
-        public void Close()
-        {
-            CloseWindow = true;
-        }
-
-        public void Submit()
+        public Task Submit()
         {
             DialogMessageResult = DialogMessageResult.Ok;
-            Close();
+            return TryCloseAsync(true);
         }
 
-        public void Cancel()
+        public Task Cancel()
         {
             DialogMessageResult = DialogMessageResult.Cancel;
-            Close();
+            return TryCloseAsync(false);
         }
     }
 }

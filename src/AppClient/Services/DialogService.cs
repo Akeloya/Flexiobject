@@ -1,20 +1,18 @@
-﻿using FlexiObject.AppClient.Properties;
-
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
+using Avalonia.Threading;
+
+using FlexiObject.AppClient.Properties;
+using FlexiObject.AppClient.Views.MessageView;
 
 using NLog;
 
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using FlexiObject.AppClient.Views.MessageView;
-using Avalonia.Threading;
-using FlexiObject.Core.Utilities;
-using System.Threading;
 
 namespace FlexiObject.AppClient.Services
 {
@@ -27,35 +25,35 @@ namespace FlexiObject.AppClient.Services
             _logger = logFactory.GetLogger(nameof(DialogService));
             _windowService = windowService;
         }
-        public void ShowError(string text, string title = null)
+        public Task ShowErrorAsync(string text, string title = null)
         {
             _logger.Info("Called ShowError");
-            CreateDialogWindow("error.png",  title, content:text);
+            return CreateDialogWindow("error.png", title, content: text);
         }
 
-        public void ShowError(Exception exeption)
+        public Task ShowErrorAsync(Exception exeption)
         {
             _logger.Info("Called ShowError");
-            CreateDialogWindow("error.png", Resources.AppTitle, content: exeption);
+            return CreateDialogWindow("error.png", Resources.AppTitle, content: exeption);
         }
 
-        public void ShowInformation(string text, string title = null)
+        public Task ShowInformationAsync(string text, string title = null)
         {
             _logger.Info("Called ShowInformation");
-            CreateDialogWindow("information.png", title, content: text);
+            return CreateDialogWindow("information.png", title, content: text);
         }
 
-        public void ShowWarning(string text, string title = null)
+        public Task ShowWarningAsync(string text, string title = null)
         {
             _logger.Info("Called ShowWarning");
-            CreateDialogWindow("warning.png",  title);
+            return CreateDialogWindow("warning.png", title);
         }
-        public DialogMessageResult ShowQuestionDialog(string text, string title = null)
+        public Task<DialogMessageResult> ShowQuestionDialogAsync(string text, string title = null)
         {
             _logger.Info("Called ShowQuestionDialog");
             return CreateDialogWindow("help-icon.png", title, DialogMessageResult.Ok | DialogMessageResult.Cancel, text);
         }
-        private DialogMessageResult CreateDialogWindow(string iconName, string title, DialogMessageResult dialogButtons = DialogMessageResult.None, object content = null)
+        private async Task<DialogMessageResult> CreateDialogWindow(string iconName, string title, DialogMessageResult dialogButtons = DialogMessageResult.None, object content = null)
         {
             _logger.Info("Creating dialog window");
             var assets = AvaloniaLocator.Current.GetService<IAssetLoader>()!;
@@ -65,17 +63,25 @@ namespace FlexiObject.AppClient.Services
                 DisplaingContent = content,
                 DialogButtons = dialogButtons,
             };
-            var wind = _windowService.CreateDialog(contentView);
-            
             _logger.Info("Opening dialog window");
-            
-            TaskHelper.RunSync(() => Dispatcher.UIThread.InvokeAsync(() =>
+
+            try
             {
-                if(title != null)
-                wind.Title = title;
-                wind.Icon = new WindowIcon(bitmap);
-                wind.Open();
-            }));
+
+                await Dispatcher.UIThread.InvokeAsync(async () =>
+                {
+                    var wind = await _windowService.CreateDialogAsync(contentView);
+                    if (title != null)
+                        wind.Title = title;
+                    wind.Icon = new WindowIcon(bitmap);
+                    wind.Open();
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+
             _logger.Info("Dialog window closed");
             return contentView.DialogMessageResult;
         }
@@ -103,16 +109,52 @@ namespace FlexiObject.AppClient.Services
         {
             throw new NotImplementedException();
         }
+
+        public async Task ShowWindowAsync(object model)
+        {
+            var window = await _windowService.CreateDialogAsync(model);
+            await Dispatcher.UIThread.InvokeAsync(async () =>
+            {
+                await window.Open();
+            });
+        }
+
+        public async Task<bool?> ShowDialogAsync(object model)
+        {
+            var window = await _windowService.CreateDialogAsync(model);
+            var result = await Dispatcher.UIThread.InvokeAsync(async () =>
+            {
+                var result = await window.Open(true);
+                return result;
+            });
+            return result;
+        }
     }
 
     public static class DialogServiceExt
     {
-        public static void Open(this Window wnd)
+        public static async Task<bool?> Open(this Window wnd, bool isDialog = false)
         {
-            if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop && desktop.MainWindow != null)
-                wnd.ShowDialog(desktop.MainWindow);
+            if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop && isDialog)
+            {
+                var owner = desktop.MainWindow ?? new Window() { Width = 0, Height = 0, ShowInTaskbar = false };
+                if (desktop.MainWindow == null)
+                    owner.Show();
+
+                try
+                {
+                    var result = await wnd.ShowDialog<bool?>(owner);
+                    return result;
+                }
+                finally
+                {
+                    if (desktop.MainWindow == null)
+                        owner.Close();
+                }
+            }
             else
                 wnd.Show();
+            return default;
         }
     }
 }

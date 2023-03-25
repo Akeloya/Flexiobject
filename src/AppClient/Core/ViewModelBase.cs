@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Threading;
+
 using FlexiObject.AppClient.Services;
 using FlexiObject.Core.Config;
 
@@ -9,7 +10,7 @@ using System;
 
 namespace FlexiObject.AppClient.Core
 {
-    public class ViewModelBase : ReactiveObject, IClosableWnd
+    public class ViewModelBase : Screen
     {
         private readonly DispatcherTimer _dispatcherTimer;
         protected IDialogService DialogService { get; }
@@ -28,6 +29,9 @@ namespace FlexiObject.AppClient.Core
         public bool CloseWindow { get; set; }
         public bool CanResize { get; set; } = true;
         public WindowState SizeState { get; set; } = WindowState.Maximized;
+
+        public ViewModelActivator Activator { get; } = new ViewModelActivator();
+
         protected virtual void OnTimerTick()
         {
 
@@ -41,10 +45,6 @@ namespace FlexiObject.AppClient.Core
         protected void StopTimer()
         {
             _dispatcherTimer.Stop();
-        }
-        public virtual void Close()
-        {
-            CloseWindow = true;
         }
     }
 }

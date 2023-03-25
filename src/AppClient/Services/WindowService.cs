@@ -2,8 +2,8 @@
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Threading;
-
-using FlexiObject.AppClient.Core;
+using FlexiObject.AppClient.Core.Window;
+using FlexiObject.AppClient.ViewModels;
 using FlexiObject.AppClient.Views;
 using FlexiObject.Core.Config;
 using FlexiObject.Core.Utilities;
@@ -28,15 +28,13 @@ namespace FlexiObject.AppClient.Services
         }
         public Window Current => _current;
 
-        public Window CreateDefault(IClosableWnd model)
+        public Window CreateDefault(object model)
         {
             var wnd = new DefaultWindow
             {
                 DataContext = model,
                 Content = _viewLocator.Build(model),
-                Width = model.Width,
-                Height = model.Height,
-                WindowState = model.SizeState
+                WindowState = WindowState.Minimized
             };
             wnd.Closed += WndClosed;
             wnd.GotFocus += WndGotFocus;
@@ -46,7 +44,7 @@ namespace FlexiObject.AppClient.Services
                 return wnd;
             }
         }
-        public Window CreateDefault<T>() where T : IClosableWnd
+        public Window CreateDefault<T>() where T : IScreen
         {
             var view = _container.Get<T>();
             return CreateDefault(view);
@@ -57,7 +55,7 @@ namespace FlexiObject.AppClient.Services
             _current = (Window)sender;
         }
 
-        public Window CreateDialog(IClosableWnd model)
+        public Window CreateDialog(object model)
         {
 
             return TaskHelper.RunSync(() =>
@@ -68,7 +66,7 @@ namespace FlexiObject.AppClient.Services
                         Width = 400,
                         Height = 200,
                         CanResize = false,
-                        WindowState = model.SizeState,
+                        WindowState = WindowState.Normal,
                         DataContext = model
                     };
                     wnd.Content = _viewLocator.Build(model);
@@ -83,6 +81,28 @@ namespace FlexiObject.AppClient.Services
 
         }
 
+        public async Task<Window> CreateDialogAsync(object model)
+        {
+            return await Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                var wnd = new DefaultWindow
+                {
+                    Width = 400,
+                    Height = 200,
+                    CanResize = false,
+                    WindowState = WindowState.Normal,
+                    DataContext = model,
+                    Content = _viewLocator.Build(model)
+                };
+                wnd.Closed += WndClosed;
+                lock (_lock)
+                {
+                    _openedWindows.Add(wnd);
+                    return wnd;
+                }
+            });
+        }
+
         private void WndClosed(object sender, EventArgs e)
         {
             lock (_lock)
@@ -90,17 +110,23 @@ namespace FlexiObject.AppClient.Services
                 var wnd = (Window)sender;
                 if (!_openedWindows.Remove(wnd))
                 {
-                    throw new Exception();//TODO need idea how to catch window, that creates not from IWindowService
+                    //throw new Exception();//TODO need idea how to catch window, that creates not from IWindowService
                 }
             }
         }
 
-        public async Task SetupMainWindowView(IClosableWnd view)
+        public async Task SetupMainWindowView(IScreen view)
         {
             if(Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 await Dispatcher.UIThread.InvokeAsync(() =>
                 {
+                    if(desktop.MainWindow == null)
+                    {
+                        desktop.MainWindow = _container.Get<IWindowService>().CreateDefault<MainWindowViewModel>();
+                        return;
+                    }
+                    
                     desktop.MainWindow.DataContext = view;
                     desktop.MainWindow.Content = _viewLocator.Build(view);
                 });

@@ -2,6 +2,7 @@
 using FlexiObject.Core.Config.SettingsStore;
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FlexiObject.AppClient.ViewModels
@@ -22,6 +23,18 @@ namespace FlexiObject.AppClient.ViewModels
         public bool UseUserLogin { get; set; }
         public bool UseUserLoginIsVisible { get; set; } = false;
         public event EventHandler<bool> LoginCompleted;
+
+        protected override Task OnActivateAsync(CancellationToken cancellationToken)
+        {
+            return base.OnActivateAsync(cancellationToken);
+        }
+
+        public override async Task<bool> CanCloseAsync(CancellationToken cancellationToken = default)
+        {
+            await DialogService.ShowWarningAsync("Точно выйти?");
+            return true;
+        }
+
         public async Task DoLogin()
         {
             await Task.Run(() =>
@@ -35,16 +48,15 @@ namespace FlexiObject.AppClient.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    DialogService.ShowError(ex);
+                    DialogService.ShowErrorAsync(ex);
                 }
 
             });
         }
 
-        public override void Close()
+        public Task Close()
         {
-            LoginCompleted?.Invoke(this, false);
-            base.Close();
+            return TryCloseAsync();
         }
 
         public Task OpenConnectionSettings()

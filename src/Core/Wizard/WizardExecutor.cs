@@ -65,7 +65,7 @@ namespace FlexiObject.Core.Wizard
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.Error(ex);
                 throw;
