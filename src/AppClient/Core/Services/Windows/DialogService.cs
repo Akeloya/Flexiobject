@@ -1,10 +1,10 @@
 ﻿using Avalonia;
-using Avalonia.Controls;
+
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Threading;
-using FlexiObject.AppClient.Core.Services.Windows;
+
 using FlexiObject.AppClient.Properties;
 using FlexiObject.AppClient.Views.MessageView;
 
@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace FlexiObject.AppClient.Core.Services.Windows
 {
+    using Avalonia.Controls;
     public class DialogService : IDialogService
     {
         private readonly ILogger _logger;

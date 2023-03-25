@@ -69,7 +69,16 @@
                     <TextBlock Classes="Info" Text="Connection" />
 
                     <TextBlock Classes="Info" Text="" />
-                    <ComboBox Classes="Info" />
+                    <ComboBox
+                        HorizontalAlignment="Stretch"
+                        Classes="Info"
+                        Items="{Binding Connections}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
 
                     <TextBlock Classes="Info" Text="Version" />
                     <TextBlock Classes="Info" Text="{Binding Version}" />

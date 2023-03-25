@@ -1,7 +1,9 @@
 ﻿using FlexiObject.AppClient.Core;
+using FlexiObject.AppClient.Core.Settings;
 using FlexiObject.Core.Config.SettingsStore;
 
 using System;
+using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,16 +18,31 @@ namespace FlexiObject.AppClient.ViewModels
             Version = GetType().Assembly.GetName().Version.ToString();
         }
         public static LoginViewModel Create => new(null);
-        public string Version { get; } = "some version";
+        public string Version { get; }
         public string LoginName { get; set; }
         public string Password { get; set; }
         public bool UseUserLogin { get; set; }
         public bool UseUserLoginIsVisible { get; set; } = false;
+
         public event EventHandler<bool> LoginCompleted;
 
-        protected override Task OnActivateAsync(CancellationToken cancellationToken)
+        public ObservableCollection<IConnection> Connections { get; set; } = new();
+        protected override async Task OnActivateAsync(CancellationToken cancellationToken)
         {
-            return base.OnActivateAsync(cancellationToken);
+            try
+            {
+                var connectionSettings = await _settingsStore.LoadAsync<ConnectionSettings>();
+
+                foreach (var sett in connectionSettings.StandaloneSettings)
+                    Connections.Add(sett);
+
+                foreach (var sett in connectionSettings.ServerSettings)
+                    Connections.Add(sett);
+            }
+            catch (Exception ex)
+            {
+                await DialogService.ShowErrorAsync(ex);
+            }
         }
 
         public override async Task<bool> CanCloseAsync(CancellationToken cancellationToken = default)

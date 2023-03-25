@@ -1,13 +1,12 @@
-﻿using Avalonia.Controls;
+﻿using FlexiObject.AppClient.Core.Services.Windows;
+using FlexiObject.Core.Config;
 
 using System;
 using System.Threading.Tasks;
-using FlexiObject.Core.Config;
-using FlexiObject.AppClient.Core;
-using FlexiObject.AppClient.Core.Services.Windows;
 
 namespace FlexiObject.AppClient.Core.Services
 {
+    using Avalonia.Controls;
     public class NavigationService : INavigationService
     {
         private readonly IWindowService _windowService;

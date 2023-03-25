@@ -1,11 +1,10 @@
-﻿using Avalonia.Controls;
-
-using FlexiObject.AppClient.Core.Window;
+﻿using FlexiObject.AppClient.Core.Window;
 
 using System.Threading.Tasks;
 
 namespace FlexiObject.AppClient.Core.Services.Windows
 {
+    using Avalonia.Controls;
     public interface IWindowService
     {
         Window Current { get; }
