@@ -1,5 +1,5 @@
 using FlexiObject.AppClient.Core;
-using FlexiObject.AppClient.Services;
+using FlexiObject.AppClient.Core.Services;
 
 using System;
 using System.Threading.Tasks;
@@ -14,8 +14,6 @@ namespace FlexiObject.AppClient.ViewModels
         {
             _navigation = navigation;
             StartTimer();
-            Width = 1200;
-            Height = 900;
         }
         protected override void OnTimerTick()
         {

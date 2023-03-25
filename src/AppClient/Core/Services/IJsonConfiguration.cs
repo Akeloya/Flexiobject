@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlexiObject.AppClient.Services
+namespace FlexiObject.AppClient.Core.Services
 {
     public interface IJsonConfiguration
     {

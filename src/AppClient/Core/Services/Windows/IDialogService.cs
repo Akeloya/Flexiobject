@@ -3,12 +3,13 @@
 using System;
 using System.Threading.Tasks;
 
-namespace FlexiObject.AppClient.Services
+namespace FlexiObject.AppClient.Core.Services.Windows
 {
     public interface IDialogService
     {
-        Task<bool?> ShowDialogAsync(object model);
-        Task ShowWindowAsync(object model);
+        DialogPropertyBuilder GetPropesBuilder();
+        Task<bool?> ShowDialogAsync(object model, DialogProperties props = default);
+        Task ShowWindowAsync(object model, DialogProperties props = default);
         Task ShowErrorAsync(string text, string title = null);
         Task ShowErrorAsync(Exception exeption);
         Task ShowInformationAsync(string text, string title = null);
@@ -18,4 +19,4 @@ namespace FlexiObject.AppClient.Services
         Task<string[]> OpenFileDialogAsync(bool allowMultiple);
         Task<string> OpenFolderDialogAsync();
     }
-} 
+}

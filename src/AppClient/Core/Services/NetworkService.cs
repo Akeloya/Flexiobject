@@ -3,7 +3,7 @@
 using System;
 using System.Timers;
 
-namespace FlexiObject.AppClient.Services
+namespace FlexiObject.AppClient.Core.Services
 {
     /// <summary>
     /// Testing connection to application server/database
@@ -12,7 +12,7 @@ namespace FlexiObject.AppClient.Services
     {
         private readonly Timer _timer = new();
         private readonly ILogger _logger;
-        public NetworkService(LoggerFactory loggerFactory) 
+        public NetworkService(LoggerFactory loggerFactory)
         {
             _logger = loggerFactory.Create<NetworkService>();
             _timer.Elapsed += NetworkTestElapsed;

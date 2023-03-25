@@ -13,8 +13,7 @@ namespace FlexiObject.AppClient.ViewModels
         public LoginViewModel(IJsonSettingsStore jsonSettingsStore)
         {
             _settingsStore = jsonSettingsStore;
-            Width = 1000;
-            Height = 450;
+            Version = GetType().Assembly.GetName().Version.ToString();
         }
         public static LoginViewModel Create => new(null);
         public string Version { get; } = "some version";

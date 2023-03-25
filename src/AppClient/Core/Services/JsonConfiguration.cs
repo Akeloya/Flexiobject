@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace FlexiObject.AppClient.Services
+namespace FlexiObject.AppClient.Core.Services
 {
     public class JsonConfiguration : IJsonConfiguration
     {
@@ -12,7 +12,7 @@ namespace FlexiObject.AppClient.Services
         private const string _jsonFileName = "appsettings.json";
         public JsonConfiguration()
         {
-            
+
         }
         public T LoadSettings<T>()
         {
@@ -23,7 +23,7 @@ namespace FlexiObject.AppClient.Services
 
         public Task<T> LoadSettingsAsync<T>()
         {
-            return Task<T>.Factory.StartNew(() => {  return LoadSettings<T>(); });
+            return Task<T>.Factory.StartNew(() => { return LoadSettings<T>(); });
         }
 
         private void BuildConfiguration()

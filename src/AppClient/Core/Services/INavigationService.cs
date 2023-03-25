@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace FlexiObject.AppClient.Services
+namespace FlexiObject.AppClient.Core.Services
 {
     public interface INavigationService
     {

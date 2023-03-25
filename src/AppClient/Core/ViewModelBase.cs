@@ -1,10 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Threading;
-
-using FlexiObject.AppClient.Services;
+using FlexiObject.AppClient.Core.Services.Windows;
 using FlexiObject.Core.Config;
-
-using ReactiveUI;
 
 using System;
 
@@ -16,6 +13,8 @@ namespace FlexiObject.AppClient.Core
         protected IDialogService DialogService { get; }
         public ViewModelBase()
         {
+            if(Design.IsDesignMode)
+                return;
             DialogService = ServiceLocator.Get<IDialogService>();
             ApiFactory = ServiceLocator.Get<ApiFactory>();
             _dispatcherTimer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Normal, (_, _) =>
@@ -24,14 +23,6 @@ namespace FlexiObject.AppClient.Core
             });
         }
         protected ApiFactory ApiFactory { get; }
-        public virtual int Width { get; set; }
-        public virtual int Height { get; set; }
-        public bool CloseWindow { get; set; }
-        public bool CanResize { get; set; } = true;
-        public WindowState SizeState { get; set; } = WindowState.Maximized;
-
-        public ViewModelActivator Activator { get; } = new ViewModelActivator();
-
         protected virtual void OnTimerTick()
         {
 

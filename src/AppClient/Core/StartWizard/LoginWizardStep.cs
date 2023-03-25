@@ -1,4 +1,4 @@
-﻿using FlexiObject.AppClient.Services;
+﻿using FlexiObject.AppClient.Core.Services.Windows;
 using FlexiObject.AppClient.ViewModels;
 using FlexiObject.Core.Exceptions;
 using FlexiObject.Core.Utilities;
@@ -33,7 +33,7 @@ namespace FlexiObject.AppClient.Core.StartWizard
 
         public async Task SetupAsync()
         {
-            bool? loginResult = await _dialogService.ShowDialogAsync(_loginViewModel);
+            bool? loginResult = await _dialogService.ShowDialogAsync(_loginViewModel, _dialogService.GetPropesBuilder().MinMaxWidth(1000).MinMaxHeight(500).Build());
 
             if (loginResult != true)
                 throw new WizardTerminateExeption();

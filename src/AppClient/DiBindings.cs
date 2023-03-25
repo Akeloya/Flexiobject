@@ -1,6 +1,4 @@
 ﻿using FlexiObject.Core.Config;
-
-using FlexiObject.AppClient.Services;
 using FlexiObject.AppClient.ViewModels;
 using FlexiObject.AppClient.Views;
 
@@ -10,6 +8,8 @@ using NLog;
 using FlexiObject.AppClient.Core;
 using FlexiObject.Core.Wizard;
 using FlexiObject.AppClient.Core.StartWizard;
+using FlexiObject.AppClient.Core.Services.Windows;
+using FlexiObject.AppClient.Core.Services;
 
 namespace FlexiObject.AppClient
 {

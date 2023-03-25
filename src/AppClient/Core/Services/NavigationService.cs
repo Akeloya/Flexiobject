@@ -4,8 +4,9 @@ using System;
 using System.Threading.Tasks;
 using FlexiObject.Core.Config;
 using FlexiObject.AppClient.Core;
+using FlexiObject.AppClient.Core.Services.Windows;
 
-namespace FlexiObject.AppClient.Services
+namespace FlexiObject.AppClient.Core.Services
 {
     public class NavigationService : INavigationService
     {
@@ -39,7 +40,7 @@ namespace FlexiObject.AppClient.Services
 
         private Window CreateWindow(ViewModelBase view)
         {
-            var wnd = _windowService.CreateDefault(view);                        
+            var wnd = _windowService.CreateDefault(view);
             wnd.DataContext = view;
             return wnd;
         }

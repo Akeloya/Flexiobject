@@ -1,4 +1,4 @@
-﻿using FlexiObject.AppClient.Services;
+﻿using FlexiObject.AppClient.Core.Services.Windows;
 using FlexiObject.AppClient.ViewModels;
 using FlexiObject.Core.Utilities;
 

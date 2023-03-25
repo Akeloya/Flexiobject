@@ -4,7 +4,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Threading;
-
+using FlexiObject.AppClient.Core.Services.Windows;
 using FlexiObject.AppClient.Properties;
 using FlexiObject.AppClient.Views.MessageView;
 
@@ -14,7 +14,7 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace FlexiObject.AppClient.Services
+namespace FlexiObject.AppClient.Core.Services.Windows
 {
     public class DialogService : IDialogService
     {
@@ -74,7 +74,7 @@ namespace FlexiObject.AppClient.Services
                     if (title != null)
                         wind.Title = title;
                     wind.Icon = new WindowIcon(bitmap);
-                    wind.Open();
+                    await wind.Open();
                 });
             }
             catch (Exception ex)
@@ -110,24 +110,29 @@ namespace FlexiObject.AppClient.Services
             throw new NotImplementedException();
         }
 
-        public async Task ShowWindowAsync(object model)
+        public async Task ShowWindowAsync(object model, DialogProperties props = default)
         {
-            var window = await _windowService.CreateDialogAsync(model);
+            var window = await _windowService.CreateDialogAsync(model, props);
             await Dispatcher.UIThread.InvokeAsync(async () =>
             {
                 await window.Open();
             });
         }
 
-        public async Task<bool?> ShowDialogAsync(object model)
+        public async Task<bool?> ShowDialogAsync(object model, DialogProperties props = default)
         {
-            var window = await _windowService.CreateDialogAsync(model);
+            var window = await _windowService.CreateDialogAsync(model, props);
             var result = await Dispatcher.UIThread.InvokeAsync(async () =>
             {
                 var result = await window.Open(true);
                 return result;
             });
             return result;
+        }
+
+        public DialogPropertyBuilder GetPropesBuilder()
+        {
+            return new DialogPropertyBuilder();
         }
     }
 

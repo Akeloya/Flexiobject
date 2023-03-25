@@ -15,9 +15,6 @@ namespace FlexiObject.AppClient.ViewModels
             AppTitle = assembly.GetCustomAttribute<AssemblyTitleAttribute>().Title;
             Version = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
             Description = assembly.GetCustomAttribute<AssemblyDescriptionAttribute>()?.Description;
-            Width = 900;
-            Height = 450;
-            SizeState = Avalonia.Controls.WindowState.Normal;
         }
         public static AboutAppViewModel Design => new();
         public string OsPlatform => Environment.OSVersion.ToString();

@@ -1,5 +1,5 @@
 ﻿using FlexiObject.AppClient.Core;
-using FlexiObject.AppClient.Services;
+using FlexiObject.AppClient.Core.Services;
 
 namespace FlexiObject.AppClient.ViewModels
 {
