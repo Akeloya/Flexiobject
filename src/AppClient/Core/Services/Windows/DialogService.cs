@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 namespace FlexiObject.AppClient.Core.Services.Windows
 {
     using Avalonia.Controls;
+    /// <inheritdoc/>
     public class DialogService : IDialogService
     {
         private readonly ILogger _logger;
@@ -26,34 +27,47 @@ namespace FlexiObject.AppClient.Core.Services.Windows
             _logger = logFactory.GetLogger(nameof(DialogService));
             _windowService = windowService;
         }
+
+        /// <inheritdoc/>
         public Task ShowErrorAsync(string text, string title = null)
         {
-            _logger.Info("Called ShowError");
-            return CreateDialogWindow("error.png", title, content: text);
+            var internalTitle = title ?? Resources.DialogMessageErrorCaption;
+            _logger.Info($"Called ShowError\nText: {text}\nTitle: {internalTitle}");
+            return CreateDialogWindow("error.png", internalTitle, content: text);
         }
 
+        /// <inheritdoc/>
         public Task ShowErrorAsync(Exception exeption)
         {
             _logger.Info("Called ShowError");
-            return CreateDialogWindow("error.png", Resources.AppTitle, content: exeption);
+            return CreateDialogWindow("error.png", Resources.DialogMessageErrorCaption, content: exeption);
         }
 
+        /// <inheritdoc/>
         public Task ShowInformationAsync(string text, string title = null)
         {
-            _logger.Info("Called ShowInformation");
-            return CreateDialogWindow("information.png", title, content: text);
+            var internalTitle = title ?? Resources.DialogMessageInformationCaption;
+            _logger.Info($"Called ShowInformation\nText: {text}\nTitle: {internalTitle}");
+            return CreateDialogWindow("information.png", internalTitle, content: text);
         }
 
+        /// <inheritdoc/>
         public Task ShowWarningAsync(string text, string title = null)
         {
-            _logger.Info("Called ShowWarning");
+            var internalTitle = title ?? Resources.DialogMessageWarningCaption;
+            _logger.Info($"Called ShowWarning\nText: {text}\nTitle: {internalTitle}");
             return CreateDialogWindow("warning.png", title);
         }
+
+        /// <inheritdoc/>
         public Task<DialogMessageResult> ShowQuestionDialogAsync(string text, string title = null)
         {
-            _logger.Info("Called ShowQuestionDialog");
+            var internalTitle = title ?? Resources.DialogMessageQuestionCaption;
+            _logger.Info($"Called ShowQuestionDialog\nText: {text}\nTitle: {internalTitle}");
             return CreateDialogWindow("help-icon.png", title, DialogMessageResult.Ok | DialogMessageResult.Cancel, text);
         }
+
+        /// <inheritdoc/>
         private async Task<DialogMessageResult> CreateDialogWindow(string iconName, string title, DialogMessageResult dialogButtons = DialogMessageResult.None, object content = null)
         {
             _logger.Info("Creating dialog window");
@@ -75,7 +89,7 @@ namespace FlexiObject.AppClient.Core.Services.Windows
                     if (title != null)
                         wind.Title = title;
                     wind.Icon = new WindowIcon(bitmap);
-                    await wind.Open();
+                    await wind.Open(true, _windowService.Current);
                 });
             }
             catch (Exception ex)
@@ -87,6 +101,7 @@ namespace FlexiObject.AppClient.Core.Services.Windows
             return contentView.DialogMessageResult;
         }
 
+        /// <inheritdoc/>
         public void OpenSetupFolder()
         {
             Process.Start(new ProcessStartInfo()
@@ -97,6 +112,7 @@ namespace FlexiObject.AppClient.Core.Services.Windows
             });
         }
 
+        /// <inheritdoc/>
         public Task<string[]> OpenFileDialogAsync(bool allowMultipel = false)
         {
             var ofd = new OpenFileDialog
@@ -106,11 +122,15 @@ namespace FlexiObject.AppClient.Core.Services.Windows
             return ofd.ShowAsync(_windowService.Current);
         }
 
-        public Task<string> OpenFolderDialogAsync()
+        /// <inheritdoc/>
+        public async Task<string> OpenFolderDialogAsync()
         {
-            throw new NotImplementedException();
+            var ofd = new OpenFolderDialog();
+            await ofd.ShowAsync(((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).MainWindow);
+            return ofd.Directory;
         }
 
+        /// <inheritdoc/>
         public async Task ShowWindowAsync(object model, DialogProperties props = default)
         {
             var window = await _windowService.CreateDialogAsync(model, props);
@@ -120,6 +140,7 @@ namespace FlexiObject.AppClient.Core.Services.Windows
             });
         }
 
+        /// <inheritdoc/>
         public async Task<bool?> ShowDialogAsync(object model, DialogProperties props = default)
         {
             var window = await _windowService.CreateDialogAsync(model, props);
@@ -131,6 +152,7 @@ namespace FlexiObject.AppClient.Core.Services.Windows
             return result;
         }
 
+        /// <inheritdoc/>
         public DialogPropertyBuilder GetPropesBuilder()
         {
             return new DialogPropertyBuilder();
@@ -139,12 +161,12 @@ namespace FlexiObject.AppClient.Core.Services.Windows
 
     public static class DialogServiceExt
     {
-        public static async Task<bool?> Open(this Window wnd, bool isDialog = false)
+        public static async Task<bool?> Open(this Window wnd, bool isDialog = false, Window parent = null)
         {
             if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop && isDialog)
             {
-                var owner = desktop.MainWindow ?? new Window() { Width = 0, Height = 0, ShowInTaskbar = false };
-                if (desktop.MainWindow == null)
+                var owner = desktop.MainWindow ?? (parent ?? new Window() { Width = 0, Height = 0, ShowInTaskbar = false });
+                if (desktop.MainWindow == null && isDialog && parent == null)
                     owner.Show();
 
                 try
@@ -154,7 +176,7 @@ namespace FlexiObject.AppClient.Core.Services.Windows
                 }
                 finally
                 {
-                    if (desktop.MainWindow == null)
+                    if (desktop.MainWindow == null && isDialog && parent == null)
                         owner.Close();
                 }
             }

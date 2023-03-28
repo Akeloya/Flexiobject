@@ -17,14 +17,10 @@ namespace FlexiObject.AppClient.Views.MessageView
     public class DialogMessageViewModel : Screen
     {
         public object DisplaingContent { get; set; }
-        public bool CloseWindow { get; set; }
         public DialogMessageResult DialogMessageResult { get; set; }
         public DialogMessageResult DialogButtons { get; set; }
         public bool ShowOkButton => (DialogButtons & DialogMessageResult.Ok) == DialogMessageResult.Ok;
         public bool ShowCancelButton => (DialogButtons & DialogMessageResult.Cancel) == DialogMessageResult.Cancel;
-        public int Width { get; set; } = 400;
-        public int Height { get; set; } = 150;
-        public bool CanResize { get; set; } = false;
         public WindowState SizeState { get; set; } = WindowState.Normal;
         public Task Submit()
         {
@@ -36,6 +32,11 @@ namespace FlexiObject.AppClient.Views.MessageView
         {
             DialogMessageResult = DialogMessageResult.Cancel;
             return TryCloseAsync(false);
+        }
+
+        public Task Close()
+        {
+            return TryCloseAsync();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using FlexiObject.AppClient.Core;
 using FlexiObject.AppClient.Core.Settings;
+using FlexiObject.AppClient.ViewModels.Connection;
 using FlexiObject.Core.Config.SettingsStore;
 
 using System;
@@ -7,7 +8,7 @@ using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace FlexiObject.AppClient.ViewModels
+namespace FlexiObject.AppClient.ViewModels.Connection
 {
     public class LoginViewModel : ViewModelBase
     {
@@ -21,12 +22,8 @@ namespace FlexiObject.AppClient.ViewModels
         public string Version { get; }
         public string LoginName { get; set; }
         public string Password { get; set; }
-        public bool UseUserLogin { get; set; }
-        public bool UseUserLoginIsVisible { get; set; } = false;
 
-        public event EventHandler<bool> LoginCompleted;
-
-        public ObservableCollection<IConnection> Connections { get; set; } = new();
+        public ObservableCollection<IFlexiConnection> Connections { get; set; } = new();
         protected override async Task OnActivateAsync(CancellationToken cancellationToken)
         {
             try
@@ -53,18 +50,18 @@ namespace FlexiObject.AppClient.ViewModels
 
         public async Task DoLogin()
         {
-            await Task.Run(() =>
+            await Task.Run(async () =>
             {
                 try
                 {
                     var app = ApiFactory.GetOrCreateApi().Create();
 
                     var session = app.OpenSession("localhost", 9696, null, null);
-                    LoginCompleted?.Invoke(this, true);
+                    await TryCloseAsync(true);
                 }
                 catch (Exception ex)
                 {
-                    DialogService.ShowErrorAsync(ex);
+                    await DialogService.ShowErrorAsync(ex);
                 }
 
             });
@@ -77,7 +74,7 @@ namespace FlexiObject.AppClient.ViewModels
 
         public Task OpenConnectionSettings()
         {
-            return Task.CompletedTask;
+            return DialogService.ShowDialogAsync(new ConnectionSettingsViewModel());
         }
 
     }

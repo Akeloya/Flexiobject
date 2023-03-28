@@ -138,6 +138,18 @@
   <data name="ButtonCloseText" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="DialogMessageErrorCaption" xml:space="preserve">
+    <value>Error in application</value>
+  </data>
+  <data name="DialogMessageInformationCaption" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="DialogMessageQuestionCaption" xml:space="preserve">
+    <value>Question</value>
+  </data>
+  <data name="DialogMessageWarningCaption" xml:space="preserve">
+    <value>Warning!</value>
+  </data>
   <data name="DialogWindowCancel" xml:space="preserve">
     <value>Cancel</value>
   </data>

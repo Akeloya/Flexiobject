@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace FlexiObject.AppClient.Core.Settings
 {
-    public interface IConnection
+    public interface IFlexiConnection
     {
         public string Name { get; set; }
     }
-    public class AppServerSettings : IConnection
+    public class AppServerSettings : IFlexiConnection
     {
         public string Host { get; set; }
         public int Port { get; set; }
@@ -19,13 +19,13 @@ namespace FlexiObject.AppClient.Core.Settings
 
     public static class ConnectionEx
     {
-        public static AppServerSettings GetServerSettings(this IConnection connection)
+        public static AppServerSettings GetServerSettings(this IFlexiConnection connection)
         {
             if (connection is not AppServerSettings)
                 return null;
             return connection as AppServerSettings;
         }
-        public static StandaloneSettings GetStandalone(this IConnection connection)
+        public static StandaloneSettings GetStandalone(this IFlexiConnection connection)
         {
             if (connection is not StandaloneSettings)
                 return null;
@@ -34,7 +34,7 @@ namespace FlexiObject.AppClient.Core.Settings
     }
 
 
-    public class StandaloneSettings : AppDbSettings, IConnection
+    public class StandaloneSettings : AppDbSettings, IFlexiConnection
     {
         public string Name { get; set; }
     }

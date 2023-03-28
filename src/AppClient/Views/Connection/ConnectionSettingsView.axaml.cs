@@ -3,12 +3,12 @@ using Avalonia.Markup.Xaml;
 
 using PropertyChanged;
 
-namespace FlexiObject.AppClient.Views
+namespace FlexiObject.AppClient.Views.Connection
 {
     [DoNotNotify]
-    public partial class LoginView : UserControl
+    public partial class ConnectionSettingsView : UserControl
     {
-        public LoginView()
+        public ConnectionSettingsView()
         {
             InitializeComponent();
         }

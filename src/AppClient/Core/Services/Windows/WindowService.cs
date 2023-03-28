@@ -74,6 +74,7 @@ namespace FlexiObject.AppClient.Core.Services.Windows
                     };
                     SetupProperties(wnd, properties);
                     wnd.Closed += WndClosed;
+                    wnd.GotFocus += WndGotFocus;
                     lock (_lock)
                     {
                         _openedWindows.Add(wnd);
@@ -97,6 +98,7 @@ namespace FlexiObject.AppClient.Core.Services.Windows
                 };
                 SetupProperties(wnd, properties);
                 wnd.Closed += WndClosed;
+                wnd.GotFocus += WndGotFocus;
                 lock (_lock)
                 {
                     _openedWindows.Add(wnd);

@@ -1,5 +1,5 @@
 <UserControl
-    x:Class="FlexiObject.AppClient.Views.LoginView"
+    x:Class="FlexiObject.AppClient.Views.Connection.LoginView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,6 +11,7 @@
     d:DesignWidth="1000"
     mc:Ignorable="d">
     <UserControl.Styles>
+        <StyleInclude Source="/Theme/Styles.axaml" />
         <Style Selector="Button.Controls">
             <Setter Property="MinWidth" Value="100" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -56,29 +57,32 @@
                     <TextBlock Classes="Info" Text="Password" />
                     <TextBox Classes="Info" Text="{Binding LoginName}" />
 
-                    <TextBlock
-                        Classes="Info"
-                        IsVisible="{Binding UseLoginIsVisible}"
-                        Text="Use OS login" />
-                    <CheckBox
-                        Classes="Info"
-                        IsChecked="{Binding UseUserLogin}"
-                        IsVisible="{Binding UseLoginIsVisible}" />
-
-                    <TextBlock Classes="Info" Text="Connection" />
                     <TextBlock Classes="Info" Text="Connection" />
 
-                    <TextBlock Classes="Info" Text="" />
-                    <ComboBox
-                        HorizontalAlignment="Stretch"
-                        Classes="Info"
-                        Items="{Binding Connections}">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Name}" />
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
+                    <StackPanel>
+                        <DockPanel Margin="3,0">
+                            <Button
+                                Width="32"
+                                Height="32"
+                                Margin="1"
+                                Command="{Binding OpenConnectionSettings}"
+                                DockPanel.Dock="Right">
+                                <Image Source="avares://FlexiObject.AppClient/Assets/settings.png" />
+                            </Button>
+                            <ComboBox
+                                HorizontalAlignment="Stretch"
+                                Classes="Info"
+                                DockPanel.Dock="Left"
+                                Items="{Binding Connections}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </DockPanel>
+                        <TextBlock Text="ConnectionInfo" />
+                    </StackPanel>
 
                     <TextBlock Classes="Info" Text="Version" />
                     <TextBlock Classes="Info" Text="{Binding Version}" />

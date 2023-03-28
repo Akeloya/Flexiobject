@@ -138,6 +138,18 @@
   <data name="ButtonCloseText" xml:space="preserve">
     <value>Закрыть</value>
   </data>
+  <data name="DialogMessageErrorCaption" xml:space="preserve">
+    <value>Ошибка в приложении</value>
+  </data>
+  <data name="DialogMessageInformationCaption" xml:space="preserve">
+    <value>Информация</value>
+  </data>
+  <data name="DialogMessageQuestionCaption" xml:space="preserve">
+    <value>Вопрос</value>
+  </data>
+  <data name="DialogMessageWarningCaption" xml:space="preserve">
+    <value>Внимание!</value>
+  </data>
   <data name="DialogWindowCancel" xml:space="preserve">
     <value>Отмена</value>
   </data>
