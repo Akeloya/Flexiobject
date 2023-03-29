@@ -19,7 +19,7 @@ namespace FlexiObject.AppClient.Core.UI
         }
 
         public static readonly AttachedProperty<object> ModelProperty = AvaloniaProperty.RegisterAttached<View, IContentControl, object>(
-            "Model", null, false, BindingMode.TwoWay);
+            "Model", null, false, BindingMode.OneWay);
 
         private static void HandleModelChanged(IAvaloniaObject element, object viewValue)
         {
@@ -27,13 +27,13 @@ namespace FlexiObject.AppClient.Core.UI
             {
                 if (viewValue != null)
                 {
-                    interactElem.DataContext = viewValue;
-                    interactElem.Content = ServiceLocator.Get<ViewLocator>().Build(viewValue);
+                    var control = ServiceLocator.Get<ViewLocator>().Build(viewValue);
+                    control.DataContext = viewValue;                    
+                    interactElem.Content = control;
                 }
                 else
                 {
-                    //interactElem.DataContext = null;
-                    //interactElem.Content = null;
+                    interactElem.Content = null;
                 }
             }
         }
