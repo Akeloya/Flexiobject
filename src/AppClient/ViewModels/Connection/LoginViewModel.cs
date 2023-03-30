@@ -13,12 +13,14 @@ namespace FlexiObject.AppClient.ViewModels.Connection
     public class LoginViewModel : ViewModelBase
     {
         private readonly IJsonSettingsStore _settingsStore;
-        public LoginViewModel(IJsonSettingsStore jsonSettingsStore)
+        private readonly FlexiConnectionFactory _connectionFactory;
+        public LoginViewModel(IJsonSettingsStore jsonSettingsStore, FlexiConnectionFactory connectionFactory)
         {
             _settingsStore = jsonSettingsStore;
+            _connectionFactory = connectionFactory;
             Version = GetType().Assembly.GetName().Version.ToString();
         }
-        public static LoginViewModel Create => new(null);
+        public static LoginViewModel Create => new(null, null);
         public string Version { get; }
         public string LoginName { get; set; }
         public string Password { get; set; }
@@ -74,7 +76,7 @@ namespace FlexiObject.AppClient.ViewModels.Connection
 
         public Task OpenConnectionSettings()
         {
-            return DialogService.ShowDialogAsync(new ConnectionSettingsViewModel());
+            return DialogService.ShowDialogAsync(new ConnectionSettingsViewModel(_connectionFactory));
         }
 
     }
