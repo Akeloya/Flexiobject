@@ -1,15 +1,42 @@
 ﻿using FlexiObject.AppClient.Core.Settings;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FlexiObject.AppClient.ViewModels.Connection
 {
-    public class ServerSettingsViewModel
+    public class ServerSettingsViewModel : ASettingsViewModel
     {
-        public AppServerSettings Settings{get;set; }
+        public ServerSettingsViewModel(IFlexiConnection connection)
+        {
+            Settings = connection as AppServerSettings ?? new AppServerSettings();
+            Discard();
+        }
+        public AppServerSettings Settings { get; }
+        public string Host { get; set; }
+        public int Port { get; set; }
+        public bool UseWindows { get; set; }
+        public string Name { get; set; }
+
+        public override void Apply()
+        {
+            Settings.Name = Name;
+            Settings.Host = Host;
+            Settings.Port = Port;
+            Settings.UseWindows = UseWindows;
+        }
+
+        public override async Task ApplyAsync()
+        {
+            Apply();
+            await Settings.SaveAsync();
+        }
+
+        public override void Discard()
+        {
+            Host = Settings.Host;
+            Port = Settings.Port;
+            Name = Settings.Name;
+            UseWindows = Settings.UseWindows;
+        }
     }
 }

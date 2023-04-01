@@ -24,19 +24,27 @@
             Grid.Row="1"
             Grid.Column="0"
             Text="Name" />
-        <TextBox Grid.Row="1" Grid.Column="1" />
+        <TextBox
+            Grid.Row="1"
+            Grid.Column="1"
+            Text="{Binding Name}" />
 
         <TextBlock
             Grid.Row="2"
             Grid.Column="0"
-            Text="Server" />
-        <TextBox Grid.Row="2" Grid.Column="1" />
+            Text="Host" />
+        <TextBox
+            Grid.Row="2"
+            Grid.Column="1"
+            Text="{Binding Host}" />
 
         <TextBlock
             Grid.Row="3"
             Grid.Column="0"
             Text="Port" />
-        <TextBox Grid.Row="3" Grid.Column="1" />
-
+        <TextBox
+            Grid.Row="3"
+            Grid.Column="1"
+            Text="{Binding Port}" />
     </Grid>
 </UserControl>

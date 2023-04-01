@@ -28,13 +28,13 @@ namespace FlexiObject.AppClient.ViewModels.Connection
         {
             if (SelectedSettings is AppServerSettings)
             {
-                SelectedSettingsViewModel = new ServerSettingsViewModel();
+                SelectedSettingsViewModel = new ServerSettingsViewModel(SelectedSettings);
                 return;
             }
 
-            SelectedSettingsViewModel = new StandaloneSettingsViewModel();
+            SelectedSettingsViewModel = new StandaloneSettingsViewModel(SelectedSettings);
         }
-        public object SelectedSettingsViewModel { get; set; }
+        public ASettingsViewModel SelectedSettingsViewModel { get; set; }
         public Task Close()
         {
             return TryCloseAsync();
@@ -44,7 +44,7 @@ namespace FlexiObject.AppClient.ViewModels.Connection
         {
             try
             {
-                await SelectedSettings.SaveAsync();
+                await SelectedSettingsViewModel.ApplyAsync();
             }
             catch (InvalidOperationException)
             {
