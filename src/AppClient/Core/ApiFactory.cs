@@ -19,7 +19,7 @@ namespace FlexiObject.AppClient.Core
             if (_api != null)
                 return _api;
 
-            var settings = _settingsStore.Load<AppSettings>();
+            var settings = _settingsStore.Load<ConnectionSettings>();
             _api = new Api(settings.GetCurrent().IsStandalone);
             return _api;
         }

@@ -1,8 +1,8 @@
-﻿using FlexiObject.AppClient.Core.Exceptions;
-using FlexiObject.Core.Config;
+﻿using FlexiObject.Core.Config;
 using FlexiObject.Core.Config.SettingsStore;
 using FlexiObject.DbProvider;
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,21 +16,66 @@ namespace FlexiObject.AppClient.Core.Settings
         public bool StandaloneMode { get; set; }
         public List<AppServerSettings> ServerSettings { get; set; } = new();
         public List<StandaloneSettings> StandaloneSettings { get; set; } = new();
+
+        private IEnumerable<IFlexiConnection> LoginSettings => ServerSettings.OfType<IFlexiConnection>().Union(StandaloneSettings);
+        public IFlexiConnection GetCurrent()
+        {
+            if (!LoginSettings.Any())
+                throw new Exception("Нет настроек подключения");
+
+            if (string.IsNullOrWhiteSpace(SelectedSettings))
+            {
+                throw new Exception("Не выбраны настройки подключения");
+            }
+            var selectedSettings = LoginSettings.First(p => p.Name == SelectedSettings);
+
+            if (selectedSettings == null)
+            {
+                if (LoginSettings.Count() > 0)
+                    SelectedSettings = null;
+                else
+                {
+                    throw new Exception("Некорректные настройки подключения");
+                }
+            }
+            return selectedSettings;
+        }
     }
     public interface IFlexiConnection
     {
         public string Name { get; set; }
+        public bool IsStandalone { get; }
+        public string BuildInfo();
         public Task SaveAsync();
     }
 
     public abstract class AFlexiConnection : IFlexiConnection
     {
-        public string Name { get; set; } = "Новое подключение";
+        protected string _oldName;
+        protected string _newName;
+        public string Name
+        {
+            get
+            {
+                return _newName;
+            }
+            set
+            {
+                if (_newName == value)
+                    return;
+                _oldName = _newName;
+                _newName = value;
+            }
+        }
+
+        protected bool NameChanged => string.CompareOrdinal(_oldName, _newName) != 0;
+
+        public virtual bool IsStandalone { get; private set; }
 
         public async Task SaveAsync()
         {
             if (!Validate())
-                throw new InvalidOperationException();
+                throw new Exceptions.InvalidOperationException();
             var jsonSettingsStore = ServiceLocator.Get<JsonSettingsStore>();
             var settings = await jsonSettingsStore.LoadAsync<ConnectionSettings>();
             Update(settings);
@@ -39,15 +84,24 @@ namespace FlexiObject.AppClient.Core.Settings
         protected abstract bool Validate();
         protected abstract void Update(ConnectionSettings settings);
 
+        public abstract string BuildInfo();
     }
     public class AppServerSettings : AFlexiConnection
     {
         public string Host { get; set; }
         public int Port { get; set; }
         public bool UseWindows { get; set; }
+
+        public override string BuildInfo()
+        {
+            return $"{Host}:{Port}";
+        }
+
         protected override void Update(ConnectionSettings settings)
         {
-            settings.ServerSettings.RemoveAll(p => p.Name == Name);
+            if (settings.StandaloneSettings.Any(p => p.Name == Name))
+                throw new FlexiObject.Core.Exceptions.ApplicationException();
+            settings.ServerSettings.RemoveAll(p => (NameChanged ? _oldName : Name) == p.Name);
             settings.ServerSettings.Add(this);
         }
         protected override bool Validate()
@@ -63,10 +117,18 @@ namespace FlexiObject.AppClient.Core.Settings
         public string DatabaseName { get; set; }
         public string UserName { get; set; }
         public string UserPassword { get; set; }
+        public override bool IsStandalone => true;
+
+        public override string BuildInfo()
+        {
+            return $"ServerName={ServerName}, CatalogName={DatabaseName}, User ID={UserName}";
+        }
 
         protected override void Update(ConnectionSettings settings)
         {
-            settings.StandaloneSettings.RemoveAll(p => p.Name == Name);
+            if (settings.ServerSettings.Any(p => p.Name == Name))
+                throw new FlexiObject.Core.Exceptions.ApplicationException();
+            settings.StandaloneSettings.RemoveAll(p => (NameChanged ? _oldName : Name) == p.Name);
             settings.StandaloneSettings.Add(this);
         }
 
@@ -79,7 +141,7 @@ namespace FlexiObject.AppClient.Core.Settings
     public class FlexiConnectionFactory
     {
         private readonly JsonSettingsStore _jsonSettingsStore;
-        public FlexiConnectionFactory(JsonSettingsStore jsonSettingsStore) 
+        public FlexiConnectionFactory(JsonSettingsStore jsonSettingsStore)
         {
             _jsonSettingsStore = jsonSettingsStore;
         }
@@ -110,6 +172,15 @@ namespace FlexiObject.AppClient.Core.Settings
             if (connection is not StandaloneSettings)
                 return null;
             return connection as StandaloneSettings;
+        }
+
+        public static async Task RemoveThis(this IFlexiConnection connection)
+        {
+            var store = ServiceLocator.Get<JsonSettingsStore>();
+            var settings = await store.LoadAsync<ConnectionSettings>();
+            settings.StandaloneSettings.RemoveAll(p => p.Name == connection.Name);
+            settings.ServerSettings.RemoveAll(p => p.Name == connection.Name);
+            await store.SaveAsync(settings);
         }
     }
 }

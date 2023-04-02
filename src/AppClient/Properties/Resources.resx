@@ -159,9 +159,6 @@
   <data name="DialogWindowOkay" xml:space="preserve">
     <value>Ok</value>
   </data>
-  <data name="MainVisual" xml:space="preserve">
-    <value>MainVisual</value>
-  </data>
   <data name="MenuItemEdit" xml:space="preserve">
     <value>Edit</value>
   </data>

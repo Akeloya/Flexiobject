@@ -24,17 +24,22 @@
     <DockPanel>
         <DockPanel DockPanel.Dock="Left">
             <StackPanel DockPanel.Dock="Bottom">
-                <TextBlock Text="Подключение" />
+                <TextBlock Text="Новое подключение:" />
                 <RadioButton
                     Content="Автономное"
                     GroupName="Standalone"
                     IsChecked="{Binding IsStandalone}" />
                 <RadioButton Content="Сервер" GroupName="Standalone" />
-                <Button
-                    HorizontalAlignment="Right"
-                    Command="{Binding Add}"
-                    Content="Добавить" />
-
+                <UniformGrid Rows="1">
+                    <Button
+                        HorizontalAlignment="Right"
+                        Command="{Binding Add}"
+                        Content="Добавить" />
+                    <Button
+                        HorizontalAlignment="Right"
+                        Command="{Binding Remove}"
+                        Content="Удалить" />
+                </UniformGrid>
             </StackPanel>
             <ListBox
                 MinWidth="200"
@@ -49,7 +54,7 @@
             </ListBox>
         </DockPanel>
         <DockPanel DockPanel.Dock="Right">
-            <TextBlock Text="Настройки подключения" />
+            <TextBlock DockPanel.Dock="Top" Text="Настройки подключения" />
             <StackPanel
                 HorizontalAlignment="Right"
                 DockPanel.Dock="Bottom"

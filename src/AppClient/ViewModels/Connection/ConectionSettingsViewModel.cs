@@ -21,11 +21,17 @@ namespace FlexiObject.AppClient.ViewModels.Connection
             new AppServerSettings { Host = "localhost", Port = 55, Name="appserver", UseWindows = false },
             new StandaloneSettings { Name ="localdb", ServerName="localhost", DbType = DbProvider.DbTypes.MsSqlServer, DatabaseName="appdb", UserName = "flexiobject_data", UserPassword="123456" }
             };
-        
-        public bool IsStandalone {get;set; }
+
+        public bool IsStandalone { get; set; } = true;
         public IFlexiConnection SelectedSettings { get; set; }
         private void OnSelectedSettingsChanged()
         {
+            if (SelectedSettings == null)
+            {
+                SelectedSettingsViewModel = null;
+                return;
+            }
+
             if (SelectedSettings is AppServerSettings)
             {
                 SelectedSettingsViewModel = new ServerSettingsViewModel(SelectedSettings);
@@ -50,11 +56,11 @@ namespace FlexiObject.AppClient.ViewModels.Connection
             {
                 await DialogService.ShowErrorAsync("Необходимо заполнить поля");
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 await DialogService.ShowErrorAsync($"Failed to apply {ex}");
             }
-            
+
         }
 
         public void Add()
@@ -62,6 +68,27 @@ namespace FlexiObject.AppClient.ViewModels.Connection
             var settings = _connectionFactory.Create(IsStandalone);
             Connections.Add(settings);
             SelectedSettings = settings;
+        }
+
+        public async void Remove()
+        {
+            if (SelectedSettings == null)
+                return;
+
+            try
+            {
+                await SelectedSettings.RemoveThis();
+                SelectedSettings = null;
+            }
+            catch (System.Exception ex)
+            {
+                await DialogService.ShowErrorAsync(ex);
+            }
+            finally
+            {
+                Connections = new ObservableCollection<IFlexiConnection>(await _connectionFactory.GetConnections());
+            }
+
         }
 
         protected override async Task OnActivateAsync(CancellationToken cancellationToken)

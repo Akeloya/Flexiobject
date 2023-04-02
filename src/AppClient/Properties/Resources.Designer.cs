@@ -187,15 +187,6 @@ namespace FlexiObject.AppClient.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MainVisual.
-        /// </summary>
-        public static string MainVisual {
-            get {
-                return ResourceManager.GetString("MainVisual", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         public static string MenuItemEdit {
