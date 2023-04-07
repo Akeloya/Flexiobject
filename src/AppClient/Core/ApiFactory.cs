@@ -1,5 +1,5 @@
 ﻿using FlexiObject.API;
-using FlexiObject.AppClient.Core.Settings;
+using FlexiObject.API.Settings;
 using FlexiObject.Core.Config.SettingsStore;
 
 using System;

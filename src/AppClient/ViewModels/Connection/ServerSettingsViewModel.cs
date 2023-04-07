@@ -1,4 +1,4 @@
-﻿using FlexiObject.AppClient.Core.Settings;
+﻿using FlexiObject.API.Settings;
 
 using System.Threading.Tasks;
 
@@ -14,7 +14,6 @@ namespace FlexiObject.AppClient.ViewModels.Connection
         public AppServerSettings Settings { get; }
         public string Host { get; set; }
         public int Port { get; set; }
-        public bool UseWindows { get; set; }
         public string Name { get; set; }
 
         public override void Apply()
@@ -22,7 +21,6 @@ namespace FlexiObject.AppClient.ViewModels.Connection
             Settings.Name = Name;
             Settings.Host = Host;
             Settings.Port = Port;
-            Settings.UseWindows = UseWindows;
         }
 
         public override async Task ApplyAsync()
@@ -36,7 +34,6 @@ namespace FlexiObject.AppClient.ViewModels.Connection
             Host = Settings.Host;
             Port = Settings.Port;
             Name = Settings.Name;
-            UseWindows = Settings.UseWindows;
         }
     }
 }

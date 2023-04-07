@@ -32,7 +32,7 @@ namespace FlexiObject.API.Settings
 
             if(_standalone)
             {
-                Bind<DbContextFactory>().ToSelf().InSingletonScope();
+                Bind<DbContextFactory>().To<StandaloneDbContextFactory>().InSingletonScope();
                 Bind<AppDbContext>().ToConstant(Kernel.Get<DbContextFactory>().Create());
                 Rebind<ISessionRepository>().To<StandaloneSessionRepository>().InSingletonScope();
             }

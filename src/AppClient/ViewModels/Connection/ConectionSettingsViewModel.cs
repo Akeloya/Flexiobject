@@ -1,6 +1,6 @@
-﻿using FlexiObject.AppClient.Core;
-using FlexiObject.AppClient.Core.Exceptions;
-using FlexiObject.AppClient.Core.Settings;
+﻿using FlexiObject.API.Settings;
+using FlexiObject.AppClient.Core;
+using FlexiObject.Core.Exceptions;
 
 using System.Collections.ObjectModel;
 using System.Threading;
@@ -18,7 +18,7 @@ namespace FlexiObject.AppClient.ViewModels.Connection
 
         public static ConnectionSettingsViewModel Design => new(null);
         public ObservableCollection<IFlexiConnection> Connections { get; set; } = new(){
-            new AppServerSettings { Host = "localhost", Port = 55, Name="appserver", UseWindows = false },
+            new AppServerSettings { Host = "localhost", Port = 55, Name="appserver"},
             new StandaloneSettings { Name ="localdb", ServerName="localhost", DbType = DbProvider.DbTypes.MsSqlServer, DatabaseName="appdb", UserName = "flexiobject_data", UserPassword="123456" }
             };
 

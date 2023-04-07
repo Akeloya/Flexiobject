@@ -146,7 +146,7 @@ namespace FlexiObject.AppClient.Core.Services.Windows
             var window = await _windowService.CreateDialogAsync(model, props);
             var result = await Dispatcher.UIThread.InvokeAsync(async () =>
             {
-                var result = await window.Open(true);
+                var result = await window.Open(true, _windowService.Current);
                 return result;
             });
             return result;

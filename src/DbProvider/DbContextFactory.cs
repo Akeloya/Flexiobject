@@ -5,14 +5,19 @@ namespace FlexiOject.DbProvider
 {
     public class DbContextFactory
     {
-        private readonly JsonSettingsStore _jsonSettingsStore;
+        protected readonly JsonSettingsStore JsonSettingsStore;
         public DbContextFactory(JsonSettingsStore jsonSettingsStore)
         {
-            _jsonSettingsStore = jsonSettingsStore;
+            JsonSettingsStore = jsonSettingsStore;
         }
-        public AppDbContext Create()
+        public virtual AppDbContext Create()
         {
-            var settings = _jsonSettingsStore.Load<AppDbSettings>();
+            var settings = JsonSettingsStore.Load<AppDbSettings>();
+            return Create(settings);
+        }
+
+        public AppDbContext Create(IAppDbSettings settings)
+        {
             return new AppDbContext(settings);
         }
     }

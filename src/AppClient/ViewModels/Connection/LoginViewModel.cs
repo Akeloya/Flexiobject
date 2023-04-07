@@ -1,7 +1,7 @@
 ﻿using Avalonia.Controls;
 
+using FlexiObject.API.Settings;
 using FlexiObject.AppClient.Core;
-using FlexiObject.AppClient.Core.Settings;
 using FlexiObject.Core.Config.SettingsStore;
 using FlexiObject.Core.Logging;
 
@@ -44,7 +44,13 @@ namespace FlexiObject.AppClient.ViewModels.Connection
                 var settings = await _settingsStore.LoadAsync<ConnectionSettings>();
                 settings.SelectedSettings = SelectedConnection?.Name;
                 await _settingsStore.SaveAsync(settings);
-                ConnectionInfo = SelectedConnection?.BuildInfo();
+                if(SelectedConnection != null)
+                {
+                    ConnectionInfo = SelectedConnection.BuildInfo();
+                    var userData = settings.SavedUsersData.FirstOrDefault(p=> p.ConnectionName == SelectedConnection.Name);
+                    LoginName = userData?.SavedLogin;
+                    Password = userData?.SavedPassword;
+                }
             }
             catch (Exception ex)
             {
@@ -96,8 +102,16 @@ namespace FlexiObject.AppClient.ViewModels.Connection
                 try
                 {
                     var app = ApiFactory.GetOrCreateApi().Create();
-
-                    var session = app.OpenSession("localhost", 9696, null, null);
+                    if(SelectedConnection.IsStandalone)
+                    {
+                        var session = app.OpenSession("localhost", 9696, LoginName, Password);
+                    }
+                    else
+                    {
+                        var settings = SelectedConnection as AppServerSettings;
+                        var session = app.OpenSession(settings.Host, settings.Port, LoginName, Password);
+                    }
+                    
                     await TryCloseAsync(true);
                 }
                 catch (Exception ex)

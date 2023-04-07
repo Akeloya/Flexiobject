@@ -21,10 +21,10 @@ namespace FlexiObject.DbProvider
     }
     public partial class AppDbContext : DbContext
     {
-        private readonly AppDbSettings _settings;
+        private readonly IAppDbSettings _settings;
         private DbConnection _connection;
         
-        public AppDbContext(AppDbSettings settings) : base()
+        public AppDbContext(IAppDbSettings settings) : base()
         {
             _settings = settings;
         }
@@ -976,15 +976,16 @@ namespace FlexiObject.DbProvider
 
         private void MsSqlInitiate(DbContextOptionsBuilder optionsBuilder)
         {
-            var connectionStr = $"Data Source={_settings.ServerName};Initial catalog={_settings.DatabaseName};";
+            var connectionStr = $"Server={_settings.ServerName};Initial catalog={_settings.DatabaseName};";
             if (string.IsNullOrEmpty(_settings.UserName) && string.IsNullOrEmpty(_settings.UserPassword))
             {
                 connectionStr += "Integrated Security=TRUE;";
             }
             else
             {
-                connectionStr += $"User ID={_settings.UserName};Password={_settings.UserPassword}";
+                connectionStr += $"User ID={_settings.UserName};Password={_settings.UserPassword};";
             }
+            connectionStr += "TrustServerCertificate=true";
             optionsBuilder.UseSqlServer(connectionStr);
         }
     }

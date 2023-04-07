@@ -1,4 +1,4 @@
-﻿using FlexiObject.AppClient.Core.Settings;
+﻿using FlexiObject.API.Settings;
 using FlexiObject.DbProvider;
 
 using System;

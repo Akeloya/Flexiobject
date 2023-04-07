@@ -55,7 +55,7 @@
                     <TextBox Classes="Info" Text="{Binding LoginName}" />
 
                     <TextBlock Classes="Info" Text="Password" />
-                    <TextBox Classes="Info" Text="{Binding LoginName}" />
+                    <TextBox Classes="Info" Text="{Binding Password}" />
 
                     <TextBlock Classes="Info" Text="Connection" />
 

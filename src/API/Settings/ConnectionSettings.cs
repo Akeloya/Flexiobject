@@ -7,13 +7,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FlexiObject.AppClient.Core.Settings
+namespace FlexiObject.API.Settings
 {
+    public class SavedUserData
+    {
+        public string ConnectionName { get; set; }
+        public string SavedLogin { get; set; }
+        public string SavedPassword { get; set; }
+    }
+
     [JsonSettingSubFolder("Settings")]
     public class ConnectionSettings : AJsonSettings
     {
         public string SelectedSettings { get; set; }
         public bool StandaloneMode { get; set; }
+        public List<SavedUserData> SavedUsersData { get; set; } = new();
         public List<AppServerSettings> ServerSettings { get; set; } = new();
         public List<StandaloneSettings> StandaloneSettings { get; set; } = new();
 
@@ -75,7 +83,7 @@ namespace FlexiObject.AppClient.Core.Settings
         public async Task SaveAsync()
         {
             if (!Validate())
-                throw new Exceptions.InvalidOperationException();
+                throw new Core.Exceptions.InvalidOperationException();
             var jsonSettingsStore = ServiceLocator.Get<JsonSettingsStore>();
             var settings = await jsonSettingsStore.LoadAsync<ConnectionSettings>();
             Update(settings);
@@ -90,8 +98,6 @@ namespace FlexiObject.AppClient.Core.Settings
     {
         public string Host { get; set; }
         public int Port { get; set; }
-        public bool UseWindows { get; set; }
-
         public override string BuildInfo()
         {
             return $"{Host}:{Port}";
@@ -100,8 +106,8 @@ namespace FlexiObject.AppClient.Core.Settings
         protected override void Update(ConnectionSettings settings)
         {
             if (settings.StandaloneSettings.Any(p => p.Name == Name))
-                throw new FlexiObject.Core.Exceptions.ApplicationException();
-            settings.ServerSettings.RemoveAll(p => (NameChanged ? _oldName : Name) == p.Name);
+                throw new Core.Exceptions.ApplicationException();
+            settings.ServerSettings.RemoveAll(p => (NameChanged ? _oldName : Name) == p.Name || p.Name == Name);
             settings.ServerSettings.Add(this);
         }
         protected override bool Validate()
@@ -127,8 +133,8 @@ namespace FlexiObject.AppClient.Core.Settings
         protected override void Update(ConnectionSettings settings)
         {
             if (settings.ServerSettings.Any(p => p.Name == Name))
-                throw new FlexiObject.Core.Exceptions.ApplicationException();
-            settings.StandaloneSettings.RemoveAll(p => (NameChanged ? _oldName : Name) == p.Name);
+                throw new Core.Exceptions.ApplicationException();
+            settings.StandaloneSettings.RemoveAll(p => (NameChanged ? _oldName : Name) == p.Name || p.Name == Name);
             settings.StandaloneSettings.Add(this);
         }
 

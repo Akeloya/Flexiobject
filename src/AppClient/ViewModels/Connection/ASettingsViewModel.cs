@@ -1,5 +1,4 @@
-﻿using FlexiObject.AppClient.Core.Settings;
-using FlexiObject.AppClient.Core.UI;
+﻿using FlexiObject.AppClient.Core.UI;
 
 using ReactiveUI;
 
