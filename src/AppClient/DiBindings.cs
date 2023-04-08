@@ -1,6 +1,5 @@
 ﻿using FlexiObject.Core.Config;
-using FlexiObject.AppClient.ViewModels;
-using FlexiObject.AppClient.Views;
+using FlexiObject.AppClient.UI.Views;
 
 using Ninject;
 
@@ -10,6 +9,7 @@ using FlexiObject.Core.Wizard;
 using FlexiObject.AppClient.Core.StartWizard;
 using FlexiObject.AppClient.Core.Services.Windows;
 using FlexiObject.AppClient.Core.Services;
+using FlexiObject.AppClient.UI.ViewModels;
 
 namespace FlexiObject.AppClient
 {

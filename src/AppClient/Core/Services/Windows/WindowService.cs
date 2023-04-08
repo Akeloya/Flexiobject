@@ -4,8 +4,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Threading;
 
 using FlexiObject.AppClient.Core.Window;
-using FlexiObject.AppClient.ViewModels;
-using FlexiObject.AppClient.Views;
+using FlexiObject.AppClient.UI.Views;
 using FlexiObject.Core.Config;
 using FlexiObject.Core.Logging;
 using FlexiObject.Core.Utilities;
@@ -17,6 +16,8 @@ using System.Threading.Tasks;
 namespace FlexiObject.AppClient.Core.Services.Windows
 {
     using Avalonia.Controls;
+    using FlexiObject.AppClient.UI.ViewModels;
+
     public class WindowService : IWindowService
     {
         private Window _current;

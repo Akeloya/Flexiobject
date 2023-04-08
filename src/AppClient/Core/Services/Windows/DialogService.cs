@@ -6,7 +6,6 @@ using Avalonia.Platform;
 using Avalonia.Threading;
 
 using FlexiObject.AppClient.Properties;
-using FlexiObject.AppClient.Views.MessageView;
 
 using NLog;
 
@@ -17,15 +16,22 @@ using System.Threading.Tasks;
 namespace FlexiObject.AppClient.Core.Services.Windows
 {
     using Avalonia.Controls;
+    using FlexiObject.AppClient.UI.ViewModels.MessageViewModels;
+
     /// <inheritdoc/>
     public class DialogService : IDialogService
     {
         private readonly ILogger _logger;
         private readonly IWindowService _windowService;
-        public DialogService(LogFactory logFactory, IWindowService windowService)
+        private readonly ViewLocator _viewLocator;
+        private const int DefaultMaxWidth = 600;
+        private readonly DialogPropertyBuilder _defaultProps;
+        public DialogService(LogFactory logFactory, IWindowService windowService, ViewLocator viewLocator)
         {
             _logger = logFactory.GetLogger(nameof(DialogService));
             _windowService = windowService;
+            _viewLocator = viewLocator;
+            _defaultProps = new DialogPropertyBuilder().MaxWidth(DefaultMaxWidth);
         }
 
         /// <inheritdoc/>
@@ -33,14 +39,14 @@ namespace FlexiObject.AppClient.Core.Services.Windows
         {
             var internalTitle = title ?? Resources.DialogMessageErrorCaption;
             _logger.Info($"Called ShowError\nText: {text}\nTitle: {internalTitle}");
-            return CreateDialogWindow("error.png", internalTitle, content: text);
+            return CreateDialogWindow("error.png", internalTitle, new ErrorMessageViewModel(text), props: _defaultProps.MaxHeight(500).Build());
         }
 
         /// <inheritdoc/>
-        public Task ShowErrorAsync(Exception exeption)
+        public Task ShowErrorAsync(Exception exeption, string message = null, string title = null)
         {
             _logger.Info("Called ShowError");
-            return CreateDialogWindow("error.png", Resources.DialogMessageErrorCaption, content: exeption);
+            return CreateDialogWindow("error.png", title ?? Resources.DialogMessageErrorCaption, new ErrorMessageViewModel(message, exeption), props: _defaultProps.MaxHeight(500).Build());
         }
 
         /// <inheritdoc/>
@@ -48,7 +54,7 @@ namespace FlexiObject.AppClient.Core.Services.Windows
         {
             var internalTitle = title ?? Resources.DialogMessageInformationCaption;
             _logger.Info($"Called ShowInformation\nText: {text}\nTitle: {internalTitle}");
-            return CreateDialogWindow("information.png", internalTitle, content: text);
+            return CreateDialogWindow("information.png", internalTitle, text, props: _defaultProps.Build());
         }
 
         /// <inheritdoc/>
@@ -56,7 +62,7 @@ namespace FlexiObject.AppClient.Core.Services.Windows
         {
             var internalTitle = title ?? Resources.DialogMessageWarningCaption;
             _logger.Info($"Called ShowWarning\nText: {text}\nTitle: {internalTitle}");
-            return CreateDialogWindow("warning.png", title);
+            return CreateDialogWindow("warning.png", title, text, props: _defaultProps.Build());
         }
 
         /// <inheritdoc/>
@@ -64,20 +70,41 @@ namespace FlexiObject.AppClient.Core.Services.Windows
         {
             var internalTitle = title ?? Resources.DialogMessageQuestionCaption;
             _logger.Info($"Called ShowQuestionDialog\nText: {text}\nTitle: {internalTitle}");
-            return CreateDialogWindow("help-icon.png", title, DialogMessageResult.Ok | DialogMessageResult.Cancel, text);
+            return CreateDialogWindow("help-icon.png", title, text, DialogMessageResult.Ok | DialogMessageResult.Cancel, _defaultProps.Build());
         }
 
+
         /// <inheritdoc/>
-        private async Task<DialogMessageResult> CreateDialogWindow(string iconName, string title, DialogMessageResult dialogButtons = DialogMessageResult.None, object content = null)
+        private async Task<DialogMessageResult> CreateDialogWindow(string iconName, string title, object content, DialogMessageResult dialogButtons = DialogMessageResult.None, DialogProperties props = default)
         {
             _logger.Info("Creating dialog window");
             var assets = AvaloniaLocator.Current.GetService<IAssetLoader>()!;
             var bitmap = new Bitmap(assets.Open(new Uri($"avares://FlexiObject.AppClient/Assets/{iconName}")));
             var contentView = new DialogMessageViewModel
             {
-                DisplaingContent = content,
                 DialogButtons = dialogButtons,
             };
+
+            if(content.GetType().Name.EndsWith("ViewModel"))
+            {
+                try
+                {
+                    await Dispatcher.UIThread.InvokeAsync(() =>
+                    {
+                        var view = _viewLocator.Build(content);
+                        view.DataContext = content;
+                        contentView.DisplaingContent = view;
+                    });
+                    
+                }
+                catch(Exception ex)
+                {
+                    contentView.DisplaingContent = ex.Message;
+                }
+                
+            }
+            else
+                contentView.DisplaingContent = content;
             _logger.Info("Opening dialog window");
 
             try
@@ -85,7 +112,7 @@ namespace FlexiObject.AppClient.Core.Services.Windows
 
                 await Dispatcher.UIThread.InvokeAsync(async () =>
                 {
-                    var wind = await _windowService.CreateDialogAsync(contentView);
+                    var wind = await _windowService.CreateDialogAsync(contentView, props);
                     if (title != null)
                         wind.Title = title;
                     wind.Icon = new WindowIcon(bitmap);

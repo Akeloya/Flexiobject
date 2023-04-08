@@ -27,7 +27,6 @@ namespace FlexiObject.DbProvider.Entities
         public int? WfHistoryFieldId { get; set; }
         public virtual Picture PictureOpen { get; set; }
         public virtual Picture PictureClose { get; set; }
-        [NotMapped]
         public WfState WfHistoryField { get; set; }
         public virtual ObjectFolder Parent { get; set; }
         public virtual ICollection<FieldDefinition> FieldDefinitions { get; set; }

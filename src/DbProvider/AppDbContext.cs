@@ -179,6 +179,16 @@ namespace FlexiObject.DbProvider
                     .HasForeignKey(d => d.SummaryDefId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_SummaryFieldSteps_ToSummaryDefinition");
+
+                entity.HasOne(p=> p.FieldDef)
+                .WithMany()
+                .HasForeignKey(p=> p.FieldId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+                entity.HasOne(p=> p.SummaryDef)
+                .WithMany()
+                .HasForeignKey(p=> p.SummaryDefId)
+                .OnDelete(DeleteBehavior.Cascade);
             });
         }
 
@@ -206,6 +216,11 @@ namespace FlexiObject.DbProvider
                     .HasForeignKey(d => d.AddFieldId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_SummaryAddFieldsStps_SummaryAddFields");
+
+                entity.HasOne(p=> p.FieldDef)
+                .WithMany()
+                .HasForeignKey(p=> p.FieldDefId)
+                .OnDelete(DeleteBehavior.NoAction);
             });
         }
 
@@ -438,6 +453,16 @@ namespace FlexiObject.DbProvider
                 entity.Property(e => e.UserGroupId).HasColumnName("User_Group");
 
                 entity.Property(e => e.UserId).HasColumnName("User_Id");
+
+                entity.HasOne(p=> p.UserGroup)
+                .WithMany()
+                .HasForeignKey(p=> p.UserGroupId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+                entity.HasOne(p=> p.User)
+                .WithMany()
+                .HasForeignKey(p=> p.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
             });
         }
 
@@ -619,7 +644,7 @@ namespace FlexiObject.DbProvider
                 entity.HasOne(d => d.Folder)
                     .WithMany(p => p.FieldDefinitions)
                     .HasForeignKey(d => d.FolderId)
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.NoAction)
                     .HasConstraintName("FK_FieldDefinition_ToObjectFolders");
             });
         }
@@ -814,6 +839,12 @@ namespace FlexiObject.DbProvider
 
                 entity.Property(e => e.WfHistoryFieldId).HasColumnName("wfHistory_fld");
 
+                entity.HasOne(p=> p.WfHistoryField)
+                .WithMany()
+                .HasForeignKey(p=> p.WfHistoryFieldId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+                entity.HasOne(p=> p.Parent).WithMany().OnDelete(DeleteBehavior.NoAction);
             });
         }
 
@@ -890,6 +921,10 @@ namespace FlexiObject.DbProvider
                     .HasForeignKey(d => d.SummaryDefId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_SummaryResultFields_ToSummaryDefinition");
+
+                entity.HasOne(p=> p.FieldDef)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
             });
         }
 
@@ -904,6 +939,16 @@ namespace FlexiObject.DbProvider
                 entity.Property(e => e.PartnerFieldId).HasColumnName("partner_field");
 
                 entity.Property(e => e.SynchOption).HasColumnName("synch_option");
+
+                entity.HasOne(p=> p.PartnerField)
+                .WithMany()
+                .HasForeignKey(p=>p.PartnerFieldId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+                entity.HasOne(p=> p.Field)
+                .WithMany()
+                .HasForeignKey(p=> p.FieldId)
+                .OnDelete(DeleteBehavior.Cascade);
             });
         }
 

@@ -1,5 +1,4 @@
-﻿using FlexiObject.AppClient.Views.MessageView;
-
+﻿using FlexiObject.AppClient.UI.ViewModels.MessageViewModels;
 using System;
 using System.Threading.Tasks;
 
@@ -37,8 +36,10 @@ namespace FlexiObject.AppClient.Core.Services.Windows
         /// Shows the error dialog asynchronous.
         /// </summary>
         /// <param name="exeption">The exeption.</param>
+        /// <param name="message">The message.</param>
+        /// <param name="title">The title.</param>
         /// <returns></returns>
-        Task ShowErrorAsync(Exception exeption);
+        Task ShowErrorAsync(Exception exeption, string message = null, string title = null);
         /// <summary>
         /// Shows the information dialog asynchronous.
         /// </summary>

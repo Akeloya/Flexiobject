@@ -1,0 +1,68 @@
+<UserControl
+    x:Class="FlexiObject.AppClient.UI.Views.Connection.ConnectionSettingsView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:FlexiObject.AppClient.UI.ViewModels.Connection"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="using:FlexiObject.AppClient.Core.UI"
+    Margin="5"
+    d:DataContext="{x:Static local:ConnectionSettingsViewModel.Design}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.Styles>
+        <Style Selector="Button">
+            <Setter Property="Margin" Value="1" />
+            <Setter Property="MinWidth" Value="100" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
+        <Style Selector="DockPanel">
+            <Setter Property="Margin" Value="1" />
+        </Style>
+    </UserControl.Styles>
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Left">
+            <StackPanel DockPanel.Dock="Bottom">
+                <TextBlock Text="Новое подключение:" />
+                <RadioButton
+                    Content="Автономное"
+                    GroupName="Standalone"
+                    IsChecked="{Binding IsStandalone}" />
+                <RadioButton Content="Сервер" GroupName="Standalone" />
+                <UniformGrid Rows="1">
+                    <Button
+                        HorizontalAlignment="Right"
+                        Command="{Binding Add}"
+                        Content="Добавить" />
+                    <Button
+                        HorizontalAlignment="Right"
+                        Command="{Binding Remove}"
+                        Content="Удалить" />
+                </UniformGrid>
+            </StackPanel>
+            <ListBox
+                MinWidth="200"
+                Items="{Binding Connections}"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                SelectedItem="{Binding SelectedSettings}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </DockPanel>
+        <DockPanel DockPanel.Dock="Right">
+            <TextBlock DockPanel.Dock="Top" Text="Настройки подключения" />
+            <StackPanel
+                HorizontalAlignment="Right"
+                DockPanel.Dock="Bottom"
+                Orientation="Horizontal">
+                <Button Command="{Binding Apply}" Content="Применить" />
+                <Button Command="{Binding Close}" Content="Закрыть" />
+            </StackPanel>
+            <ContentControl ui:View.Model="{Binding SelectedSettingsViewModel}" DockPanel.Dock="Top" />
+        </DockPanel>
+    </DockPanel>
+</UserControl>

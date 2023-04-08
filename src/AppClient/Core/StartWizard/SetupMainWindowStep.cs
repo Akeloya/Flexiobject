@@ -1,5 +1,5 @@
 ﻿using FlexiObject.AppClient.Core.Services.Windows;
-using FlexiObject.AppClient.ViewModels;
+using FlexiObject.AppClient.UI.ViewModels;
 using FlexiObject.Core.Utilities;
 
 using System;

@@ -44,6 +44,12 @@
             return this;
         }
 
+        public DialogPropertyBuilder MaxHeight(int maxHeight)
+        {
+            dialogProperties.MaxHeight = maxHeight;
+            return this;
+        }
+
         public DialogPropertyBuilder MinMaxWidth(int width)
         {
             dialogProperties.MinWidth = dialogProperties.MaxWidth = width;

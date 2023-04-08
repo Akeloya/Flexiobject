@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FlexiObject.DbProvider.Entities
@@ -7,6 +8,7 @@ namespace FlexiObject.DbProvider.Entities
     [Table("ObjectDef")]
     public class ObjectDef
     {
+        [Key]
         public long Id { get; set; }
         public DateTime Created { get; set; }
         public int FolderId { get; set; }
