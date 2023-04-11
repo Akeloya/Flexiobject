@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace FlexiObject.API.Repositories
 {
     [Repository(typeof(ISessionRepository), typeof(ClientSessionRepository))]
-    internal class ClientSessionRepository : ISessionRepository
+    internal class ClientSessionRepository : ISessionRepository, IDisposable
     {
         private readonly Client _client;
         private readonly Application _application;
@@ -29,8 +29,16 @@ namespace FlexiObject.API.Repositories
         {
             Task.Run(async () =>
             {
-                await _client.Open(host, port);
-                var result = await _client.GetDataAsync<PingDataContract>("/api/OpenSession", new CancellationTokenSource(TimeSpan.FromSeconds(60)).Token);
+                try
+                {
+                    await _client.Open(host, port);
+                    var result = await _client.GetDataAsync<PingDataContract>("/api/OpenSession", new CancellationTokenSource(TimeSpan.FromSeconds(60)).Token);
+                }
+                finally
+                {
+                    Dispose();
+                }
+                
             }).ConfigureAwait(false).GetAwaiter().GetResult();
             
             return new Session(_application, _container.Get<IUserRepository>(), _container.Get<ICustomObjectRepository>());
@@ -49,6 +57,11 @@ namespace FlexiObject.API.Repositories
 
         public void LogOff(ISession session)
         {
+        }
+
+        public void Dispose()
+        {
+            _client?.Dispose();
         }
     }
 }

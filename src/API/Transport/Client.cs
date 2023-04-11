@@ -23,11 +23,6 @@ namespace FlexiObject.API.Transport
         private readonly ILogger _logger;
         private readonly HttpClient _httpClient;
 
-        internal static ClientFactory Factory { get; }
-        static Client()
-        {
-            Factory = new ClientFactory();
-        }
         public Client()
         {
             _logger = LogManager.GetCurrentClassLogger();

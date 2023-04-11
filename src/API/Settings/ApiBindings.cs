@@ -38,7 +38,7 @@ namespace FlexiObject.API.Settings
             }
             else
             {
-                Bind<Client>().ToMethod((ctx) => Client.Factory.GetSinglton());
+                Bind<Client>().ToSelf().InTransientScope();
             }
         }        
     }

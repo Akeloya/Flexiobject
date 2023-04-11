@@ -3,6 +3,7 @@
 using FlexiObject.API.Settings;
 using FlexiObject.AppClient.Core;
 using FlexiObject.Core.Config.SettingsStore;
+using FlexiObject.Core.Exceptions;
 using FlexiObject.Core.Logging;
 
 using System;
@@ -51,6 +52,7 @@ namespace FlexiObject.AppClient.UI.ViewModels.Connection
                     LoginName = userData?.SavedLogin;
                     Password = userData?.SavedPassword;
                 }
+                ApiFactory.ResetApi();
             }
             catch (Exception ex)
             {
@@ -114,9 +116,16 @@ namespace FlexiObject.AppClient.UI.ViewModels.Connection
 
                     await TryCloseAsync(true);
                 }
+                catch (UnauthorizedException ex)
+                {
+                    _logger.Error(ex);
+                    ApiFactory.ResetApi();
+                    await DialogService.ShowErrorAsync("Access deny");
+                }
                 catch (Exception ex)
                 {
                     _logger.Error(ex);
+                    ApiFactory.ResetApi();
                     await DialogService.ShowErrorAsync(ex);
                 }
 
