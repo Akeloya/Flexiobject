@@ -9,7 +9,6 @@ namespace FlexiObject.Core.Wizard
     {
         string Name { get; }
         bool IsBackground { get; }
-        void Setup();
         Task SetupAsync();
     }
 }

@@ -30,28 +30,25 @@
             Margin="2"
             DockPanel.Dock="Top"
             Orientation="Horizontal">
-            <Button
-                Command="{Binding ShowDetailes}"
-                Content="Детали"
-                IsVisible="{Binding Exception, Converter={x:Static ObjectConverters.IsNotNull}}" />
-        </StackPanel>
-        <StackPanel
-            DockPanel.Dock="Top"
-            IsVisible="{Binding ShowInfo}"
-            ScrollViewer.HorizontalScrollBarVisibility="Auto"
-            ScrollViewer.VerticalScrollBarVisibility="Auto">
-            <ItemsControl Items="{Binding Exception.StackFrames}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <TextBox
-                            Focusable="False"
-                            IsReadOnly="True"
-                            Text="{Binding}"
-                            TextWrapping="WrapWithOverflow" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-
+            <Expander
+                HorizontalAlignment="Stretch"
+                Header="Детали"
+                IsVisible="{Binding Exception, Converter={x:Static ObjectConverters.IsNotNull}}">
+                <ItemsControl
+                    Items="{Binding Exception.StackFrames}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                    ScrollViewer.VerticalScrollBarVisibility="Visible">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBox
+                                Focusable="False"
+                                IsReadOnly="True"
+                                Text="{Binding}"
+                                TextWrapping="WrapWithOverflow" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Expander>
         </StackPanel>
     </DockPanel>
 </UserControl>

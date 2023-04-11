@@ -17,30 +17,6 @@ namespace FlexiObject.Core.Wizard
             _logger = loggerFactory.Create<WizardExecutor>();
         }
 
-        public void Setup()
-        {
-            _logger.Trace("Start setup wizard");
-            foreach (var step in _steps)
-            {
-                _logger.Trace($"Start setup step: {step.Name}");
-                try
-                {
-                    if (step.IsBackground)
-                    {
-                        Task.Run(step.Setup);
-                        continue;
-                    }
-                    step.Setup();
-                }
-                catch (WizardTerminateExeption)
-                {
-                    _logger.Warn("$Wizard setup terminated at step {step.Name}");
-                    break;
-                }
-            }
-            _logger.Trace("End setup wizard");
-        }
-
         public async Task SetupAsync()
         {
             _logger.Trace("Start setup wizard");

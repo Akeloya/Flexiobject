@@ -24,11 +24,6 @@ namespace FlexiObject.AppClient.Core.StartWizard
 
         public event EventHandler<ViewModelBase> OnSetupViewModel;
 
-        public void Setup()
-        {
-            TaskHelper.RunSync(SetupAsync);
-        }
-
         public async Task SetupAsync()
         {
             await _windowService.SetupMainWindowView(_mainWindowViewModel);

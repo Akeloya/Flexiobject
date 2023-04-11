@@ -14,7 +14,7 @@ namespace FlexiObject.DbProvider
 
     public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     {
-        public AppDbContext CreateDbContext(string[] args)
+        public AppDbContext CreateDbContext(params string[] args)
         {
             return new AppDbContext(new JsonSettingsStore().Load<AppDbSettings>());
         }

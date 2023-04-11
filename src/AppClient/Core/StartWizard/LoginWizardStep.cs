@@ -26,11 +26,6 @@ namespace FlexiObject.AppClient.Core.StartWizard
 
         public event EventHandler<ViewModelBase> OnSetupViewModel;
 
-        public void Setup()
-        {
-            TaskHelper.RunSync(SetupAsync);
-        }
-
         public async Task SetupAsync()
         {
             bool? loginResult = await _dialogService.ShowDialogAsync(_loginViewModel, _dialogService.GetPropesBuilder().MinMaxWidth(1000).MinMaxHeight(500).Build());
