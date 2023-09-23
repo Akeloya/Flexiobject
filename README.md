@@ -1,4 +1,4 @@
-# Flexiobject [![License: GPL v3](https://img.shields.io/github/license/Akeloya/CustomObjectApplication.svg)](http://www.gnu.org/licenses/gpl-3.0) [![Build](https://github.com/Akeloya/CustomObjectApplication/workflows/.NET%20Core/badge.svg)](https://github.com/Akeloya/CustomObjectApplication/actions?query=workflow%3A%22.NET+Core%22) [![CodeQL](https://github.com/Akeloya/CustomObjectApplication/workflows/CodeQL/badge.svg)](https://github.com/Akeloya/CustomObjectApplication/actions?query=workflow%3ACodeQL) [![BCH compliance](https://bettercodehub.com/edge/badge/Akeloya/CustomObjectApplication?branch=master)](https://bettercodehub.com/)
+# Flexiobject [![License: GPL v3](https://img.shields.io/github/license/Akeloya/CustomObjectApplication.svg)](http://www.gnu.org/licenses/gpl-3.0) [![Build](https://github.com/Akeloya/CustomObjectApplication/workflows/.NET%20Core/badge.svg)](https://github.com/Akeloya/CustomObjectApplication/actions?query=workflow%3A%22.NET+Core%22) [![CodeQL](https://github.com/Akeloya/CustomObjectApplication/workflows/CodeQL/badge.svg)](https://github.com/Akeloya/CustomObjectApplication/actions?query=workflow%3ACodeQL)
 
 Application for creating and using freely customizable configuration of data, forms, actions and other things
 
@@ -6,11 +6,11 @@ Application for creating and using freely customizable configuration of data, fo
 
 | Language | Platform      | Application GUI |
 |:--------:|:-------------:|:---------------:|
-|   C#     | .Net Core 6   | Avalonia app    |
+|   C#     | .Net Core 7   | Avalonia app    |
 
 ## Development
 
-- Make sure you have Visual Studio 2019 Community (or higher)
+- Make sure you have Visual Studio 2022 Community (or higher)
 - Fork this repo
 - Clone to computer
 - Open solution, run build

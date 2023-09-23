@@ -1,0 +1,46 @@
+<UserControl
+    x:Class="FlexiObject.AppClient.UI.Views.MessageViews.DialogMessageView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+    xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:r="using:FlexiObject.AppClient.Properties"
+    Design.Height="150"
+    Design.Width="400"
+    mc:Ignorable="d">
+    <UserControl.Styles>
+        <Style Selector="Button.DialogBtn">
+            <Setter Property="Width" Value="80" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+        <Style Selector="WrapPanel.DialogWrp">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+    </UserControl.Styles>
+    <DockPanel LastChildFill="True">
+        <WrapPanel Classes="DialogWrp" DockPanel.Dock="Bottom">
+            <Button
+                Classes="DialogBtn"
+                Command="{Binding Submit}"
+                Content="{x:Static r:Resources.DialogWindowOkay}"
+                IsVisible="{Binding ShowOkButton}" />
+            <Button
+                Classes="DialogBtn"
+                Command="{Binding Cancel}"
+                Content="{x:Static r:Resources.DialogWindowCancel}"
+                IsVisible="{Binding ShowCancelButton}" />
+            <Button
+                Classes="DialogBtn"
+                Command="{Binding Close}"
+                Content="{x:Static r:Resources.DialogWindowClose}" />
+        </WrapPanel>
+        <ContentControl
+            Padding="5"
+            Content="{Binding DisplaingContent}"
+            DockPanel.Dock="Left" />
+    </DockPanel>
+</UserControl>

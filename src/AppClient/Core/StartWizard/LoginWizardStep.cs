@@ -1,0 +1,37 @@
+﻿using FlexiObject.AppClient.Core.Services.Windows;
+using FlexiObject.AppClient.UI.ViewModels.Connection;
+using FlexiObject.Core.Exceptions;
+using FlexiObject.Core.Utilities;
+
+using System;
+using System.Threading.Tasks;
+
+namespace FlexiObject.AppClient.Core.StartWizard
+{
+    internal class LoginWizardStep : IWindowWizardStep
+    {
+        private readonly LoginViewModel _loginViewModel;
+        private readonly IDialogService _dialogService;
+        public LoginWizardStep(LoginViewModel loginViewModel, IDialogService dialogService)
+        {
+            _loginViewModel = loginViewModel;
+            _dialogService = dialogService;
+        }
+
+        public ViewModelBase ViewModel => _loginViewModel;
+
+        public string Name => "Show login view model";
+
+        public bool IsBackground => false;
+
+        public event EventHandler<ViewModelBase> OnSetupViewModel;
+
+        public async Task SetupAsync()
+        {
+            bool? loginResult = await _dialogService.ShowDialogAsync(_loginViewModel, _dialogService.GetPropesBuilder().MinMaxWidth(1000).MinMaxHeight(500).Build());
+
+            if (loginResult != true)
+                throw new WizardTerminateExeption();
+        }
+    }
+}
