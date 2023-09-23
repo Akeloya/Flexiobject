@@ -6,7 +6,7 @@ using Xunit;
 
 namespace FlexiObject.Tests.DbProvider
 {
-    public class InitiateDb : IDisposable
+    public class InitiateDb
     {
         private readonly AppDbSettings _settings = new() { DbType = DbTypes.SqlLight, ServerName = "localhost", DatabaseName = "TestDb" };
 
@@ -30,11 +30,6 @@ namespace FlexiObject.Tests.DbProvider
             ctx.SaveChanges();
             connection.CommitTransaction();
             connection.Close();
-        }
-
-        public void Dispose()
-        {
-
         }
     }
 }

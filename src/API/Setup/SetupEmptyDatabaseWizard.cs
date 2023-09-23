@@ -1,8 +1,7 @@
-﻿using FlexiObject.Core.Wizard;
+﻿using FlexiObject.API.Setup.Steps;
+using FlexiObject.Core.Logging;
+using FlexiObject.Core.Wizard;
 using FlexiObject.DbProvider;
-using FlexiObject.DbProvider.Entities;
-
-using NLog;
 
 using System;
 using System.Collections.Generic;
@@ -10,15 +9,16 @@ using System.Threading.Tasks;
 
 namespace FlexiObject.API.Setup
 {
-    //TODO: переделать в посетителя/цепочку обязанностей/компановщика, чтобы не плодить портянку, а раскидать по отдельным классам, отвечающим каждый за своё
-    //Создать БД -> создать пользователей -> создать пользовательские папки с полями для управления пользователями -> связать папки с AppUsers.
     public class SetupEmptyDatabaseWizardStep : IWizardStep
     {
         private readonly AppDbContextFactory _appDbContextFactory;
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        public SetupEmptyDatabaseWizardStep(AppDbContextFactory dbContextFactory)
+        private readonly ILogger _logger;
+        private readonly LoggerFactory _loggerFactory;
+        public SetupEmptyDatabaseWizardStep(AppDbContextFactory dbContextFactory, LoggerFactory loggerFactory)
         {
             _appDbContextFactory = dbContextFactory;
+            _loggerFactory = loggerFactory;
+            _logger = loggerFactory.Create<SetupEmptyDatabaseWizardStep>();
         }
         public string Name => "Setup empty database";
 
@@ -29,54 +29,37 @@ namespace FlexiObject.API.Setup
         {
             var dbContext = _appDbContextFactory.CreateDbContext();
 
+            var steps = new List<IWizardStep>()
+            {
+                new CreateUserFoldersStep(dbContext),
+                new AddUsersStep(dbContext)
+            };
+            //TODO: add building empty database for any saved schema to create different examples for users
+            
             var dbCreated = await dbContext.Database.EnsureCreatedAsync();
-
             await using var transaction = await dbContext.Database.BeginTransactionAsync();
 
             try
             {
-                await dbContext.AppUsers.AddRangeAsync(GetDefaultUsers());
-                await dbContext.SaveChangesAsync();
+                var wizardExecutor = new WizardExecutor(steps,_loggerFactory);
+                await wizardExecutor.SetupAsync();
+
                 await transaction.CommitAsync();
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                _logger.Error(ex);
                 try
                 {
                     await transaction.RollbackAsync();
                 }
                 catch (Exception ex2)
                 {
-                    Logger.Error(ex2);
+                    _logger.Error(ex2);
                 }
 
                 throw;
             }
-        }
-
-        private IEnumerable<AppUser> GetDefaultUsers()
-        {
-            var users = new LinkedList<AppUser>();
-            users.AddLast(new AppUser()
-            {
-                LoginName = "FlexiAdmin",
-                Password = "FlexiAdmin",
-                IsGroup = false,
-                IsAdministrator = true,
-                IsActive = true,
-                LoginMode = Core.Enumes.FlexiUserAuthTypes.Internal
-            });
-            users.AddLast(new AppUser()
-            {
-                LoginName = "FlexiUser",
-                Password = "FlexiUser",
-                IsGroup = false,
-                IsAdministrator = false,
-                IsActive = true,
-                LoginMode = Core.Enumes.FlexiUserAuthTypes.Internal
-            });
-            return users;
-        }
+        }        
     }
 }
